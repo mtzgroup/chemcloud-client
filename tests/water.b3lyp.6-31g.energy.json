@@ -1,0 +1,93 @@
+{
+  "id": null,
+  "schema_name": "qcschema_output",
+  "schema_version": 1,
+  "molecule": {
+    "schema_name": "qcschema_molecule",
+    "schema_version": 2,
+    "validated": true,
+    "symbols": ["O", "H", "H"],
+    "geometry": [
+      -0.1014217085766319,
+      -0.07509332367630613,
+      0.0,
+      -0.053694055594007625,
+      1.7554092274683715,
+      0.0,
+      1.6633301703714394,
+      -0.5636236870312887,
+      0.0
+    ],
+    "name": "IUPAC oxidane",
+    "molecular_charge": 0.0,
+    "molecular_multiplicity": 1,
+    "fix_com": false,
+    "fix_orientation": false,
+    "provenance": {
+      "creator": "QCElemental",
+      "version": "v0.17.0",
+      "routine": "qcelemental.molparse.from_string"
+    }
+  },
+  "driver": "energy",
+  "model": { "method": "B3LYP", "basis": "6-31g" },
+  "keywords": {},
+  "protocols": {},
+  "extras": {
+    "qcvars": {
+      "-D ENERGY": 0.0,
+      "CURRENT DIPOLE X": 1.9802882827380812,
+      "CURRENT DIPOLE Y": 1.4662172058141363,
+      "CURRENT DIPOLE Z": 0.0,
+      "CURRENT ENERGY": -76.3854670986905,
+      "CURRENT REFERENCE ENERGY": -76.3854670986905,
+      "DFT FUNCTIONAL TOTAL ENERGY": -76.3854670986905,
+      "DFT TOTAL ENERGY": -76.3854670986905,
+      "DFT VV10 ENERGY": 0.0,
+      "DFT XC ENERGY": -7.561530666061596,
+      "NUCLEAR REPULSION ENERGY": 9.084364497686215,
+      "ONE-ELECTRON ENERGY": -122.86147164425104,
+      "PCM POLARIZATION ENERGY": 0.0,
+      "SCF DIPOLE X": 1.9802882827380812,
+      "SCF DIPOLE Y": 1.4662172058141363,
+      "SCF DIPOLE Z": 0.0,
+      "SCF ITERATION ENERGY": -76.3854670986905,
+      "SCF ITERATIONS": 6.0,
+      "SCF TOTAL ENERGY": -76.3854670986905,
+      "TWO-ELECTRON ENERGY": 44.953170713935926
+    }
+  },
+  "provenance": {
+    "creator": "Psi4",
+    "version": "1.3.2",
+    "routine": "psi4.json.run_json",
+    "username": "root",
+    "qcengine_version": "v0.17.0",
+    "wall_time": 4.479123592376709,
+    "hostname": "fake_host_name", 
+    "memory": 0.634,
+    "nthreads": 1,
+    "cpu": "Intel(R) Core(TM) i7-4770HQ CPU @ 2.20GHz"
+  },
+  "properties": {
+    "calcinfo_nbasis": 13,
+    "calcinfo_nmo": 13,
+    "calcinfo_nalpha": 5,
+    "calcinfo_nbeta": 5,
+    "calcinfo_natom": 3,
+    "nuclear_repulsion_energy": 9.084364497686215,
+    "return_energy": -76.3854670986905,
+    "scf_one_electron_energy": -122.86147164425104,
+    "scf_two_electron_energy": 44.953170713935926,
+    "scf_xc_energy": -7.561530666061596,
+    "scf_dipole_moment": [1.9802882827380812, 1.4662172058141363, 0.0],
+    "scf_total_energy": -76.3854670986905,
+    "scf_iterations": 6
+  },
+  "wavefunction": null,
+  "return_result": -76.3854670986905,
+  "stdout": "\n  Memory set to 616.755 MiB by Python driver.\n\n*** tstart() called on 7d1f585822be\n*** at Wed Jan 13 06:39:47 2021\n\n   => Loading Basis Set <=\n\n    Name: 6-31G\n    Role: ORBITAL\n    Keyword: BASIS\n    atoms 1   entry O          line   117 file /opt/conda/share/psi4/basis/6-31g.gbs \n    atoms 2-3 entry H          line    26 file /opt/conda/share/psi4/basis/6-31g.gbs \n\n\n         ---------------------------------------------------------\n                                   SCF\n               by Justin Turney, Rob Parrish, Andy Simmonett\n                          and Daniel G. A. Smith\n                              RKS Reference\n                        1 Threads,    616 MiB Core\n         ---------------------------------------------------------\n\n  ==> Geometry <==\n\n    Molecular point group: cs\n    Full point group: Cs\n\n    Geometry (in Bohr), charge = 0, multiplicity = 1:\n\n       Center              X                  Y                   Z               Mass       \n    ------------   -----------------  -----------------  -----------------  -----------------\n         O           -0.101421708577    -0.075093323676     0.000000000000    15.994914619570\n         H           -0.053694055594     1.755409227468     0.000000000000     1.007825032230\n         H            1.663330170371    -0.563623687031     0.000000000000     1.007825032230\n\n  Running in cs symmetry.\n\n  Rotational constants: A =     26.44908  B =     14.34823  C =      9.30202 [cm^-1]\n  Rotational constants: A = 792923.47827  B = 430148.98626  C = 278867.55712 [MHz]\n  Nuclear repulsion =    9.084364497686215\n\n  Charge       = 0\n  Multiplicity = 1\n  Electrons    = 10\n  Nalpha       = 5\n  Nbeta        = 5\n\n  ==> Algorithm <==\n\n  SCF Algorithm Type is DF.\n  DIIS enabled.\n  MOM disabled.\n  Fractional occupation disabled.\n  Guess Type is SAD.\n  Energy threshold   = 1.00e-06\n  Density threshold  = 1.00e-06\n  Integral threshold = 0.00e+00\n\n  ==> Primary Basis <==\n\n  Basis Set: 6-31G\n    Blend: 6-31G\n    Number of shells: 9\n    Number of basis function: 13\n    Number of Cartesian functions: 13\n    Spherical Harmonics?: false\n    Max angular momentum: 1\n\n  ==> DFT Potential <==\n\n   => Composite Functional: B3LYP <= \n\n    B3LYP Hyb-GGA Exchange-Correlation Functional\n\n    P. J. Stephens, F. J. Devlin, C. F. Chabalowski, and M. J. Frisch, J. Phys. Chem. 98, 11623 (1994)\n\n    Deriv               =              1\n    GGA                 =           TRUE\n    Meta                =          FALSE\n\n    Exchange Hybrid     =           TRUE\n    MP2 Hybrid          =          FALSE\n\n   => Exchange Functionals <=\n\n    0.0800   Slater exchange\n    0.7200         Becke 88\n\n   => Exact (HF) Exchange <=\n\n    0.2000               HF \n\n   => Correlation Functionals <=\n\n    0.1900   Vosko, Wilk & Nusair (VWN5_RPA)\n    0.8100   Lee, Yang & Parr\n\n   => Molecular Quadrature <=\n\n    Radial Scheme          =       TREUTLER\n    Pruning Scheme         =           FLAT\n    Nuclear Scheme         =       TREUTLER\n\n    BS radius alpha        =              1\n    Pruning alpha          =              1\n    Radial Points          =             75\n    Spherical Points       =            302\n    Total Points           =          65565\n    Total Blocks           =            557\n    Max Points             =            256\n    Max Functions          =             13\n\n   => Loading Basis Set <=\n\n    Name: (6-31G AUX)\n    Role: JKFIT\n    Keyword: DF_BASIS_SCF\n    atoms 1   entry O          line   221 file /opt/conda/share/psi4/basis/cc-pvdz-jkfit.gbs \n    atoms 2-3 entry H          line    51 file /opt/conda/share/psi4/basis/cc-pvdz-jkfit.gbs \n\n  ==> Pre-Iterations <==\n\n   -------------------------------------------------------\n    Irrep   Nso     Nmo     Nalpha   Nbeta   Ndocc  Nsocc\n   -------------------------------------------------------\n     A'        11      11       0       0       0       0\n     A\"         2       2       0       0       0       0\n   -------------------------------------------------------\n    Total      13      13       5       5       5       0\n   -------------------------------------------------------\n\n  ==> Integral Setup <==\n\n  DFHelper Memory: AOs need 0.000 GiB; user supplied 0.428 GiB. Using in-core AOs.\n\n  ==> MemDFJK: Density-Fitted J/K Matrices <==\n\n    J tasked:                   Yes\n    K tasked:                   Yes\n    wK tasked:                   No\n    OpenMP threads:               1\n    Memory [MiB]:               438\n    Algorithm:                 Core\n    Schwarz Cutoff:           1E-12\n    Mask sparsity (%):       0.0000\n    Fitting Condition:        1E-10\n\n   => Auxiliary Basis Set <=\n\n  Basis Set: (6-31G AUX)\n    Blend: CC-PVDZ-JKFIT\n    Number of shells: 42\n    Number of basis function: 131\n    Number of Cartesian functions: 131\n    Spherical Harmonics?: false\n    Max angular momentum: 3\n\n  Cached 100.0% of DFT collocation blocks in 0.024 [GiB].\n\n  Minimum eigenvalue in the overlap matrix is 6.9275791978E-02.\n  Using Symmetric Orthogonalization.\n\n  SCF Guess: Superposition of Atomic Densities via on-the-fly atomic UHF.\n\n  ==> Iterations <==\n\n                           Total Energy        Delta E     RMS |[F,P]|\n\n   @DF-RKS iter SAD:   -76.10517227903208   -7.61052e+01   0.00000e+00 \n   @DF-RKS iter   1:   -76.23419915641975   -1.29027e-01   5.62318e-02 DIIS\n   @DF-RKS iter   2:   -76.06889050011479    1.65309e-01   8.10132e-02 DIIS\n   @DF-RKS iter   3:   -76.38541834686211   -3.16528e-01   8.26396e-04 DIIS\n   @DF-RKS iter   4:   -76.38546626736759   -4.79205e-05   1.32699e-04 DIIS\n   @DF-RKS iter   5:   -76.38546709733056   -8.29963e-07   4.56410e-06 DIIS\n   @DF-RKS iter   6:   -76.38546709869050   -1.35994e-09   3.25500e-07 DIIS\n  Energy and wave function converged.\n\n\n  ==> Post-Iterations <==\n\n    Orbital Energies [Eh]\n    ---------------------\n\n    Doubly Occupied:                                                      \n\n       1Ap   -19.135456     2Ap    -1.014438     3Ap    -0.525511  \n       4Ap    -0.357327     1App   -0.291839  \n\n    Virtual:                                                              \n\n       5Ap     0.054131     6Ap     0.143369     7Ap     0.804602  \n       8Ap     0.868223     2App    0.889069     9Ap     0.957747  \n      10Ap     1.066263    11Ap     1.423418  \n\n    Final Occupation by Irrep:\n             Ap   App \n    DOCC [     4,    1 ]\n\n  @DF-RKS Final Energy:   -76.38546709869050\n\n   => Energetics <=\n\n    Nuclear Repulsion Energy =              9.0843644976862148\n    One-Electron Energy =                -122.8614716442510399\n    Two-Electron Energy =                  44.9531707139359256\n    DFT Exchange-Correlation Energy =      -7.5615306660615964\n    Empirical Dispersion Energy =           0.0000000000000000\n    VV10 Nonlocal Energy =                  0.0000000000000000\n    Total Energy =                        -76.3854670986904978\n\nComputation Completed\n\n\nProperties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]\n\nProperties computed using the SCF density matrix\n\n  Nuclear Dipole Moment: [e a0]\n     X:     0.7983      Y:     0.5910      Z:     0.0000\n\n  Electronic Dipole Moment: [e a0]\n     X:    -0.0192      Y:    -0.0142      Z:     0.0000\n\n  Dipole Moment: [e a0]\n     X:     0.7791      Y:     0.5769      Z:     0.0000     Total:     0.9694\n\n  Dipole Moment: [D]\n     X:     1.9803      Y:     1.4662      Z:     0.0000     Total:     2.4640\n\n\n*** tstop() called on 7d1f585822be at Wed Jan 13 06:39:49 2021\nModule time:\n\tuser time   =       1.71 seconds =       0.03 minutes\n\tsystem time =       0.25 seconds =       0.00 minutes\n\ttotal time  =          2 seconds =       0.03 minutes\nTotal time:\n\tuser time   =       1.71 seconds =       0.03 minutes\n\tsystem time =       0.25 seconds =       0.00 minutes\n\ttotal time  =          2 seconds =       0.03 minutes\n",
+  "stderr": null,
+  "success": true,
+  "error": null
+}

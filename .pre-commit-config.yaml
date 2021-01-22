@@ -1,0 +1,41 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.2.0
+    hooks:
+      - id: check-yaml
+      - id: check-added-large-files
+        args: ["--maxkb=250"]
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v0.14.3
+    hooks:
+      - id: detect-secrets
+        exclude: Pipfile.lock
+  - repo: https://github.com/PyCQA/isort
+    rev: master
+    hooks:
+      - id: isort
+  - repo: https://github.com/psf/black
+    rev: master
+    hooks:
+      - id: black
+  - repo: https://github.com/PyCQA/flake8
+    rev: master
+    hooks:
+      - id: flake8
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: master
+    hooks:
+      - id: mypy
+        additional_dependencies: [tokenize-rt==3.2.0, pydantic>=1.0.0]
+
+  - repo: local
+    hooks:
+      - id: tests
+        name: tests
+        stages: [push]
+        language: system
+        entry: pytest
+        types: [python]
+        pass_filenames: false
