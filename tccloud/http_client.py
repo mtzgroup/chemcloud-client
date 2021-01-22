@@ -261,3 +261,7 @@ class _RequestsClient:
         if atomic_result:
             response["atomic_result"] = AtomicResult(**atomic_result)
         return response["status"], response["atomic_result"]
+
+    def hello_world(self):
+        """Ping hello-world endpoint on TeraChem Cloud"""
+        return self._request("get", "/hello-world", api_call=False)

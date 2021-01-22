@@ -51,6 +51,10 @@ class TCClient:
             engines = None
         return engines
 
+    def hello_world(self):
+        """A simple endpoint to check connectivity to TeraChem Cloud"""
+        return self._client.hello_world()
+
     def compute(self, atomic_input: AtomicInput, engine: str) -> FutureResult:
         """Submit a computation to TeraChem Cloud"""
         if self.supported_engines is not None:
