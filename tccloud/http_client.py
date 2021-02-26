@@ -7,14 +7,36 @@ from typing import Any, Dict, Optional, Tuple, Union
 
 import httpx
 import toml
-from qcelemental.models.results import AtomicInput, AtomicResult
 
-from tccloud import models
+from tccloud.models import (
+    FutureResult,
+    AtomicInput,
+    AtomicResult,
+    FailedOperation,
+    TaskStatus,
+)
 
 from .config import Settings, settings
 
 
 class _RequestsClient:
+    """Interface for making http requests to TeraChem Cloud.
+
+    This class should never be instantiated by end users. End users should use the
+    TCClient class to interact with TeraChem Cloud. This
+
+    Main Features:
+        - Manages credentials for making authenticated requests.
+        - All public methods in should enforce a contract of returning python data
+            objects to the caller rather than dicts or request/response objects.
+        - public methods:
+            - hello_world()
+            - compute()
+            - result()
+            - write_tokens_to_credentials_file()
+
+    """
+
     def __init__(
         self,
         *,
@@ -113,7 +135,7 @@ class _RequestsClient:
         refresh_token: str,
         *,
         profile: str = settings.tccloud_default_credentials_profile,
-    ):
+    ) -> None:
         """Writes access_token and refresh_token to configuration file"""
         assert (
             access_token and refresh_token
@@ -208,9 +230,9 @@ class _RequestsClient:
             headers=headers,
             data=data,
         )
-        # Return new  refresh_token if issued, keep current token if no new token
+        # Return new refresh_token if issued, keep current token if no new token
         # issued. New refresh_token issued if refresh token rotation activated on
-        # backend.
+        # Auth0 backend.
         self._access_token, self._refresh_token = (
             response["access_token"],
             response.get("refresh_token", refresh_token),
@@ -245,23 +267,33 @@ class _RequestsClient:
         json_string = urlsafe_b64decode(encoded_payload).decode("utf-8")
         return json.loads(json_string)
 
-    def compute(self, atomic_input: AtomicInput, engine: str) -> models.FutureResult:
+    def compute(self, atomic_input: AtomicInput, engine: str) -> FutureResult:
         """Submit a computation to TeraChem Cloud"""
         task_id = self._authenticated_request(
             "post", "/compute", data=atomic_input.json(), params={"engine": engine}
         )
-        return models.FutureResult(task_id, self)
+        return FutureResult(task_id, self)
 
-    def result(self, task_id: str) -> Tuple[str, Optional[Union[str, AtomicResult]]]:
-        """Check the result of a compute job"""
-        response = self._authenticated_request("get", f"/compute/result/{task_id}")
+    def result(
+        self, task_id: str
+    ) -> Tuple[TaskStatus, Optional[Union[FailedOperation, AtomicResult]]]:
+        """Check the result of a compute job, returns status and result (if available)."""
+        task_result = self._authenticated_request("get", f"/compute/result/{task_id}")
 
-        # May be null if result not ready
-        atomic_result = response.get("atomic_result")
-        if atomic_result:
-            response["atomic_result"] = AtomicResult(**atomic_result)
-        return response["status"], response["atomic_result"]
+        returned_result = task_result["result"]
+        if returned_result:
+            if returned_result["success"]:
+                # Successful results return AtomicInput
+                result = AtomicResult(**returned_result)
+            else:
+                # Unsuccessful results return FailedOperation
+                result = FailedOperation(**returned_result)
+        else:
+            result = None
+        return TaskStatus(task_result["status"]), result
 
-    def hello_world(self):
+    def hello_world(self, name: Optional[str] = None):
         """Ping hello-world endpoint on TeraChem Cloud"""
-        return self._request("get", "/hello-world", api_call=False)
+        return self._request(
+            "get", "/hello-world", params={"name": name}, api_call=False
+        )
