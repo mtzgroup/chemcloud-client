@@ -9,7 +9,7 @@ from qcelemental.models.common_models import Model
 
 from tccloud.config import Settings
 from tccloud.http_client import _RequestsClient
-from tccloud.models import FutureResult
+from tccloud.models import FutureResult, TaskStatus
 
 
 def test_passing_username_password_are_prioritized_for_auth(
@@ -374,12 +374,12 @@ def test_result_pending(settings, jwt, httpx_mock: HTTPXMock):
     client = _RequestsClient(settings=settings)
     client._access_token = jwt
 
-    httpx_mock.add_response(json={"status": "pending", "atomic_result": None})
+    httpx_mock.add_response(json={"status": "PENDING", "result": None})
 
-    status, atomic_result = client.result("fake_id")
+    status, result = client.result("fake_id")
 
-    assert status == "pending"
-    assert atomic_result is None
+    assert status == TaskStatus.PENDING
+    assert result is None
 
 
 def test_result_success(settings, jwt, httpx_mock: HTTPXMock):
@@ -391,13 +391,13 @@ def test_result_success(settings, jwt, httpx_mock: HTTPXMock):
     url = re.compile(".*/compute/result/.*")
     httpx_mock.add_response(
         url=url,
-        json={"status": "SUCCESS", "atomic_result": json.loads(atomic_result.json())},
+        json={"status": "SUCCESS", "result": json.loads(atomic_result.json())},
     )
 
-    status, atomic_result = client.result("fake_id")
+    status, result = client.result("fake_id")
 
     assert status == "SUCCESS"
-    assert isinstance(atomic_result, AtomicResult)
+    assert isinstance(result, AtomicResult)
 
 
 def test__decode_access_token():

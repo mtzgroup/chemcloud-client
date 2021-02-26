@@ -6,6 +6,8 @@ from .models import AtomicInput, FutureResult
 
 
 class TCClient:
+    """Main client object for end user interation"""
+
     def __init__(
         self,
         *,
@@ -51,9 +53,9 @@ class TCClient:
             engines = None
         return engines
 
-    def hello_world(self):
+    def hello_world(self, name: Optional[str] = None):
         """A simple endpoint to check connectivity to TeraChem Cloud"""
-        return self._client.hello_world()
+        return self._client.hello_world(name)
 
     def compute(self, atomic_input: AtomicInput, engine: str) -> FutureResult:
         """Submit a computation to TeraChem Cloud"""
@@ -65,6 +67,9 @@ class TCClient:
 
     def configure(self, profile: str = settings.tccloud_default_credentials_profile):
         """Configure credentials file with tokens"""
+        print(
+            f"✅ If you don't get have an account please signup at: {settings.tccloud_domain}/signup"
+        )
         access_token, refresh_token = self._client._set_tokens_from_user_input()
         self._client.write_tokens_to_credentials_file(
             access_token, refresh_token, profile=profile
