@@ -16,7 +16,7 @@
     
     
       
-        <title>TCClient - tccloud</title>
+        <title>Molecule - tccloud</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#tcclient" class="md-skip">
+        <a href="#molecule" class="md-skip">
           Skip to content
         </a>
       
@@ -96,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              TCClient
+              Molecule
             
           </span>
         </div>
@@ -277,18 +277,6 @@
             
   
   
-  
-    <li class="md-nav__item">
-      <a href="../molecule/" class="md-nav__link">
-        Molecule
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
     
   
   
@@ -299,10 +287,72 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Molecule
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
-        TCClient
+        Molecule
       </a>
       
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#import-the-model-object" class="md-nav__link">
+    Import the Model object
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-molecule" class="md-nav__link">
+    Create a Molecule
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#save-a-molecule-to-a-file" class="md-nav__link">
+    Save a Molecule to a file
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-attributes" class="md-nav__link">
+    Basic Attributes
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TCClient/" class="md-nav__link">
+        TCClient
+      </a>
     </li>
   
 
@@ -343,6 +393,42 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#import-the-model-object" class="md-nav__link">
+    Import the Model object
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-molecule" class="md-nav__link">
+    Create a Molecule
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#save-a-molecule-to-a-file" class="md-nav__link">
+    Save a Molecule to a file
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-attributes" class="md-nav__link">
+    Basic Attributes
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -353,13 +439,46 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/mtzgroup/tccloud/edit/master/docs/usage/TCClient.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/mtzgroup/tccloud/edit/master/docs/usage/molecule.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="tcclient">TCClient<a class="headerlink" href="#tcclient" title="Permanent link">🔗</a></h1>
-<p>The <code>TCClient</code> is the main way you will interact with TeraChem Cloud to make compute requests.</p>
+                <h1 id="molecule">Molecule<a class="headerlink" href="#molecule" title="Permanent link">🔗</a></h1>
+<p>The <code>Molecule</code> object is the core representation of a molecule used throughout <code>tccloud</code>. The <code>molecule</code> object is from the <code>qcelemental.models</code> module, but it is available in the <code>tccloud.models</code> module for your convenience. You can access the QCElemental documentation on the <code>Molecule</code> <a href="http://docs.qcarchive.molssi.org/projects/QCElemental/en/stable/model_molecule.html">here</a>. It is assumed that all geometries are in <code>bohr</code>.</p>
+<h2 id="import-the-model-object">Import the Model object<a class="headerlink" href="#import-the-model-object" title="Permanent link">🔗</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">tccloud.models</span> <span class="kn">import</span> <span class="n">Molecule</span>
+</code></pre></div>
+<h2 id="create-a-molecule">Create a Molecule<a class="headerlink" href="#create-a-molecule" title="Permanent link">🔗</a></h2>
+<p>Molecules can be created directly from data on <a href="https://pubchem.ncbi.nlm.nih.gov">pubchem</a>, a python string, a <code>psi4</code> file, an <code>xyz</code> file, an <code>xyz+</code> file, or a <code>json</code> file.</p>
+<p>Pubchem:</p>
+<div class="highlight"><pre><span></span><code><span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="s2">&quot;pubchem:water&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>From Files:</p>
+<div class="highlight"><pre><span></span><code><span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s2">&quot;water.xyz&quot;</span><span class="p">)</span>
+<span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s2">&quot;water.psi4&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="save-a-molecule-to-a-file">Save a Molecule to a file<a class="headerlink" href="#save-a-molecule-to-a-file" title="Permanent link">🔗</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="s2">&quot;pubchem:water&quot;</span><span class="p">)</span>
+<span class="c1"># JSON is the prefered format since it preserves the most information</span>
+<span class="n">water</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s2">&quot;water.json&quot;</span><span class="p">)</span>
+<span class="n">water</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s2">&quot;water.xyz&quot;</span><span class="p">)</span>
+<span class="n">water</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s2">&quot;water.psi4&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="basic-attributes">Basic Attributes<a class="headerlink" href="#basic-attributes" title="Permanent link">🔗</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="s2">&quot;pubchem:water&quot;</span><span class="p">)</span>
+<span class="n">water</span><span class="o">.</span><span class="n">symbols</span>
+<span class="n">array</span><span class="p">([</span><span class="s1">&#39;O&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;&lt;U1&#39;</span><span class="p">)</span><span class="n">water</span><span class="o">.</span><span class="n">symbols</span>
+
+<span class="n">water</span><span class="o">.</span><span class="n">geometry</span>
+<span class="n">array</span><span class="p">([[</span> <span class="mf">0.</span>        <span class="p">,</span>  <span class="mf">0.</span>        <span class="p">,</span>  <span class="mf">0.</span>        <span class="p">],</span>
+       <span class="p">[</span> <span class="mf">0.52421003</span><span class="p">,</span>  <span class="mf">1.68733646</span><span class="p">,</span>  <span class="mf">0.48074633</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mf">1.14668581</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.45032174</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.35474466</span><span class="p">]])</span>
+
+<span class="c1"># All Attributes</span>
+<span class="n">attrs</span> <span class="o">=</span> <span class="p">[</span><span class="n">attr</span> <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">water</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">attr</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">attrs</span><span class="p">)</span>
+</code></pre></div>
                 
               
               
@@ -377,7 +496,7 @@
   
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
-        <a href="../molecule/" class="md-footer__link md-footer__link--prev" rel="prev">
+        <a href="../Atomic%20Input/" class="md-footer__link md-footer__link--prev" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -386,19 +505,19 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Molecule
+              Atomic Input
             </div>
           </div>
         </a>
       
       
-        <a href="../keywords/" class="md-footer__link md-footer__link--next" rel="next">
+        <a href="../TCClient/" class="md-footer__link md-footer__link--next" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Keywords
+              TCClient
             </div>
           </div>
           <div class="md-footer__button md-icon">
