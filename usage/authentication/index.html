@@ -38,6 +38,8 @@
     
     
     
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+    
     
       
     
@@ -216,63 +218,6 @@
 
   
   
-  
-    <li class="md-nav__item">
-      <a href="../../about/" class="md-nav__link">
-        About
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
-      
-      <label class="md-nav__link" for="__nav_3">
-        Development
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="Development" data-md-level="1">
-        <label class="md-nav__title" for="__nav_3">
-          <span class="md-nav__icon md-icon"></span>
-          Development
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../development/core_decisions/" class="md-nav__link">
-        Core Development Decisions
-      </a>
-    </li>
-  
-
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
     
   
   
@@ -280,30 +225,18 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
       
-      <label class="md-nav__link" for="__nav_4">
+      <label class="md-nav__link" for="__nav_2">
         Usage
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Usage" data-md-level="1">
-        <label class="md-nav__title" for="__nav_4">
+        <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           Usage
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../TCClient/" class="md-nav__link">
-        TCClient
-      </a>
-    </li>
-  
-
           
             
   
@@ -318,9 +251,72 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Authentication
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         Authentication
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#username-and-password" class="md-nav__link">
+    Username and Password
+  </a>
+  
+    <nav class="md-nav" aria-label="Username and Password">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clientconfigure-recommended-for-most-cases" class="md-nav__link">
+    client.configure() (recommended for most cases)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    Environment Variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pass-usernamepassword-when-prompted-after-requesting-a-compute-job" class="md-nav__link">
+    Pass Username/Password when prompted after requesting a compute job
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pass-usernamepassword-to-client-not-recommended" class="md-nav__link">
+    Pass Username/Password to Client (not recommended)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -350,6 +346,55 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#username-and-password" class="md-nav__link">
+    Username and Password
+  </a>
+  
+    <nav class="md-nav" aria-label="Username and Password">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clientconfigure-recommended-for-most-cases" class="md-nav__link">
+    client.configure() (recommended for most cases)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    Environment Variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pass-usernamepassword-when-prompted-after-requesting-a-compute-job" class="md-nav__link">
+    Pass Username/Password when prompted after requesting a compute job
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pass-usernamepassword-to-client-not-recommended" class="md-nav__link">
+    Pass Username/Password to Client (not recommended)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -365,8 +410,47 @@
                   </a>
                 
                 
-                <h1 id="authentication">Authentication</h1>
-<p>Authentication is the process of supplying your credentials (usually a username and password) to <code>tccloud</code> so that you can perform computation. <code>tccloud</code> provides a few easy ways for you to authenticate.</p>
+                <h1 id="authentication">Authentication<a class="headerlink" href="#authentication" title="Permanent link">🔗</a></h1>
+<p>Authentication is the process of supplying your credentials (usually a username and password) to <code>tccloud</code> so that you can perform computation. <code>tccloud</code> provides a few easy ways for you to authenticate. If you do not have a TeraChem Cloud account you can get one for free here: <a href="https://tccloud.mtzlab.com/signup">https://tccloud.mtzlab.com/signup</a></p>
+<h2 id="username-and-password">Username and Password<a class="headerlink" href="#username-and-password" title="Permanent link">🔗</a></h2>
+<h3 id="clientconfigure-recommended-for-most-cases">client.configure() (recommended for most cases)<a class="headerlink" href="#clientconfigure-recommended-for-most-cases" title="Permanent link">🔗</a></h3>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">tccloud</span> <span class="kn">import</span> <span class="n">TCClient</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">client</span> <span class="o">=</span> <span class="n">TCClient</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">client</span><span class="o">.</span><span class="n">configure</span><span class="p">()</span>
+<span class="err">✅</span> <span class="n">If</span> <span class="n">you</span> <span class="n">dont</span> <span class="n">get</span> <span class="n">have</span> <span class="n">an</span> <span class="n">account</span> <span class="n">please</span> <span class="n">signup</span> <span class="n">at</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">tccloud</span><span class="o">.</span><span class="n">mtzlab</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">signup</span>
+<span class="n">Please</span> <span class="n">enter</span> <span class="n">your</span> <span class="n">TeraChem</span> <span class="n">Cloud</span> <span class="n">username</span><span class="p">:</span> <span class="n">your_username</span><span class="nd">@email</span><span class="o">.</span><span class="n">com</span>
+<span class="n">Please</span> <span class="n">enter</span> <span class="n">your</span> <span class="n">TeraChem</span> <span class="n">Cloud</span> <span class="n">password</span><span class="p">:</span>
+<span class="n">Authenticating</span><span class="o">...</span>
+<span class="s1">&#39;default&#39;</span> <span class="n">profile</span> <span class="n">configured</span><span class="err">!</span> <span class="n">Username</span><span class="o">/</span><span class="n">password</span> <span class="ow">not</span> <span class="n">required</span> <span class="k">for</span> <span class="n">future</span> <span class="n">use</span> <span class="n">of</span> <span class="n">TCClient</span>
+</code></pre></div>
+<p>Performing this action will configure your local client by writing authentication tokens to <code>~/.tccloud/credentials</code>. You will not need to execute <code>configure()</code> ever again. Under the hood <code>TCClient</code> will access your tokens, refresh them when necessary, and keep you logged in to TeraChem Cloud. Note that this will write a file to your home directory with sensitive access tokens, so if you are on a shared computer or using a device where you would not want to write this information to disk do not use this option. If you would like to write the <code>credentials</code> file to a different directory than <code>~/.tccloud</code>, set the <code>TCCLOUD_BASE_DIRECTORY</code> environment variable to the path of interest.</p>
+<p>You can configure multiple profiles in case you have multiple logins to TeraChem cloud by passing a profile name to <code>configure()</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">client</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="s1">&#39;mtz_lab&#39;</span><span class="p">)</span>
+<span class="err">✅</span> <span class="n">If</span> <span class="n">you</span> <span class="n">dont</span> <span class="n">get</span> <span class="n">have</span> <span class="n">an</span> <span class="n">account</span> <span class="n">please</span> <span class="n">signup</span> <span class="n">at</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">tccloud</span><span class="o">.</span><span class="n">mtzlab</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">signup</span>
+<span class="n">Please</span> <span class="n">enter</span> <span class="n">your</span> <span class="n">TeraChem</span> <span class="n">Cloud</span> <span class="n">username</span><span class="p">:</span> <span class="n">your_username</span><span class="nd">@email</span><span class="o">.</span><span class="n">om</span>
+<span class="n">Please</span> <span class="n">enter</span> <span class="n">your</span> <span class="n">TeraChem</span> <span class="n">Cloud</span> <span class="n">password</span><span class="p">:</span>
+<span class="n">Authenticating</span><span class="o">...</span>
+<span class="s1">&#39;mtz_lab&#39;</span> <span class="n">profile</span> <span class="n">configured</span><span class="err">!</span> <span class="n">Username</span><span class="o">/</span><span class="n">password</span> <span class="ow">not</span> <span class="n">required</span> <span class="k">for</span> <span class="n">future</span> <span class="n">use</span> <span class="n">of</span> <span class="n">TCClient</span>
+</code></pre></div>
+<p>To use one of these profiles pass the profile option to your client instance. The "default" profile is used when no profile name is passed:</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">tccloud</span> <span class="kn">import</span> <span class="n">TCClient</span>
+<span class="c1"># Use default profile</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">client</span> <span class="o">=</span> <span class="n">TCClient</span><span class="p">()</span>
+
+<span class="c1"># Use named profile</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">client</span> <span class="o">=</span> <span class="n">TCClient</span><span class="p">(</span><span class="n">profile</span><span class="o">=</span><span class="s2">&quot;mtz_lab&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="environment-variables">Environment Variables<a class="headerlink" href="#environment-variables" title="Permanent link">🔗</a></h3>
+<p>You can set your TeraChem username and password in your environment and the <code>client</code> will find them automatically. Set <code>TCCLOUD_USERNAME</code> and <code>TCCLOUD_PASSWORD</code>. When you create a client it will find these values and maintain all access tokens in memory only.</p>
+<h3 id="pass-usernamepassword-when-prompted-after-requesting-a-compute-job">Pass Username/Password when prompted after requesting a compute job<a class="headerlink" href="#pass-usernamepassword-when-prompted-after-requesting-a-compute-job" title="Permanent link">🔗</a></h3>
+<p>If you have not run <code>client.configure()</code> or set environment variables you will be requested for your username and password when you submit a computation to TeraChem Cloud using <code>client.compute(...)</code>. The client will use your username and password to get access tokens and will maintain access tokens for you in memory only. Your login session will be valid for the duration of your python session.</p>
+<h3 id="pass-usernamepassword-to-client-not-recommended">Pass Username/Password to Client (not recommended)<a class="headerlink" href="#pass-usernamepassword-to-client-not-recommended" title="Permanent link">🔗</a></h3>
+<p>You can directly pass a username and password to the <code>client</code> object. This is <strong>not</strong> recommended as it opens up the possibility of your credentials accidentally being committed to your code repo. However, it can be used in rare circumstances when necessary.</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">tccloud</span> <span class="kn">import</span> <span class="n">TCClient</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">client</span> <span class="o">=</span> <span class="n">TCClient</span><span class="p">(</span>
+    <span class="n">tccloud_username</span><span class="o">=</span><span class="s2">&quot;your_username@email.com&quot;</span><span class="p">,</span> <span class="n">tccloud_password</span><span class="o">=</span><span class="s2">&quot;super_secret_password&quot;</span>
+    <span class="p">)</span>
+</code></pre></div>
                 
               
               
@@ -384,7 +468,7 @@
   
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
-        <a href="../TCClient/" class="md-footer__link md-footer__link--prev" rel="prev">
+        <a href="../.." class="md-footer__link md-footer__link--prev" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -393,7 +477,7 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              TCClient
+              tccloud
             </div>
           </div>
         </a>
@@ -423,6 +507,10 @@
     
     
       <script src="../../assets/javascripts/bundle.ca5457b8.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+      
+        <script src="../../javascripts/config.js"></script>
       
     
   </body>

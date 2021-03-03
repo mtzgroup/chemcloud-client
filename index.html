@@ -38,6 +38,8 @@
     
     
     
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+    
     
       
     
@@ -289,91 +291,22 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="about/" class="md-nav__link">
-        About
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
     
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
       
-      <label class="md-nav__link" for="__nav_3">
-        Development
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="Development" data-md-level="1">
-        <label class="md-nav__title" for="__nav_3">
-          <span class="md-nav__icon md-icon"></span>
-          Development
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="development/core_decisions/" class="md-nav__link">
-        Core Development Decisions
-      </a>
-    </li>
-  
-
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
-      
-      <label class="md-nav__link" for="__nav_4">
+      <label class="md-nav__link" for="__nav_2">
         Usage
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Usage" data-md-level="1">
-        <label class="md-nav__title" for="__nav_4">
+        <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           Usage
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="usage/TCClient/" class="md-nav__link">
-        TCClient
-      </a>
-    </li>
-  
-
           
             
   
@@ -475,95 +408,95 @@
                   </a>
                 
                 
-                <h1 id="tccloud">tccloud</h1>
+                <h1 id="tccloud">tccloud<a class="headerlink" href="#tccloud" title="Permanent link">🔗</a></h1>
 <p>A Python Client for TeraChem Cloud.</p>
 <p><code>tccloud</code> is a python client that makes performing quantum chemistry calculations easy, fast, and fun. All input and output data structures are based on the <a href="https://molssi-qc-schema.readthedocs.io/en/latest/index.html#">QCSchema</a> specification designed by <a href="https://molssi.org">The Molecular Sciences Software Institute</a>. The client provides a simple, yet powerful interface to perform quantum chemistry calculation using nothing but modern python and an internet connection. Compute is generously provided free of charge by the <a href="https://tccloud.mtzlab.com">TeraChem Cloud</a> project.</p>
-<h2 id="requirements">Requirements</h2>
+<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">🔗</a></h2>
 <ul>
 <li>Python 3.6+</li>
 <li><code>tccloud</code> stands on the shoulders of giants. It internally depends upon <a href="http://docs.qcarchive.molssi.org/projects/QCElemental/en/stable/">QCElemental</a>, <a href="https://www.python-httpx.org">httpx</a>, and <a href="https://pypi.org/project/toml/">toml</a>.</li>
 <li>The <code>AtomicInput</code>, <code>Molecule</code>, <code>Model</code>, and <code>AtomicResult</code> models used throughout the package come directly from <a href="http://docs.qcarchive.molssi.org/projects/QCElemental/en/stable/">QCElemental</a>. They are included in <code>tccloud.models</code> for your convenience.</li>
 </ul>
-<h2 id="installation">Installation</h2>
-<pre><code class="language-sh">pip install tccloud
-</code></pre>
-<h2 id="example">Example</h2>
-<h3 id="the-absolute-minimum">The Absolute Minimum</h3>
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">🔗</a></h2>
+<div class="highlight"><pre><span></span><code>pip install tccloud
+</code></pre></div>
+<h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">🔗</a></h2>
+<h3 id="the-absolute-minimum">The Absolute Minimum<a class="headerlink" href="#the-absolute-minimum" title="Permanent link">🔗</a></h3>
 <ul>
 <li>Create a TeraChem Cloud account at https://tccloud.mtzlab.com/signup.</li>
 <li>Instantiate a client</li>
 <li>Configure client (only required the very first time you use <code>TCClient</code>)</li>
 </ul>
-<pre><code class="language-python">&gt;&gt;&gt; from tccloud import TCClient
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">tccloud</span> <span class="kn">import</span> <span class="n">TCClient</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">client</span> <span class="o">=</span> <span class="n">TCClient</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">client</span><span class="o">.</span><span class="n">configure</span><span class="p">()</span> <span class="c1"># only run the very first time you use TCClient</span>
 
-&gt;&gt;&gt; client = TCClient()
-&gt;&gt;&gt; client.configure()
-# See supported compute engines
-&gt;&gt;&gt; client.supported_engines
-['psi4', 'terachem_pbs', ...]
-# Test connection to TeraChem Cloud
-&gt;&gt;&gt; client.hello_world(&quot;Colton&quot;)
-'Welcome to TeraChem Cloud, Colton'
-</code></pre>
+<span class="c1"># See supported compute engines</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">client</span><span class="o">.</span><span class="n">supported_engines</span>
+<span class="p">[</span><span class="s1">&#39;psi4&#39;</span><span class="p">,</span> <span class="s1">&#39;terachem_pbs&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+
+<span class="c1"># Test connection to TeraChem Cloud</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">client</span><span class="o">.</span><span class="n">hello_world</span><span class="p">(</span><span class="s2">&quot;Colton&quot;</span><span class="p">)</span>
+<span class="s1">&#39;Welcome to TeraChem Cloud, Colton&#39;</span>
+</code></pre></div>
 <ul>
 <li>Create a <code>Molecule</code></li>
 <li>More details about the <code>Molecule</code> object can be found <a href="http://docs.qcarchive.molssi.org/en/latest/basic_examples/QCElemental.html#Molecule-Parsing-and-Models">here</a> and <a href="http://docs.qcarchive.molssi.org/projects/QCElemental/en/stable/model_molecule.html">here</a>.</li>
 <li><code>Molecules</code> can be created from <a href="https://pubchem.ncbi.nlm.nih.gov">pubchem</a>, local files, or using pure python.</li>
 </ul>
-<pre><code class="language-python">&gt;&gt;&gt; from tccloud.models import Molecule
-&gt;&gt;&gt; water = Molecule.from_data(&quot;pubchem:water&quot;)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">tccloud.models</span> <span class="kn">import</span> <span class="n">Molecule</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="s2">&quot;pubchem:water&quot;</span><span class="p">)</span>
+</code></pre></div>
 <ul>
 <li>Specify your compute job using an <code>AtomicInput</code> object</li>
 <li>More details about the <code>AtomicInput</code> object can be found <a href="http://docs.qcarchive.molssi.org/projects/QCElemental/en/stable/model_result.html">here</a>.</li>
 </ul>
-<pre><code class="language-python">&gt;&gt;&gt; from tccloud.models import AtomicInput
-&gt;&gt;&gt; atomic_input = AtomicInput(molecule=water, model={&quot;method&quot;: &quot;B3LYP&quot;, &quot;basis&quot;: &quot;6-31g&quot;}, driver=&quot;energy&quot;)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">tccloud.models</span> <span class="kn">import</span> <span class="n">AtomicInput</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">atomic_input</span> <span class="o">=</span> <span class="n">AtomicInput</span><span class="p">(</span><span class="n">molecule</span><span class="o">=</span><span class="n">water</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;B3LYP&quot;</span><span class="p">,</span> <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="s2">&quot;6-31g&quot;</span><span class="p">},</span> <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;energy&quot;</span><span class="p">)</span>
+</code></pre></div>
 <ul>
 <li>Submit a computation, specify a target quantum chemistry engine, and get back an <a href="http://docs.qcarchive.molssi.org/projects/QCElemental/en/stable/model_result.html">AtomicResult</a></li>
 </ul>
-<pre><code class="language-python">&gt;&gt;&gt; future_result = client.compute(atomic_input, engine=&quot;terachem_pbs&quot;)
-&gt;&gt;&gt; future_result.status
-'STARTED'
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">future_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">atomic_input</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;terachem_pbs&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">future_result</span><span class="o">.</span><span class="n">status</span>
+<span class="s1">&#39;STARTED&#39;</span>
 
-# Get result
-&gt;&gt;&gt; result = future_result.get()
-# Successful computation
-&gt;&gt;&gt; result.success
-True
-&gt;&gt;&gt; result
-AtomicResult(driver='energy', model={'method': 'B3LYP', 'basis': '6-31g'}, molecule_hash='b6ec4fa')
-&gt;&gt;&gt; result.return_result
--76.38545794119997
+<span class="c1"># Get result</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">future_result</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="c1"># Successful computation</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span>
+<span class="kc">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">result</span>
+<span class="n">AtomicResult</span><span class="p">(</span><span class="n">driver</span><span class="o">=</span><span class="s1">&#39;energy&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="s1">&#39;B3LYP&#39;</span><span class="p">,</span> <span class="s1">&#39;basis&#39;</span><span class="p">:</span> <span class="s1">&#39;6-31g&#39;</span><span class="p">},</span> <span class="n">molecule_hash</span><span class="o">=</span><span class="s1">&#39;b6ec4fa&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">result</span><span class="o">.</span><span class="n">return_result</span>
+<span class="o">-</span><span class="mf">76.38545794119997</span>
 
-# Failed computation
-&gt;&gt;&gt; result.success
-False
-# View result
-&gt;&gt;&gt; result
-FailedOperation(error=ComputeError(error_type='input_error', error_message='QCEngine Input Error: Traceback (most recent call last):...'))
-&gt;&gt;&gt; from pprint import pprint
-&gt;&gt;&gt; pprint(result.error.error_message)
-</code></pre>
+<span class="c1"># Failed computation</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span>
+<span class="kc">False</span>
+<span class="c1"># View result</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">result</span>
+<span class="n">FailedOperation</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="n">ComputeError</span><span class="p">(</span><span class="n">error_type</span><span class="o">=</span><span class="s1">&#39;input_error&#39;</span><span class="p">,</span> <span class="n">error_message</span><span class="o">=</span><span class="s1">&#39;QCEngine Input Error: Traceback (most recent call last):...&#39;</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">pprint</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="o">.</span><span class="n">error_message</span><span class="p">)</span>
+</code></pre></div>
 <ul>
 <li>Putting it all together</li>
 </ul>
-<pre><code class="language-python">&gt;&gt;&gt; from tccloud import TCClient
-&gt;&gt;&gt; from tccloud.models import AtomicInput, Molecule
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">tccloud</span> <span class="kn">import</span> <span class="n">TCClient</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">tccloud.models</span> <span class="kn">import</span> <span class="n">AtomicInput</span><span class="p">,</span> <span class="n">Molecule</span>
 
-&gt;&gt;&gt; client = TCClient()
-&gt;&gt;&gt; client.configure() # only run the very first time you use TCClient
-&gt;&gt;&gt; water = Molecule.from_data(&quot;pubchem:water&quot;)
-&gt;&gt;&gt; atomic_input = AtomicInput(molecule=water, model={&quot;method&quot;: &quot;B3LYP&quot;, &quot;basis&quot;: &quot;6-31g&quot;}, driver=&quot;energy&quot;)
-&gt;&gt;&gt; future_result = client.compute(atomic_input, engine=&quot;terachem_pbs&quot;)
-&gt;&gt;&gt; result = future_result.get()
-&gt;&gt;&gt; result
-AtomicResult(driver='energy', model={'method': 'B3LYP', 'basis': '6-31g'}, molecule_hash='b6ec4fa')
-&gt;&gt;&gt; result.return_result
--76.38545794119997
-</code></pre>
-<h2 id="licence">Licence</h2>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">client</span> <span class="o">=</span> <span class="n">TCClient</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="s2">&quot;pubchem:water&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">atomic_input</span> <span class="o">=</span> <span class="n">AtomicInput</span><span class="p">(</span><span class="n">molecule</span><span class="o">=</span><span class="n">water</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;B3LYP&quot;</span><span class="p">,</span> <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="s2">&quot;6-31g&quot;</span><span class="p">},</span> <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;energy&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">future_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">atomic_input</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;terachem_pbs&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">future_result</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">result</span>
+<span class="n">AtomicResult</span><span class="p">(</span><span class="n">driver</span><span class="o">=</span><span class="s1">&#39;energy&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="s1">&#39;B3LYP&#39;</span><span class="p">,</span> <span class="s1">&#39;basis&#39;</span><span class="p">:</span> <span class="s1">&#39;6-31g&#39;</span><span class="p">},</span> <span class="n">molecule_hash</span><span class="o">=</span><span class="s1">&#39;b6ec4fa&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">result</span><span class="o">.</span><span class="n">return_result</span>
+<span class="o">-</span><span class="mf">76.38545794119997</span>
+</code></pre></div>
+<h2 id="licence">Licence<a class="headerlink" href="#licence" title="Permanent link">🔗</a></h2>
 <p>This project is licensed under the terms of the MIT license.</p>
                 
               
@@ -583,13 +516,13 @@ AtomicResult(driver='energy', model={'method': 'B3LYP', 'basis': '6-31g'}, molec
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
       
-        <a href="about/" class="md-footer__link md-footer__link--next" rel="next">
+        <a href="usage/authentication/" class="md-footer__link md-footer__link--next" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              About
+              Authentication
             </div>
           </div>
           <div class="md-footer__button md-icon">
@@ -621,6 +554,10 @@ AtomicResult(driver='energy', model={'method': 'B3LYP', 'basis': '6-31g'}, molec
     
     
       <script src="assets/javascripts/bundle.ca5457b8.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+      
+        <script src="javascripts/config.js"></script>
       
     
   </body>
