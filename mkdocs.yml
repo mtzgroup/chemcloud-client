@@ -1,0 +1,40 @@
+site_name: tccloud
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: teal
+      accent: amber
+  features:
+    - search.suggest
+    - search.highlight
+  icon:
+    repo: fontawesome/brands/github-alt
+  favicon: img/favicon.ico
+
+repo_url: https://github.com/mtzgroup/tccloud
+site_author: Colton Hicks
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - toc:
+      permalink: 🔗
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js
+  - javascripts/config.js
+extra_css:
+  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css
+
+nav:
+  - tccloud: index.md
+  - Usage:
+      - usage/authentication.md
+      - usage/compute.md
+      - usage/Atomic Input.md
+      - usage/molecule.md
+      - usage/TCClient.md
+      - usage/keywords.md
