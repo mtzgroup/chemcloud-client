@@ -1,8 +1,8 @@
-# tccloud - A Python Client for TeraChem Cloud
+# tccloud
+
+A Python Client for TeraChem Cloud.
 
 `tccloud` is a python client that makes performing quantum chemistry calculations easy, fast, and fun. All input and output data structures are based on the [QCSchema](https://molssi-qc-schema.readthedocs.io/en/latest/index.html#) specification designed by [The Molecular Sciences Software Institute](https://molssi.org). The client provides a simple, yet powerful interface to perform quantum chemistry calculation using nothing but modern python and an internet connection. Compute is generously provided free of charge by the [TeraChem Cloud](https://tccloud.mtzlab.com) project.
-
-Check out the [documentation](https://mtzgroup.github.io/tccloud/).
 
 ## Requirements
 
@@ -26,12 +26,13 @@ pip install tccloud
 
 ```python
 >>> from tccloud import TCClient
-
 >>> client = TCClient()
 >>> client.configure() # only run the very first time you use TCClient
+
 # See supported compute engines
 >>> client.supported_engines
 ['psi4', 'terachem_pbs', ...]
+
 # Test connection to TeraChem Cloud
 >>> client.hello_world("Colton")
 'Welcome to TeraChem Cloud, Colton'
