@@ -1,0 +1,3 @@
+# FutureResult
+
+::: tccloud.models:FutureResult

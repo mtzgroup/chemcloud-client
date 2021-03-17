@@ -6,7 +6,7 @@ from .models import AtomicInput, FutureResult
 
 
 class TCClient:
-    """Main client object for end user interation"""
+    """Main client object to perform computations using TeraChem Cloud."""
 
     def __init__(
         self,
@@ -16,6 +16,21 @@ class TCClient:
         profile: Optional[str] = None,
         tccloud_domain: Optional[str] = None,
     ):
+        """
+        Initialize a TCClient object.
+        
+        Parameters:
+            tccloud_username: TeraChem Cloud username
+            tccloud_password: TeraChem Cloud password
+            profile: Authentication profile name
+            tccloud_domain: Domain of TeraChem Cloud instance to connect to
+        
+        !!! Danger
+            It is not recommended to pass your TeraChem Cloud username and password
+            directly to a `TCClient`. Instead instantiate a client with no credentials
+            `client = TCClient()` and then run `client.configure()` to securely set up
+            your authentication credentials for TeraChem Cloud.
+        """
         self._client = _RequestsClient(
             tccloud_username=tccloud_username,
             tccloud_password=tccloud_password,
@@ -34,13 +49,23 @@ class TCClient:
         )
 
     @property
-    def profile(self):
-        """Profile being used for authentication with TeraChem Cloud"""
+    def profile(self) -> str:
+        """Profile being used for authentication with TeraChem Cloud.
+
+        Returns:
+            The name of the name of the credentials profile being used with
+            the current client.
+
+        NOTE: This is a note!
+        """
         return self._client._profile
 
     @property
-    def supported_engines(self) -> Optional[List[str]]:
-        """Compute engines currently supported by TeraChem Cloud"""
+    def supported_engines(self) -> List[str]:
+        """Compute engines currently supported by TeraChem Cloud.
+
+        Returns:
+            List of engines currently supported by TeraChem Cloud."""
         if not self._openapi_spec:
             self._set_openapi_specification()
         try:
@@ -50,23 +75,56 @@ class TCClient:
             ]
         except IndexError:
             print("Cannot locate currently supported engines.")
-            engines = None
+            engines = [""]
         return engines
 
-    def hello_world(self, name: Optional[str] = None):
-        """A simple endpoint to check connectivity to TeraChem Cloud"""
+    def hello_world(self, name: Optional[str] = None) -> str:
+        """A simple endpoint to check connectivity to TeraChem Cloud.
+
+        Parameters:
+            name: Your name
+
+        Returns:
+            A message from TeraChem Cloud if the client was able to successfully
+            connect.
+        """
         return self._client.hello_world(name)
 
     def compute(self, atomic_input: AtomicInput, engine: str) -> FutureResult:
-        """Submit a computation to TeraChem Cloud"""
+        """Submit a computation to TeraChem Cloud.
+
+        Parameters:
+            atomic_input: Defines the structure of the desired computation.
+            engine: A string matching one of the `self.supported_engines`
+
+        Returns:
+            Object providing access to a computation's eventual result. You can check a
+            computation's status by runing `.status` on the `FutureResult` object or
+            `.get()` to block and retrieve the computation's final result.
+        """
         if self.supported_engines is not None:
             assert (
                 engine in self.supported_engines
             ), f"Please use one of the following engines: {self.supported_engines}"
         return self._client.compute(atomic_input, engine)
 
-    def configure(self, profile: str = settings.tccloud_default_credentials_profile):
-        """Configure credentials file with tokens"""
+    def configure(
+        self, profile: str = settings.tccloud_default_credentials_profile
+    ) -> None:
+        """Configure profiles for authentication with TeraChem Cloud.
+
+        Parameters:
+            profile: Optional value to create a named profile for use with TeraChem
+                Cloud. No value needs to be passed and most users will only have one
+                login with TeraChem Cloud. TCClient will access the profile by
+                default without a specific name being passed. Pass a value if you have
+                multiple logins to TeraChem Cloud.
+        Note:
+            Configures `tccloud` to use the passed credentials automatically in the
+            future. You will not need to run `.configure()` the next time you use the
+            `tccloud`.
+
+        """
         print(
             f"✅ If you don't get have an account please signup at: {settings.tccloud_domain}/signup"
         )

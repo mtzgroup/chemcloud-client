@@ -50,7 +50,12 @@ _UNREADY_STATES = frozenset(
 
 class FutureResult:
     def __init__(self, task_id: str, client):
-        """client is http_client._Requests client. Must avoid circular import"""
+        """client is http_client._Requests client. Must avoid circular import
+
+        Caution:
+            A FutureResult should never be instantiated directly.
+            `TCClient.compute(...)` will return one when you submit a computation.
+        """
         self.task_id = task_id
         self.result: Optional[Union[AtomicResult, FailedOperation]] = None
         self._client = client
@@ -67,8 +72,19 @@ class FutureResult:
     ) -> Union[AtomicResult, FailedOperation]:
         """Block and return result.
 
+        Parameters:
+            timeout: The number of seconds to wait for a computation before raising a
+                TimeOutError.
+            interval: The amount of time to wait between calls to TeraChem Cloud to
+                check a computation's status.
+            raise_error: If set to True `.get()` will raise a ComputeError if the
+                computation was unsuccessful.
+
         Returns:
-            AtomicResult if computation succeeded or FailedOperation if computation failed.
+            `AtomicResult` if computation succeeded or `FailedOperation` if computation failed.
+        
+        Exceptions:
+            ComputeError: Raised if `raise_error=True`
         """
         if self.result:
             return self.result
@@ -96,8 +112,11 @@ class FutureResult:
     def status(self) -> str:
         """Check status of compute task.
 
-        Side Effect:
-            Set self.result if task complete.
+        Returns:
+            Status of computation.
+
+        Note:
+            Sets self.result if task is complete.
         """
         if self._status in _READY_STATES:
             return self._status

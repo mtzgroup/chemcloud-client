@@ -1,0 +1,3 @@
+# AtomicResult
+
+::: tccloud.models:AtomicResult
