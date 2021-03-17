@@ -1,0 +1,1508 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="Colton Hicks">
+      
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.3">
+    
+    
+      
+        <title>FailedOperation - tccloud</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.1655a90d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.7fa14f5b.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#failedoperation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="tccloud" class="md-header__button md-logo" aria-label="tccloud">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            tccloud
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              FailedOperation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="md-header__options">
+      
+    </div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/mtzgroup/tccloud/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="tccloud" class="md-nav__button md-logo" aria-label="tccloud">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    tccloud
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/mtzgroup/tccloud/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        tccloud
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" data-md-state="indeterminate" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        Tutorial - Users Guide
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Tutorial - Users Guide" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorial - Users Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/compute/" class="md-nav__link">
+        Compute
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/authentication/" class="md-nav__link">
+        Authentication
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/keywords/" class="md-nav__link">
+        Keywords
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      <label class="md-nav__link" for="__nav_3">
+        Code Reference
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Code Reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Code Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TCClient/" class="md-nav__link">
+        TCClient
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FutureResult/" class="md-nav__link">
+        FutureResult
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Molecule/" class="md-nav__link">
+        Molecule
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AtomicInput/" class="md-nav__link">
+        AtomicInput
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AtomicResult/" class="md-nav__link">
+        AtomicResult
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          FailedOperation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        FailedOperation
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation" class="md-nav__link">
+    qcelemental.models.common_models.FailedOperation
+  </a>
+  
+    <nav class="md-nav" aria-label="qcelemental.models.common_models.FailedOperation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation--parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation-attributes" class="md-nav__link">
+    Attributes
+  </a>
+  
+    <nav class="md-nav" aria-label="Attributes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.error" class="md-nav__link">
+    error
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.extras" class="md-nav__link">
+    extras
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.fields" class="md-nav__link">
+    fields
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.id" class="md-nav__link">
+    id
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.input_data" class="md-nav__link">
+    input_data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.success" class="md-nav__link">
+    success
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.Config" class="md-nav__link">
+    Config
+  </a>
+  
+    <nav class="md-nav" aria-label="Config">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.Config.allow_mutation" class="md-nav__link">
+    allow_mutation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.Config.extra" class="md-nav__link">
+    extra
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.Config.force_skip_defaults" class="md-nav__link">
+    force_skip_defaults
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.Config.json_encoders" class="md-nav__link">
+    json_encoders
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.Config.serialize_default_excludes" class="md-nav__link">
+    serialize_default_excludes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.Config.serialize_skip_defaults" class="md-nav__link">
+    serialize_skip_defaults
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation-methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.compare" class="md-nav__link">
+    compare()
+  </a>
+  
+    <nav class="md-nav" aria-label="compare()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.compare--parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.compare--returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.dict" class="md-nav__link">
+    dict()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.json" class="md-nav__link">
+    json()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.serialize" class="md-nav__link">
+    serialize()
+  </a>
+  
+    <nav class="md-nav" aria-label="serialize()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.serialize--parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.serialize--returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ComputeError/" class="md-nav__link">
+        ComputeError
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exceptions/" class="md-nav__link">
+        Exceptions
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CHANGELOG/" class="md-nav__link">
+        Changelog
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation" class="md-nav__link">
+    qcelemental.models.common_models.FailedOperation
+  </a>
+  
+    <nav class="md-nav" aria-label="qcelemental.models.common_models.FailedOperation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation--parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation-attributes" class="md-nav__link">
+    Attributes
+  </a>
+  
+    <nav class="md-nav" aria-label="Attributes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.error" class="md-nav__link">
+    error
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.extras" class="md-nav__link">
+    extras
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.fields" class="md-nav__link">
+    fields
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.id" class="md-nav__link">
+    id
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.input_data" class="md-nav__link">
+    input_data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.success" class="md-nav__link">
+    success
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.Config" class="md-nav__link">
+    Config
+  </a>
+  
+    <nav class="md-nav" aria-label="Config">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.Config.allow_mutation" class="md-nav__link">
+    allow_mutation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.Config.extra" class="md-nav__link">
+    extra
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.Config.force_skip_defaults" class="md-nav__link">
+    force_skip_defaults
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.Config.json_encoders" class="md-nav__link">
+    json_encoders
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.Config.serialize_default_excludes" class="md-nav__link">
+    serialize_default_excludes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.Config.serialize_skip_defaults" class="md-nav__link">
+    serialize_skip_defaults
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation-methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.compare" class="md-nav__link">
+    compare()
+  </a>
+  
+    <nav class="md-nav" aria-label="compare()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.compare--parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.compare--returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.dict" class="md-nav__link">
+    dict()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.json" class="md-nav__link">
+    json()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.serialize" class="md-nav__link">
+    serialize()
+  </a>
+  
+    <nav class="md-nav" aria-label="serialize()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.serialize--parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.common_models.FailedOperation.serialize--returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/mtzgroup/tccloud/edit/develop/docs/code_reference/FailedOperation.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="failedoperation">FailedOperation<a class="headerlink" href="#failedoperation" title="Permanent link">🔗</a></h1>
+
+
+  <div class="doc doc-object doc-class">
+
+<a id="qcelemental.models.common_models.FailedOperation"></a>
+    <div class="doc doc-contents first">
+
+      <p>Record indicating that a given operation (program, procedure, etc.) has failed and containing the reason and input data which generated the failure.</p>
+<h3 id="qcelemental.models.common_models.FailedOperation--parameters">Parameters<a class="headerlink" href="#qcelemental.models.common_models.FailedOperation--parameters" title="Permanent link">🔗</a></h3>
+<p>id : str, Optional
+    A unique identifier which links this FailedOperation, often of the same Id of the operation should it have been successful. This will often be set programmatically by a database such as Fractal.
+input_data : Any, Optional
+    The input data which was passed in that generated this failure. This should be the complete input which when attempted to be run, caused the operation to fail.
+success : bool, Default: False
+    A boolean indicator that the operation failed consistent with the model of successful operations. Should always be False. Allows programmatic assessment of all operations regardless of if they failed or succeeded
+error : :class:<code>ComputeError</code>, Default: Ellipsis
+    A container which has details of the error that failed this operation. See the :class:<code>ComputeError</code> for more details.
+extras : Dict[str, Any], Optional
+    Additional information to bundle with the failed operation. Details which pertain specifically to a thrown error should be contained in the <code>error</code> field. See :class:<code>ComputeError</code> for details.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+<h2 id="qcelemental.models.common_models.FailedOperation-attributes">Attributes<a class="headerlink" href="#qcelemental.models.common_models.FailedOperation-attributes" title="Permanent link">🔗</a></h2>
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 class="doc doc-heading" id="qcelemental.models.common_models.FailedOperation.error">
+<code class="highlight language-python"><span class="n">error</span><span class="p">:</span> <span class="n">ComputeError</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
+      <small class="doc doc-property doc-property-required"><code>required</code></small>
+  </span>
+
+<a class="headerlink" href="#qcelemental.models.common_models.FailedOperation.error" title="Permanent link">🔗</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A container which has details of the error that failed this operation. See the :class:<code>ComputeError</code> for more details.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 class="doc doc-heading" id="qcelemental.models.common_models.FailedOperation.extras">
+<code class="highlight language-python"><span class="n">extras</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
+  </span>
+
+<a class="headerlink" href="#qcelemental.models.common_models.FailedOperation.extras" title="Permanent link">🔗</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Additional information to bundle with the failed operation. Details which pertain specifically to a thrown error should be contained in the <code>error</code> field. See :class:<code>ComputeError</code> for details.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 class="doc doc-heading" id="qcelemental.models.common_models.FailedOperation.fields">
+<code class="highlight language-python"><span class="n">fields</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pydantic</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">ModelField</span><span class="p">]</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
+  </span>
+
+<a class="headerlink" href="#qcelemental.models.common_models.FailedOperation.fields" title="Permanent link">🔗</a></h3>
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 class="doc doc-heading" id="qcelemental.models.common_models.FailedOperation.id">
+<code class="highlight language-python"><span class="nb">id</span><span class="p">:</span> <span class="nb">str</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
+  </span>
+
+<a class="headerlink" href="#qcelemental.models.common_models.FailedOperation.id" title="Permanent link">🔗</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A unique identifier which links this FailedOperation, often of the same Id of the operation should it have been successful. This will often be set programmatically by a database such as Fractal.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 class="doc doc-heading" id="qcelemental.models.common_models.FailedOperation.input_data">
+<code class="highlight language-python"><span class="n">input_data</span><span class="p">:</span> <span class="n">Any</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
+  </span>
+
+<a class="headerlink" href="#qcelemental.models.common_models.FailedOperation.input_data" title="Permanent link">🔗</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>The input data which was passed in that generated this failure. This should be the complete input which when attempted to be run, caused the operation to fail.</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 class="doc doc-heading" id="qcelemental.models.common_models.FailedOperation.success">
+<code class="highlight language-python"><span class="n">success</span><span class="p">:</span> <span class="nb">bool</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-pydantic-field"><code>pydantic-field</code></small>
+  </span>
+
+<a class="headerlink" href="#qcelemental.models.common_models.FailedOperation.success" title="Permanent link">🔗</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A boolean indicator that the operation failed consistent with the model of successful operations. Should always be False. Allows programmatic assessment of all operations regardless of if they failed or succeeded</p>
+    </div>
+
+  </div>
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 class="doc doc-heading" id="qcelemental.models.common_models.FailedOperation.Config">
+        <code>Config</code>
+
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+<a class="headerlink" href="#qcelemental.models.common_models.FailedOperation.Config" title="Permanent link">🔗</a></h3>
+
+    <div class="doc doc-contents ">
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h5 class="doc doc-heading" id="qcelemental.models.common_models.FailedOperation.Config.allow_mutation">
+<code class="highlight language-python"><span class="n">allow_mutation</span><span class="p">:</span> <span class="nb">bool</span></code>
+
+
+<a class="headerlink" href="#qcelemental.models.common_models.FailedOperation.Config.allow_mutation" title="Permanent link">🔗</a></h5>
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h5 class="doc doc-heading" id="qcelemental.models.common_models.FailedOperation.Config.extra">
+<code class="highlight language-python"><span class="n">extra</span><span class="p">:</span> <span class="nb">str</span></code>
+
+
+<a class="headerlink" href="#qcelemental.models.common_models.FailedOperation.Config.extra" title="Permanent link">🔗</a></h5>
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h5 class="doc doc-heading" id="qcelemental.models.common_models.FailedOperation.Config.force_skip_defaults">
+<code class="highlight language-python"><span class="n">force_skip_defaults</span><span class="p">:</span> <span class="nb">bool</span></code>
+
+
+<a class="headerlink" href="#qcelemental.models.common_models.FailedOperation.Config.force_skip_defaults" title="Permanent link">🔗</a></h5>
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h5 class="doc doc-heading" id="qcelemental.models.common_models.FailedOperation.Config.json_encoders">
+<code class="highlight language-python"><span class="n">json_encoders</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span></code>
+
+
+<a class="headerlink" href="#qcelemental.models.common_models.FailedOperation.Config.json_encoders" title="Permanent link">🔗</a></h5>
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h5 class="doc doc-heading" id="qcelemental.models.common_models.FailedOperation.Config.serialize_default_excludes">
+<code class="highlight language-python"><span class="n">serialize_default_excludes</span><span class="p">:</span> <span class="n">Set</span></code>
+
+
+<a class="headerlink" href="#qcelemental.models.common_models.FailedOperation.Config.serialize_default_excludes" title="Permanent link">🔗</a></h5>
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h5 class="doc doc-heading" id="qcelemental.models.common_models.FailedOperation.Config.serialize_skip_defaults">
+<code class="highlight language-python"><span class="n">serialize_skip_defaults</span><span class="p">:</span> <span class="nb">bool</span></code>
+
+
+<a class="headerlink" href="#qcelemental.models.common_models.FailedOperation.Config.serialize_skip_defaults" title="Permanent link">🔗</a></h5>
+
+    <div class="doc doc-contents ">
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+<h2 id="qcelemental.models.common_models.FailedOperation-methods">Methods<a class="headerlink" href="#qcelemental.models.common_models.FailedOperation-methods" title="Permanent link">🔗</a></h2>
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 class="doc doc-heading" id="qcelemental.models.common_models.FailedOperation.compare">
+<code class="highlight language-python"><span class="n">compare</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ProtoModel</span><span class="p">,</span> <span class="n">pydantic</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">BaseModel</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+<a class="headerlink" href="#qcelemental.models.common_models.FailedOperation.compare" title="Permanent link">🔗</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Compares the current object to the provided object recursively.</p>
+<h5 id="qcelemental.models.common_models.FailedOperation.compare--parameters">Parameters<a class="headerlink" href="#qcelemental.models.common_models.FailedOperation.compare--parameters" title="Permanent link">🔗</a></h5>
+<p>other : Model
+    The model to compare to.
+**kwargs
+    Additional kwargs to pass to <code>qcelemental.compare_recursive</code>.</p>
+<h5 id="qcelemental.models.common_models.FailedOperation.compare--returns">Returns<a class="headerlink" href="#qcelemental.models.common_models.FailedOperation.compare--returns" title="Permanent link">🔗</a></h5>
+<p>bool
+    True if the objects match.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>qcelemental/models/common_models.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">compare</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="s2">&quot;ProtoModel&quot;</span><span class="p">,</span> <span class="n">BaseModel</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Compares the current object to the provided object recursively.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    other : Model</span>
+<span class="sd">        The model to compare to.</span>
+<span class="sd">    **kwargs</span>
+<span class="sd">        Additional kwargs to pass to ``qcelemental.compare_recursive``.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool</span>
+<span class="sd">        True if the objects match.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">compare_recursive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 class="doc doc-heading" id="qcelemental.models.common_models.FailedOperation.dict">
+<code class="highlight language-python"><span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+<a class="headerlink" href="#qcelemental.models.common_models.FailedOperation.dict" title="Permanent link">🔗</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Generate a dictionary representation of the model, optionally specifying which fields to include or exclude.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>qcelemental/models/common_models.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="n">encoding</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;exclude&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;exclude&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="p">)</span> <span class="o">|</span> <span class="bp">self</span><span class="o">.</span><span class="n">__config__</span><span class="o">.</span><span class="n">serialize_default_excludes</span>  <span class="c1"># type: ignore</span>
+    <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;exclude_unset&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__config__</span><span class="o">.</span><span class="n">serialize_skip_defaults</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__config__</span><span class="o">.</span><span class="n">force_skip_defaults</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;exclude_unset&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">dict</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">encoding</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">data</span>
+    <span class="k">elif</span> <span class="n">encoding</span> <span class="o">==</span> <span class="s2">&quot;json&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">serialize</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown encoding type &#39;</span><span class="si">{</span><span class="n">encoding</span><span class="si">}</span><span class="s2">&#39;, valid encoding types: &#39;json&#39;.&quot;</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 class="doc doc-heading" id="qcelemental.models.common_models.FailedOperation.json">
+<code class="highlight language-python"><span class="n">json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+<a class="headerlink" href="#qcelemental.models.common_models.FailedOperation.json" title="Permanent link">🔗</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Generate a JSON representation of the model, <code>include</code> and <code>exclude</code> arguments as per <code>dict()</code>.</p>
+<p><code>encoder</code> is an optional function to supply as <code>default</code> to json.dumps(), other arguments as per <code>json.dumps()</code>.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>qcelemental/models/common_models.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="c1"># Alias JSON here from BaseModel to reflect dict changes</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="s2">&quot;json&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 class="doc doc-heading" id="qcelemental.models.common_models.FailedOperation.serialize">
+<code class="highlight language-python"><span class="n">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">encoding</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">include</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">exclude</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">exclude_unset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">exclude_defaults</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">exclude_none</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-inherited"><code>inherited</code></small>
+  </span>
+
+<a class="headerlink" href="#qcelemental.models.common_models.FailedOperation.serialize" title="Permanent link">🔗</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Generates a serialized representation of the model</p>
+<h5 id="qcelemental.models.common_models.FailedOperation.serialize--parameters">Parameters<a class="headerlink" href="#qcelemental.models.common_models.FailedOperation.serialize--parameters" title="Permanent link">🔗</a></h5>
+<p>encoding : str
+    The serialization type, available types are: {'json', 'json-ext', 'msgpack-ext'}
+include : Optional[Set[str]], optional
+    Fields to be included in the serialization.
+exclude : Optional[Set[str]], optional
+    Fields to be excluded in the serialization.
+exclude_unset : Optional[bool], optional
+    If True, skips fields that have default values provided.</p>
+<div class="admonition exclude_defaults">
+<p class="admonition-title">Optional[bool], optional</p>
+<p>If True, skips fields that have set or defaulted values equal to the default.</p>
+</div>
+<div class="admonition exclude_none">
+<p class="admonition-title">Optional[bool], optional</p>
+<p>If True, skips fields that have value <code>None</code>.</p>
+</div>
+<h5 id="qcelemental.models.common_models.FailedOperation.serialize--returns">Returns<a class="headerlink" href="#qcelemental.models.common_models.FailedOperation.serialize--returns" title="Permanent link">🔗</a></h5>
+<p>Union[bytes, str]
+    The serialized model.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>qcelemental/models/common_models.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">encoding</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">include</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">exclude</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">exclude_unset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">exclude_defaults</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">exclude_none</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Generates a serialized representation of the model</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    encoding : str</span>
+<span class="sd">        The serialization type, available types are: {&#39;json&#39;, &#39;json-ext&#39;, &#39;msgpack-ext&#39;}</span>
+<span class="sd">    include : Optional[Set[str]], optional</span>
+<span class="sd">        Fields to be included in the serialization.</span>
+<span class="sd">    exclude : Optional[Set[str]], optional</span>
+<span class="sd">        Fields to be excluded in the serialization.</span>
+<span class="sd">    exclude_unset : Optional[bool], optional</span>
+<span class="sd">        If True, skips fields that have default values provided.</span>
+<span class="sd">    exclude_defaults: Optional[bool], optional</span>
+<span class="sd">        If True, skips fields that have set or defaulted values equal to the default.</span>
+<span class="sd">    exclude_none: Optional[bool], optional</span>
+<span class="sd">        If True, skips fields that have value ``None``.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Union[bytes, str]</span>
+<span class="sd">        The serialized model.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">include</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;include&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">include</span>
+    <span class="k">if</span> <span class="n">exclude</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;exclude&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">exclude</span>
+    <span class="k">if</span> <span class="n">exclude_unset</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;exclude_unset&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">exclude_unset</span>
+    <span class="k">if</span> <span class="n">exclude_defaults</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;exclude_defaults&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">exclude_defaults</span>
+    <span class="k">if</span> <span class="n">exclude_none</span><span class="p">:</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;exclude_none&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">exclude_none</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">serialize</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../AtomicResult/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              AtomicResult
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../ComputeError/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              ComputeError
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["search.suggest", "search.highlight", "navigation.instant", "navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.fb4a9340.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.ca5457b8.min.js"></script>
+      
+    
+  </body>
+</html>
