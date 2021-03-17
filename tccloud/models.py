@@ -2,7 +2,7 @@ from enum import Enum
 from time import sleep, time
 from typing import Optional, Union
 
-from qcelemental.models import AtomicInput as AtomicInput
+from qcelemental.models import AtomicInput as AtomicInput  # noqa: F401
 from qcelemental.models import AtomicResult as AtomicResult  # noqa: F401
 from qcelemental.models import Molecule as Molecule  # noqa: F401
 from qcelemental.models.common_models import FailedOperation
@@ -82,7 +82,7 @@ class FutureResult:
 
         Returns:
             `AtomicResult` if computation succeeded or `FailedOperation` if computation failed.
-        
+
         Exceptions:
             ComputeError: Raised if `raise_error=True`
         """

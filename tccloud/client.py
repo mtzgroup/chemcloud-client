@@ -18,13 +18,13 @@ class TCClient:
     ):
         """
         Initialize a TCClient object.
-        
+
         Parameters:
             tccloud_username: TeraChem Cloud username
             tccloud_password: TeraChem Cloud password
             profile: Authentication profile name
             tccloud_domain: Domain of TeraChem Cloud instance to connect to
-        
+
         !!! Danger
             It is not recommended to pass your TeraChem Cloud username and password
             directly to a `TCClient`. Instead instantiate a client with no credentials
