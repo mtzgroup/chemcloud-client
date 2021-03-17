@@ -20,7 +20,7 @@ pip install tccloud
 
 ### The Absolute Minimum
 
-- Create a TeraChem Cloud account at https://tccloud.mtzlab.com/signup.
+- Create a TeraChem Cloud account at [https://tccloud.mtzlab.com/signup](https://tccloud.mtzlab.com/signup).
 - Instantiate a client
 - Configure client (only required the very first time you use `TCClient`)
 
