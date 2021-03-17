@@ -2,9 +2,9 @@
 
 ## Overview
 
-Computations are performed on [TeraChem Cloud](https://tccloud.mtzlab.com). The `tccloud` python client submits jobs to and retrieves from TeraChem Cloud.
+Computations are physically executed on [TeraChem Cloud](https://tccloud.mtzlab.com). The `tccloud` python client submits jobs to and retrieves work from TeraChem Cloud. Computations are submitted using the [TCClient][tccloud.client.TCClient] object.
 
-Computations require an [AtomicInput](./Atomic Input.md) object and the specification of a compute engine.
+Computations require an [AtomicInput][tccloud.models.AtomicInput] object and the specification of a compute engine.
 
 ```python
 >>> from tccloud import TCClient
@@ -30,7 +30,7 @@ Supported compute engines can be checked on the client. If you would like to req
 
 ## Keywords
 
-Keywords specific to a quantum chemistry engine can be added to an [AtomicInput](./Atomic Input.md) as follows:
+Keywords specific to a quantum chemistry engine can be added to an [AtomicInput][tccloud.models.AtomicInput] as follows:
 
 ```python
 ai = AtomicInput(

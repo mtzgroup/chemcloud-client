@@ -8,9 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
-### Changed
-
-### Removed
+- Extended documentation to include a Code Reference section and much more comprehensive documentation of the main objects.
 
 ## [0.2.1] - 2021-03-05
 
