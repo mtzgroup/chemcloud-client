@@ -1,8 +1,9 @@
 from typing import Dict, List, Optional
 
+from . import __version__
 from .config import settings
 from .http_client import _RequestsClient
-from .models import AtomicInput, FutureResult
+from .models import AtomicInput, FutureResult, OptimizationInput
 
 
 class TCClient:
@@ -49,6 +50,11 @@ class TCClient:
         )
 
     @property
+    def version(self) -> str:
+        """Return tccloud version"""
+        return __version__
+
+    @property
     def profile(self) -> str:
         """Profile being used for authentication with TeraChem Cloud.
 
@@ -77,6 +83,24 @@ class TCClient:
             print("Cannot locate currently supported engines.")
             engines = [""]
         return engines
+
+    @property
+    def supported_procedures(self) -> List[str]:
+        """Compute procedures currently supported by TeraChem Cloud.
+
+        Returns:
+            List of procedures currently supported by TeraChem Cloud."""
+        if not self._openapi_spec:
+            self._set_openapi_specification()
+        try:
+            assert self._openapi_spec is not None
+            procedures = self._openapi_spec["components"]["schemas"][
+                "SupportedProcedures"
+            ]["enum"]
+        except IndexError:
+            print("Cannot locate currently supported procedures.")
+            procedures = [""]
+        return procedures
 
     def hello_world(self, name: Optional[str] = None) -> str:
         """A simple endpoint to check connectivity to TeraChem Cloud.
@@ -107,6 +131,26 @@ class TCClient:
                 engine in self.supported_engines
             ), f"Please use one of the following engines: {self.supported_engines}"
         return self._client.compute(atomic_input, engine)
+
+    def compute_procedure(
+        self, input: OptimizationInput, procedure: str
+    ) -> FutureResult:
+        """Submit a procedure computation to TeraChem Cloud
+
+        Parameters:
+            input: Defines the inputs for an optimization computation
+            procedure: The name of the procedure, e.g., 'berny'
+
+        Returns:
+            Object providing access to a computation's eventual result. You can check a
+            computation's status by runing `.status` on the `FutureResult` object or
+            `.get()` to block and retrieve the computation's final result.
+        """
+        if self.supported_procedures is not None:
+            assert (
+                procedure in self.supported_procedures
+            ), f"Please use one of the following procedures: {self.supported_procedures}"
+        return self._client.compute_procedure(input, procedure)
 
     def configure(
         self, profile: str = settings.tccloud_default_credentials_profile

@@ -7,18 +7,7 @@ Computations are physically executed on [TeraChem Cloud](https://tccloud.mtzlab.
 Computations require an [AtomicInput][tccloud.models.AtomicInput] object and the specification of a compute engine.
 
 ```python
->>> from tccloud import TCClient
->>> from tccloud.models import AtomicInput, Molecule
-
->>> client = TCClient()
->>> water = Molecule.from_data("pubchem:water")
->>> atomic_input = AtomicInput(molecule=water, model={"method": "B3LYP", "basis": "6-31g"}, driver="energy")
->>> future_result = client.compute(atomic_input, engine="terachem_pbs")
->>> result = future_result.get()
->>> result
-AtomicResult(driver='energy', model={'method': 'B3LYP', 'basis': '6-31g'}, molecule_hash='b6ec4fa')
->>> result.return_result
--76.38545794119997
+{!../examples/energy.py!}
 ```
 
 Supported compute engines can be checked on the client. If you would like to request additional engines please open an [issue](https://github.com/mtzgroup/tccloud/issues).
