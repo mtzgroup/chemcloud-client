@@ -4,12 +4,18 @@ from pathlib import Path
 
 import toml
 from pytest_httpx import HTTPXMock
-from qcelemental.models import AtomicInput, AtomicResult
 from qcelemental.models.common_models import Model
 
 from tccloud.config import Settings
 from tccloud.http_client import _RequestsClient
-from tccloud.models import FutureResult, TaskStatus
+from tccloud.models import (
+    AtomicInput,
+    AtomicResult,
+    FutureResult,
+    OptimizationInput,
+    QCInputSpecification,
+    TaskStatus,
+)
 
 
 def test_passing_username_password_are_prioritized_for_auth(
@@ -364,6 +370,29 @@ def test_compute(settings, patch_compute_endpoint, water, jwt):
     atomic_input = AtomicInput(molecule=water, model=model, driver="energy")
 
     future_result = client.compute(atomic_input, engine="psi4")
+
+    assert isinstance(future_result, FutureResult)
+    assert future_result.task_id == patch_compute_endpoint["task_id"]
+    assert future_result._client is client
+
+
+def test_compute_procedure(settings, patch_compute_endpoint, water, jwt):
+    client = _RequestsClient(settings=settings)
+    client._access_token = jwt
+
+    input_spec = QCInputSpecification(
+        driver="gradient",
+        model={"method": "b3lyp", "basis": "6-31g"},
+    )
+
+    opt_input = OptimizationInput(
+        input_specification=input_spec,
+        initial_molecule=water,
+        protocols={"trajectory": "all"},
+        keywords={"program": "terachem_pbs"},
+    )
+
+    future_result = client.compute_procedure(opt_input, "geometric")
 
     assert isinstance(future_result, FutureResult)
     assert future_result.task_id == patch_compute_endpoint["task_id"]

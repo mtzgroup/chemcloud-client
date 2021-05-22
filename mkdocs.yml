@@ -19,6 +19,7 @@ site_author: Colton Hicks
 extra_css:
   - css/extra.css
 plugins:
+  - search
   - mkdocstrings:
       watch:
         - tccloud
@@ -48,6 +49,8 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
+  - markdown_include.include:
+      base_path: docs
 
 nav:
   - tccloud: index.md
@@ -55,6 +58,7 @@ nav:
       - tutorial/compute.md  
       - tutorial/authentication.md
       - tutorial/keywords.md
+      - tutorial/geometry_optimization.md
   - Code Reference:
       - code_reference/TCClient.md
       - code_reference/FutureResult.md

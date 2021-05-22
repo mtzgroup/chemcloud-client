@@ -5,8 +5,13 @@ from typing import Optional, Union
 from qcelemental.models import AtomicInput as AtomicInput  # noqa: F401
 from qcelemental.models import AtomicResult as AtomicResult  # noqa: F401
 from qcelemental.models import Molecule as Molecule  # noqa: F401
+from qcelemental.models import OptimizationInput as OptimizationInput  # noqa: F401
+from qcelemental.models import OptimizationResult as OptimizationResult  # noqa: F401
 from qcelemental.models.common_models import FailedOperation
 from qcelemental.models.common_models import Model as Model  # noqa: F401
+from qcelemental.models.procedures import (  # noqa: F401
+    QCInputSpecification as QCInputSpecification,
+)
 
 from .exceptions import ComputeError, TimeoutError
 
@@ -47,6 +52,8 @@ _UNREADY_STATES = frozenset(
     }
 )
 
+PossibleResults = Union[AtomicResult, OptimizationResult, FailedOperation]
+
 
 class FutureResult:
     def __init__(self, task_id: str, client):
@@ -57,7 +64,7 @@ class FutureResult:
             `TCClient.compute(...)` will return one when you submit a computation.
         """
         self.task_id = task_id
-        self.result: Optional[Union[AtomicResult, FailedOperation]] = None
+        self.result: Optional[PossibleResults] = None
         self._client = client
         self._status: TaskStatus = TaskStatus.PENDING
 
@@ -69,7 +76,7 @@ class FutureResult:
         timeout: Optional[float] = None,  # in seconds
         interval: float = 1.0,
         raise_error: bool = False,
-    ) -> Union[AtomicResult, FailedOperation]:
+    ) -> PossibleResults:
         """Block and return result.
 
         Parameters:
