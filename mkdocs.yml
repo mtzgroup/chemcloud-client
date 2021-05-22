@@ -8,33 +8,64 @@ theme:
   features:
     - search.suggest
     - search.highlight
+    - navigation.instant
+    - navigation.expand
   icon:
     repo: fontawesome/brands/github-alt
-  favicon: img/favicon.ico
 
 repo_url: https://github.com/mtzgroup/tccloud
+edit_uri: edit/develop/docs/
 site_author: Colton Hicks
+extra_css:
+  - css/extra.css
+plugins:
+  - search
+  - mkdocstrings:
+      watch:
+        - tccloud
+      handlers:
+        python:
+          rendering:
+            show_root_heading: False
+            show_root_full_path: True
+            show_category_heading: True
+            show_signature_annotations: True
+            show_if_no_docstring: True
+            group_by_category: True
+            heading_level: 2
+          selection:
+            new_path_syntax: True
+            inherited_members: True
+            filters:
+              - "!^_"
+              - "^__init__$"
 markdown_extensions:
   - pymdownx.highlight
   - pymdownx.superfences
+  - pymdownx.details
+  - admonition
   - toc:
       permalink: 🔗
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
-
-extra_javascript:
-  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js
-  - javascripts/config.js
-extra_css:
-  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css
+  - markdown_include.include:
+      base_path: docs
 
 nav:
   - tccloud: index.md
-  - Usage:
-      - usage/authentication.md
-      - usage/compute.md
-      - usage/Atomic Input.md
-      - usage/molecule.md
-      - usage/TCClient.md
-      - usage/keywords.md
+  - Tutorial - Users Guide:
+      - tutorial/compute.md  
+      - tutorial/authentication.md
+      - tutorial/keywords.md
+      - tutorial/geometry_optimization.md
+  - Code Reference:
+      - code_reference/TCClient.md
+      - code_reference/FutureResult.md
+      - code_reference/Molecule.md
+      - code_reference/AtomicInput.md
+      - code_reference/AtomicResult.md
+      - code_reference/FailedOperation.md
+      - code_reference/ComputeError.md
+      - code_reference/exceptions.md
+  - Changelog: CHANGELOG.md

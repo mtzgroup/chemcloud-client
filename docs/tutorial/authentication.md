@@ -4,7 +4,7 @@ Authentication is the process of supplying your credentials (usually a username 
 
 ## Username and Password
 
-### client.configure() (recommended for most cases)
+### [client.configure()][tccloud.client:TCClient.configure] (recommended for most cases)
 
 ```python
 >>> from tccloud import TCClient

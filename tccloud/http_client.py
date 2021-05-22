@@ -3,16 +3,19 @@ from base64 import urlsafe_b64decode
 from getpass import getpass
 from pathlib import Path
 from time import time
-from typing import Any, Dict, Optional, Tuple, Union
+from typing import Any, Dict, Optional, Tuple
 
 import httpx
 import toml
+from qcelemental.models.procedures import OptimizationResult
 
 from tccloud.models import (
-    FutureResult,
     AtomicInput,
     AtomicResult,
     FailedOperation,
+    FutureResult,
+    OptimizationInput,
+    PossibleResults,
     TaskStatus,
 )
 
@@ -274,17 +277,30 @@ class _RequestsClient:
         )
         return FutureResult(task_id, self)
 
-    def result(
-        self, task_id: str
-    ) -> Tuple[TaskStatus, Optional[Union[FailedOperation, AtomicResult]]]:
+    def compute_procedure(
+        self, input: OptimizationInput, procedure: str
+    ) -> FutureResult:
+        """Submit a procedure computation to Terachem Cloud"""
+        task_id = self._authenticated_request(
+            "post",
+            "/compute-procedure",
+            data=input.json(),
+            params={"procedure": procedure},
+        )
+        return FutureResult(task_id, self)
+
+    def result(self, task_id: str) -> Tuple[TaskStatus, Optional[PossibleResults]]:
         """Check the result of a compute job, returns status and result (if available)."""
         task_result = self._authenticated_request("get", f"/compute/result/{task_id}")
 
         returned_result = task_result["result"]
         if returned_result:
             if returned_result["success"]:
-                # Successful results return AtomicInput
-                result = AtomicResult(**returned_result)
+                # Successful results return AtomicResult or OptimizationResult
+                if returned_result.get("final_molecule"):
+                    result = OptimizationResult(**returned_result)
+                else:
+                    result = AtomicResult(**returned_result)
             else:
                 # Unsuccessful results return FailedOperation
                 result = FailedOperation(**returned_result)

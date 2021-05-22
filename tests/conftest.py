@@ -84,6 +84,19 @@ def patch_compute_endpoint(httpx_mock: HTTPXMock):
 
 
 @pytest.fixture
+def patch_compute_procedure_endpoint(httpx_mock: HTTPXMock):
+    """Patch httpx methods against /compute endpoint"""
+    PATCH_VALUES = {
+        "task_id": "fake_task_id",
+    }
+
+    compute_endpoint = re.compile(r".*/compute-procedure")
+    httpx_mock.add_response(url=compute_endpoint, json=PATCH_VALUES["task_id"])
+
+    yield PATCH_VALUES
+
+
+@pytest.fixture
 def water():
     return Molecule.from_file(Path(__file__).parent / "water.json")
 

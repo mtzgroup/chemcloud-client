@@ -2,11 +2,16 @@ from enum import Enum
 from time import sleep, time
 from typing import Optional, Union
 
-from qcelemental.models import AtomicInput as AtomicInput
+from qcelemental.models import AtomicInput as AtomicInput  # noqa: F401
 from qcelemental.models import AtomicResult as AtomicResult  # noqa: F401
 from qcelemental.models import Molecule as Molecule  # noqa: F401
+from qcelemental.models import OptimizationInput as OptimizationInput  # noqa: F401
+from qcelemental.models import OptimizationResult as OptimizationResult  # noqa: F401
 from qcelemental.models.common_models import FailedOperation
 from qcelemental.models.common_models import Model as Model  # noqa: F401
+from qcelemental.models.procedures import (  # noqa: F401
+    QCInputSpecification as QCInputSpecification,
+)
 
 from .exceptions import ComputeError, TimeoutError
 
@@ -47,12 +52,19 @@ _UNREADY_STATES = frozenset(
     }
 )
 
+PossibleResults = Union[AtomicResult, OptimizationResult, FailedOperation]
+
 
 class FutureResult:
     def __init__(self, task_id: str, client):
-        """client is http_client._Requests client. Must avoid circular import"""
+        """client is http_client._Requests client. Must avoid circular import
+
+        Caution:
+            A FutureResult should never be instantiated directly.
+            `TCClient.compute(...)` will return one when you submit a computation.
+        """
         self.task_id = task_id
-        self.result: Optional[Union[AtomicResult, FailedOperation]] = None
+        self.result: Optional[PossibleResults] = None
         self._client = client
         self._status: TaskStatus = TaskStatus.PENDING
 
@@ -64,11 +76,22 @@ class FutureResult:
         timeout: Optional[float] = None,  # in seconds
         interval: float = 1.0,
         raise_error: bool = False,
-    ) -> Union[AtomicResult, FailedOperation]:
+    ) -> PossibleResults:
         """Block and return result.
 
+        Parameters:
+            timeout: The number of seconds to wait for a computation before raising a
+                TimeOutError.
+            interval: The amount of time to wait between calls to TeraChem Cloud to
+                check a computation's status.
+            raise_error: If set to True `.get()` will raise a ComputeError if the
+                computation was unsuccessful.
+
         Returns:
-            AtomicResult if computation succeeded or FailedOperation if computation failed.
+            `AtomicResult` if computation succeeded or `FailedOperation` if computation failed.
+
+        Exceptions:
+            ComputeError: Raised if `raise_error=True`
         """
         if self.result:
             return self.result
@@ -96,8 +119,11 @@ class FutureResult:
     def status(self) -> str:
         """Check status of compute task.
 
-        Side Effect:
-            Set self.result if task complete.
+        Returns:
+            Status of computation.
+
+        Note:
+            Sets self.result if task is complete.
         """
         if self._status in _READY_STATES:
             return self._status

@@ -1,0 +1,3 @@
+# AtomicInput
+
+::: tccloud.models:AtomicInput
