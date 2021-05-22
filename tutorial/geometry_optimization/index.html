@@ -597,7 +597,7 @@
 </span><span class="p">)</span>
 
 
-<span class="n">client</span> <span class="o">=</span> <span class="n">TCClient</span><span class="p">(</span><span class="n">tccloud_domain</span><span class="o">=</span><span class="s2">&quot;https://tccloud.dev.mtzlab.com&quot;</span><span class="p">,</span> <span class="n">profile</span><span class="o">=</span><span class="s2">&quot;dev&quot;</span><span class="p">)</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">TCClient</span><span class="p">()</span>
 <span class="c1"># Optimizer can be &quot;berny&quot; or &quot;geometric&quot;</span>
 <span class="hll"><span class="n">future_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute_procedure</span><span class="p">(</span><span class="n">opt_input</span><span class="p">,</span> <span class="s2">&quot;berny&quot;</span><span class="p">)</span>
 </span><span class="n">result</span> <span class="o">=</span> <span class="n">future_result</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
