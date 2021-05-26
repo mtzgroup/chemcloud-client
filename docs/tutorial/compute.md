@@ -9,26 +9,3 @@ Computations require an [AtomicInput][tccloud.models.AtomicInput] object and the
 ```python
 {!../examples/energy.py!}
 ```
-
-Supported compute engines can be checked on the client. If you would like to request additional engines please open an [issue](https://github.com/mtzgroup/tccloud/issues).
-
-```python
->>> client.supported_engines
-['psi4', 'terachem_pbs', ...]
-```
-
-## Keywords
-
-Keywords specific to a quantum chemistry engine can be added to an [AtomicInput][tccloud.models.AtomicInput] as follows:
-
-```python
-ai = AtomicInput(
-    ...,
-    keywords={
-        "molden": True,
-        "imd_orbital_type": "whole_c",
-        ...
-    }
-)
-
-```
