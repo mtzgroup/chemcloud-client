@@ -1,7 +1,9 @@
+from abc import ABC, abstractmethod
 from enum import Enum
 from time import sleep, time
-from typing import Optional, Union
+from typing import Any, Dict, List, Optional, Union
 
+from pydantic.main import BaseModel
 from qcelemental.models import AtomicInput as AtomicInput  # noqa: F401
 from qcelemental.models import AtomicResult as AtomicResult  # noqa: F401
 from qcelemental.models import Molecule as Molecule  # noqa: F401
@@ -14,6 +16,12 @@ from qcelemental.models.procedures import (  # noqa: F401
 )
 
 from .exceptions import ComputeError, TimeoutError
+
+# Convenience types
+AtomicInputOrList = Union[AtomicInput, List[AtomicInput]]
+OptimizationInputOrList = Union[OptimizationInput, List[OptimizationInput]]
+PossibleResults = Union[AtomicResult, OptimizationResult, FailedOperation]
+PossibleResultsOrList = Union[PossibleResults, List[PossibleResults]]
 
 
 class TaskStatus(str, Enum):
@@ -52,24 +60,34 @@ _UNREADY_STATES = frozenset(
     }
 )
 
-PossibleResults = Union[AtomicResult, OptimizationResult, FailedOperation]
 
+class FutureResultBase(BaseModel, ABC):
+    """Base class for FutureResults
 
-class FutureResult:
-    def __init__(self, task_id: str, client):
-        """client is http_client._Requests client. Must avoid circular import
+    Parameters:
+        task_id: The task_id for primary task submitted to TeraChem Cloud. May
+            correspond to a single task for group of tasks
+        client: The _RequestsClient to use for http requests to TeraChem Cloud
+        result: Primary return value resulting from computation
 
-        Caution:
-            A FutureResult should never be instantiated directly.
-            `TCClient.compute(...)` will return one when you submit a computation.
-        """
-        self.task_id = task_id
-        self.result: Optional[PossibleResults] = None
-        self._client = client
-        self._status: TaskStatus = TaskStatus.PENDING
+    Caution:
+        A FutureResult should never be instantiated directly.
+        `TCClient.compute(...)` will return one when you submit a computation.
+    """
 
-    def __repr__(self) -> str:
-        return f"{type(self).__name__}(task_id={self.task_id}, result={self.result})"
+    task_id: str
+    result: Optional[Any] = None
+    client: Any
+    compute_status: TaskStatus = TaskStatus.PENDING
+
+    class Config:
+        # underscore_attrs_are_private = False
+        validate_assignment = True
+
+    @abstractmethod
+    def to_task(self):
+        """Convert to task dictionary for TeraChem Cloud /result endpoint"""
+        raise NotImplementedError
 
     def get(
         self,
@@ -124,10 +142,48 @@ class FutureResult:
 
         Note:
             Sets self.result if task is complete.
+
+        NOTE: Do I want to return TaskStatus.FAILURE if FailedOperation is returned?
         """
-        if self._status in _READY_STATES:
-            return self._status
-        self._status, result = self._client.result(self.task_id)
-        if result:
-            self.result = result
-        return self._status.value
+        if self.compute_status in _READY_STATES:
+            return self.compute_status
+        self.compute_status, self.result = self.client.result(self.to_task())
+        return self.compute_status
+
+
+class FutureResult(FutureResultBase):
+    """Single computation FutureResult"""
+
+    result: Optional[PossibleResults] = None
+
+    @classmethod
+    def from_task(cls, task: Dict[str, str], client) -> "FutureResult":
+        """Instantiate FutureResult from TeraChem Cloud Task"""
+        return cls(task_id=task["task_id"], client=client)
+
+    def to_task(self) -> Dict[str, str]:
+        """To TeraChem Cloud task defintion"""
+        return {"task_id": self.task_id}
+
+
+class FutureResultGroup(FutureResultBase):
+    """Group computation FutureResult
+
+    Parameters:
+        subtask_ids: Array of task_ids for children tasks. Children tasks exist when
+            multiple computation were submitted as a group.
+    """
+
+    subtask_ids: List[str]
+    result: Optional[List[PossibleResults]] = None
+
+    @classmethod
+    def from_task(cls, task: Dict[str, Any], client) -> "FutureResultGroup":
+        """Instantiate FutureResult from TeraChem Cloud Task"""
+        subtask_ids = [st["task_id"] for st in task["subtasks"]]
+        return cls(task_id=task["task_id"], client=client, subtask_ids=subtask_ids)
+
+    def to_task(self) -> Dict[str, Any]:
+        """To TeraChem Cloud task defintion"""
+        subtasks = [{"task_id": st_id} for st_id in self.subtask_ids]
+        return {"task_id": self.task_id, "subtasks": subtasks}

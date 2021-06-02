@@ -12,6 +12,7 @@ from tccloud.models import (
     AtomicInput,
     AtomicResult,
     FutureResult,
+    FutureResultGroup,
     OptimizationInput,
     QCInputSpecification,
     TaskStatus,
@@ -362,7 +363,7 @@ def test__set_tokens_called_if_access_token_expired_and_no_refresh_token_set(
     mocked.assert_called_once()
 
 
-def test_compute(settings, patch_compute_endpoint, water, jwt):
+def test_compute(settings, patch_compute_endpoints, water, jwt):
     client = _RequestsClient(settings=settings)
     client._access_token = jwt
 
@@ -372,11 +373,29 @@ def test_compute(settings, patch_compute_endpoint, water, jwt):
     future_result = client.compute(atomic_input, engine="psi4")
 
     assert isinstance(future_result, FutureResult)
-    assert future_result.task_id == patch_compute_endpoint["task_id"]
-    assert future_result._client is client
+    assert future_result.task_id == patch_compute_endpoints["task_id"]
+    assert future_result.client is client
 
 
-def test_compute_procedure(settings, patch_compute_endpoint, water, jwt):
+def test_compute_batch(settings, patch_compute_endpoints_batch, water, jwt):
+    client = _RequestsClient(settings=settings)
+    client._access_token = jwt
+
+    model = Model(method="B3LYP", basis="6-31g")
+    atomic_input = AtomicInput(molecule=water, model=model, driver="energy")
+
+    future_result = client.compute([atomic_input, atomic_input], engine="psi4")
+
+    assert isinstance(future_result, FutureResultGroup)
+    assert future_result.task_id == patch_compute_endpoints_batch["task_id"]
+    assert (
+        future_result.subtask_ids[0]
+        == patch_compute_endpoints_batch["subtasks"][0]["task_id"]
+    )
+    assert future_result.client is client
+
+
+def test_compute_procedure(settings, patch_compute_endpoints, water, jwt):
     client = _RequestsClient(settings=settings)
     client._access_token = jwt
 
@@ -395,17 +414,44 @@ def test_compute_procedure(settings, patch_compute_endpoint, water, jwt):
     future_result = client.compute_procedure(opt_input, "geometric")
 
     assert isinstance(future_result, FutureResult)
-    assert future_result.task_id == patch_compute_endpoint["task_id"]
-    assert future_result._client is client
+    assert future_result.task_id == patch_compute_endpoints["task_id"]
+    assert future_result.client is client
+
+
+def test_compute_procedure_batch(settings, patch_compute_endpoints_batch, water, jwt):
+    client = _RequestsClient(settings=settings)
+    client._access_token = jwt
+
+    input_spec = QCInputSpecification(
+        driver="gradient",
+        model={"method": "b3lyp", "basis": "6-31g"},
+    )
+
+    opt_input = OptimizationInput(
+        input_specification=input_spec,
+        initial_molecule=water,
+        protocols={"trajectory": "all"},
+        keywords={"program": "terachem_pbs"},
+    )
+
+    future_result = client.compute_procedure(opt_input, "geometric")
+
+    assert isinstance(future_result, FutureResultGroup)
+    assert future_result.task_id == patch_compute_endpoints_batch["task_id"]
+    assert (
+        future_result.subtask_ids[0]
+        == patch_compute_endpoints_batch["subtasks"][0]["task_id"]
+    )
+    assert future_result.client is client
 
 
 def test_result_pending(settings, jwt, httpx_mock: HTTPXMock):
     client = _RequestsClient(settings=settings)
     client._access_token = jwt
 
-    httpx_mock.add_response(json={"status": "PENDING", "result": None})
+    httpx_mock.add_response(json={"compute_status": "PENDING", "result": None})
 
-    status, result = client.result("fake_id")
+    status, result = client.result({"task_id": "fake_id"})
 
     assert status == TaskStatus.PENDING
     assert result is None
@@ -417,16 +463,16 @@ def test_result_success(settings, jwt, httpx_mock: HTTPXMock):
     atomic_result = AtomicResult.parse_file(
         Path(__file__).parent / "water.b3lyp.6-31g.energy.json"
     )
-    url = re.compile(".*/compute/result/.*")
+    url = re.compile(".*/compute/result")
     httpx_mock.add_response(
         url=url,
-        json={"status": "SUCCESS", "result": json.loads(atomic_result.json())},
+        json={"compute_status": "SUCCESS", "result": json.loads(atomic_result.json())},
     )
 
-    status, result = client.result("fake_id")
+    status, result = client.result({"task_id": "fake_id"})
 
     assert status == "SUCCESS"
-    assert isinstance(result, AtomicResult)
+    assert isinstance(AtomicResult(**result), AtomicResult)
 
 
 def test__decode_access_token():
