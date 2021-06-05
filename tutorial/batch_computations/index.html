@@ -16,7 +16,7 @@
     
     
       
-        <title>Keywords - tccloud</title>
+        <title>Batch Computations - tccloud</title>
       
     
     
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#keywords" class="md-skip">
+        <a href="#batch-computations" class="md-skip">
           Skip to content
         </a>
       
@@ -98,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Keywords
+              Batch Computations
             
           </span>
         </div>
@@ -220,12 +220,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" data-md-state="indeterminate" type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
       
       <label class="md-nav__link" for="__nav_2">
         Tutorial - Users Guide
@@ -282,6 +284,27 @@
       <a href="../geometry_optimization/" class="md-nav__link">
         Geometry Optimization
       </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Batch Computations
+      </a>
+      
     </li>
   
 
@@ -381,6 +404,30 @@
   
   
     <li class="md-nav__item">
+      <a href="../../code_reference/OptimizationInput/" class="md-nav__link">
+        Optimization Input
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code_reference/OptimizationResult/" class="md-nav__link">
+        Optimization Result
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../code_reference/FailedOperation/" class="md-nav__link">
         FailedOperation
       </a>
@@ -451,21 +498,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#terachem_pbs" class="md-nav__link">
-    terachem_pbs
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -476,20 +508,35 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/mtzgroup/tccloud/edit/develop/docs/tutorial/keywords.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/mtzgroup/tccloud/edit/develop/docs/tutorial/batch_computations.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="keywords">Keywords<a class="headerlink" href="#keywords" title="Permanent link">🔗</a></h1>
-<h2 id="terachem_pbs">terachem_pbs<a class="headerlink" href="#terachem_pbs" title="Permanent link">🔗</a></h2>
-<ul>
-<li><code>molden</code>: Optional, True/False<ul>
-<li>If set to <code>True</code> and <code>imd_orbital_type</code> set to <code>whole_c</code> the <code>AtomicResult.extras['molden']</code> field will contain a string of the molden file.</li>
-</ul>
-</li>
-<li><code>imd_orbital_type</code>: Optional, One of: ["no_orbital", "alpha_orbital", "beta_orbital", "alpha_density", "beta_density", "whole_c"], Default: "no_orbital".</li>
-</ul>
+                <h1 id="batch-computations">Batch Computations<a class="headerlink" href="#batch-computations" title="Permanent link">🔗</a></h1>
+<p>Both single point and geometry optimizations can be performed in bulk by submitting up to 100 computations simultaneously. Simply submit an array of <a href="../../code_reference/AtomicInput/#qcelemental.models.results.AtomicInput">AtomicInputs</a> or <a href="../../code_reference/OptimizationInput/#qcelemental.models.procedures.OptimizationInput">OptimizationInput</a> objects as input data.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">tccloud</span> <span class="kn">import</span> <span class="n">TCClient</span>
+<span class="kn">from</span> <span class="nn">tccloud.models</span> <span class="kn">import</span> <span class="n">AtomicInput</span><span class="p">,</span> <span class="n">Molecule</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">TCClient</span><span class="p">()</span>
+
+<span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="s2">&quot;pubchem:water&quot;</span><span class="p">)</span>
+
+<span class="n">atomic_input</span> <span class="o">=</span> <span class="n">AtomicInput</span><span class="p">(</span>
+    <span class="n">molecule</span><span class="o">=</span><span class="n">water</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;B3LYP&quot;</span><span class="p">,</span> <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="s2">&quot;6-31g&quot;</span><span class="p">},</span>
+    <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;energy&quot;</span><span class="p">,</span>
+    <span class="n">keywords</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;closed&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s2">&quot;restricted&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+
+<span class="hll"><span class="n">future_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">([</span><span class="n">atomic_input</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;terachem_pbs&quot;</span><span class="p">)</span>
+</span><span class="n">result</span> <span class="o">=</span> <span class="n">future_result</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="c1"># Array of AtomicResult objects</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div>
                 
               
               
@@ -504,6 +551,39 @@
       
         
 <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../geometry_optimization/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Geometry Optimization
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../../code_reference/TCClient/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              TCClient
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

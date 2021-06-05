@@ -347,6 +347,18 @@
   
 
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../batch_computations/" class="md-nav__link">
+        Batch Computations
+      </a>
+    </li>
+  
+
+          
         </ul>
       </nav>
     </li>
@@ -432,6 +444,30 @@
     <li class="md-nav__item">
       <a href="../../code_reference/AtomicResult/" class="md-nav__link">
         AtomicResult
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code_reference/OptimizationInput/" class="md-nav__link">
+        Optimization Input
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code_reference/OptimizationResult/" class="md-nav__link">
+        Optimization Result
       </a>
     </li>
   
@@ -567,7 +603,7 @@
 <h2 id="basic-working-example">Basic Working Example<a class="headerlink" href="#basic-working-example" title="Permanent link">🔗</a></h2>
 <ul>
 <li>Create a Molecule</li>
-<li>Specify the gradient driver and define parameters for the compute engine</li>
+<li>Define parameters for the compute engine</li>
 <li>Define the optimization parameters for the optimizer and specify the compute engine</li>
 <li>Specify the optimizer to run</li>
 </ul>
@@ -576,10 +612,11 @@
 <span class="kn">from</span> <span class="nn">tccloud</span> <span class="kn">import</span> <span class="n">TCClient</span>
 <span class="kn">from</span> <span class="nn">tccloud.models</span> <span class="kn">import</span> <span class="n">Molecule</span><span class="p">,</span> <span class="n">OptimizationInput</span><span class="p">,</span> <span class="n">QCInputSpecification</span>
 
+<span class="n">client</span> <span class="o">=</span> <span class="n">TCClient</span><span class="p">()</span>
+
 <span class="hll"><span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="s2">&quot;pubchem:water&quot;</span><span class="p">)</span>
 </span>
 <span class="hll"><span class="n">input_spec</span> <span class="o">=</span> <span class="n">QCInputSpecification</span><span class="p">(</span>
-</span><span class="hll">    <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;gradient&quot;</span><span class="p">,</span>
 </span><span class="hll">    <span class="n">model</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;b3lyp&quot;</span><span class="p">,</span> <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="s2">&quot;6-31g&quot;</span><span class="p">},</span>
 </span><span class="hll">    <span class="c1"># Keywords for the compute engine (e.g., psi4, terachem_pbs)</span>
 </span><span class="hll">    <span class="n">keywords</span><span class="o">=</span><span class="p">{},</span>
@@ -597,7 +634,6 @@
 </span><span class="p">)</span>
 
 
-<span class="n">client</span> <span class="o">=</span> <span class="n">TCClient</span><span class="p">()</span>
 <span class="c1"># Optimizer can be &quot;berny&quot; or &quot;geometric&quot;</span>
 <span class="hll"><span class="n">future_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute_procedure</span><span class="p">(</span><span class="n">opt_input</span><span class="p">,</span> <span class="s2">&quot;berny&quot;</span><span class="p">)</span>
 </span><span class="n">result</span> <span class="o">=</span> <span class="n">future_result</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
@@ -847,13 +883,13 @@
         </a>
       
       
-        <a href="../../code_reference/TCClient/" class="md-footer__link md-footer__link--next" rel="next">
+        <a href="../batch_computations/" class="md-footer__link md-footer__link--next" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              TCClient
+              Batch Computations
             </div>
           </div>
           <div class="md-footer__button md-icon">
