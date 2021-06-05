@@ -3,20 +3,17 @@ from base64 import urlsafe_b64decode
 from getpass import getpass
 from pathlib import Path
 from time import time
-from typing import Any, Dict, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import httpx
 import toml
-from qcelemental.models.procedures import OptimizationResult
+from qcelemental.util.serialization import json_dumps
 
 from tccloud.models import (
-    AtomicInput,
-    AtomicResult,
-    FailedOperation,
+    AtomicInputOrList,
     FutureResult,
-    OptimizationInput,
-    PossibleResults,
-    TaskStatus,
+    FutureResultGroup,
+    OptimizationInputOrList,
 )
 
 from .config import Settings, settings
@@ -185,9 +182,9 @@ class _RequestsClient:
             data=data,
             params=params,
         )
+
         with httpx.Client() as client:
             response = client.send(request)
-
         response.raise_for_status()
         return response.json()
 
@@ -196,7 +193,6 @@ class _RequestsClient:
         kwargs["headers"] = kwargs.get("headers", {})
         access_token = self._get_access_token()
         kwargs["headers"]["Authorization"] = f"Bearer {access_token}"
-
         return self._request(
             method,
             route,
@@ -270,43 +266,50 @@ class _RequestsClient:
         json_string = urlsafe_b64decode(encoded_payload).decode("utf-8")
         return json.loads(json_string)
 
-    def compute(self, atomic_input: AtomicInput, engine: str) -> FutureResult:
+    def compute(
+        self, input_data: AtomicInputOrList, engine: str
+    ) -> Union[FutureResult, FutureResultGroup]:
         """Submit a computation to TeraChem Cloud"""
-        task_id = self._authenticated_request(
-            "post", "/compute", data=atomic_input.json(), params={"engine": engine}
+        task = self._authenticated_request(
+            "post", "/compute", data=json_dumps(input_data), params={"engine": engine}
         )
-        return FutureResult(task_id, self)
+        if task.get("subtasks"):
+            return FutureResultGroup.from_task(task, self)
+        return FutureResult.from_task(task, self)
 
     def compute_procedure(
-        self, input: OptimizationInput, procedure: str
-    ) -> FutureResult:
+        self, input_data: OptimizationInputOrList, procedure: str
+    ) -> Union[FutureResult, FutureResultGroup]:
         """Submit a procedure computation to Terachem Cloud"""
-        task_id = self._authenticated_request(
+        task = self._authenticated_request(
             "post",
             "/compute-procedure",
-            data=input.json(),
+            data=json_dumps(input_data),
             params={"procedure": procedure},
         )
-        return FutureResult(task_id, self)
+        if task.get("subtasks"):
+            return FutureResultGroup.from_task(task, self)
+        return FutureResult.from_task(task, self)
 
-    def result(self, task_id: str) -> Tuple[TaskStatus, Optional[PossibleResults]]:
-        """Check the result of a compute job, returns status and result (if available)."""
-        task_result = self._authenticated_request("get", f"/compute/result/{task_id}")
+    def result(
+        self, task: Dict[str, Any]
+    ) -> Tuple[str, Union[Optional[Any], Optional[List[Any]]]]:
+        """Check the result of a compute job, returns status and result (if available).
 
-        returned_result = task_result["result"]
-        if returned_result:
-            if returned_result["success"]:
-                # Successful results return AtomicResult or OptimizationResult
-                if returned_result.get("final_molecule"):
-                    result = OptimizationResult(**returned_result)
-                else:
-                    result = AtomicResult(**returned_result)
-            else:
-                # Unsuccessful results return FailedOperation
-                result = FailedOperation(**returned_result)
-        else:
-            result = None
-        return TaskStatus(task_result["status"]), result
+        Parameters:
+            task: Task specification for TeraChem Cloud
+                {"task_id": "my-task-id"} OR
+                {"task_id": "my-task-id", "subtasks": [{"task_id": "tid_1"}, ...}
+
+        Endpoint returns:
+            class TaskResult(BaseModel):
+                compute_status: TaskStatus (str)
+                result: Optional[Union[PossibleResults, List[PossibleResults]]] = None
+        """
+        task_result = self._authenticated_request(
+            "post", "/compute/result", data=json_dumps(task)
+        )
+        return task_result["compute_status"], task_result["result"]
 
     def hello_world(self, name: Optional[str] = None):
         """Ping hello-world endpoint on TeraChem Cloud"""

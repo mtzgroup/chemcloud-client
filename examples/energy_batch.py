@@ -4,6 +4,7 @@ from tccloud.models import AtomicInput, Molecule
 client = TCClient()
 
 water = Molecule.from_data("pubchem:water")
+
 atomic_input = AtomicInput(
     molecule=water,
     model={"method": "B3LYP", "basis": "6-31g"},
@@ -13,9 +14,8 @@ atomic_input = AtomicInput(
         "restricted": True,
     },
 )
-future_result = client.compute(atomic_input, engine="terachem_pbs")
+
+future_result = client.compute([atomic_input] * 2, engine="terachem_pbs")
 result = future_result.get()
-# AtomicResult object containing all returned data
+# Array of AtomicResult objects
 print(result)
-# The energy value requested
-print(result.return_result)

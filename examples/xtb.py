@@ -1,21 +1,26 @@
 from tccloud import TCClient
 from tccloud.models import AtomicInput, Molecule
 
-client = TCClient()
-
+client = TCClient(tccloud_domain="https://tccloud.dev.mtzlab.com", profile="dev")
 water = Molecule.from_data("pubchem:water")
+
 atomic_input = AtomicInput(
     molecule=water,
-    model={"method": "B3LYP", "basis": "6-31g"},
     driver="energy",
+    model={
+        "method": "GFN2-xTB",
+    },
     keywords={
-        "closed": True,
-        "restricted": True,
+        "accuracy": 1.0,
+        "max_iterations": 50,
     },
 )
-future_result = client.compute(atomic_input, engine="terachem_pbs")
+
+
+future_result = client.compute(atomic_input, engine="xtb")
 result = future_result.get()
 # AtomicResult object containing all returned data
 print(result)
 # The energy value requested
 print(result.return_result)
+print(result.provenance.wall_time)

@@ -1,9 +1,14 @@
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Union
 
 from . import __version__
 from .config import settings
 from .http_client import _RequestsClient
-from .models import AtomicInput, FutureResult, OptimizationInput
+from .models import (
+    AtomicInputOrList,
+    FutureResult,
+    FutureResultGroup,
+    OptimizationInputOrList,
+)
 
 
 class TCClient:
@@ -114,11 +119,13 @@ class TCClient:
         """
         return self._client.hello_world(name)
 
-    def compute(self, atomic_input: AtomicInput, engine: str) -> FutureResult:
+    def compute(
+        self, input_data: AtomicInputOrList, engine: str
+    ) -> Union[FutureResult, FutureResultGroup]:
         """Submit a computation to TeraChem Cloud.
 
         Parameters:
-            atomic_input: Defines the structure of the desired computation.
+            input_data: Defines the structure of the desired computation.
             engine: A string matching one of the `self.supported_engines`
 
         Returns:
@@ -130,11 +137,12 @@ class TCClient:
             assert (
                 engine in self.supported_engines
             ), f"Please use one of the following engines: {self.supported_engines}"
-        return self._client.compute(atomic_input, engine)
+
+        return self._client.compute(input_data, engine)
 
     def compute_procedure(
-        self, input: OptimizationInput, procedure: str
-    ) -> FutureResult:
+        self, input_data: OptimizationInputOrList, procedure: str
+    ) -> Union[FutureResult, FutureResultGroup]:
         """Submit a procedure computation to TeraChem Cloud
 
         Parameters:
@@ -150,7 +158,7 @@ class TCClient:
             assert (
                 procedure in self.supported_procedures
             ), f"Please use one of the following procedures: {self.supported_procedures}"
-        return self._client.compute_procedure(input, procedure)
+        return self._client.compute_procedure(input_data, procedure)
 
     def configure(
         self, profile: str = settings.tccloud_default_credentials_profile
