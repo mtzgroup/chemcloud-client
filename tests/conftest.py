@@ -71,27 +71,28 @@ def patch_token_endpoint(httpx_mock: HTTPXMock):
 
 
 @pytest.fixture
-def patch_compute_endpoint(httpx_mock: HTTPXMock):
+def patch_compute_endpoints(httpx_mock: HTTPXMock):
     """Patch httpx methods against /compute endpoint"""
     PATCH_VALUES = {
         "task_id": "fake_task_id",
     }
 
     compute_endpoint = re.compile(r".*/compute")
-    httpx_mock.add_response(url=compute_endpoint, json=PATCH_VALUES["task_id"])
+    httpx_mock.add_response(url=compute_endpoint, json=PATCH_VALUES)
 
     yield PATCH_VALUES
 
 
 @pytest.fixture
-def patch_compute_procedure_endpoint(httpx_mock: HTTPXMock):
+def patch_compute_endpoints_batch(httpx_mock: HTTPXMock):
     """Patch httpx methods against /compute endpoint"""
     PATCH_VALUES = {
         "task_id": "fake_task_id",
+        "subtasks": [{"task_id": "fake_subtask_id"}],
     }
 
-    compute_endpoint = re.compile(r".*/compute-procedure")
-    httpx_mock.add_response(url=compute_endpoint, json=PATCH_VALUES["task_id"])
+    compute_endpoint = re.compile(r".*/compute.*")
+    httpx_mock.add_response(url=compute_endpoint, json=PATCH_VALUES)
 
     yield PATCH_VALUES
 

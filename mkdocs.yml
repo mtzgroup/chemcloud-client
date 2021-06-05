@@ -59,12 +59,15 @@ nav:
       - tutorial/compute_engines.md
       - tutorial/authentication.md
       - tutorial/geometry_optimization.md
+      - tutorial/batch_computations.md
   - Code Reference:
       - code_reference/TCClient.md
       - code_reference/FutureResult.md
       - code_reference/Molecule.md
       - code_reference/AtomicInput.md
       - code_reference/AtomicResult.md
+      - code_reference/OptimizationInput.md
+      - code_reference/OptimizationResult.md
       - code_reference/FailedOperation.md
       - code_reference/ComputeError.md
       - code_reference/exceptions.md

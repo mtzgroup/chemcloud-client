@@ -3,12 +3,12 @@
 ## Basic Working Example
 
 - Create a Molecule
-- Specify the gradient driver and define parameters for the compute engine
+- Define parameters for the compute engine
 - Define the optimization parameters for the optimizer and specify the compute engine
 - Specify the optimizer to run
 
-```Python hl_lines="6 8-13 20 23 29"
-{!../examples/geometry_optimization.py!}
+```Python hl_lines="8 10-14 21 24 29"
+{!../examples/optimization.py!}
 ```
 
 ## Using Force Fields
