@@ -1,4 +1,5 @@
 site_name: tccloud
+site_url: https://mtzgroup.github.io/tccloud/
 theme:
   name: material
   palette:
