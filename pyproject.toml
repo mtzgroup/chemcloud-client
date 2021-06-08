@@ -59,6 +59,7 @@ doc = [
   "mkdocs-material >= 7.0.3",
   "mkdocstrings >= 0.15.0",
   "markdown-include >= 0.6.0",
+  "livereload >=2.6.3",
 ]
 
 [tool.pytest.ini_options]

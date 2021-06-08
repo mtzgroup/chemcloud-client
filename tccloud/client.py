@@ -120,13 +120,14 @@ class TCClient:
         return self._client.hello_world(name)
 
     def compute(
-        self, input_data: AtomicInputOrList, engine: str
+        self, input_data: AtomicInputOrList, engine: str, queue: Optional[str] = None
     ) -> Union[FutureResult, FutureResultGroup]:
         """Submit a computation to TeraChem Cloud.
 
         Parameters:
             input_data: Defines the structure of the desired computation.
             engine: A string matching one of the `self.supported_engines`
+            queue: The name of a private compute queue. If None, default queue is used
 
         Returns:
             Object providing access to a computation's eventual result. You can check a
@@ -138,16 +139,20 @@ class TCClient:
                 engine in self.supported_engines
             ), f"Please use one of the following engines: {self.supported_engines}"
 
-        return self._client.compute(input_data, engine)
+        return self._client.compute(input_data, engine, queue)
 
     def compute_procedure(
-        self, input_data: OptimizationInputOrList, procedure: str
+        self,
+        input_data: OptimizationInputOrList,
+        procedure: str,
+        queue: Optional[str] = None,
     ) -> Union[FutureResult, FutureResultGroup]:
         """Submit a procedure computation to TeraChem Cloud
 
         Parameters:
-            input: Defines the inputs for an optimization computation
+            input_data: Defines the inputs for an optimization computation
             procedure: The name of the procedure, e.g., 'berny'
+            queue: The name of a private compute queue. If None, default queue is used
 
         Returns:
             Object providing access to a computation's eventual result. You can check a
@@ -158,7 +163,7 @@ class TCClient:
             assert (
                 procedure in self.supported_procedures
             ), f"Please use one of the following procedures: {self.supported_procedures}"
-        return self._client.compute_procedure(input_data, procedure)
+        return self._client.compute_procedure(input_data, procedure, queue)
 
     def configure(
         self, profile: str = settings.tccloud_default_credentials_profile
