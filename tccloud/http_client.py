@@ -267,25 +267,31 @@ class _RequestsClient:
         return json.loads(json_string)
 
     def compute(
-        self, input_data: AtomicInputOrList, engine: str
+        self, input_data: AtomicInputOrList, engine: str, queue: Optional[str] = None
     ) -> Union[FutureResult, FutureResultGroup]:
         """Submit a computation to TeraChem Cloud"""
         task = self._authenticated_request(
-            "post", "/compute", data=json_dumps(input_data), params={"engine": engine}
+            "post",
+            "/compute",
+            data=json_dumps(input_data),
+            params={"engine": engine, "queue": queue},
         )
         if task.get("subtasks"):
             return FutureResultGroup.from_task(task, self)
         return FutureResult.from_task(task, self)
 
     def compute_procedure(
-        self, input_data: OptimizationInputOrList, procedure: str
+        self,
+        input_data: OptimizationInputOrList,
+        procedure: str,
+        queue: Optional[str] = None,
     ) -> Union[FutureResult, FutureResultGroup]:
         """Submit a procedure computation to Terachem Cloud"""
         task = self._authenticated_request(
             "post",
             "/compute-procedure",
             data=json_dumps(input_data),
-            params={"procedure": procedure},
+            params={"procedure": procedure, "queue": queue},
         )
         if task.get("subtasks"):
             return FutureResultGroup.from_task(task, self)
