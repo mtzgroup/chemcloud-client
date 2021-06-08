@@ -1003,7 +1003,7 @@ your authentication credentials for TeraChem Cloud.</p>
 
 
 <h3 class="doc doc-heading" id="tccloud.client.TCClient.compute">
-<code class="highlight language-python"><span class="n">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">qcelemental</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">AtomicInput</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">qcelemental</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">AtomicInput</span><span class="p">]],</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">tccloud</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">FutureResult</span><span class="p">,</span> <span class="n">tccloud</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">FutureResultGroup</span><span class="p">]</span></code>
+<code class="highlight language-python"><span class="n">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">qcelemental</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">AtomicInput</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">qcelemental</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">AtomicInput</span><span class="p">]],</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">queue</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">tccloud</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">FutureResult</span><span class="p">,</span> <span class="n">tccloud</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">FutureResultGroup</span><span class="p">]</span></code>
 
 
 <a class="headerlink" href="#tccloud.client.TCClient.compute" title="Permanent link">🔗</a></h3>
@@ -1035,6 +1035,12 @@ your authentication credentials for TeraChem Cloud.</p>
         <td><p>A string matching one of the <code>self.supported_engines</code></p></td>
         <td><em>required</em></td>
       </tr>
+      <tr>
+        <td><code>queue</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>The name of a private compute queue. If None, default queue is used</p></td>
+        <td><code>None</code></td>
+      </tr>
   </tbody>
 </table>
 <p><strong>Returns:</strong></p>
@@ -1057,13 +1063,14 @@ computation's status by runing <code>.status</code> on the <code>FutureResult</c
         <details class="quote">
           <summary>Source code in <code>tccloud/client.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">compute</span><span class="p">(</span>
-    <span class="bp">self</span><span class="p">,</span> <span class="n">input_data</span><span class="p">:</span> <span class="n">AtomicInputOrList</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">input_data</span><span class="p">:</span> <span class="n">AtomicInputOrList</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">queue</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">FutureResult</span><span class="p">,</span> <span class="n">FutureResultGroup</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Submit a computation to TeraChem Cloud.</span>
 
 <span class="sd">    Parameters:</span>
 <span class="sd">        input_data: Defines the structure of the desired computation.</span>
 <span class="sd">        engine: A string matching one of the `self.supported_engines`</span>
+<span class="sd">        queue: The name of a private compute queue. If None, default queue is used</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Object providing access to a computation&#39;s eventual result. You can check a</span>
@@ -1075,7 +1082,7 @@ computation's status by runing <code>.status</code> on the <code>FutureResult</c
             <span class="n">engine</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">supported_engines</span>
         <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Please use one of the following engines: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">supported_engines</span><span class="si">}</span><span class="s2">&quot;</span>
 
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">queue</span><span class="p">)</span>
 </code></pre></div>
         </details>
     </div>
@@ -1089,7 +1096,7 @@ computation's status by runing <code>.status</code> on the <code>FutureResult</c
 
 
 <h3 class="doc doc-heading" id="tccloud.client.TCClient.compute_procedure">
-<code class="highlight language-python"><span class="n">compute_procedure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">qcelemental</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">procedures</span><span class="o">.</span><span class="n">OptimizationInput</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">qcelemental</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">procedures</span><span class="o">.</span><span class="n">OptimizationInput</span><span class="p">]],</span> <span class="n">procedure</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">tccloud</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">FutureResult</span><span class="p">,</span> <span class="n">tccloud</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">FutureResultGroup</span><span class="p">]</span></code>
+<code class="highlight language-python"><span class="n">compute_procedure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">qcelemental</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">procedures</span><span class="o">.</span><span class="n">OptimizationInput</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">qcelemental</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">procedures</span><span class="o">.</span><span class="n">OptimizationInput</span><span class="p">]],</span> <span class="n">procedure</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">queue</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">tccloud</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">FutureResult</span><span class="p">,</span> <span class="n">tccloud</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">FutureResultGroup</span><span class="p">]</span></code>
 
 
 <a class="headerlink" href="#tccloud.client.TCClient.compute_procedure" title="Permanent link">🔗</a></h3>
@@ -1121,6 +1128,12 @@ computation's status by runing <code>.status</code> on the <code>FutureResult</c
         <td><p>The name of the procedure, e.g., 'berny'</p></td>
         <td><em>required</em></td>
       </tr>
+      <tr>
+        <td><code>queue</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>The name of a private compute queue. If None, default queue is used</p></td>
+        <td><code>None</code></td>
+      </tr>
   </tbody>
 </table>
 <p><strong>Returns:</strong></p>
@@ -1143,13 +1156,17 @@ computation's status by runing <code>.status</code> on the <code>FutureResult</c
         <details class="quote">
           <summary>Source code in <code>tccloud/client.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">compute_procedure</span><span class="p">(</span>
-    <span class="bp">self</span><span class="p">,</span> <span class="n">input_data</span><span class="p">:</span> <span class="n">OptimizationInputOrList</span><span class="p">,</span> <span class="n">procedure</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">input_data</span><span class="p">:</span> <span class="n">OptimizationInputOrList</span><span class="p">,</span>
+    <span class="n">procedure</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">queue</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">FutureResult</span><span class="p">,</span> <span class="n">FutureResultGroup</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Submit a procedure computation to TeraChem Cloud</span>
 
 <span class="sd">    Parameters:</span>
 <span class="sd">        input: Defines the inputs for an optimization computation</span>
 <span class="sd">        procedure: The name of the procedure, e.g., &#39;berny&#39;</span>
+<span class="sd">        queue: The name of a private compute queue. If None, default queue is used</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Object providing access to a computation&#39;s eventual result. You can check a</span>
@@ -1160,7 +1177,7 @@ computation's status by runing <code>.status</code> on the <code>FutureResult</c
         <span class="k">assert</span> <span class="p">(</span>
             <span class="n">procedure</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">supported_procedures</span>
         <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Please use one of the following procedures: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">supported_procedures</span><span class="si">}</span><span class="s2">&quot;</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">compute_procedure</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">procedure</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">compute_procedure</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">procedure</span><span class="p">,</span> <span class="n">queue</span><span class="p">)</span>
 </code></pre></div>
         </details>
     </div>
