@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
+## [0.2.4]
+
+### Added
+
+- Private compute queues to `compute()` and `compute_procedure()`
+
 ## [0.2.3]
 
 ### Added
@@ -54,7 +60,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - `_RequestsClient` class that handles all network requests to TeraChem Cloud server
 - `FutureResults` object that is created from a `task_id` and can be used to retrieve a result once finished.
 
-[unreleased]: https://github.com/mtzgroup/tccloud/compare/0.2.3...HEAD
+[unreleased]: https://github.com/mtzgroup/tccloud/compare/0.2.4...HEAD
+[0.2.4]: https://github.com/mtzgroup/tccloud/releases/tag/0.2.4
 [0.2.3]: https://github.com/mtzgroup/tccloud/releases/tag/0.2.3
 [0.2.2]: https://github.com/mtzgroup/tccloud/releases/tag/0.2.2
 [0.2.1]: https://github.com/mtzgroup/tccloud/releases/tag/0.2.1
