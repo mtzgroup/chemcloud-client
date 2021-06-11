@@ -11,14 +11,14 @@
         <meta name="author" content="Colton Hicks">
       
       
-        <link rel="canonical" href="https://mtzgroup.github.io/tccloud/tutorial/batch_computations/">
+        <link rel="canonical" href="https://mtzgroup.github.io/tccloud/tutorial/terachem_cloud_algorithms/">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.3">
     
     
       
-        <title>Batch Computations - tccloud</title>
+        <title>TeraChem Cloud Algorithms - tccloud</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#batch-computations" class="md-skip">
+        <a href="#terachem-cloud-algorithms" class="md-skip">
           Skip to content
         </a>
       
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Batch Computations
+              TeraChem Cloud Algorithms
             
           </span>
         </div>
@@ -293,6 +293,18 @@
             
   
   
+  
+    <li class="md-nav__item">
+      <a href="../batch_computations/" class="md-nav__link">
+        Batch Computations
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
     
   
   
@@ -303,22 +315,53 @@
         
       
       
-      <a href="./" class="md-nav__link md-nav__link--active">
-        Batch Computations
-      </a>
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          TeraChem Cloud Algorithms
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../terachem_cloud_algorithms/" class="md-nav__link">
+      <a href="./" class="md-nav__link md-nav__link--active">
         TeraChem Cloud Algorithms
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#hessian" class="md-nav__link">
+    Hessian
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frequency-analysis" class="md-nav__link">
+    Frequency Analysis
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#keywords" class="md-nav__link">
+    Keywords
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -512,6 +555,35 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#hessian" class="md-nav__link">
+    Hessian
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frequency-analysis" class="md-nav__link">
+    Frequency Analysis
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#keywords" class="md-nav__link">
+    Keywords
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -522,13 +594,14 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/mtzgroup/tccloud/edit/develop/docs/tutorial/batch_computations.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/mtzgroup/tccloud/edit/develop/docs/tutorial/terachem_cloud_algorithms.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="batch-computations">Batch Computations<a class="headerlink" href="#batch-computations" title="Permanent link">🔗</a></h1>
-<p>Both single point and geometry optimizations can be performed in bulk by submitting up to 100 computations simultaneously. Simply submit an array of <a href="../../code_reference/AtomicInput/#qcelemental.models.results.AtomicInput">AtomicInputs</a> or <a href="../../code_reference/OptimizationInput/#qcelemental.models.procedures.OptimizationInput">OptimizationInput</a> objects as input data.</p>
+                <h1 id="terachem-cloud-algorithms">TeraChem Cloud Algorithms<a class="headerlink" href="#terachem-cloud-algorithms" title="Permanent link">🔗</a></h1>
+<p>TeraChem Cloud implements some of its own concurrent algorithms that leverage its horizontally scalable backend infrastructure. These include a parallel hessian algorithm and parallel frequency analysis algorithm. To use them submit either a <code>hessian</code> or <code>properties</code> computation to TeraChem Cloud using <code>tcc</code> as the engine. Keywords specific to these algorithms are added to <code>.extras['tcc_kwargs']</code>. None are required and all are optional.</p>
+<h2 id="hessian">Hessian<a class="headerlink" href="#hessian" title="Permanent link">🔗</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">tccloud</span> <span class="kn">import</span> <span class="n">TCClient</span>
 <span class="kn">from</span> <span class="nn">tccloud.models</span> <span class="kn">import</span> <span class="n">AtomicInput</span><span class="p">,</span> <span class="n">Molecule</span>
 
@@ -536,21 +609,88 @@
 
 <span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="s2">&quot;pubchem:water&quot;</span><span class="p">)</span>
 
+<span class="c1"># Hessian computation</span>
 <span class="n">atomic_input</span> <span class="o">=</span> <span class="n">AtomicInput</span><span class="p">(</span>
     <span class="n">molecule</span><span class="o">=</span><span class="n">water</span><span class="p">,</span>
     <span class="n">model</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;B3LYP&quot;</span><span class="p">,</span> <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="s2">&quot;6-31g&quot;</span><span class="p">},</span>
-    <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;energy&quot;</span><span class="p">,</span>
-    <span class="n">keywords</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">&quot;closed&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-        <span class="s2">&quot;restricted&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;hessian&quot;</span><span class="p">,</span>
+    <span class="n">extras</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;tcc_kwargs&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;dh&quot;</span><span class="p">:</span> <span class="mf">5e-3</span><span class="p">,</span>  <span class="c1"># OPTIONAL: displacement for finite difference</span>
+        <span class="p">},</span>
     <span class="p">},</span>
 <span class="p">)</span>
-
-<span class="hll"><span class="n">future_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">([</span><span class="n">atomic_input</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;terachem_pbs&quot;</span><span class="p">)</span>
-</span><span class="n">result</span> <span class="o">=</span> <span class="n">future_result</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-<span class="c1"># Array of AtomicResult objects</span>
+<span class="n">future_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">atomic_input</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;tcc&quot;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">future_result</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="c1"># AtomicResult object containing all returned data</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="c1"># The hessian matrix</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">return_result</span><span class="p">)</span>
 </code></pre></div>
+<h2 id="frequency-analysis">Frequency Analysis<a class="headerlink" href="#frequency-analysis" title="Permanent link">🔗</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">tccloud</span> <span class="kn">import</span> <span class="n">TCClient</span>
+<span class="kn">from</span> <span class="nn">tccloud.models</span> <span class="kn">import</span> <span class="n">AtomicInput</span><span class="p">,</span> <span class="n">Molecule</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">TCClient</span><span class="p">()</span>
+
+<span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="s2">&quot;pubchem:water&quot;</span><span class="p">)</span>
+
+<span class="c1"># Frequency Analysis</span>
+<span class="n">atomic_input</span> <span class="o">=</span> <span class="n">AtomicInput</span><span class="p">(</span>
+    <span class="n">molecule</span><span class="o">=</span><span class="n">water</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;B3LYP&quot;</span><span class="p">,</span> <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="s2">&quot;6-31g&quot;</span><span class="p">},</span>
+    <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;properties&quot;</span><span class="p">,</span>
+    <span class="n">extras</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;tcc_kwargs&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;temperature&quot;</span><span class="p">:</span> <span class="mf">380.0</span><span class="p">,</span>  <span class="c1"># OPTIONAL: temperature for free energy calculation</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+<span class="n">future_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">atomic_input</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;tcc&quot;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">future_result</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="c1"># AtomicResult object containing all returned data</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="c1"># Dictionary containing frequency analysis results</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">return_result</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="keywords">Keywords<a class="headerlink" href="#keywords" title="Permanent link">🔗</a></h2>
+<p>Keywords are passed in <code>AtomicInput.extras['tcc_kwargs']</code>.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Keyword</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+<th align="left">Default Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>dh</code></td>
+<td align="left"><code>float</code></td>
+<td align="left">Displacement for gradient geometries for finite difference</td>
+<td align="left"><code>5.0e-3</code></td>
+</tr>
+<tr>
+<td align="left"><code>energy</code></td>
+<td align="left"><code>float</code></td>
+<td align="left">Electronic energy passed to the harmonic free energy module</td>
+<td align="left"><code>0.0</code></td>
+</tr>
+<tr>
+<td align="left"><code>temperature</code></td>
+<td align="left"><code>float</code></td>
+<td align="left">Temperature passed to the harmonic free energy module</td>
+<td align="left"><code>300.0</code></td>
+</tr>
+<tr>
+<td align="left"><code>pressure</code></td>
+<td align="left"><code>float</code></td>
+<td align="left">Pressure passed to the harmonic free energy module</td>
+<td align="left"><code>1.0</code></td>
+</tr>
+</tbody>
+</table>
                 
               
               
@@ -568,7 +708,7 @@
   
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
-        <a href="../geometry_optimization/" class="md-footer__link md-footer__link--prev" rel="prev">
+        <a href="../batch_computations/" class="md-footer__link md-footer__link--prev" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -577,19 +717,19 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Geometry Optimization
+              Batch Computations
             </div>
           </div>
         </a>
       
       
-        <a href="../terachem_cloud_algorithms/" class="md-footer__link md-footer__link--next" rel="next">
+        <a href="../../code_reference/TCClient/" class="md-footer__link md-footer__link--next" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              TeraChem Cloud Algorithms
+              TCClient
             </div>
           </div>
           <div class="md-footer__button md-icon">
