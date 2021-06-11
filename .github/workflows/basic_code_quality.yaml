@@ -15,7 +15,7 @@ jobs:
         run: pip install flake8
       - name: Flake8
         run: flake8 .
-  
+
   mypy:
     runs-on: ubuntu-latest
     steps:
@@ -24,8 +24,10 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: "3.6"
-      - name: Install mypy and pydantic
-        run: pip install mypy pydantic
+      - name: Install flit
+        run: pip install flit
+      - name: Install repo
+        run: flit install --deps develop --symlink
       - name: mypy
         run: mypy
 
