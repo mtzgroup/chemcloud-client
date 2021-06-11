@@ -10,6 +10,8 @@ client.supported_engines
 ["psi4", "terachem_pbs", "rdkit", ...]
 ```
 
+Please see [TeraChem Cloud Algorithms](./terachem_cloud_algorithms.md) for details on parallel execution algorithms unique to the TeraChem Cloud (`tcc`) compute engine.
+
 ## Keywords
 
 Keywords specific to a quantum chemistry engine can be added to an [AtomicInput][tccloud.models.AtomicInput] as follows:
