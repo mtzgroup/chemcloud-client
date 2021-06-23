@@ -18,9 +18,10 @@ TeraChem Cloud implements some of its own concurrent algorithms that leverage it
 
 Keywords are passed in `AtomicInput.extras['tcc_kwargs']`.
 
-| Keyword       | Type    | Description                                                 | Default Value |
-| :------------ | :------ | :---------------------------------------------------------- | :------------ |
-| `dh`          | `float` | Displacement for gradient geometries for finite difference  | `5.0e-3`      |
-| `energy`      | `float` | Electronic energy passed to the harmonic free energy module | `0.0`         |
-| `temperature` | `float` | Temperature passed to the harmonic free energy module       | `300.0`       |
-| `pressure`    | `float` | Pressure passed to the harmonic free energy module          | `1.0`         |
+| Keyword           | Type    | Description                                                 | Default Value  |
+| :---------------- | :------ | :---------------------------------------------------------- | :------------- |
+| `gradient_engine` | `str`   | The program to use for gradient calculations                | `terachem_pbs` |
+| `dh`              | `float` | Displacement for gradient geometries for finite difference  | `5.0e-3`       |
+| `energy`          | `float` | Electronic energy passed to the harmonic free energy module | `0.0`          |
+| `temperature`     | `float` | Temperature passed to the harmonic free energy module       | `300.0`        |
+| `pressure`        | `float` | Pressure passed to the harmonic free energy module          | `1.0`          |
