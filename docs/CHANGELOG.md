@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
+### Added
+
+- Support for `AtomicInput.protocols.native_files`. User can now request QC package specific files generated during a computation.
+- Added support for TeraChem-specific `native_files`. c0/ca0/cb0 bytes files (or any bytes data) placed in `AtomicInput.extras['tcfe:keywords']` will be automatically base64 encoded and sent to the server. The enables seeding computations with a wave function as an initial guess.
+- Base64 encoded `native_files` returned from server will be automatically decoded to bytes.
+
 ## [0.2.4]
 
 ### Added

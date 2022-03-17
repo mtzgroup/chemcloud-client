@@ -12,10 +12,14 @@ atomic_input = AtomicInput(
         "closed": True,
         "restricted": True,
     },
+    protocols={"stdout": True, "native_files": "all"},
+    extras={"tcfe:keywords": {"native_files": ["c0"]}},
 )
-future_result = client.compute(atomic_input, engine="terachem_pbs")
+future_result = client.compute(atomic_input, engine="terachem_fe")
 result = future_result.get()
 # AtomicResult object containing all returned data
 print(result)
 # The energy value requested
 print(result.return_result)
+print(result.stdout)
+print(result.native_files.keys())
