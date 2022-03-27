@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
+### Added
+
+- Decode b64 encoded data returned from server in `AtomicResult.extra['tcfe:keywords']`
+
+### Changed
+
+- Updated `config.settings.tcfe_config_kwargs = "tcfe:config` -> `config.settings.tcfe_keywords = "tcfe:keywords`
+
 ## [0.3.0]
 
 ### Added
