@@ -668,9 +668,8 @@
 <span class="kn">from</span> <span class="nn">tccloud.models</span> <span class="kn">import</span> <span class="n">AtomicInput</span><span class="p">,</span> <span class="n">Molecule</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">TCClient</span><span class="p">()</span>
-<span class="c1"># client = TCClient(profile=&quot;dev&quot;, tccloud_domain=&quot;https://tccloud.dev.mtzlab.com&quot;)</span>
 
-<span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="s2">&quot;pubchem:caffeine&quot;</span><span class="p">)</span>
+<span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="s2">&quot;pubchem:water&quot;</span><span class="p">)</span>
 
 <span class="c1"># Hessian computation</span>
 <span class="n">atomic_input</span> <span class="o">=</span> <span class="n">AtomicInput</span><span class="p">(</span>
