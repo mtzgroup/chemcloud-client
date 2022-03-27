@@ -11,7 +11,7 @@ atomic_input = AtomicInput(
     model={"method": "B3LYP", "basis": "6-31g"},
     driver="hessian",
     extras={
-        "tcc_kwargs": {
+        "tcc:keywords": {
             "dh": 5e-3,  # OPTIONAL: displacement for finite difference
         },
     },

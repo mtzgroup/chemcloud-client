@@ -11,7 +11,7 @@ atomic_input = AtomicInput(
     model={"method": "B3LYP", "basis": "6-31g"},
     driver="properties",
     extras={
-        "tcc_kwargs": {
+        "tcc:keywords": {
             "temperature": 380.0,  # OPTIONAL: temperature for free energy calculation
         },
     },

@@ -17,6 +17,7 @@ from tccloud.models import (
 )
 
 from .config import Settings, settings
+from .utils import _b64_to_bytes, _bytes_to_b64
 
 
 class _RequestsClient:
@@ -270,6 +271,9 @@ class _RequestsClient:
         self, input_data: AtomicInputOrList, engine: str, queue: Optional[str] = None
     ) -> Union[FutureResult, FutureResultGroup]:
         """Submit a computation to TeraChem Cloud"""
+        # Convery any bytes data to b64 encoding
+        _bytes_to_b64(input_data)
+
         task = self._authenticated_request(
             "post",
             "/compute",
@@ -287,6 +291,9 @@ class _RequestsClient:
         queue: Optional[str] = None,
     ) -> Union[FutureResult, FutureResultGroup]:
         """Submit a procedure computation to Terachem Cloud"""
+        # Convert any bytes data to b64 encoding
+        _bytes_to_b64(input_data)
+
         task = self._authenticated_request(
             "post",
             "/compute-procedure",
@@ -315,6 +322,10 @@ class _RequestsClient:
         task_result = self._authenticated_request(
             "post", "/compute/result", data=json_dumps(task)
         )
+        if task_result["result"]:
+            # Convery b64 encoded native_files to bytes
+            _b64_to_bytes(task_result["result"])
+
         return task_result["compute_status"], task_result["result"]
 
     def hello_world(self, name: Optional[str] = None):

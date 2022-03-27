@@ -15,6 +15,7 @@ class Settings(BaseSettings):
     tccloud_domain: str = "https://tccloud.mtzlab.com"
     tccloud_api_version_prefix: str = "/api/v1"
     tccloud_default_credentials_profile: str = "default"
+    tcfe_config_kwarg: str = "tcfe:config"
 
 
 settings = Settings()
