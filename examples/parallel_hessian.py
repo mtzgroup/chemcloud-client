@@ -4,22 +4,21 @@ from tccloud.models import AtomicInput, Molecule
 client = TCClient()
 
 water = Molecule.from_data("pubchem:water")
+
+# Hessian computation
 atomic_input = AtomicInput(
     molecule=water,
     model={"method": "B3LYP", "basis": "6-31g"},
-    driver="energy",
-    keywords={
-        "closed": True,
-        "restricted": True,
+    driver="hessian",
+    extras={
+        "tcc:keywords": {
+            "dh": 5e-3,  # OPTIONAL: displacement for finite difference
+        },
     },
-    protocols={"stdout": True, "native_files": "all"},
-    extras={"tcfe:keywords": {"native_files": ["c0"]}},
 )
-future_result = client.compute(atomic_input, engine="terachem_fe")
+future_result = client.compute(atomic_input, engine="tcc")
 result = future_result.get()
 # AtomicResult object containing all returned data
 print(result)
-# The energy value requested
+# The hessian matrix
 print(result.return_result)
-print(result.stdout)
-print(result.native_files.keys())
