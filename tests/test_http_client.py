@@ -408,7 +408,7 @@ def test_compute_procedure(settings, patch_compute_endpoints, water, jwt):
         input_specification=input_spec,
         initial_molecule=water,
         protocols={"trajectory": "all"},
-        keywords={"program": "terachem_pbs"},
+        keywords={"program": "terachem_fe"},
     )
 
     future_result = client.compute_procedure(opt_input, "geometric")
@@ -431,7 +431,7 @@ def test_compute_procedure_batch(settings, patch_compute_endpoints_batch, water,
         input_specification=input_spec,
         initial_molecule=water,
         protocols={"trajectory": "all"},
-        keywords={"program": "terachem_pbs"},
+        keywords={"program": "terachem_fe"},
     )
 
     future_result = client.compute_procedure(opt_input, "geometric")
