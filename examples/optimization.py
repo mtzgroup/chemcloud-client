@@ -9,7 +9,7 @@ water = Molecule.from_data("pubchem:water")
 
 input_spec = QCInputSpecification(
     model={"method": "b3lyp", "basis": "6-31g"},
-    # Keywords for the compute engine (e.g., psi4, terachem_pbs)
+    # Keywords for the compute engine (e.g., psi4, terachem_fe)
     keywords={},
 )
 
@@ -21,7 +21,7 @@ opt_input = OptimizationInput(
     protocols={"trajectory": "all"},
     # Must define compute engine "program": "engine_name"
     # Define keywords for optimizer (pyberny or geomeTRIC)
-    keywords={"program": "terachem_pbs", "maxsteps": 3},
+    keywords={"program": "terachem_fe", "maxsteps": 3},
 )
 
 

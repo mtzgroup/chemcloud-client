@@ -15,7 +15,7 @@ atomic_input = AtomicInput(
     },
 )
 
-future_result = client.compute([atomic_input] * 2, engine="terachem_pbs")
+future_result = client.compute([atomic_input] * 2, engine="terachem_fe")
 result = future_result.get()
 # Array of AtomicResult objects
 print(result)

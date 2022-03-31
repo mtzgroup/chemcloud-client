@@ -7,7 +7,7 @@ from tccloud import TCClient
 
 client = TCClient()
 client.supported_engines
-["psi4", "terachem_pbs", "rdkit", ...]
+["psi4", "terachem_fe", "rdkit", ...]
 ```
 
 Please see [TeraChem Cloud Algorithms](./terachem_cloud_algorithms.md) for details on parallel execution algorithms unique to the TeraChem Cloud (`tcc`) compute engine.
