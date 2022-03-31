@@ -724,7 +724,7 @@
 
 <span class="c1"># See supported compute engines</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">client</span><span class="o">.</span><span class="n">supported_engines</span>
-<span class="p">[</span><span class="s1">&#39;psi4&#39;</span><span class="p">,</span> <span class="s1">&#39;terachem_pbs&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+<span class="p">[</span><span class="s1">&#39;psi4&#39;</span><span class="p">,</span> <span class="s1">&#39;terachem_fe&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
 
 <span class="c1"># Test connection to TeraChem Cloud</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">client</span><span class="o">.</span><span class="n">hello_world</span><span class="p">(</span><span class="s2">&quot;Colton&quot;</span><span class="p">)</span>
@@ -748,7 +748,7 @@
 <ul>
 <li>Submit a computation, specify a target quantum chemistry engine, and get back an <a href="http://docs.qcarchive.molssi.org/projects/QCElemental/en/stable/model_result.html">AtomicResult</a></li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">future_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">atomic_input</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;terachem_pbs&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">future_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">atomic_input</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;terachem_fe&quot;</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">future_result</span><span class="o">.</span><span class="n">status</span>
 <span class="s1">&#39;STARTED&#39;</span>
 
@@ -780,7 +780,7 @@
 <span class="o">&gt;&gt;&gt;</span> <span class="n">client</span> <span class="o">=</span> <span class="n">TCClient</span><span class="p">()</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="s2">&quot;pubchem:water&quot;</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">atomic_input</span> <span class="o">=</span> <span class="n">AtomicInput</span><span class="p">(</span><span class="n">molecule</span><span class="o">=</span><span class="n">water</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;B3LYP&quot;</span><span class="p">,</span> <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="s2">&quot;6-31g&quot;</span><span class="p">},</span> <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;energy&quot;</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">future_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">atomic_input</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;terachem_pbs&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">future_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">atomic_input</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;terachem_fe&quot;</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">future_result</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">result</span>
 <span class="n">AtomicResult</span><span class="p">(</span><span class="n">driver</span><span class="o">=</span><span class="s1">&#39;energy&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="s1">&#39;B3LYP&#39;</span><span class="p">,</span> <span class="s1">&#39;basis&#39;</span><span class="p">:</span> <span class="s1">&#39;6-31g&#39;</span><span class="p">},</span> <span class="n">molecule_hash</span><span class="o">=</span><span class="s1">&#39;b6ec4fa&#39;</span><span class="p">)</span>

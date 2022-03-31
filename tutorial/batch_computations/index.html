@@ -606,7 +606,7 @@
     <span class="p">},</span>
 <span class="p">)</span>
 
-<span class="hll"><span class="n">future_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">([</span><span class="n">atomic_input</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;terachem_pbs&quot;</span><span class="p">)</span>
+<span class="hll"><span class="n">future_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">([</span><span class="n">atomic_input</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;terachem_fe&quot;</span><span class="p">)</span>
 </span><span class="n">result</span> <span class="o">=</span> <span class="n">future_result</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 <span class="c1"># Array of AtomicResult objects</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
