@@ -267,6 +267,11 @@ class _RequestsClient:
         json_string = urlsafe_b64decode(encoded_payload).decode("utf-8")
         return json.loads(json_string)
 
+    def _result_id_to_future_result(self, input_data, result_id):
+        if isinstance(input_data, list):
+            return FutureResultGroup(id=result_id, client=self)
+        return FutureResult(id=result_id, client=self)
+
     def compute(
         self, input_data: AtomicInputOrList, engine: str, queue: Optional[str] = None
     ) -> Union[FutureResult, FutureResultGroup]:
@@ -274,15 +279,13 @@ class _RequestsClient:
         # Convery any bytes data to b64 encoding
         _bytes_to_b64(input_data)
 
-        task = self._authenticated_request(
+        result_id = self._authenticated_request(
             "post",
             "/compute",
             data=json_dumps(input_data),
             params={"engine": engine, "queue": queue},
         )
-        if task.get("subtasks"):
-            return FutureResultGroup.from_task(task, self)
-        return FutureResult.from_task(task, self)
+        return self._result_id_to_future_result(input_data, result_id)
 
     def compute_procedure(
         self,
@@ -290,43 +293,38 @@ class _RequestsClient:
         procedure: str,
         queue: Optional[str] = None,
     ) -> Union[FutureResult, FutureResultGroup]:
-        """Submit a procedure computation to Terachem Cloud"""
+        """Submit a procedure computation to TeraChem Cloud"""
         # Convert any bytes data to b64 encoding
         _bytes_to_b64(input_data)
 
-        task = self._authenticated_request(
+        result_id = self._authenticated_request(
             "post",
             "/compute-procedure",
             data=json_dumps(input_data),
             params={"procedure": procedure, "queue": queue},
         )
-        if task.get("subtasks"):
-            return FutureResultGroup.from_task(task, self)
-        return FutureResult.from_task(task, self)
+        return self._result_id_to_future_result(input_data, result_id)
 
     def result(
-        self, task: Dict[str, Any]
+        self,
+        result_id: str,
     ) -> Tuple[str, Union[Optional[Any], Optional[List[Any]]]]:
         """Check the result of a compute job, returns status and result (if available).
 
         Parameters:
-            task: Task specification for TeraChem Cloud
-                {"task_id": "my-task-id"} OR
-                {"task_id": "my-task-id", "subtasks": [{"task_id": "tid_1"}, ...}
+            result_id: The ID of the result.
 
         Endpoint returns:
             class TaskResult(BaseModel):
                 compute_status: TaskStatus (str)
                 result: Optional[Union[PossibleResults, List[PossibleResults]]] = None
         """
-        task_result = self._authenticated_request(
-            "post", "/compute/result", data=json_dumps(task)
-        )
-        if task_result["result"]:
+        result = self._authenticated_request("get", f"/compute/result/{result_id}")
+        if result["result"]:
             # Convery b64 encoded native_files to bytes
-            _b64_to_bytes(task_result["result"])
+            _b64_to_bytes(result["result"])
 
-        return task_result["compute_status"], task_result["result"]
+        return result["state"], result["result"]
 
     def hello_world(self, name: Optional[str] = None):
         """Ping hello-world endpoint on TeraChem Cloud"""

@@ -64,6 +64,7 @@ nav:
       - tutorial/terachem_cloud_algorithms.md
   - Code Reference:
       - code_reference/TCClient.md
+      - code_reference/models.md
       - code_reference/FutureResult.md
       - code_reference/Molecule.md
       - code_reference/AtomicInput.md
