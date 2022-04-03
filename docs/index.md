@@ -31,7 +31,7 @@ pip install tccloud
 
 # See supported compute engines
 >>> client.supported_engines
-['psi4', 'terachem_pbs', ...]
+['psi4', 'terachem_fe', ...]
 
 # Test connection to TeraChem Cloud
 >>> client.hello_world("Colton")
@@ -58,7 +58,7 @@ pip install tccloud
 - Submit a computation, specify a target quantum chemistry engine, and get back an [AtomicResult](http://docs.qcarchive.molssi.org/projects/QCElemental/en/stable/model_result.html)
 
 ```python
->>> future_result = client.compute(atomic_input, engine="terachem_pbs")
+>>> future_result = client.compute(atomic_input, engine="terachem_fe")
 >>> future_result.status
 'STARTED'
 
@@ -91,7 +91,7 @@ FailedOperation(error=ComputeError(error_type='input_error', error_message='QCEn
 >>> client = TCClient()
 >>> water = Molecule.from_data("pubchem:water")
 >>> atomic_input = AtomicInput(molecule=water, model={"method": "B3LYP", "basis": "6-31g"}, driver="energy")
->>> future_result = client.compute(atomic_input, engine="terachem_pbs")
+>>> future_result = client.compute(atomic_input, engine="terachem_fe")
 >>> result = future_result.get()
 >>> result
 AtomicResult(driver='energy', model={'method': 'B3LYP', 'basis': '6-31g'}, molecule_hash='b6ec4fa')

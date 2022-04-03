@@ -9,6 +9,7 @@ from qcelemental.models.common_models import Model
 from tccloud.config import Settings
 from tccloud.http_client import _RequestsClient
 from tccloud.models import (
+    GROUP_ID_PREFIX,
     AtomicInput,
     AtomicResult,
     FutureResult,
@@ -371,13 +372,12 @@ def test_compute(settings, patch_compute_endpoints, water, jwt):
     atomic_input = AtomicInput(molecule=water, model=model, driver="energy")
 
     future_result = client.compute(atomic_input, engine="psi4")
-
     assert isinstance(future_result, FutureResult)
-    assert future_result.task_id == patch_compute_endpoints["task_id"]
+    assert future_result.id == patch_compute_endpoints
     assert future_result.client is client
 
 
-def test_compute_batch(settings, patch_compute_endpoints_batch, water, jwt):
+def test_compute_batch(settings, patch_compute_endpoints, water, jwt):
     client = _RequestsClient(settings=settings)
     client._access_token = jwt
 
@@ -387,11 +387,7 @@ def test_compute_batch(settings, patch_compute_endpoints_batch, water, jwt):
     future_result = client.compute([atomic_input, atomic_input], engine="psi4")
 
     assert isinstance(future_result, FutureResultGroup)
-    assert future_result.task_id == patch_compute_endpoints_batch["task_id"]
-    assert (
-        future_result.subtask_ids[0]
-        == patch_compute_endpoints_batch["subtasks"][0]["task_id"]
-    )
+    assert future_result.id == f"{GROUP_ID_PREFIX}{patch_compute_endpoints}"
     assert future_result.client is client
 
 
@@ -408,17 +404,17 @@ def test_compute_procedure(settings, patch_compute_endpoints, water, jwt):
         input_specification=input_spec,
         initial_molecule=water,
         protocols={"trajectory": "all"},
-        keywords={"program": "terachem_pbs"},
+        keywords={"program": "terachem_fe"},
     )
 
     future_result = client.compute_procedure(opt_input, "geometric")
 
     assert isinstance(future_result, FutureResult)
-    assert future_result.task_id == patch_compute_endpoints["task_id"]
+    assert future_result.id == patch_compute_endpoints
     assert future_result.client is client
 
 
-def test_compute_procedure_batch(settings, patch_compute_endpoints_batch, water, jwt):
+def test_compute_procedure_batch(settings, patch_compute_endpoints, water, jwt):
     client = _RequestsClient(settings=settings)
     client._access_token = jwt
 
@@ -431,17 +427,13 @@ def test_compute_procedure_batch(settings, patch_compute_endpoints_batch, water,
         input_specification=input_spec,
         initial_molecule=water,
         protocols={"trajectory": "all"},
-        keywords={"program": "terachem_pbs"},
+        keywords={"program": "terachem_fe"},
     )
 
-    future_result = client.compute_procedure(opt_input, "geometric")
+    future_result = client.compute_procedure([opt_input] * 2, "geometric")
 
     assert isinstance(future_result, FutureResultGroup)
-    assert future_result.task_id == patch_compute_endpoints_batch["task_id"]
-    assert (
-        future_result.subtask_ids[0]
-        == patch_compute_endpoints_batch["subtasks"][0]["task_id"]
-    )
+    assert future_result.id == f"{GROUP_ID_PREFIX}{patch_compute_endpoints}"
     assert future_result.client is client
 
 
@@ -449,9 +441,9 @@ def test_result_pending(settings, jwt, httpx_mock: HTTPXMock):
     client = _RequestsClient(settings=settings)
     client._access_token = jwt
 
-    httpx_mock.add_response(json={"compute_status": "PENDING", "result": None})
+    httpx_mock.add_response(json={"state": "PENDING", "result": None})
 
-    status, result = client.result({"task_id": "fake_id"})
+    status, result = client.result("fake_id")
 
     assert status == TaskStatus.PENDING
     assert result is None
@@ -466,10 +458,10 @@ def test_result_success(settings, jwt, httpx_mock: HTTPXMock):
     url = re.compile(".*/compute/result")
     httpx_mock.add_response(
         url=url,
-        json={"compute_status": "SUCCESS", "result": json.loads(atomic_result.json())},
+        json={"state": "SUCCESS", "result": json.loads(atomic_result.json())},
     )
 
-    status, result = client.result({"task_id": "fake_id"})
+    status, result = client.result("fake_id")
 
     assert status == "SUCCESS"
     assert isinstance(AtomicResult(**result), AtomicResult)

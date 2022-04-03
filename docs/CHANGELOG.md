@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [unreleased]
+
+### Added
+
+- `to_file()` and `from_file()` methods to easily save compute job ids for later retrieval.
+
+### Changed
+
+- Simplified management of task ids between client and server. Only need to send a single id to server even if a batch computation was initiated.
+
+### Removed
+
+- Support for Python3.6. Python3.6 end-of-lif'ed December 23, 2021.
+
 ## [0.3.1]
 
 ### Added
