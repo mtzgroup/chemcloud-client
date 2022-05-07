@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
+## [0.4.1]
+
+### Changed
+
+- Upped the default timeout on http reads from 5.0s -> 20.0s.
+
 ## [0.4.0]
 
 ### Added
@@ -92,7 +98,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - `_RequestsClient` class that handles all network requests to TeraChem Cloud server
 - `FutureResults` object that is created from a `task_id` and can be used to retrieve a result once finished.
 
-[unreleased]: https://github.com/mtzgroup/tccloud/compare/0.4.0...HEAD
+[unreleased]: https://github.com/mtzgroup/tccloud/compare/0.4.1...HEAD
+[0.4.1]: https://github.com/mtzgroup/tccloud/releases/tag/0.4.1
 [0.4.0]: https://github.com/mtzgroup/tccloud/releases/tag/0.4.0
 [0.3.1]: https://github.com/mtzgroup/tccloud/releases/tag/0.3.1
 [0.3.0]: https://github.com/mtzgroup/tccloud/releases/tag/0.3.0
