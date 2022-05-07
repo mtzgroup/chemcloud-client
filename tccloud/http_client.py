@@ -183,8 +183,12 @@ class _RequestsClient:
             data=data,
             params=params,
         )
-
-        with httpx.Client() as client:
+        # Leave default 5.0s timeout, incrase read timeout to 20.0 seconds to handle
+        # httpx.ReadTimeout exceptions seen by Ethan. I think the issue is the client
+        # is waiting while TCC retrieves results from backend and with large results
+        # this can take longer than 5 seconds. Will see if this solves issue...
+        # https://www.python-httpx.org/advanced/#fine-tuning-the-configuration
+        with httpx.Client(timeout=httpx.Timeout(5.0, read=20.0)) as client:
             response = client.send(request)
         response.raise_for_status()
         return response.json()
