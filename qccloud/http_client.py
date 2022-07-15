@@ -9,7 +9,7 @@ import httpx
 import toml
 from qcelemental.util.serialization import json_dumps
 
-from tccloud.models import (
+from qccloud.models import (
     AtomicInputOrList,
     FutureResult,
     FutureResultGroup,
@@ -21,10 +21,10 @@ from .utils import _b64_to_bytes, _bytes_to_b64
 
 
 class _RequestsClient:
-    """Interface for making http requests to TeraChem Cloud.
+    """Interface for making http requests to Quantum Chemistry Cloud.
 
     This class should never be instantiated by end users. End users should use the
-    TCClient class to interact with TeraChem Cloud. This
+    QCClient class to interact with QC Cloud.
 
     Main Features:
         - Manages credentials for making authenticated requests.
@@ -41,32 +41,36 @@ class _RequestsClient:
     def __init__(
         self,
         *,
-        tccloud_username: Optional[str] = None,
-        tccloud_password: Optional[str] = None,
+        qccloud_username: Optional[str] = None,
+        qccloud_password: Optional[str] = None,
         profile: Optional[str] = None,
         settings: Settings = settings,
-        tccloud_domain: Optional[str] = None,
+        qccloud_domain: Optional[str] = None,
     ):
-        self._tccloud_username = tccloud_username
-        self._tccloud_password = tccloud_password
+        self._qccloud_username = qccloud_username
+        self._qccloud_password = qccloud_password
         self._settings = settings
-        self._profile = profile or settings.tccloud_default_credentials_profile
+        self._profile = profile or settings.qccloud_default_credentials_profile
         self._access_token: str = ""
         self._refresh_token: str = ""
-        self._tccloud_domain = tccloud_domain or settings.tccloud_domain
+        self._qccloud_domain = qccloud_domain or settings.qccloud_domain
         # If set to True future refresh_tokens calls will also write new tokens to Credentials file
         self._tokens_set_from_file: bool = False
 
     def __repr__(self) -> str:
-        return f"{type(self).__name__}({self._tccloud_domain}, profile={self._profile})"
+        return f"{type(self).__name__}({self._qccloud_domain}, profile={self._profile})"
 
     def _set_tokens(self) -> None:
         """Set self._access_token and self._refresh_token"""
-        un = self._tccloud_username or self._settings.tccloud_username
-        pw = self._tccloud_password or self._settings.tccloud_password
+        un = self._qccloud_username or self._settings.qccloud_username
+        pw = self._qccloud_password or self._settings.qccloud_password
         credentials_file = (
-            self._settings.tccloud_base_directory
-            / self._settings.tccloud_credentials_file
+            self._settings.qccloud_base_directory
+            / self._settings.qccloud_credentials_file
+        )
+
+        unauth_msg = (
+            "You must authenticate with Quantum Chemistry Cloud to make this request."
         )
 
         if un and pw:  # username/password passed in or found in environment
@@ -79,26 +83,27 @@ class _RequestsClient:
                 access_token = credentials[self._profile]["access_token"]
                 refresh_token = credentials[self._profile]["refresh_token"]
             except KeyError:
-                print("You must authenticate with TeraChem Cloud to make this request.")
+                print(unauth_msg)
                 access_token, refresh_token = self._set_tokens_from_user_input()
             else:
                 self._tokens_set_from_file = True
                 if self._expired_access_token(access_token):
                     access_token, refresh_token = self._refresh_tokens(refresh_token)
         else:
-            print("You must authenticate with TeraChem Cloud to make this request.")
+            print(unauth_msg)
             access_token, refresh_token = self._set_tokens_from_user_input()
 
         # Remove sensitive credentials from object
-        self._tccloud_username, self._tccloud_password = None, None
+        self._qccloud_username, self._qccloud_password = None, None
 
         self._access_token, self._refresh_token = access_token, refresh_token
 
     def _set_tokens_from_user_input(self):
         """Request user to input username/password to get access tokens"""
         while True:
-            username = input("Please enter your TeraChem Cloud username: ")
-            password = getpass("Please enter your TeraChem Cloud password: ")
+            msg = "Please enter your Quantum Chemistry Cloud"
+            username = input(msg + " username: ")
+            password = getpass(msg + " password: ")
 
             try:
                 print("Authenticating...")
@@ -107,8 +112,8 @@ class _RequestsClient:
                 print(e)
                 print(
                     "Login Failed! Did you enter your credentials correctly? If you "
-                    "do not have a TeraChem Cloud account please visit "
-                    f"{self._tccloud_domain}/signup to create an account."
+                    "do not have a QC Cloud account please visit "
+                    f"{self._qccloud_domain}/signup to create an account."
                 )
 
     def _get_access_token(self) -> str:
@@ -135,7 +140,7 @@ class _RequestsClient:
         access_token: str,
         refresh_token: str,
         *,
-        profile: str = settings.tccloud_default_credentials_profile,
+        profile: str = settings.qccloud_default_credentials_profile,
     ) -> None:
         """Writes access_token and refresh_token to configuration file"""
         assert (
@@ -143,8 +148,8 @@ class _RequestsClient:
         ), "You must pass an access_token and refresh_token"
 
         credentials_file = (
-            Path(self._settings.tccloud_base_directory)
-            / self._settings.tccloud_credentials_file
+            Path(self._settings.qccloud_base_directory)
+            / self._settings.qccloud_credentials_file
         )
 
         if credentials_file.is_file():
@@ -173,8 +178,8 @@ class _RequestsClient:
     ):
         """Make HTTP request"""
         url = (
-            f"{self._tccloud_domain}"
-            f"{self._settings.tccloud_api_version_prefix if api_call else ''}{route}"
+            f"{self._qccloud_domain}"
+            f"{self._settings.qccloud_api_version_prefix if api_call else ''}{route}"
         )
         request = httpx.Request(
             method,
@@ -183,9 +188,9 @@ class _RequestsClient:
             data=data,
             params=params,
         )
-        # Leave default 5.0s timeout, incrase read timeout to 20.0 seconds to handle
+        # Leave default 5.0s timeout, increase read timeout to 20.0 seconds to handle
         # httpx.ReadTimeout exceptions seen by Ethan. I think the issue is the client
-        # is waiting while TCC retrieves results from backend and with large results
+        # is waiting while QCC retrieves results from backend and with large results
         # this can take longer than 5 seconds. Will see if this solves issue...
         # https://www.python-httpx.org/advanced/#fine-tuning-the-configuration
         with httpx.Client(timeout=httpx.Timeout(5.0, read=20.0)) as client:
@@ -253,7 +258,7 @@ class _RequestsClient:
         """Checks expiration of JWT (access token)"""
         payload = self._decode_access_token(jwt)
         return payload["exp"] <= (
-            int(time()) + self._settings.tccloud_access_token_expiration_buffer
+            int(time()) + self._settings.qccloud_access_token_expiration_buffer
         )
 
     @staticmethod
@@ -279,7 +284,7 @@ class _RequestsClient:
     def compute(
         self, input_data: AtomicInputOrList, engine: str, queue: Optional[str] = None
     ) -> Union[FutureResult, FutureResultGroup]:
-        """Submit a computation to TeraChem Cloud"""
+        """Submit a computation to QC Cloud"""
         # Convery any bytes data to b64 encoding
         _bytes_to_b64(input_data)
 
@@ -297,7 +302,7 @@ class _RequestsClient:
         procedure: str,
         queue: Optional[str] = None,
     ) -> Union[FutureResult, FutureResultGroup]:
-        """Submit a procedure computation to TeraChem Cloud"""
+        """Submit a procedure computation to QC Cloud"""
         # Convert any bytes data to b64 encoding
         _bytes_to_b64(input_data)
 
@@ -331,7 +336,7 @@ class _RequestsClient:
         return result["state"], result["result"]
 
     def hello_world(self, name: Optional[str] = None):
-        """Ping hello-world endpoint on TeraChem Cloud"""
+        """Ping hello-world endpoint on QC Cloud"""
         return self._request(
             "get", "/hello-world", params={"name": name}, api_call=False
         )

@@ -1,3 +1,3 @@
 # FutureResult
 
-::: tccloud.models:FutureResult
+::: qccloud.models:FutureResult

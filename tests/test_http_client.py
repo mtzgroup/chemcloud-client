@@ -6,9 +6,9 @@ import toml
 from pytest_httpx import HTTPXMock
 from qcelemental.models.common_models import Model
 
-from tccloud.config import Settings
-from tccloud.http_client import _RequestsClient
-from tccloud.models import (
+from qccloud.config import Settings
+from qccloud.http_client import _RequestsClient
+from qccloud.models import (
     GROUP_ID_PREFIX,
     AtomicInput,
     AtomicResult,
@@ -24,8 +24,8 @@ def test_passing_username_password_are_prioritized_for_auth(
     mocker, monkeypatch, settings, credentials_file, patch_token_endpoint, jwt
 ):
     # Set environment variables
-    monkeypatch.setenv("TCCLOUD_USERNAME", "env_username", prepend=False)
-    monkeypatch.setenv("TCCLOUD_PASSWORD", "env_password", prepend=False)
+    monkeypatch.setenv("QCCLOUD_USERNAME", "env_username", prepend=False)
+    monkeypatch.setenv("QCCLOUD_PASSWORD", "env_password", prepend=False)
 
     # Create Credentials file
     refresh_token = "credentials_file_refresh_token"
@@ -37,8 +37,8 @@ def test_passing_username_password_are_prioritized_for_auth(
     passed_username = "passed_username"
     passed_password = "passed_password"  # pragma: allowlist secret
     client = _RequestsClient(
-        tccloud_username=passed_username,
-        tccloud_password=passed_password,
+        qccloud_username=passed_username,
+        qccloud_password=passed_password,
         settings=settings,
     )
     client._set_tokens()
@@ -54,8 +54,8 @@ def test_environment_variables_used_for_auth_if_no_passed_values(
     # Set environment variables
     env_username = "env_username"
     env_password = "env_password"  # pragma: allowlist secret
-    monkeypatch.setenv("TCCLOUD_USERNAME", env_username, prepend=False)
-    monkeypatch.setenv("TCCLOUD_PASSWORD", env_password, prepend=False)
+    monkeypatch.setenv("QCCLOUD_USERNAME", env_username, prepend=False)
+    monkeypatch.setenv("QCCLOUD_PASSWORD", env_password, prepend=False)
 
     # Create Credentials file
     refresh_token = "credentials_file_refresh_token"
@@ -64,7 +64,7 @@ def test_environment_variables_used_for_auth_if_no_passed_values(
     spy = mocker.spy(_RequestsClient, "_tokens_from_username_password")
 
     settings_with_patched_envars = Settings(
-        tccloud_base_directory=settings.tccloud_base_directory
+        qccloud_base_directory=settings.qccloud_base_directory
     )
 
     # Instantiate client
@@ -104,7 +104,7 @@ def test_username_password_requested_if_no_credentials_available_to_create_crede
     password = "user_input_password"  # pragma: allowlist secret
 
     monkeypatch.setattr("builtins.input", lambda _: username)
-    monkeypatch.setattr("tccloud.http_client.getpass", lambda x: password)
+    monkeypatch.setattr("qccloud.http_client.getpass", lambda x: password)
 
     spy = mocker.spy(_RequestsClient, "_tokens_from_username_password")
 
@@ -116,7 +116,7 @@ def test_username_password_requested_if_no_credentials_available_to_create_crede
     assert client._refresh_token == patch_token_endpoint["refresh_token"]
 
     credentials_file = (
-        Path(settings.tccloud_base_directory) / settings.tccloud_credentials_file
+        Path(settings.qccloud_base_directory) / settings.qccloud_credentials_file
     )
 
     # Credentials file does not yet exist
@@ -126,7 +126,7 @@ def test_username_password_requested_if_no_credentials_available_to_create_crede
 def test_write_tokens_to_credentials_file(settings):
     client = _RequestsClient(settings=settings)
     credentials_file = (
-        Path(settings.tccloud_base_directory) / settings.tccloud_credentials_file
+        Path(settings.qccloud_base_directory) / settings.qccloud_credentials_file
     )
 
     # Credentials file does not yet exist
@@ -143,11 +143,11 @@ def test_write_tokens_to_credentials_file(settings):
         data = toml.load(f)
 
     assert (
-        data[settings.tccloud_default_credentials_profile]["access_token"]
+        data[settings.qccloud_default_credentials_profile]["access_token"]
         == test_access_token
     )
     assert (
-        data[settings.tccloud_default_credentials_profile]["refresh_token"]
+        data[settings.qccloud_default_credentials_profile]["refresh_token"]
         == test_refresh_token
     )
 
@@ -157,7 +157,7 @@ def test_write_tokens_to_credentials_file_adds_new_profiles_to_credentials_file(
 ):
     client = _RequestsClient(settings=settings)
     credentials_file = (
-        Path(settings.tccloud_base_directory) / settings.tccloud_credentials_file
+        Path(settings.qccloud_base_directory) / settings.qccloud_credentials_file
     )
 
     # Credentials file does not yet exist
@@ -174,11 +174,11 @@ def test_write_tokens_to_credentials_file_adds_new_profiles_to_credentials_file(
         data = toml.load(f)
 
     assert (
-        data[settings.tccloud_default_credentials_profile]["access_token"]
+        data[settings.qccloud_default_credentials_profile]["access_token"]
         == default_access_token
     )
     assert (
-        data[settings.tccloud_default_credentials_profile]["refresh_token"]
+        data[settings.qccloud_default_credentials_profile]["refresh_token"]
         == default_refresh_token
     )
 
@@ -195,11 +195,11 @@ def test_write_tokens_to_credentials_file_adds_new_profiles_to_credentials_file(
 
     # Default profile still exists
     assert (
-        data[settings.tccloud_default_credentials_profile]["access_token"]
+        data[settings.qccloud_default_credentials_profile]["access_token"]
         == default_access_token
     )
     assert (
-        data[settings.tccloud_default_credentials_profile]["refresh_token"]
+        data[settings.qccloud_default_credentials_profile]["refresh_token"]
         == default_refresh_token
     )
 
@@ -213,7 +213,7 @@ def test_write_tokens_to_credentials_file_overwrites_tokens_of_existing_profiles
 ):
     client = _RequestsClient(settings=settings)
     credentials_file = (
-        Path(settings.tccloud_base_directory) / settings.tccloud_credentials_file
+        Path(settings.qccloud_base_directory) / settings.qccloud_credentials_file
     )
 
     # Credentials file does not yet exist
@@ -232,11 +232,11 @@ def test_write_tokens_to_credentials_file_overwrites_tokens_of_existing_profiles
         data = toml.load(f)
 
     assert (
-        data[settings.tccloud_default_credentials_profile]["access_token"]
+        data[settings.qccloud_default_credentials_profile]["access_token"]
         == original_access_token
     )
     assert (
-        data[settings.tccloud_default_credentials_profile]["refresh_token"]
+        data[settings.qccloud_default_credentials_profile]["refresh_token"]
         == original_refresh_token
     )
 
@@ -250,11 +250,11 @@ def test_write_tokens_to_credentials_file_overwrites_tokens_of_existing_profiles
 
     # Default profile has new tokens
     assert (
-        data[settings.tccloud_default_credentials_profile]["access_token"]
+        data[settings.qccloud_default_credentials_profile]["access_token"]
         == new_access_token
     )
     assert (
-        data[settings.tccloud_default_credentials_profile]["refresh_token"]
+        data[settings.qccloud_default_credentials_profile]["refresh_token"]
         == new_refresh_token
     )
 
@@ -266,15 +266,15 @@ def test__set_tokens_removes_username_password_from_attributes(
     password = "super_secret"  # pragma: allowlist secret
 
     client = _RequestsClient(
-        settings=settings, tccloud_username=username, tccloud_password=password
+        settings=settings, qccloud_username=username, qccloud_password=password
     )
-    assert client._tccloud_username == username
-    assert client._tccloud_password == password
+    assert client._qccloud_username == username
+    assert client._qccloud_password == password
 
     client._set_tokens()
 
-    assert client._tccloud_username is None
-    assert client._tccloud_password is None
+    assert client._qccloud_username is None
+    assert client._qccloud_password is None
 
     assert client._access_token == patch_token_endpoint["access_token"]
     assert client._refresh_token == patch_token_endpoint["refresh_token"]
@@ -303,7 +303,7 @@ def test__refresh_tokens_writes_to_credentials_file_only_if_flag_set(
     original_refresh_token = "my_refresh_token"
 
     credentials_file = (
-        settings.tccloud_base_directory / settings.tccloud_credentials_file
+        settings.qccloud_base_directory / settings.qccloud_credentials_file
     )
     assert not credentials_file.is_file()
 
@@ -325,11 +325,11 @@ def test__refresh_tokens_writes_to_credentials_file_only_if_flag_set(
         data = toml.load(f)
 
     assert (
-        data[settings.tccloud_default_credentials_profile]["access_token"]
+        data[settings.qccloud_default_credentials_profile]["access_token"]
         == patch_token_endpoint["access_token"]
     )
     assert (
-        data[settings.tccloud_default_credentials_profile]["refresh_token"]
+        data[settings.qccloud_default_credentials_profile]["refresh_token"]
         == patch_token_endpoint["refresh_token"]
     )
 

@@ -1,3 +1,3 @@
 # Optimization Input
 
-::: tccloud.models:OptimizationInput
+::: qccloud.models:OptimizationInput

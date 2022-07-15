@@ -1,3 +1,3 @@
 # Optimization Result
 
-::: tccloud.models:OptimizationResult
+::: qccloud.models:OptimizationResult

@@ -1,6 +1,6 @@
-# TeraChem Cloud Algorithms
+# BigQC Algorithms
 
-TeraChem Cloud implements some of its own concurrent algorithms that leverage its horizontally scalable backend infrastructure. These include a parallel hessian algorithm and parallel frequency analysis algorithm. To use them submit either a `hessian` or `properties` computation to TeraChem Cloud using `tcc` as the engine. Keywords specific to these algorithms are added to `.extras['tcc:keywords']`. None are required and all are optional.
+BigQC implements some of its own concurrent algorithms that leverage its horizontally scalable backend infrastructure. These include a parallel hessian algorithm and parallel frequency analysis algorithm. To use them submit either a `hessian` or `properties` computation to QC Cloud using `bigqc` as the engine. Keywords specific to these algorithms are added to `.extras['bigqc:keywords']`. None are required and all are optional.
 
 ## Hessian
 
@@ -16,7 +16,7 @@ TeraChem Cloud implements some of its own concurrent algorithms that leverage it
 
 ## Keywords
 
-Keywords are passed in `AtomicInput.extras['tcc:keywords']`.
+Keywords are passed in `AtomicInput.extras['bigqc:keywords']`.
 
 | Keyword           | Type    | Description                                                 | Default Value  |
 | :---------------- | :------ | :---------------------------------------------------------- | :------------- |

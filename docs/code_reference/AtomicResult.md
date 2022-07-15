@@ -1,3 +1,3 @@
 # AtomicResult
 
-::: tccloud.models:AtomicResult
+::: qccloud.models:AtomicResult

@@ -1,3 +1,3 @@
 # AtomicInput
 
-::: tccloud.models:AtomicInput
+::: qccloud.models:AtomicInput

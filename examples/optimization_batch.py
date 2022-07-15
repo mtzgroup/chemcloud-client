@@ -1,7 +1,7 @@
-from tccloud import TCClient
-from tccloud.models import Molecule, OptimizationInput, QCInputSpecification
+from qccloud import QCClient
+from qccloud.models import Molecule, OptimizationInput, QCInputSpecification
 
-client = TCClient()
+client = QCClient()
 
 water = Molecule.from_data("pubchem:water")
 

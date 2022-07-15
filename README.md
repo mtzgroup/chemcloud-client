@@ -1,40 +1,40 @@
-# tccloud - A Python Client for TeraChem Cloud
+# qccloud - A Python Client for Quantum Chemistry Cloud
 
-`tccloud` is a python client that makes performing quantum chemistry calculations easy, fast, and fun. All input and output data structures are based on the [QCSchema](https://molssi-qc-schema.readthedocs.io/en/latest/index.html#) specification designed by [The Molecular Sciences Software Institute](https://molssi.org). The client provides a simple, yet powerful interface to perform quantum chemistry calculation using nothing but modern python and an internet connection. Compute is generously provided free of charge by the [TeraChem Cloud](https://tccloud.mtzlab.com) project.
+`qccloud` is a python client that makes performing quantum chemistry calculations easy, fast, and fun. All input and output data structures are based on the [QCSchema](https://molssi-qc-schema.readthedocs.io/en/latest/index.html#) specification designed by [The Molecular Sciences Software Institute](https://molssi.org). The client provides a simple, yet powerful interface to perform quantum chemistry calculation using nothing but modern python and an internet connection. Compute is generously provided free of charge by the [Quantum Chemistry Cloud](https://qccloud.mtzlab.com) project.
 
-Check out the [documentation](https://mtzgroup.github.io/tccloud/).
+Check out the [documentation](https://mtzgroup.github.io/qccloud/).
 
 ## Requirements
 
 - Python 3.6+
-- `tccloud` stands on the shoulders of giants. It internally depends upon [QCElemental](http://docs.qcarchive.molssi.org/projects/QCElemental/en/stable/), [httpx](https://www.python-httpx.org), and [toml](https://pypi.org/project/toml/).
-- The `AtomicInput`, `Molecule`, `Model`, and `AtomicResult` models used throughout the package come directly from [QCElemental](http://docs.qcarchive.molssi.org/projects/QCElemental/en/stable/). They are included in `tccloud.models` for your convenience.
+- `qccloud` stands on the shoulders of giants. It internally depends upon [QCElemental](http://docs.qcarchive.molssi.org/projects/QCElemental/en/stable/), [httpx](https://www.python-httpx.org), and [toml](https://pypi.org/project/toml/).
+- The `AtomicInput`, `Molecule`, `Model`, and `AtomicResult` models used throughout the package come directly from [QCElemental](http://docs.qcarchive.molssi.org/projects/QCElemental/en/stable/). They are included in `qccloud.models` for your convenience.
 
 ## Installation
 
 ```sh
-pip install tccloud
+pip install qccloud
 ```
 
 ## Example
 
 ### The Absolute Minimum
 
-- Create a TeraChem Cloud account at [https://tccloud.mtzlab.com/signup](https://tccloud.mtzlab.com/signup).
+- Create a Quantum Chemistry Cloud account at [https://qccloud.mtzlab.com/signup](https://qccloud.mtzlab.com/signup).
 - Instantiate a client
-- Configure client (only required the very first time you use `TCClient`)
+- Configure client (only required the very first time you use `QCClient`)
 
 ```python
->>> from tccloud import TCClient
+>>> from qccloud import QCClient
 
->>> client = TCClient()
->>> client.configure() # only run the very first time you use TCClient
+>>> client = QCClient()
+>>> client.configure() # only run the very first time you use QCClient
 # See supported compute engines
 >>> client.supported_engines
 ['psi4', 'terachem_fe', ...]
-# Test connection to TeraChem Cloud
+# Test connection to Quantum Chemistry Cloud
 >>> client.hello_world("Colton")
-'Welcome to TeraChem Cloud, Colton'
+'Welcome to Quantum Chemistry Cloud, Colton'
 ```
 
 - Create a `Molecule`
@@ -42,7 +42,7 @@ pip install tccloud
 - `Molecules` can be created from [pubchem](https://pubchem.ncbi.nlm.nih.gov), local files, or using pure python.
 
 ```python
->>> from tccloud.models import Molecule
+>>> from qccloud.models import Molecule
 >>> water = Molecule.from_data("pubchem:water")
 ```
 
@@ -50,7 +50,7 @@ pip install tccloud
 - More details about the `AtomicInput` object can be found [here](http://docs.qcarchive.molssi.org/projects/QCElemental/en/stable/model_result.html).
 
 ```python
->>> from tccloud.models import AtomicInput
+>>> from qccloud.models import AtomicInput
 >>> atomic_input = AtomicInput(molecule=water, model={"method": "B3LYP", "basis": "6-31g"}, driver="energy")
 ```
 
@@ -84,10 +84,10 @@ FailedOperation(error=ComputeError(error_type='input_error', error_message='QCEn
 - Putting it all together
 
 ```python
->>> from tccloud import TCClient
->>> from tccloud.models import AtomicInput, Molecule
+>>> from qccloud import QCClient
+>>> from qccloud.models import AtomicInput, Molecule
 
->>> client = TCClient()
+>>> client = QCClient()
 >>> water = Molecule.from_data("pubchem:water")
 >>> atomic_input = AtomicInput(molecule=water, model={"method": "B3LYP", "basis": "6-31g"}, driver="energy")
 >>> future_result = client.compute(atomic_input, engine="terachem_fe")
