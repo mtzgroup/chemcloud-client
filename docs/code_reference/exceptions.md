@@ -1,3 +1,3 @@
 # Exceptions
 
-::: tccloud.exceptions
+::: qccloud.exceptions

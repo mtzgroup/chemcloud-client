@@ -1,5 +1,5 @@
-site_name: tccloud
-site_url: https://mtzgroup.github.io/tccloud/
+site_name: qccloud
+site_url: https://mtzgroup.github.io/qccloud-client/
 theme:
   name: material
   palette:
@@ -14,7 +14,7 @@ theme:
   icon:
     repo: fontawesome/brands/github-alt
 
-repo_url: https://github.com/mtzgroup/tccloud
+repo_url: https://github.com/mtzgroup/qccloud-client
 edit_uri: edit/develop/docs/
 site_author: Colton Hicks
 extra_css:
@@ -23,7 +23,7 @@ plugins:
   - search
   - mkdocstrings:
       watch:
-        - tccloud
+        - qccloud
       handlers:
         python:
           rendering:
@@ -54,7 +54,7 @@ markdown_extensions:
       base_path: docs
 
 nav:
-  - tccloud: index.md
+  - qccloud: index.md
   - Tutorial - Users Guide:
       - tutorial/compute.md
       - tutorial/compute_engines.md
@@ -63,7 +63,7 @@ nav:
       - tutorial/batch_computations.md
       - tutorial/terachem_cloud_algorithms.md
   - Code Reference:
-      - code_reference/TCClient.md
+      - code_reference/QCClient.md
       - code_reference/models.md
       - code_reference/FutureResult.md
       - code_reference/Molecule.md

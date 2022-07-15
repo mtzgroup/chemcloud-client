@@ -1,10 +1,10 @@
-from tccloud.models import (
+from qccloud.models import (
     AtomicInput,
     AtomicResult,
     OptimizationInput,
     OptimizationResult,
 )
-from tccloud.utils import B64_POSTFIX, _b64_to_bytes, _bytes_to_b64
+from qccloud.utils import B64_POSTFIX, _b64_to_bytes, _bytes_to_b64
 
 
 def test_bytes_to_b64(water, settings):

@@ -22,8 +22,8 @@ classifiers = [
   "License :: OSI Approved :: MIT License",
 ]
 description-file = "README.md"
-home-page = "https://github.com/coltonbh/terachem-cloud-pyclient"
-module = "tccloud"
+home-page = "https://github.com/mtzgroup/qccloud-client"
+module = "qccloud"
 
 requires = [
   "qcelemental >= 0.24.0",
@@ -34,7 +34,7 @@ requires = [
 requires-python = ">=3.7"
 
 [tool.flit.metadata.urls]
-Documentation = "https://mtzgroup.github.io/tccloud/"
+Documentation = "https://mtzgroup.github.io/qccloud-client/"
 
 [tool.flit.metadata.requires-extra]
 test = [
@@ -49,7 +49,7 @@ dev = [
   "flake8 >=3.8.4",
   "pre-commit >= 2.9.3",
   "mypy >=0.942",
-  "black >=20.8b1,<21.0b0",
+  "black >=22.6.0",
   "isort >=5.7.0,<6.0.0",
   "autoflake >= 1.4",
   "types-toml >= 0.1.1",

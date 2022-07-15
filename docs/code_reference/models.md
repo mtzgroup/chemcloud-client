@@ -1,3 +1,3 @@
 # Models
 
-::: tccloud.models
+::: qccloud.models

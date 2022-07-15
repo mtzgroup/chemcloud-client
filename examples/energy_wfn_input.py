@@ -1,8 +1,8 @@
-from tccloud import TCClient
-from tccloud.config import settings
-from tccloud.models import AtomicInput, Molecule
+from qccloud import QCClient
+from qccloud.config import settings
+from qccloud.models import AtomicInput, Molecule
 
-client = TCClient()
+client = QCClient()
 
 water = Molecule.from_data("pubchem:water")
 atomic_input = AtomicInput(

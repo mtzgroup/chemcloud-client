@@ -1,20 +1,20 @@
 # Compute Engines
 
-Supported compute engines in `tccloud` can be checked as follows:
+Supported compute engines in `qccloud` can be checked as follows:
 
 ```python
-from tccloud import TCClient
+from qccloud import QCClient
 
-client = TCClient()
+client = QCClient()
 client.supported_engines
 ["psi4", "terachem_fe", "rdkit", ...]
 ```
 
-Please see [TeraChem Cloud Algorithms](./terachem_cloud_algorithms.md) for details on parallel execution algorithms unique to the TeraChem Cloud (`tcc`) compute engine.
+Please see [BigQC Algorithms](./bigc_algorithms.md) for details on parallel execution algorithms unique to the BigQC (`bigqc`) compute engine.
 
 ## Keywords
 
-Keywords specific to a quantum chemistry engine can be added to an [AtomicInput][tccloud.models.AtomicInput] as follows:
+Keywords specific to a quantum chemistry engine can be added to an [AtomicInput][qccloud.models.atomicinput] as follows:
 
 ```python
 ai = AtomicInput(
@@ -48,4 +48,4 @@ ai = AtomicInput(
 
 ## xtb
 
-xtb specific documentation on how to run calculations using the [QCSchema](https://molssi-qc-schema.readthedocs.io/en/latest/index.html) specification used TeraChem Cloud can be found [here](https://xtb-python.readthedocs.io/en/latest/qcarchive.html?highlight=run_qcschema) and [here](https://xtb-python.readthedocs.io/en/latest/_modules/xtb/qcschema/harness.html).
+xtb specific documentation on how to run calculations using the [QCSchema](https://molssi-qc-schema.readthedocs.io/en/latest/index.html) specification used QC Cloud can be found [here](https://xtb-python.readthedocs.io/en/latest/qcarchive.html?highlight=run_qcschema) and [here](https://xtb-python.readthedocs.io/en/latest/_modules/xtb/qcschema/harness.html).

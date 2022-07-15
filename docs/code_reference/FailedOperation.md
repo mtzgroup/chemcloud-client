@@ -1,3 +1,3 @@
 # FailedOperation
 
-::: tccloud.models:FailedOperation
+::: qccloud.models:FailedOperation

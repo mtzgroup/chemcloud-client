@@ -40,14 +40,14 @@ class FutureResultBase(BaseModel, ABC):
     """Base class for FutureResults
 
     Parameters:
-        id: The id for primary task submitted to TeraChem Cloud. May correspond to a
+        id: The id for primary task submitted to QC Cloud. May correspond to a
             single task or group of tasks
-        client: The _RequestsClient to use for http requests to TeraChem Cloud
+        client: The _RequestsClient to use for http requests to QC Cloud
         result: Primary return value resulting from computation
 
     Caution:
         A FutureResult should never be instantiated directly.
-        `TCClient.compute(...)` will return one when you submit a computation.
+        `QCClient.compute(...)` will return one when you submit a computation.
     """
 
     id: str
@@ -69,7 +69,7 @@ class FutureResultBase(BaseModel, ABC):
         Parameters:
             timeout: The number of seconds to wait for a computation before raising a
                 TimeOutError.
-            interval: The amount of time to wait between calls to TeraChem Cloud to
+            interval: The amount of time to wait between calls to QC Cloud to
                 check a computation's status.
 
         Returns:
@@ -171,7 +171,7 @@ def from_file(
 
     Params:
         path: Path to file containing the ids
-        client: Instantiated TCClient object
+        client: Instantiated QCClient object
     """
     frs: List[Union[FutureResult, FutureResultGroup]] = []
     with open(path) as f:

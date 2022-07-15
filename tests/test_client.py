@@ -1,6 +1,6 @@
-from tccloud.client import TCClient
+from qccloud.client import QCClient
 
 
 def test_version():
-    client = TCClient()
+    client = QCClient()
     assert isinstance(client.version, str)
