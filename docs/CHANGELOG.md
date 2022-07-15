@@ -6,13 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
-## [0.4.1]
+### Changed
+
+- Updated project name from `tccloud` to `qccloud`
+
+## [0.4.1] - 2022-05-07
 
 ### Changed
 
 - Upped the default timeout on http reads from 5.0s -> 20.0s.
 
-## [0.4.0]
+## [0.4.0] - 2022-4-02
 
 ### Added
 
@@ -26,7 +30,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - Support for Python3.6. Python3.6 end-of-lif'ed December 23, 2021.
 
-## [0.3.1]
+## [0.3.1] - 2022-03-27
 
 ### Added
 
@@ -36,7 +40,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - Updated `config.settings.tcfe_config_kwargs = "tcfe:config` -> `config.settings.tcfe_keywords = "tcfe:keywords`
 
-## [0.3.0]
+## [0.3.0] - 2022-03-26
 
 ### Added
 
@@ -44,13 +48,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Added support for TeraChem-specific `native_files`. c0/ca0/cb0 bytes files (or any bytes data) placed in `AtomicInput.extras['tcfe:keywords']` will be automatically base64 encoded and sent to the server. The enables seeding computations with a wave function as an initial guess.
 - Base64 encoded `native_files` returned from server will be automatically decoded to bytes.
 
-## [0.2.4]
+## [0.2.4] - 2021-06-07
 
 ### Added
 
 - Private compute queues to `compute()` and `compute_procedure()`
 
-## [0.2.3]
+## [0.2.3] - 2021-06-04
 
 ### Added
 
@@ -61,7 +65,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - Added `pydantic` `BaseModel` as base for `FutureResult` objects.
 
-## [0.2.2]
+## [0.2.2] - 2021-05-21
 
 ### Added
 
@@ -98,15 +102,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - `_RequestsClient` class that handles all network requests to TeraChem Cloud server
 - `FutureResults` object that is created from a `task_id` and can be used to retrieve a result once finished.
 
-[unreleased]: https://github.com/mtzgroup/tccloud/compare/0.4.1...HEAD
-[0.4.1]: https://github.com/mtzgroup/tccloud/releases/tag/0.4.1
-[0.4.0]: https://github.com/mtzgroup/tccloud/releases/tag/0.4.0
-[0.3.1]: https://github.com/mtzgroup/tccloud/releases/tag/0.3.1
-[0.3.0]: https://github.com/mtzgroup/tccloud/releases/tag/0.3.0
-[0.2.4]: https://github.com/mtzgroup/tccloud/releases/tag/0.2.4
-[0.2.3]: https://github.com/mtzgroup/tccloud/releases/tag/0.2.3
-[0.2.2]: https://github.com/mtzgroup/tccloud/releases/tag/0.2.2
-[0.2.1]: https://github.com/mtzgroup/tccloud/releases/tag/0.2.1
-[0.2.0]: https://github.com/mtzgroup/tccloud/releases/tag/0.2.0
-[0.1.1]: https://github.com/mtzgroup/tccloud/releases/tag/0.1.1
-[core_decisions.md]: https://github.com/mtzgroup/tccloud/blob/develop/docs/development/core_decisions.md
+[unreleased]: https://github.com/mtzgroup/qccloud-client/compare/0.4.1...HEAD
+[0.4.1]: https://github.com/mtzgroup/qccloud-client/releases/tag/0.4.1
+[0.4.0]: https://github.com/mtzgroup/qccloud-client/releases/tag/0.4.0
+[0.3.1]: https://github.com/mtzgroup/qccloud-client/releases/tag/0.3.1
+[0.3.0]: https://github.com/mtzgroup/qccloud-client/releases/tag/0.3.0
+[0.2.4]: https://github.com/mtzgroup/qccloud-client/releases/tag/0.2.4
+[0.2.3]: https://github.com/mtzgroup/qccloud-client/releases/tag/0.2.3
+[0.2.2]: https://github.com/mtzgroup/qccloud-client/releases/tag/0.2.2
+[0.2.1]: https://github.com/mtzgroup/qccloud-client/releases/tag/0.2.1
+[0.2.0]: https://github.com/mtzgroup/qccloud-client/releases/tag/0.2.0
+[0.1.1]: https://github.com/mtzgroup/qccloud-client/releases/tag/0.1.1
+[core_decisions.md]: https://github.com/mtzgroup/qccloud-client/blob/develop/docs/development/core_decisions.md
