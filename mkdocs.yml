@@ -61,7 +61,7 @@ nav:
       - tutorial/authentication.md
       - tutorial/geometry_optimization.md
       - tutorial/batch_computations.md
-      - tutorial/terachem_cloud_algorithms.md
+      - tutorial/bigqc_algorithms.md
   - Code Reference:
       - code_reference/QCClient.md
       - code_reference/models.md

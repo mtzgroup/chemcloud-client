@@ -56,9 +56,15 @@ dev = [
 ]
 
 doc = [
+  "jinja2 == 2.11.3",
+  "pymdown-extensions == 8.2",
+  "markupsafe < 2.0.0",
+  "markdown == 3.3.7",
+  "mkdocs-material == 7.0.3",
+  "pygments == 2.11.2",
   "mkdocs >= 1.1.2",
-  "mkdocs-material >= 7.0.3",
-  "mkdocstrings >= 0.15.0",
+  "mkdocs-material == 7.0.3",
+  "mkdocstrings == 0.15.0",
   "markdown-include >= 0.6.0",
   "livereload >=2.6.3",
 ]

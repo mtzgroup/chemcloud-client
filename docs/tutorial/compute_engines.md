@@ -10,11 +10,11 @@ client.supported_engines
 ["psi4", "terachem_fe", "rdkit", ...]
 ```
 
-Please see [BigQC Algorithms](./bigc_algorithms.md) for details on parallel execution algorithms unique to the BigQC (`bigqc`) compute engine.
+Please see [BigQC Algorithms](./bigqc_algorithms.md) for details on parallel execution algorithms unique to the BigQC (`bigqc`) compute engine.
 
 ## Keywords
 
-Keywords specific to a quantum chemistry engine can be added to an [AtomicInput][qccloud.models.atomicinput] as follows:
+Keywords specific to a quantum chemistry engine can be added to an [AtomicInput][qccloud.models.AtomicInput] as follows:
 
 ```python
 ai = AtomicInput(
