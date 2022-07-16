@@ -1,0 +1,1445 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="Colton Hicks">
+      
+      
+        <link rel="canonical" href="https://mtzgroup.github.io/qccloud-client/code_reference/QCClient/">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-7.0.3">
+    
+    
+      
+        <title>QCClient - qccloud</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.1655a90d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.7fa14f5b.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#qcclient" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="https://mtzgroup.github.io/qccloud-client/" title="qccloud" class="md-header__button md-logo" aria-label="qccloud">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            qccloud
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              QCClient
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="md-header__options">
+      
+    </div>
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/mtzgroup/qccloud-client" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://mtzgroup.github.io/qccloud-client/" title="qccloud" class="md-nav__button md-logo" aria-label="qccloud">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    qccloud
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/mtzgroup/qccloud-client" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        qccloud
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" data-md-state="indeterminate" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        Tutorial - Users Guide
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Tutorial - Users Guide" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorial - Users Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/compute/" class="md-nav__link">
+        Compute
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/compute_engines/" class="md-nav__link">
+        Compute Engines
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/authentication/" class="md-nav__link">
+        Authentication
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/geometry_optimization/" class="md-nav__link">
+        Geometry Optimization
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/batch_computations/" class="md-nav__link">
+        Batch Computations
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/bigqc_algorithms/" class="md-nav__link">
+        BigQC Algorithms
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      <label class="md-nav__link" for="__nav_3">
+        Code Reference
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Code Reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Code Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          QCClient
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        QCClient
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#qccloud.client.QCClient" class="md-nav__link">
+    qccloud.client.QCClient
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qccloud.client.QCClient-attributes" class="md-nav__link">
+    Attributes
+  </a>
+  
+    <nav class="md-nav" aria-label="Attributes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qccloud.client.QCClient.profile" class="md-nav__link">
+    profile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qccloud.client.QCClient.supported_engines" class="md-nav__link">
+    supported_engines
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qccloud.client.QCClient.supported_procedures" class="md-nav__link">
+    supported_procedures
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qccloud.client.QCClient.version" class="md-nav__link">
+    version
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qccloud.client.QCClient-methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qccloud.client.QCClient.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qccloud.client.QCClient.compute" class="md-nav__link">
+    compute()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qccloud.client.QCClient.compute_procedure" class="md-nav__link">
+    compute_procedure()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qccloud.client.QCClient.configure" class="md-nav__link">
+    configure()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qccloud.client.QCClient.hello_world" class="md-nav__link">
+    hello_world()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/" class="md-nav__link">
+        Models
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FutureResult/" class="md-nav__link">
+        FutureResult
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Molecule/" class="md-nav__link">
+        Molecule
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AtomicInput/" class="md-nav__link">
+        AtomicInput
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AtomicResult/" class="md-nav__link">
+        AtomicResult
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../OptimizationInput/" class="md-nav__link">
+        Optimization Input
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../OptimizationResult/" class="md-nav__link">
+        Optimization Result
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FailedOperation/" class="md-nav__link">
+        FailedOperation
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ComputeError/" class="md-nav__link">
+        ComputeError
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exceptions/" class="md-nav__link">
+        Exceptions
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CHANGELOG/" class="md-nav__link">
+        Changelog
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#qccloud.client.QCClient" class="md-nav__link">
+    qccloud.client.QCClient
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qccloud.client.QCClient-attributes" class="md-nav__link">
+    Attributes
+  </a>
+  
+    <nav class="md-nav" aria-label="Attributes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qccloud.client.QCClient.profile" class="md-nav__link">
+    profile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qccloud.client.QCClient.supported_engines" class="md-nav__link">
+    supported_engines
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qccloud.client.QCClient.supported_procedures" class="md-nav__link">
+    supported_procedures
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qccloud.client.QCClient.version" class="md-nav__link">
+    version
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qccloud.client.QCClient-methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qccloud.client.QCClient.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qccloud.client.QCClient.compute" class="md-nav__link">
+    compute()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qccloud.client.QCClient.compute_procedure" class="md-nav__link">
+    compute_procedure()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qccloud.client.QCClient.configure" class="md-nav__link">
+    configure()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qccloud.client.QCClient.hello_world" class="md-nav__link">
+    hello_world()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/mtzgroup/qccloud-client/edit/develop/docs/code_reference/QCClient.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="qcclient">QCClient<a class="headerlink" href="#qcclient" title="Permanent link">🔗</a></h1>
+
+
+  <div class="doc doc-object doc-class">
+
+<a id="qccloud.client.QCClient"></a>
+    <div class="doc doc-contents first">
+
+      <p>Main client object to perform computations using Quantum Chemistry Cloud.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+<h2 id="qccloud.client.QCClient-attributes">Attributes<a class="headerlink" href="#qccloud.client.QCClient-attributes" title="Permanent link">🔗</a></h2>
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 class="doc doc-heading" id="qccloud.client.QCClient.profile">
+<code class="highlight language-python"><span class="n">profile</span><span class="p">:</span> <span class="nb">str</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
+  </span>
+
+<a class="headerlink" href="#qccloud.client.QCClient.profile" title="Permanent link">🔗</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Profile being used for authentication with QC Cloud.</p>
+
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>str</code></td>
+      <td><p>The name of the name of the credentials profile being used with
+the current client.</p></td>
+    </tr>
+  </tbody>
+</table>      <p>NOTE: This is a note!</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 class="doc doc-heading" id="qccloud.client.QCClient.supported_engines">
+<code class="highlight language-python"><span class="n">supported_engines</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
+  </span>
+
+<a class="headerlink" href="#qccloud.client.QCClient.supported_engines" title="Permanent link">🔗</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Compute engines currently supported by QC Cloud.</p>
+
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>List[str]</code></td>
+      <td><p>List of engines currently supported by QC Cloud.</p></td>
+    </tr>
+  </tbody>
+</table>    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 class="doc doc-heading" id="qccloud.client.QCClient.supported_procedures">
+<code class="highlight language-python"><span class="n">supported_procedures</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
+  </span>
+
+<a class="headerlink" href="#qccloud.client.QCClient.supported_procedures" title="Permanent link">🔗</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Compute procedures currently supported by QC Cloud.</p>
+
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>List[str]</code></td>
+      <td><p>List of procedures currently supported by QC Cloud.</p></td>
+    </tr>
+  </tbody>
+</table>    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 class="doc doc-heading" id="qccloud.client.QCClient.version">
+<code class="highlight language-python"><span class="n">version</span><span class="p">:</span> <span class="nb">str</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
+  </span>
+
+<a class="headerlink" href="#qccloud.client.QCClient.version" title="Permanent link">🔗</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Return qccloud version</p>
+    </div>
+
+  </div>
+
+
+
+
+<h2 id="qccloud.client.QCClient-methods">Methods<a class="headerlink" href="#qccloud.client.QCClient-methods" title="Permanent link">🔗</a></h2>
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 class="doc doc-heading" id="qccloud.client.QCClient.__init__">
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">qccloud_username</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">qccloud_password</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">qccloud_domain</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+<a class="headerlink" href="#qccloud.client.QCClient.__init__" title="Permanent link">🔗</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Initialize a QCClient object.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>qccloud_username</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Quantum Chemistry Cloud username</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>qccloud_password</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Quantum Chemistry Cloud password</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>profile</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Authentication profile name</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>qccloud_domain</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Domain of Quantum Chemistry Cloud instance to connect to</p></td>
+        <td><code>None</code></td>
+      </tr>
+  </tbody>
+</table>      <div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>It is not recommended to pass your Quantum Chemistry Cloud username and
+password directly to a <code>QCClient</code>. Instead instantiate a client with no
+credentials <code>client = QCClient()</code> and then run <code>client.configure()</code> to
+securely set up your authentication credentials for QC Cloud.</p>
+</div>
+
+        <details class="quote">
+          <summary>Source code in <code>qccloud/client.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">qccloud_username</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">qccloud_password</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">profile</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">qccloud_domain</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Initialize a QCClient object.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        qccloud_username: Quantum Chemistry Cloud username</span>
+<span class="sd">        qccloud_password: Quantum Chemistry Cloud password</span>
+<span class="sd">        profile: Authentication profile name</span>
+<span class="sd">        qccloud_domain: Domain of Quantum Chemistry Cloud instance to connect to</span>
+
+<span class="sd">    !!! Danger</span>
+<span class="sd">        It is not recommended to pass your Quantum Chemistry Cloud username and</span>
+<span class="sd">        password directly to a `QCClient`. Instead instantiate a client with no</span>
+<span class="sd">        credentials `client = QCClient()` and then run `client.configure()` to</span>
+<span class="sd">        securely set up your authentication credentials for QC Cloud.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="o">=</span> <span class="n">_RequestsClient</span><span class="p">(</span>
+        <span class="n">qccloud_username</span><span class="o">=</span><span class="n">qccloud_username</span><span class="p">,</span>
+        <span class="n">qccloud_password</span><span class="o">=</span><span class="n">qccloud_password</span><span class="p">,</span>
+        <span class="n">profile</span><span class="o">=</span><span class="n">profile</span><span class="p">,</span>
+        <span class="n">qccloud_domain</span><span class="o">=</span><span class="n">qccloud_domain</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_openapi_spec</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 class="doc doc-heading" id="qccloud.client.QCClient.compute">
+<code class="highlight language-python"><span class="n">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">qcelemental</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">AtomicInput</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">qcelemental</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">AtomicInput</span><span class="p">]],</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">queue</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">qccloud</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">FutureResult</span><span class="p">,</span> <span class="n">qccloud</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">FutureResultGroup</span><span class="p">]</span></code>
+
+
+<a class="headerlink" href="#qccloud.client.QCClient.compute" title="Permanent link">🔗</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Submit a computation to QC Cloud.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>input_data</code></td>
+        <td><code>Union[qcelemental.models.results.AtomicInput, List[qcelemental.models.results.AtomicInput]]</code></td>
+        <td><p>Defines the structure of the desired computation.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>engine</code></td>
+        <td><code>str</code></td>
+        <td><p>A string matching one of the <code>self.supported_engines</code></p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>queue</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>The name of a private compute queue. If None, default queue is used</p></td>
+        <td><code>None</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Union[qccloud.models.FutureResult, qccloud.models.FutureResultGroup]</code></td>
+      <td><p>Object providing access to a computation's eventual result. You can check a
+computation's status by runing <code>.status</code> on the <code>FutureResult</code> object or
+<code>.get()</code> to block and retrieve the computation's final result.</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>qccloud/client.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">compute</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">input_data</span><span class="p">:</span> <span class="n">AtomicInputOrList</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">queue</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">FutureResult</span><span class="p">,</span> <span class="n">FutureResultGroup</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Submit a computation to QC Cloud.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        input_data: Defines the structure of the desired computation.</span>
+<span class="sd">        engine: A string matching one of the `self.supported_engines`</span>
+<span class="sd">        queue: The name of a private compute queue. If None, default queue is used</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Object providing access to a computation&#39;s eventual result. You can check a</span>
+<span class="sd">        computation&#39;s status by runing `.status` on the `FutureResult` object or</span>
+<span class="sd">        `.get()` to block and retrieve the computation&#39;s final result.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">supported_engines</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="p">(</span>
+            <span class="n">engine</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">supported_engines</span>
+        <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Please use one of the following engines: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">supported_engines</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">queue</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 class="doc doc-heading" id="qccloud.client.QCClient.compute_procedure">
+<code class="highlight language-python"><span class="n">compute_procedure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">qcelemental</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">procedures</span><span class="o">.</span><span class="n">OptimizationInput</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">qcelemental</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">procedures</span><span class="o">.</span><span class="n">OptimizationInput</span><span class="p">]],</span> <span class="n">procedure</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">queue</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">qccloud</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">FutureResult</span><span class="p">,</span> <span class="n">qccloud</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">FutureResultGroup</span><span class="p">]</span></code>
+
+
+<a class="headerlink" href="#qccloud.client.QCClient.compute_procedure" title="Permanent link">🔗</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Submit a procedure computation to QC Cloud</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>input_data</code></td>
+        <td><code>Union[qcelemental.models.procedures.OptimizationInput, List[qcelemental.models.procedures.OptimizationInput]]</code></td>
+        <td><p>Defines the inputs for an optimization computation</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>procedure</code></td>
+        <td><code>str</code></td>
+        <td><p>The name of the procedure, e.g., 'berny'</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>queue</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>The name of a private compute queue. If None, default queue is used</p></td>
+        <td><code>None</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Union[qccloud.models.FutureResult, qccloud.models.FutureResultGroup]</code></td>
+      <td><p>Object providing access to a computation's eventual result. You can check a
+computation's status by runing <code>.status</code> on the <code>FutureResult</code> object or
+<code>.get()</code> to block and retrieve the computation's final result.</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>qccloud/client.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">compute_procedure</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">input_data</span><span class="p">:</span> <span class="n">OptimizationInputOrList</span><span class="p">,</span>
+    <span class="n">procedure</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">queue</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">FutureResult</span><span class="p">,</span> <span class="n">FutureResultGroup</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Submit a procedure computation to QC Cloud</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        input_data: Defines the inputs for an optimization computation</span>
+<span class="sd">        procedure: The name of the procedure, e.g., &#39;berny&#39;</span>
+<span class="sd">        queue: The name of a private compute queue. If None, default queue is used</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Object providing access to a computation&#39;s eventual result. You can check a</span>
+<span class="sd">        computation&#39;s status by runing `.status` on the `FutureResult` object or</span>
+<span class="sd">        `.get()` to block and retrieve the computation&#39;s final result.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">supported_procedures</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="p">(</span>
+            <span class="n">procedure</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">supported_procedures</span>
+        <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Please use one of the following procedures: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">supported_procedures</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">compute_procedure</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">procedure</span><span class="p">,</span> <span class="n">queue</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 class="doc doc-heading" id="qccloud.client.QCClient.configure">
+<code class="highlight language-python"><span class="n">configure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span></code>
+
+
+<a class="headerlink" href="#qccloud.client.QCClient.configure" title="Permanent link">🔗</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Configure profiles for authentication with QC Cloud.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>profile</code></td>
+        <td><code>str</code></td>
+        <td><p>Optional value to create a named profile for use with QC
+Cloud. No value needs to be passed and most users will only have one
+login with QC Cloud. QCClient will access the profile by
+default without a specific name being passed. Pass a value if you have
+multiple logins to QC Cloud.</p></td>
+        <td><code>&#39;default&#39;</code></td>
+      </tr>
+  </tbody>
+</table>      <div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Configures <code>qccloud</code> to use the passed credentials automatically in the
+future. You will not need to run <code>.configure()</code> the next time you use the
+<code>qccloud</code>.</p>
+</div>
+
+        <details class="quote">
+          <summary>Source code in <code>qccloud/client.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">configure</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">qccloud_default_credentials_profile</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Configure profiles for authentication with QC Cloud.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        profile: Optional value to create a named profile for use with QC</span>
+<span class="sd">            Cloud. No value needs to be passed and most users will only have one</span>
+<span class="sd">            login with QC Cloud. QCClient will access the profile by</span>
+<span class="sd">            default without a specific name being passed. Pass a value if you have</span>
+<span class="sd">            multiple logins to QC Cloud.</span>
+<span class="sd">    Note:</span>
+<span class="sd">        Configures `qccloud` to use the passed credentials automatically in the</span>
+<span class="sd">        future. You will not need to run `.configure()` the next time you use the</span>
+<span class="sd">        `qccloud`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;✅ If you don&#39;t get have an account please signup at: </span><span class="si">{</span><span class="n">settings</span><span class="o">.</span><span class="n">qccloud_domain</span><span class="si">}</span><span class="s2">/signup&quot;</span>
+    <span class="p">)</span>
+    <span class="n">access_token</span><span class="p">,</span> <span class="n">refresh_token</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">_set_tokens_from_user_input</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">write_tokens_to_credentials_file</span><span class="p">(</span>
+        <span class="n">access_token</span><span class="p">,</span> <span class="n">refresh_token</span><span class="p">,</span> <span class="n">profile</span><span class="o">=</span><span class="n">profile</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">profile</span><span class="si">}</span><span class="s2">&#39; profile configured! Username/password not required for future use of QCClient&quot;</span>
+    <span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 class="doc doc-heading" id="qccloud.client.QCClient.hello_world">
+<code class="highlight language-python"><span class="n">hello_world</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span></code>
+
+
+<a class="headerlink" href="#qccloud.client.QCClient.hello_world" title="Permanent link">🔗</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A simple endpoint to check connectivity to QC Cloud.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>name</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>Your name</p></td>
+        <td><code>None</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>str</code></td>
+      <td><p>A message from QC Cloud if the client was able to successfully
+connect.</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>qccloud/client.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">hello_world</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A simple endpoint to check connectivity to QC Cloud.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        name: Your name</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A message from QC Cloud if the client was able to successfully</span>
+<span class="sd">        connect.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">hello_world</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../../tutorial/bigqc_algorithms/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              BigQC Algorithms
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../models/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Models
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["search.suggest", "search.highlight", "navigation.instant", "navigation.expand"], "search": "../../assets/javascripts/workers/search.fb4a9340.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.ca5457b8.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -7,46 +7,45 @@
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
       
+      
         <meta name="author" content="Colton Hicks">
       
       
-        <link rel="canonical" href="https://mtzgroup.github.io/tccloud/code_reference/OptimizationInput/">
+        <link rel="canonical" href="https://mtzgroup.github.io/qccloud-client/code_reference/OptimizationInput/">
       
-      <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.8">
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-7.0.3">
     
     
       
-        <title>Optimization Input - tccloud</title>
-      
-    
-    
-      <link rel="stylesheet" href="../../assets/stylesheets/main.644de097.min.css">
-      
-        
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
-        
+        <title>Optimization Input - qccloud</title>
       
     
     
-    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.1655a90d.min.css">
       
         
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.7fa14f5b.min.css">
+        
+      
+    
+    
+    
+      
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
       
+    
     
     
       <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
     
       <link rel="stylesheet" href="../../css/extra.css">
     
-    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
-
     
     
   </head>
@@ -60,10 +59,8 @@
     
     
     <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber">
+      
   
-    
-    
-      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -80,12 +77,11 @@
       
     </div>
     
-    
       
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="tccloud" class="md-header__button md-logo" aria-label="tccloud" data-md-component="logo">
+    <a href="https://mtzgroup.github.io/qccloud-client/" title="qccloud" class="md-header__button md-logo" aria-label="qccloud">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -98,7 +94,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            tccloud
+            qccloud
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -110,39 +106,26 @@
         </div>
       </div>
     </div>
-    
-      <form class="md-header__option" data-md-component="palette">
-        
-          
-          
-          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
-          
-        
-      </form>
-    
-    
+    <div class="md-header__options">
+      
+    </div>
     
       <label class="md-header__button md-icon" for="__search">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
       </label>
-      <div class="md-search" data-md-component="search" role="dialog">
+      
+<div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
       <label class="md-search__icon md-icon" for="__search">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
       </label>
-      <nav class="md-search__options" aria-label="Search">
-        
-        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
-        </button>
-      </nav>
-      
-        <div class="md-search__suggest" data-md-component="search-suggest"></div>
-      
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" data-md-scrollfix>
@@ -159,10 +142,11 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/mtzgroup/tccloud" title="Go to repository" class="md-source" data-md-component="source">
+        
+<a href="https://github.com/mtzgroup/qccloud-client" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -171,14 +155,11 @@
       </div>
     
   </nav>
-  
 </header>
     
     <div class="md-container" data-md-component="container">
       
       
-        
-          
         
       
       <main class="md-main" data-md-component="main">
@@ -192,22 +173,25 @@
                     
 
 
+
+
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="tccloud" class="md-nav__button md-logo" aria-label="tccloud" data-md-component="logo">
+    <a href="https://mtzgroup.github.io/qccloud-client/" title="qccloud" class="md-nav__button md-logo" aria-label="qccloud">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
-    tccloud
+    qccloud
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/mtzgroup/tccloud" title="Go to repository" class="md-source" data-md-component="source">
+      
+<a href="https://github.com/mtzgroup/qccloud-client" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -226,7 +210,7 @@
   
     <li class="md-nav__item">
       <a href="../.." class="md-nav__link">
-        tccloud
+        qccloud
       </a>
     </li>
   
@@ -245,14 +229,10 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" data-md-state="indeterminate" type="checkbox" id="__nav_2" checked>
       
-      
-      
-      
-        <label class="md-nav__link" for="__nav_2">
-          Tutorial - Users Guide
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
+      <label class="md-nav__link" for="__nav_2">
+        Tutorial - Users Guide
+        <span class="md-nav__icon md-icon"></span>
+      </label>
       <nav class="md-nav" aria-label="Tutorial - Users Guide" data-md-level="1">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
@@ -261,7 +241,6 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
-              
   
   
   
@@ -272,10 +251,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -286,10 +263,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -300,10 +275,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -314,10 +287,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -328,21 +299,18 @@
     </li>
   
 
-            
           
             
-              
   
   
   
     <li class="md-nav__item">
-      <a href="../../tutorial/terachem_cloud_algorithms/" class="md-nav__link">
-        TeraChem Cloud Algorithms
+      <a href="../../tutorial/bigqc_algorithms/" class="md-nav__link">
+        BigQC Algorithms
       </a>
     </li>
   
 
-            
           
         </ul>
       </nav>
@@ -365,14 +333,10 @@
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
       
-      
-      
-      
-        <label class="md-nav__link" for="__nav_3">
-          Code Reference
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
+      <label class="md-nav__link" for="__nav_3">
+        Code Reference
+        <span class="md-nav__icon md-icon"></span>
+      </label>
       <nav class="md-nav" aria-label="Code Reference" data-md-level="1">
         <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
@@ -381,21 +345,18 @@
         <ul class="md-nav__list" data-md-scrollfix>
           
             
-              
   
   
   
     <li class="md-nav__item">
-      <a href="../TCClient/" class="md-nav__link">
-        TCClient
+      <a href="../QCClient/" class="md-nav__link">
+        QCClient
       </a>
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -406,10 +367,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -420,10 +379,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -434,10 +391,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -448,10 +403,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -462,10 +415,8 @@
     </li>
   
 
-            
           
             
-              
   
   
     
@@ -474,7 +425,6 @@
     <li class="md-nav__item md-nav__item--active">
       
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
       
         
       
@@ -489,9 +439,7 @@
       </a>
       
         
-
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
   
   
     
@@ -507,19 +455,6 @@
   <a href="#qcelemental.models.procedures.OptimizationInput" class="md-nav__link">
     qcelemental.models.procedures.OptimizationInput
   </a>
-  
-    <nav class="md-nav" aria-label="qcelemental.models.procedures.OptimizationInput">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#qcelemental.models.procedures.OptimizationInput--parameters" class="md-nav__link">
-    Parameters
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -564,19 +499,6 @@
     input_specification
   </a>
   
-    <nav class="md-nav" aria-label="input_specification">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#qcelemental.models.procedures.OptimizationInput.input_specification--parameters" class="md-nav__link">
-    Parameters
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
@@ -591,38 +513,12 @@
     protocols
   </a>
   
-    <nav class="md-nav" aria-label="protocols">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#qcelemental.models.procedures.OptimizationInput.protocols--parameters" class="md-nav__link">
-    Parameters
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
   <a href="#qcelemental.models.procedures.OptimizationInput.provenance" class="md-nav__link">
     provenance
   </a>
-  
-    <nav class="md-nav" aria-label="provenance">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#qcelemental.models.procedures.OptimizationInput.provenance--parameters" class="md-nav__link">
-    Parameters
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -788,10 +684,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -802,10 +696,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -816,10 +708,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -830,10 +720,8 @@
     </li>
   
 
-            
           
             
-              
   
   
   
@@ -844,7 +732,6 @@
     </li>
   
 
-            
           
         </ul>
       </nav>
@@ -879,9 +766,7 @@
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
-
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
   
   
     
@@ -897,19 +782,6 @@
   <a href="#qcelemental.models.procedures.OptimizationInput" class="md-nav__link">
     qcelemental.models.procedures.OptimizationInput
   </a>
-  
-    <nav class="md-nav" aria-label="qcelemental.models.procedures.OptimizationInput">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#qcelemental.models.procedures.OptimizationInput--parameters" class="md-nav__link">
-    Parameters
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -954,19 +826,6 @@
     input_specification
   </a>
   
-    <nav class="md-nav" aria-label="input_specification">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#qcelemental.models.procedures.OptimizationInput.input_specification--parameters" class="md-nav__link">
-    Parameters
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
@@ -981,38 +840,12 @@
     protocols
   </a>
   
-    <nav class="md-nav" aria-label="protocols">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#qcelemental.models.procedures.OptimizationInput.protocols--parameters" class="md-nav__link">
-    Parameters
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
   <a href="#qcelemental.models.procedures.OptimizationInput.provenance" class="md-nav__link">
     provenance
   </a>
-  
-    <nav class="md-nav" aria-label="provenance">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#qcelemental.models.procedures.OptimizationInput.provenance--parameters" class="md-nav__link">
-    Parameters
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -1183,13 +1016,12 @@
             <article class="md-content__inner md-typeset">
               
                 
-<a href="https://github.com/mtzgroup/tccloud/edit/develop/docs/code_reference/OptimizationInput.md" title="Edit this page" class="md-content__button md-icon">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
-</a>
-
-
-
-<h1 id="optimization-input">Optimization Input<a class="headerlink" href="#optimization-input" title="Permanent link">🔗</a></h1>
+                  <a href="https://github.com/mtzgroup/qccloud-client/edit/develop/docs/code_reference/OptimizationInput.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="optimization-input">Optimization Input<a class="headerlink" href="#optimization-input" title="Permanent link">🔗</a></h1>
 
 
   <div class="doc doc-object doc-class">
@@ -1197,90 +1029,7 @@
 <a id="qcelemental.models.procedures.OptimizationInput"></a>
     <div class="doc doc-contents first">
 
-      <h3 id="qcelemental.models.procedures.OptimizationInput--parameters">Parameters<a class="headerlink" href="#qcelemental.models.procedures.OptimizationInput--parameters" title="Permanent link">🔗</a></h3>
-<p>id : str, Optional
-hash_index : str, Optional
-schema_name : ConstrainedStrValue, Default: qcschema_optimization_input
-schema_version : int, Default: 1
-keywords : Dict[Any], Default: {}
-    The optimization specific keywords to be used.
-extras : Dict[Any], Default: {}
-    Extra fields that are not part of the schema.
-protocols : :class:<code>OptimizationProtocols</code>, Optional</p>
-<div class="highlight"><pre><span></span><code>Protocols regarding the manipulation of a Optimization output data.
 
-
-Parameters
-----------
-trajectory : {all,initial_and_final,final,none}, Default: all
-
-        Which gradient evaluations to keep in an optimization trajectory.
-</code></pre></div>
-<p>input_specification : :class:<code>QCInputSpecification</code></p>
-<div class="highlight"><pre><span></span><code>A compute description for energy, gradient, and Hessian computations used in a geometry optimization.
-
-
-Parameters
-----------
-schema_name : ConstrainedStrValue, Default: qcschema_input
-schema_version : int, Default: 1
-driver : {energy,gradient,hessian,properties}, Default: gradient
-    Allowed computation driver values.
-model : :class:`Model`
-    The computational molecular sciences model to run.
-
-    Parameters
-    ----------
-    method : str
-        The quantum chemistry method to evaluate (e.g., B3LYP, PBE, ...). For MM, name of the force field.
-    basis : Union[str, :class:`BasisSet`], Optional
-        The quantum chemistry basis set to evaluate (e.g., 6-31g, cc-pVDZ, ...). Can be ``None`` for methods without basis sets. For molecular mechanics, name of the atom-typer.
-
-keywords : Dict[Any], Default: {}
-    The program specific keywords to be used.
-extras : Dict[Any], Default: {}
-    Additional information to bundle with the computation. Use for schema development and scratch space.
-</code></pre></div>
-<p>initial_molecule : :class:<code>Molecule</code>
-    The starting molecule for the geometry optimization.
-provenance : :class:<code>Provenance</code>, Optional
-    Provenance information.</p>
-<div class="highlight"><pre><span></span><code>Parameters
-----------
-creator : str
-    The name of the program, library, or person who created the object.
-version : str, Default: 
-    The version of the creator, blank otherwise. This should be sortable by the very broad [PEP 440](https://www.python.org/dev/peps/pep-0440/).
-routine : str, Default: 
-    The name of the routine or function within the creator, blank otherwise.
-</code></pre></div>
-
-        <details class="quote">
-          <summary>Source code in <code>qcelemental/models/procedures.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">OptimizationInput</span><span class="p">(</span><span class="n">ProtoModel</span><span class="p">):</span>
-    <span class="nb">id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">hash_index</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">schema_name</span><span class="p">:</span> <span class="n">constr</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
-        <span class="n">strip_whitespace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="n">qcschema_optimization_input_default</span>
-    <span class="p">)</span> <span class="o">=</span> <span class="n">qcschema_optimization_input_default</span>
-    <span class="n">schema_version</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>
-
-    <span class="n">keywords</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">({},</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The optimization specific keywords to be used.&quot;</span><span class="p">)</span>
-    <span class="n">extras</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">({},</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Extra fields that are not part of the schema.&quot;</span><span class="p">)</span>
-    <span class="n">protocols</span><span class="p">:</span> <span class="n">OptimizationProtocols</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">OptimizationProtocols</span><span class="p">(),</span> <span class="n">description</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">OptimizationProtocols</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">))</span>
-
-    <span class="n">input_specification</span><span class="p">:</span> <span class="n">QCInputSpecification</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">QCInputSpecification</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">))</span>
-    <span class="n">initial_molecule</span><span class="p">:</span> <span class="n">Molecule</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The starting molecule for the geometry optimization.&quot;</span><span class="p">)</span>
-
-    <span class="n">provenance</span><span class="p">:</span> <span class="n">Provenance</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">Provenance</span><span class="p">(</span><span class="o">**</span><span class="n">provenance_stamp</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)),</span> <span class="n">description</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">Provenance</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">))</span>
-
-    <span class="k">def</span> <span class="nf">__repr_args__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;ReprArgs&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">[</span>
-            <span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_specification</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">dict</span><span class="p">()),</span>
-            <span class="p">(</span><span class="s2">&quot;molecule_hash&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_molecule</span><span class="o">.</span><span class="n">get_hash</span><span class="p">()[:</span><span class="mi">7</span><span class="p">]),</span>
-        <span class="p">]</span>
-</code></pre></div>
-        </details>
 
 
 
@@ -1394,25 +1143,8 @@ routine : str, Default:
 
     <div class="doc doc-contents ">
 
-      <p>A compute description for energy, gradient, and Hessian computations used in a geometry optimization.</p>
-<h5 id="qcelemental.models.procedures.OptimizationInput.input_specification--parameters">Parameters<a class="headerlink" href="#qcelemental.models.procedures.OptimizationInput.input_specification--parameters" title="Permanent link">🔗</a></h5>
-<p>schema_name : ConstrainedStrValue, Default: qcschema_input
-schema_version : int, Default: 1
-driver : {energy,gradient,hessian,properties}, Default: gradient
-    Allowed computation driver values.
-model : :class:<code>Model</code>
-    The computational molecular sciences model to run.</p>
-<div class="highlight"><pre><span></span><code>Parameters
-----------
-method : str
-    The quantum chemistry method to evaluate (e.g., B3LYP, PBE, ...). For MM, name of the force field.
-basis : Union[str, :class:`BasisSet`], Optional
-    The quantum chemistry basis set to evaluate (e.g., 6-31g, cc-pVDZ, ...). Can be ``None`` for methods without basis sets. For molecular mechanics, name of the atom-typer.
+      <div class="highlight"><pre><span></span><code>A compute description for energy, gradient, and Hessian computations used in a geometry optimization.
 </code></pre></div>
-<p>keywords : Dict[Any], Default: {}
-    The program specific keywords to be used.
-extras : Dict[Any], Default: {}
-    Additional information to bundle with the computation. Use for schema development and scratch space.</p>
     </div>
 
   </div>
@@ -1456,10 +1188,7 @@ extras : Dict[Any], Default: {}
 
     <div class="doc doc-contents ">
 
-      <p>Protocols regarding the manipulation of a Optimization output data.</p>
-<h5 id="qcelemental.models.procedures.OptimizationInput.protocols--parameters">Parameters<a class="headerlink" href="#qcelemental.models.procedures.OptimizationInput.protocols--parameters" title="Permanent link">🔗</a></h5>
-<p>trajectory : {all,initial_and_final,final,none}, Default: all</p>
-<div class="highlight"><pre><span></span><code>    Which gradient evaluations to keep in an optimization trajectory.
+      <div class="highlight"><pre><span></span><code>Protocols regarding the manipulation of a Optimization output data.
 </code></pre></div>
     </div>
 
@@ -1483,13 +1212,6 @@ extras : Dict[Any], Default: {}
     <div class="doc doc-contents ">
 
       <p>Provenance information.</p>
-<h5 id="qcelemental.models.procedures.OptimizationInput.provenance--parameters">Parameters<a class="headerlink" href="#qcelemental.models.procedures.OptimizationInput.provenance--parameters" title="Permanent link">🔗</a></h5>
-<p>creator : str
-    The name of the program, library, or person who created the object.
-version : str, Default: 
-    The version of the creator, blank otherwise. This should be sortable by the very broad <a href="https://www.python.org/dev/peps/pep-0440/">PEP 440</a>.
-routine : str, Default: 
-    The name of the routine or function within the creator, blank otherwise.</p>
     </div>
 
   </div>
@@ -1544,8 +1266,7 @@ routine : str, Default:
 
 
 <h3 class="doc doc-heading" id="qcelemental.models.procedures.OptimizationInput.Config">
-        <code>
-Config        </code>
+        <code>Config</code>
 
 
   <span class="doc doc-properties">
@@ -1557,17 +1278,6 @@ Config        </code>
     <div class="doc doc-contents ">
 
 
-        <details class="quote">
-          <summary>Source code in <code>qcelemental/models/procedures.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
-    <span class="n">allow_mutation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">extra</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;forbid&quot;</span>
-    <span class="n">json_encoders</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">v</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()}</span>
-    <span class="n">serialize_default_excludes</span><span class="p">:</span> <span class="n">Set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-    <span class="n">serialize_skip_defaults</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">force_skip_defaults</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-</code></pre></div>
-        </details>
 
 
 
@@ -1718,10 +1428,10 @@ Config        </code>
 
       <p>Compares the current object to the provided object recursively.</p>
 <h5 id="qcelemental.models.procedures.OptimizationInput.compare--parameters">Parameters<a class="headerlink" href="#qcelemental.models.procedures.OptimizationInput.compare--parameters" title="Permanent link">🔗</a></h5>
-<p>other : Model
+<p>other
     The model to compare to.
 **kwargs
-    Additional kwargs to pass to <code>qcelemental.compare_recursive</code>.</p>
+    Additional kwargs to pass to :func:<code>~qcelemental.compare_recursive</code>.</p>
 <h5 id="qcelemental.models.procedures.OptimizationInput.compare--returns">Returns<a class="headerlink" href="#qcelemental.models.procedures.OptimizationInput.compare--returns" title="Permanent link">🔗</a></h5>
 <p>bool
     True if the objects match.</p>
@@ -1733,16 +1443,18 @@ Config        </code>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    other : Model</span>
+<span class="sd">    other</span>
 <span class="sd">        The model to compare to.</span>
 <span class="sd">    **kwargs</span>
-<span class="sd">        Additional kwargs to pass to ``qcelemental.compare_recursive``.</span>
+<span class="sd">        Additional kwargs to pass to :func:`~qcelemental.compare_recursive`.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    bool</span>
 <span class="sd">        True if the objects match.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">..testing</span> <span class="kn">import</span> <span class="n">compare_recursive</span>
+
     <span class="k">return</span> <span class="n">compare_recursive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div>
         </details>
@@ -1845,24 +1557,20 @@ Config        </code>
 
       <p>Generates a serialized representation of the model</p>
 <h5 id="qcelemental.models.procedures.OptimizationInput.serialize--parameters">Parameters<a class="headerlink" href="#qcelemental.models.procedures.OptimizationInput.serialize--parameters" title="Permanent link">🔗</a></h5>
-<p>encoding : str
+<p>encoding
     The serialization type, available types are: {'json', 'json-ext', 'msgpack-ext'}
-include : Optional[Set[str]], optional
+include
     Fields to be included in the serialization.
-exclude : Optional[Set[str]], optional
+exclude
     Fields to be excluded in the serialization.
-exclude_unset : Optional[bool], optional
-    If True, skips fields that have default values provided.</p>
-<div class="admonition exclude_defaults">
-<p class="admonition-title">Optional[bool], optional</p>
-<p>If True, skips fields that have set or defaulted values equal to the default.</p>
-</div>
-<div class="admonition exclude_none">
-<p class="admonition-title">Optional[bool], optional</p>
-<p>If True, skips fields that have value <code>None</code>.</p>
-</div>
+exclude_unset
+    If True, skips fields that have default values provided.
+exclude_defaults
+    If True, skips fields that have set or defaulted values equal to the default.
+exclude_none
+    If True, skips fields that have value <code>None</code>.</p>
 <h5 id="qcelemental.models.procedures.OptimizationInput.serialize--returns">Returns<a class="headerlink" href="#qcelemental.models.procedures.OptimizationInput.serialize--returns" title="Permanent link">🔗</a></h5>
-<p>Union[bytes, str]
+<p>~typing.Union[bytes, str]
     The serialized model.</p>
 
         <details class="quote">
@@ -1881,22 +1589,22 @@ exclude_unset : Optional[bool], optional
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    encoding : str</span>
+<span class="sd">    encoding</span>
 <span class="sd">        The serialization type, available types are: {&#39;json&#39;, &#39;json-ext&#39;, &#39;msgpack-ext&#39;}</span>
-<span class="sd">    include : Optional[Set[str]], optional</span>
+<span class="sd">    include</span>
 <span class="sd">        Fields to be included in the serialization.</span>
-<span class="sd">    exclude : Optional[Set[str]], optional</span>
+<span class="sd">    exclude</span>
 <span class="sd">        Fields to be excluded in the serialization.</span>
-<span class="sd">    exclude_unset : Optional[bool], optional</span>
+<span class="sd">    exclude_unset</span>
 <span class="sd">        If True, skips fields that have default values provided.</span>
-<span class="sd">    exclude_defaults: Optional[bool], optional</span>
+<span class="sd">    exclude_defaults</span>
 <span class="sd">        If True, skips fields that have set or defaulted values equal to the default.</span>
-<span class="sd">    exclude_none: Optional[bool], optional</span>
+<span class="sd">    exclude_none</span>
 <span class="sd">        If True, skips fields that have value ``None``.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    Union[bytes, str]</span>
+<span class="sd">    ~typing.Union[bytes, str]</span>
 <span class="sd">        The serialized model.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -1930,20 +1638,24 @@ exclude_unset : Optional[bool], optional
     </div>
 
   </div>
+                
+              
+              
+                
+
 
               
             </article>
           </div>
         </div>
-        
       </main>
       
-        <footer class="md-footer">
+        
+<footer class="md-footer">
   
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
-        
-        <a href="../AtomicResult/" class="md-footer__link md-footer__link--prev" aria-label="Previous: AtomicResult" rel="prev">
+        <a href="../AtomicResult/" class="md-footer__link md-footer__link--prev" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -1958,8 +1670,7 @@ exclude_unset : Optional[bool], optional
         </a>
       
       
-        
-        <a href="../OptimizationResult/" class="md-footer__link md-footer__link--next" aria-label="Next: Optimization Result" rel="next">
+        <a href="../OptimizationResult/" class="md-footer__link md-footer__link--next" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
@@ -1977,15 +1688,13 @@ exclude_unset : Optional[bool], optional
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
-      <div class="md-copyright">
-  
-  
-    Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-      Material for MkDocs
-    </a>
-  
-</div>
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
       
     </div>
   </div>
@@ -1995,10 +1704,10 @@ exclude_unset : Optional[bool], optional
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["search.suggest", "search.highlight", "navigation.instant", "navigation.expand"], "search": "../../assets/javascripts/workers/search.5e67fbfe.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["search.suggest", "search.highlight", "navigation.instant", "navigation.expand"], "search": "../../assets/javascripts/workers/search.fb4a9340.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.c44cc438.min.js"></script>
+      <script src="../../assets/javascripts/bundle.ca5457b8.min.js"></script>
       
     
   </body>
