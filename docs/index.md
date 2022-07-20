@@ -1,33 +1,33 @@
-# qccloud
+# chemcloud
 
-A Python Client for Quantum Chemistry Cloud.
+A Python Client for ChemCloud.
 
-`qccloud` is a python client that makes performing quantum chemistry calculations easy, fast, and fun. All input and output data structures are based on the [QCSchema](https://molssi-qc-schema.readthedocs.io/en/latest/index.html#) specification designed by [The Molecular Sciences Software Institute](https://molssi.org). The client provides a simple, yet powerful interface to perform quantum chemistry calculation using nothing but modern python and an internet connection. Compute is generously provided free of charge by the [Quantum Chemistry Cloud](https://qccloud.mtzlab.com) project.
+`chemcloud` is a python client that makes performing computational chemistry calculations easy, fast, and fun. All input and output data structures are based on the [QCSchema](https://molssi-qc-schema.readthedocs.io/en/latest/index.html#) specification designed by [The Molecular Sciences Software Institute](https://molssi.org). The client provides a simple, yet powerful interface to perform quantum chemistry calculation using nothing but modern python and an internet connection. Compute is generously provided free of charge by the [ChemCloud](https://chemcloud.mtzlab.com) project.
 
 ## Requirements
 
 - Python 3.6+
-- `qccloud` stands on the shoulders of giants. It internally depends upon [QCElemental](http://docs.qcarchive.molssi.org/projects/QCElemental/en/stable/), [httpx](https://www.python-httpx.org), and [toml](https://pypi.org/project/toml/).
-- The `AtomicInput`, `Molecule`, `Model`, and `AtomicResult` models used throughout the package come directly from [QCElemental](http://docs.qcarchive.molssi.org/projects/QCElemental/en/stable/). They are included in `qccloud.models` for your convenience.
+- `chemcloud` stands on the shoulders of giants. It internally depends upon [QCElemental](http://docs.qcarchive.molssi.org/projects/QCElemental/en/stable/), [httpx](https://www.python-httpx.org), and [toml](https://pypi.org/project/toml/).
+- The `AtomicInput`, `Molecule`, `Model`, and `AtomicResult` models used throughout the package come directly from [QCElemental](http://docs.qcarchive.molssi.org/projects/QCElemental/en/stable/). They are included in `chemcloud.models` for your convenience.
 
 ## Installation
 
 ```sh
-pip install qccloud
+pip install chemcloud
 ```
 
 ## Example
 
 ### The Absolute Minimum
 
-- Create a QC Cloud account at [https://qccloud.mtzlab.com/signup](https://qccloud.mtzlab.com/signup).
+- Create a QC Cloud account at [https://chemcloud.mtzlab.com/signup](https://chemcloud.mtzlab.com/signup).
 - Instantiate a client
-- Configure client (only required the very first time you use `QCClient`)
+- Configure client (only required the very first time you use `CCClient`)
 
 ```python
->>> from qccloud import QCClient
->>> client = QCClient()
->>> client.configure() # only run the very first time you use QCClient
+>>> from chemcloud import CCClient
+>>> client = CCClient()
+>>> client.configure() # only run the very first time you use CCClient
 
 # See supported compute engines
 >>> client.supported_engines
@@ -35,7 +35,7 @@ pip install qccloud
 
 # Test connection to QC Cloud
 >>> client.hello_world("Colton")
-'Welcome to Quantum Chemistry Cloud, Colton'
+'Welcome to ChemCloud, Colton'
 ```
 
 - Create a `Molecule`
@@ -43,7 +43,7 @@ pip install qccloud
 - `Molecules` can be created from [pubchem](https://pubchem.ncbi.nlm.nih.gov), local files, or using pure python.
 
 ```python
->>> from qccloud.models import Molecule
+>>> from chemcloud.models import Molecule
 >>> water = Molecule.from_data("pubchem:water")
 ```
 
@@ -51,7 +51,7 @@ pip install qccloud
 - More details about the `AtomicInput` object can be found [here](http://docs.qcarchive.molssi.org/projects/QCElemental/en/stable/model_result.html).
 
 ```python
->>> from qccloud.models import AtomicInput
+>>> from chemcloud.models import AtomicInput
 >>> atomic_input = AtomicInput(molecule=water, model={"method": "B3LYP", "basis": "6-31g"}, driver="energy")
 ```
 
@@ -85,10 +85,10 @@ FailedOperation(error=ComputeError(error_type='input_error', error_message='QCEn
 - Putting it all together
 
 ```python
->>> from qccloud import QCClient
->>> from qccloud.models import AtomicInput, Molecule
+>>> from chemcloud import CCClient
+>>> from chemcloud.models import AtomicInput, Molecule
 
->>> client = QCClient()
+>>> client = CCClient()
 >>> water = Molecule.from_data("pubchem:water")
 >>> atomic_input = AtomicInput(molecule=water, model={"method": "B3LYP", "basis": "6-31g"}, driver="energy")
 >>> future_result = client.compute(atomic_input, engine="terachem_fe")

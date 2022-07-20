@@ -2,12 +2,12 @@
 
 ## Overview
 
-The `Molecule` object is the core representation of a molecule used throughout `qccloud`. The `molecule` object is from the `qcelemental.models` module, but it is available in the `qccloud.models` module for your convenience. You can access the QCElemental documentation on the `Molecule` [here](http://docs.qcarchive.molssi.org/projects/QCElemental/en/stable/model_molecule.html). It is assumed that all geometries are in `bohr`.
+The `Molecule` object is the core representation of a molecule used throughout `chemcloud`. The `molecule` object is from the `qcelemental.models` module, but it is available in the `chemcloud.models` module for your convenience. You can access the QCElemental documentation on the `Molecule` [here](http://docs.qcarchive.molssi.org/projects/QCElemental/en/stable/model_molecule.html). It is assumed that all geometries are in `bohr`.
 
 ## Import the Model object
 
 ```python
-from qccloud.models import Molecule
+from chemcloud.models import Molecule
 ```
 
 ## Create a Molecule
@@ -56,4 +56,4 @@ print(attrs)
 
 ## Molecule Full Reference
 
-::: qccloud.models:Molecule
+::: chemcloud.models:Molecule

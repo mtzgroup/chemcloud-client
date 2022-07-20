@@ -1,5 +1,5 @@
-site_name: qccloud
-site_url: https://mtzgroup.github.io/qccloud-client/
+site_name: chemcloud
+site_url: https://mtzgroup.github.io/chemcloud-client/
 theme:
   name: material
   palette:
@@ -14,7 +14,7 @@ theme:
   icon:
     repo: fontawesome/brands/github-alt
 
-repo_url: https://github.com/mtzgroup/qccloud-client
+repo_url: https://github.com/mtzgroup/chemcloud-client
 edit_uri: edit/develop/docs/
 site_author: Colton Hicks
 extra_css:
@@ -23,7 +23,7 @@ plugins:
   - search
   - mkdocstrings:
       watch:
-        - qccloud
+        - chemcloud
       handlers:
         python:
           rendering:
@@ -54,16 +54,16 @@ markdown_extensions:
       base_path: docs
 
 nav:
-  - qccloud: index.md
+  - chemcloud: index.md
   - Tutorial - Users Guide:
       - tutorial/compute.md
       - tutorial/compute_engines.md
       - tutorial/authentication.md
       - tutorial/geometry_optimization.md
       - tutorial/batch_computations.md
-      - tutorial/bigqc_algorithms.md
+      - tutorial/bigchem_algorithms.md
   - Code Reference:
-      - code_reference/QCClient.md
+      - code_reference/CCClient.md
       - code_reference/models.md
       - code_reference/FutureResult.md
       - code_reference/Molecule.md

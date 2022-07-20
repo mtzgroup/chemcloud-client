@@ -1,3 +1,3 @@
 # Optimization Input
 
-::: qccloud.models:OptimizationInput
+::: chemcloud.models:OptimizationInput

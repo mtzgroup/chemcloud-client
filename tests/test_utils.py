@@ -1,10 +1,10 @@
-from qccloud.models import (
+from chemcloud.models import (
     AtomicInput,
     AtomicResult,
     OptimizationInput,
     OptimizationResult,
 )
-from qccloud.utils import B64_POSTFIX, _b64_to_bytes, _bytes_to_b64
+from chemcloud.utils import B64_POSTFIX, _b64_to_bytes, _bytes_to_b64
 
 
 def test_bytes_to_b64(water, settings):

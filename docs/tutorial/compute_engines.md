@@ -1,20 +1,20 @@
 # Compute Engines
 
-Supported compute engines in `qccloud` can be checked as follows:
+Supported compute engines in `chemcloud` can be checked as follows:
 
 ```python
-from qccloud import QCClient
+from chemcloud import CCClient
 
-client = QCClient()
+client = CCClient()
 client.supported_engines
 ["psi4", "terachem_fe", "rdkit", ...]
 ```
 
-Please see [BigQC Algorithms](./bigqc_algorithms.md) for details on parallel execution algorithms unique to the BigQC (`bigqc`) compute engine.
+Please see [BigChem Algorithms](./bigchem_algorithms.md) for details on parallel execution algorithms unique to the BigChem (`bigchem`) compute engine.
 
 ## Keywords
 
-Keywords specific to a quantum chemistry engine can be added to an [AtomicInput][qccloud.models.AtomicInput] as follows:
+Keywords specific to a quantum chemistry engine can be added to an [AtomicInput][chemcloud.models.AtomicInput] as follows:
 
 ```python
 ai = AtomicInput(

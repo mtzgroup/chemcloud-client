@@ -1,3 +1,3 @@
 # Models
 
-::: qccloud.models
+::: chemcloud.models

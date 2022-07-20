@@ -1,3 +1,0 @@
-# QCClient
-
-::: qccloud.client:QCClient

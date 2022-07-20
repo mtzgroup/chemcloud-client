@@ -10,7 +10,7 @@ import toml
 from pytest_httpx import HTTPXMock
 from qcelemental.models import Molecule
 
-from qccloud.config import Settings
+from chemcloud.config import Settings
 
 
 def _jwt_from_payload(payload: Dict[str, str]) -> str:
@@ -23,7 +23,7 @@ def _jwt_from_payload(payload: Dict[str, str]) -> str:
 
 @pytest.fixture(scope="function")
 def settings(tmp_path):
-    test_settings = {"qccloud_base_directory": tmp_path}
+    test_settings = {"chemcloud_base_directory": tmp_path}
     return Settings(**test_settings)
 
 
@@ -34,13 +34,13 @@ def credentials_file(settings):
     def _write_credentials_file(
         access_token: str,
         refresh_token: str = "credentials_file_refresh_token",
-        profile: str = settings.qccloud_default_credentials_profile,
+        profile: str = settings.chemcloud_default_credentials_profile,
     ):
         credentials = {
             profile: {"access_token": access_token, "refresh_token": refresh_token}
         }
         credentials_file = (
-            settings.qccloud_base_directory / settings.qccloud_credentials_file
+            settings.chemcloud_base_directory / settings.chemcloud_credentials_file
         )
         with open(credentials_file, "w+") as f:
             toml.dump(credentials, f)
@@ -89,7 +89,7 @@ def water():
 @pytest.fixture
 def jwt(settings):
     payload = {
-        "exp": int(time() + settings.qccloud_access_token_expiration_buffer) + 10,
+        "exp": int(time() + settings.chemcloud_access_token_expiration_buffer) + 10,
     }
     return _jwt_from_payload(payload)
 

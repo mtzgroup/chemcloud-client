@@ -11,42 +11,42 @@ from .models import (
 )
 
 
-class QCClient:
-    """Main client object to perform computations using Quantum Chemistry Cloud."""
+class CCClient:
+    """Main client object to perform computations using ChemCloud."""
 
     def __init__(
         self,
         *,
-        qccloud_username: Optional[str] = None,
-        qccloud_password: Optional[str] = None,
+        chemcloud_username: Optional[str] = None,
+        chemcloud_password: Optional[str] = None,
         profile: Optional[str] = None,
-        qccloud_domain: Optional[str] = None,
+        chemcloud_domain: Optional[str] = None,
     ):
         """
-        Initialize a QCClient object.
+        Initialize a CCClient object.
 
         Parameters:
-            qccloud_username: Quantum Chemistry Cloud username
-            qccloud_password: Quantum Chemistry Cloud password
+            chemcloud_username: ChemCloud username
+            chemcloud_password: ChemCloud password
             profile: Authentication profile name
-            qccloud_domain: Domain of Quantum Chemistry Cloud instance to connect to
+            chemcloud_domain: Domain of ChemCloud instance to connect to
 
         !!! Danger
-            It is not recommended to pass your Quantum Chemistry Cloud username and
-            password directly to a `QCClient`. Instead instantiate a client with no
-            credentials `client = QCClient()` and then run `client.configure()` to
-            securely set up your authentication credentials for QC Cloud.
+            It is not recommended to pass your ChemCloud username and
+            password directly to a `CCClient`. Instead instantiate a client with no
+            credentials `client = CCClient()` and then run `client.configure()` to
+            securely set up your authentication credentials for ChemCloud.
         """
         self._client = _RequestsClient(
-            qccloud_username=qccloud_username,
-            qccloud_password=qccloud_password,
+            chemcloud_username=chemcloud_username,
+            chemcloud_password=chemcloud_password,
             profile=profile,
-            qccloud_domain=qccloud_domain,
+            chemcloud_domain=chemcloud_domain,
         )
         self._openapi_spec: Optional[Dict] = None
 
     def __repr__(self) -> str:
-        return f"{type(self).__name__}({self._client._qccloud_domain}, profile={self.profile})"
+        return f"{type(self).__name__}({self._client._chemcloud_domain}, profile={self.profile})"
 
     def _set_openapi_specification(self):
         """Gets OpenAPI specification from QC Cloud Server"""
@@ -56,7 +56,7 @@ class QCClient:
 
     @property
     def version(self) -> str:
-        """Return qccloud version"""
+        """Return chemcloud version"""
         return __version__
 
     @property
@@ -166,29 +166,29 @@ class QCClient:
         return self._client.compute_procedure(input_data, procedure, queue)
 
     def configure(
-        self, profile: str = settings.qccloud_default_credentials_profile
+        self, profile: str = settings.chemcloud_default_credentials_profile
     ) -> None:
         """Configure profiles for authentication with QC Cloud.
 
         Parameters:
             profile: Optional value to create a named profile for use with QC
                 Cloud. No value needs to be passed and most users will only have one
-                login with QC Cloud. QCClient will access the profile by
+                login with QC Cloud. CCClient will access the profile by
                 default without a specific name being passed. Pass a value if you have
                 multiple logins to QC Cloud.
         Note:
-            Configures `qccloud` to use the passed credentials automatically in the
+            Configures `chemcloud` to use the passed credentials automatically in the
             future. You will not need to run `.configure()` the next time you use the
-            `qccloud`.
+            `chemcloud`.
 
         """
         print(
-            f"✅ If you don't get have an account please signup at: {settings.qccloud_domain}/signup"
+            f"✅ If you don't get have an account please signup at: {self._client._chemcloud_domain}/signup"
         )
         access_token, refresh_token = self._client._set_tokens_from_user_input()
         self._client.write_tokens_to_credentials_file(
             access_token, refresh_token, profile=profile
         )
         print(
-            f"'{profile}' profile configured! Username/password not required for future use of QCClient"
+            f"'{profile}' profile configured! Username/password not required for future use of CCClient"
         )
