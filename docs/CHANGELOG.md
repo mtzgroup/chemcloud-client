@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
+## [0.6.0] - 2022-07-19
+
 ### Changed
 
 - Updated project name from `qccloud` to `chemcloud`
@@ -108,7 +110,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - `_RequestsClient` class that handles all network requests to TeraChem Cloud server
 - `FutureResults` object that is created from a `task_id` and can be used to retrieve a result once finished.
 
-[unreleased]: https://github.com/mtzgroup/chemcloud-client/compare/0.5.0...HEAD
+[unreleased]: https://github.com/mtzgroup/chemcloud-client/compare/0.6.0...HEAD
+[0.6.0]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.6.0
 [0.5.0]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.5.0
 [0.4.1]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.4.1
 [0.4.0]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.4.0
@@ -120,4 +123,3 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 [0.2.1]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.2.1
 [0.2.0]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.2.0
 [0.1.1]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.1.1
-[core_decisions.md]: https://github.com/mtzgroup/chemcloud-client/blob/develop/docs/development/core_decisions.md
