@@ -47,7 +47,7 @@ class FutureResultBase(BaseModel, ABC):
 
     Caution:
         A FutureResult should never be instantiated directly.
-        `QCClient.compute(...)` will return one when you submit a computation.
+        `CCClient.compute(...)` will return one when you submit a computation.
     """
 
     id: str
@@ -171,7 +171,7 @@ def from_file(
 
     Params:
         path: Path to file containing the ids
-        client: Instantiated QCClient object
+        client: Instantiated CCClient object
     """
     frs: List[Union[FutureResult, FutureResultGroup]] = []
     with open(path) as f:

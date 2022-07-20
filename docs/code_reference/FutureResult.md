@@ -1,3 +1,3 @@
 # FutureResult
 
-::: qccloud.models:FutureResult
+::: chemcloud.models:FutureResult

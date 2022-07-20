@@ -1,6 +1,6 @@
-from qccloud.client import QCClient
+from chemcloud.client import CCClient
 
 
 def test_version():
-    client = QCClient()
+    client = CCClient()
     assert isinstance(client.version, str)

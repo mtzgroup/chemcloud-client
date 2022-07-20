@@ -9,7 +9,7 @@ import httpx
 import toml
 from qcelemental.util.serialization import json_dumps
 
-from qccloud.models import (
+from chemcloud.models import (
     AtomicInputOrList,
     FutureResult,
     FutureResultGroup,
@@ -21,10 +21,10 @@ from .utils import _b64_to_bytes, _bytes_to_b64
 
 
 class _RequestsClient:
-    """Interface for making http requests to Quantum Chemistry Cloud.
+    """Interface for making http requests to ChemCloud.
 
     This class should never be instantiated by end users. End users should use the
-    QCClient class to interact with QC Cloud.
+    CCClient class to interact with QC Cloud.
 
     Main Features:
         - Manages credentials for making authenticated requests.
@@ -41,37 +41,37 @@ class _RequestsClient:
     def __init__(
         self,
         *,
-        qccloud_username: Optional[str] = None,
-        qccloud_password: Optional[str] = None,
+        chemcloud_username: Optional[str] = None,
+        chemcloud_password: Optional[str] = None,
         profile: Optional[str] = None,
         settings: Settings = settings,
-        qccloud_domain: Optional[str] = None,
+        chemcloud_domain: Optional[str] = None,
     ):
-        self._qccloud_username = qccloud_username
-        self._qccloud_password = qccloud_password
+        self._chemcloud_username = chemcloud_username
+        self._chemcloud_password = chemcloud_password
         self._settings = settings
-        self._profile = profile or settings.qccloud_default_credentials_profile
+        self._profile = profile or settings.chemcloud_default_credentials_profile
         self._access_token: str = ""
         self._refresh_token: str = ""
-        self._qccloud_domain = qccloud_domain or settings.qccloud_domain
+        self._chemcloud_domain = chemcloud_domain or settings.chemcloud_domain
         # If set to True future refresh_tokens calls will also write new tokens to Credentials file
         self._tokens_set_from_file: bool = False
 
     def __repr__(self) -> str:
-        return f"{type(self).__name__}({self._qccloud_domain}, profile={self._profile})"
+        return (
+            f"{type(self).__name__}({self._chemcloud_domain}, profile={self._profile})"
+        )
 
     def _set_tokens(self) -> None:
         """Set self._access_token and self._refresh_token"""
-        un = self._qccloud_username or self._settings.qccloud_username
-        pw = self._qccloud_password or self._settings.qccloud_password
+        un = self._chemcloud_username or self._settings.chemcloud_username
+        pw = self._chemcloud_password or self._settings.chemcloud_password
         credentials_file = (
-            self._settings.qccloud_base_directory
-            / self._settings.qccloud_credentials_file
+            self._settings.chemcloud_base_directory
+            / self._settings.chemcloud_credentials_file
         )
 
-        unauth_msg = (
-            "You must authenticate with Quantum Chemistry Cloud to make this request."
-        )
+        unauth_msg = "You must authenticate with ChemCloud to make this request."
 
         if un and pw:  # username/password passed in or found in environment
             access_token, refresh_token = self._tokens_from_username_password(un, pw)
@@ -94,14 +94,14 @@ class _RequestsClient:
             access_token, refresh_token = self._set_tokens_from_user_input()
 
         # Remove sensitive credentials from object
-        self._qccloud_username, self._qccloud_password = None, None
+        self._chemcloud_username, self._chemcloud_password = None, None
 
         self._access_token, self._refresh_token = access_token, refresh_token
 
     def _set_tokens_from_user_input(self):
         """Request user to input username/password to get access tokens"""
         while True:
-            msg = "Please enter your Quantum Chemistry Cloud"
+            msg = "Please enter your ChemCloud"
             username = input(msg + " username: ")
             password = getpass(msg + " password: ")
 
@@ -113,7 +113,7 @@ class _RequestsClient:
                 print(
                     "Login Failed! Did you enter your credentials correctly? If you "
                     "do not have a QC Cloud account please visit "
-                    f"{self._qccloud_domain}/signup to create an account."
+                    f"{self._chemcloud_domain}/signup to create an account."
                 )
 
     def _get_access_token(self) -> str:
@@ -140,7 +140,7 @@ class _RequestsClient:
         access_token: str,
         refresh_token: str,
         *,
-        profile: str = settings.qccloud_default_credentials_profile,
+        profile: str = settings.chemcloud_default_credentials_profile,
     ) -> None:
         """Writes access_token and refresh_token to configuration file"""
         assert (
@@ -148,8 +148,8 @@ class _RequestsClient:
         ), "You must pass an access_token and refresh_token"
 
         credentials_file = (
-            Path(self._settings.qccloud_base_directory)
-            / self._settings.qccloud_credentials_file
+            Path(self._settings.chemcloud_base_directory)
+            / self._settings.chemcloud_credentials_file
         )
 
         if credentials_file.is_file():
@@ -178,8 +178,8 @@ class _RequestsClient:
     ):
         """Make HTTP request"""
         url = (
-            f"{self._qccloud_domain}"
-            f"{self._settings.qccloud_api_version_prefix if api_call else ''}{route}"
+            f"{self._chemcloud_domain}"
+            f"{self._settings.chemcloud_api_version_prefix if api_call else ''}{route}"
         )
         request = httpx.Request(
             method,
@@ -258,7 +258,7 @@ class _RequestsClient:
         """Checks expiration of JWT (access token)"""
         payload = self._decode_access_token(jwt)
         return payload["exp"] <= (
-            int(time()) + self._settings.qccloud_access_token_expiration_buffer
+            int(time()) + self._settings.chemcloud_access_token_expiration_buffer
         )
 
     @staticmethod

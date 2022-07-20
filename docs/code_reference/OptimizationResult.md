@@ -1,3 +1,3 @@
 # Optimization Result
 
-::: qccloud.models:OptimizationResult
+::: chemcloud.models:OptimizationResult

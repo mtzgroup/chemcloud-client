@@ -1,3 +1,3 @@
 # AtomicInput
 
-::: qccloud.models:AtomicInput
+::: chemcloud.models:AtomicInput

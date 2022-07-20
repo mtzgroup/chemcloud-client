@@ -59,7 +59,7 @@ jobs:
       - name: Install repo
         run: flit install --deps develop --symlink
       - name: Check import formatting with isort
-        run: isort --check-only --diff qccloud tests
+        run: isort --check-only --diff chemcloud tests
 
   documentation_checks:
     runs-on: ubuntu-latest

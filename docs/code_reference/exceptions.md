@@ -1,3 +1,3 @@
 # Exceptions
 
-::: qccloud.exceptions
+::: chemcloud.exceptions
