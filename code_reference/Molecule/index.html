@@ -2316,7 +2316,7 @@ data for symbols, geometry, connectivity, charges, fragmentation, etc while also
 
     <div class="doc doc-contents ">
 
-      <p>Additional per-atom labels as an array of strings. Typical use is in model conversions, such as Elemental &lt;-&gt; Molpro and not typically something which should be user assigned. See the :attr:<code>~qcelemental.models.Molecule.comment</code> field for general human-consumable text to affix to the molecule.</p>
+      <p>Additional per-atom labels as an array of strings. Typical use is in model conversions, such as Elemental &lt;-&gt; Molpro and not typically something which should be user assigned. See the <code>comments</code> field for general human-consumable text to affix to the molecule.</p>
     </div>
 
   </div>
@@ -2360,7 +2360,7 @@ data for symbols, geometry, connectivity, charges, fragmentation, etc while also
 
     <div class="doc doc-contents ">
 
-      <p>An optional ordered 1-D array-like object of atomic numbers of shape (nat,). Index matches the 0-indexed indices of all other per-atom settings like :attr:<code>~qcelemental.models.Molecule.symbols</code> and :attr:<code>~qcelemental.models.Molecule.real</code>. Values are inferred from the :attr:<code>~qcelemental.models.Molecule.symbols</code> list if not explicitly set. Ghostedness should be indicated through :attr:<code>~qcelemental.models.Molecule.real</code> field, not zeros here.</p>
+      <p>An optional ordered 1-D array-like object of atomic numbers of shape (nat,). Index matches the 0-indexed indices of all other per-atom settings like <code>symbols</code> and <code>real</code>. Values are inferred from the <code>symbols</code> list if not explicitly set. Ghostedness should be indicated through <code>real</code> field, not zeros here.</p>
     </div>
 
   </div>
@@ -2426,7 +2426,7 @@ data for symbols, geometry, connectivity, charges, fragmentation, etc while also
 
     <div class="doc doc-contents ">
 
-      <p>A list of bonds within the molecule. Each entry is a tuple of <code>(atom_index_A, atom_index_B, bond_order)</code> where the <code>atom_index</code> matches the 0-indexed indices of all other per-atom settings like :attr:<code>~qcelemental.models.Molecule.symbols</code> and :attr:<code>~qcelemental.models.Molecule.real</code>. Bonds may be freely reordered and inverted.</p>
+      <p>A list of bonds within the molecule. Each entry is a tuple of <code>(atom_index_A, atom_index_B, bond_order)</code> where the <code>atom_index</code> matches the 0-indexed indices of all other per-atom settings like <code>symbols</code> and <code>real</code>. Bonds may be freely reordered and inverted.</p>
     </div>
 
   </div>
@@ -2470,7 +2470,7 @@ data for symbols, geometry, connectivity, charges, fragmentation, etc while also
 
     <div class="doc doc-contents ">
 
-      <p>Whether translation of geometry is allowed (fix F) or disallowed (fix T).When False, QCElemental will pre-process the Molecule object to translate the center of mass to (0,0,0) in Euclidean coordinate space, resulting in a different :attr:<code>~qcelemental.models.Molecule.geometry</code> than the one provided. 'Fix' is used in the sense of 'specify': that is, <code>fix_com=True</code> signals that the origin in <code>geometry</code> is a deliberate part of the Molecule spec, whereas <code>fix_com=False</code> (default) allows that the origin is happenstance and may be adjusted. guidance: A consumer who translates the geometry must not reattach the input (pre-translation) molecule schema instance to any output (post-translation) origin-sensitive results (e.g., an ordinary energy when EFP present).</p>
+      <p>Whether translation of geometry is allowed (fix F) or disallowed (fix T).When False, QCElemental will pre-process the Molecule object to translate the center of mass to (0,0,0) in Euclidean coordinate space, resulting in a different <code>geometry</code> than the one provided. 'Fix' is used in the sense of 'specify': that is, <code>fix_com=True</code> signals that the origin in <code>geometry</code> is a deliberate part of the Molecule spec, whereas <code>fix_com=False</code> (default) allows that the origin is happenstance and may be adjusted. guidance: A consumer who translates the geometry must not reattach the input (pre-translation) molecule schema instance to any output (post-translation) origin-sensitive results (e.g., an ordinary energy when EFP present).</p>
     </div>
 
   </div>
@@ -2492,7 +2492,7 @@ data for symbols, geometry, connectivity, charges, fragmentation, etc while also
 
     <div class="doc doc-contents ">
 
-      <p>Whether rotation of geometry is allowed (fix F) or disallowed (fix T). When False, QCElemental will pre-process the Molecule object to orient via the intertial tensor, resulting in a different :attr:<code>~qcelemental.models.Molecule.geometry</code> than the one provided. 'Fix' is used in the sense of 'specify': that is, <code>fix_orientation=True</code> signals that the frame orientation in <code>geometry</code> is a deliberate part of the Molecule spec, whereas <code>fix_orientation=False</code> (default) allows that the frame is happenstance and may be adjusted. guidance: A consumer who rotates the geometry must not reattach the input (pre-rotation) molecule schema instance to any output (post-rotation) frame-sensitive results (e.g., molecular vibrations).</p>
+      <p>Whether rotation of geometry is allowed (fix F) or disallowed (fix T). When False, QCElemental will pre-process the Molecule object to orient via the intertial tensor, resulting in a different <code>geometry</code> than the one provided. 'Fix' is used in the sense of 'specify': that is, <code>fix_orientation=True</code> signals that the frame orientation in <code>geometry</code> is a deliberate part of the Molecule spec, whereas <code>fix_orientation=False</code> (default) allows that the frame is happenstance and may be adjusted. guidance: A consumer who rotates the geometry must not reattach the input (pre-rotation) molecule schema instance to any output (post-rotation) frame-sensitive results (e.g., molecular vibrations).</p>
     </div>
 
   </div>
@@ -2514,7 +2514,7 @@ data for symbols, geometry, connectivity, charges, fragmentation, etc while also
 
     <div class="doc doc-contents ">
 
-      <p>Maximal point group symmetry which :attr:<code>~qcelemental.models.Molecule.geometry</code> should be treated. Lowercase.</p>
+      <p>Maximal point group symmetry which <code>geometry</code> should be treated. Lowercase.</p>
     </div>
 
   </div>
@@ -2558,7 +2558,7 @@ data for symbols, geometry, connectivity, charges, fragmentation, etc while also
 
     <div class="doc doc-contents ">
 
-      <p>The total charge of each fragment in the :attr:<code>~qcelemental.models.Molecule.fragments</code> list. The index of this list matches the 0-index indices of :attr:<code>~qcelemental.models.Molecule.fragments</code> list. Will be filled in based on a set of rules if not provided (and :attr:<code>~qcelemental.models.Molecule.fragments</code> are specified).</p>
+      <p>The total charge of each fragment in the <code>fragments</code> list. The index of this list matches the 0-index indices of <code>fragments</code> list. Will be filled in based on a set of rules if not provided (and <code>fragments</code> are specified).</p>
     </div>
 
   </div>
@@ -2602,7 +2602,7 @@ data for symbols, geometry, connectivity, charges, fragmentation, etc while also
 
     <div class="doc doc-contents ">
 
-      <p>The multiplicity of each fragment in the :attr:<code>~qcelemental.models.Molecule.fragments</code> list. The index of this list matches the 0-index indices of :attr:<code>~qcelemental.models.Molecule.fragments</code> list. Will be filled in based on a set of rules if not provided (and :attr:<code>~qcelemental.models.Molecule.fragments</code> are specified).</p>
+      <p>The multiplicity of each fragment in the <code>fragments</code> list. The index of this list matches the 0-index indices of <code>fragments</code> list. Will be filled in based on a set of rules if not provided (and <code>fragments</code> are specified).</p>
     </div>
 
   </div>
@@ -2646,7 +2646,7 @@ data for symbols, geometry, connectivity, charges, fragmentation, etc while also
 
     <div class="doc doc-contents ">
 
-      <p>List of indices grouping atoms (0-indexed) into molecular fragments within the molecule. Each entry in the outer list is a new fragment; index matches the ordering in :attr:<code>~qcelemental.models.Molecule.fragment_charges</code> and :attr:<code>~qcelemental.models.Molecule.fragment_multiplicities</code>. Inner lists are 0-indexed atoms which compose the fragment; every atom must be in exactly one inner list. Noncontiguous fragments are allowed, though no QM program is known to support them. Fragment ordering is fixed; that is, a consumer who shuffles fragments must not reattach the input (pre-shuffling) molecule schema instance to any output (post-shuffling) per-fragment results (e.g., n-body energy arrays).</p>
+      <p>List of indices grouping atoms (0-indexed) into molecular fragments within the molecule. Each entry in the outer list is a new fragment; index matches the ordering in <code>fragment_charges</code> and <code>fragment_multiplicities</code>. Inner lists are 0-indexed atoms which compose the fragment; every atom must be in exactly one inner list. Noncontiguous fragments are allowed, though no QM program is known to support them. Fragment ordering is fixed; that is, a consumer who shuffles fragments must not reattach the input (pre-shuffling) molecule schema instance to any output (post-shuffling) per-fragment results (e.g., n-body energy arrays).</p>
     </div>
 
   </div>
@@ -2669,7 +2669,7 @@ data for symbols, geometry, connectivity, charges, fragmentation, etc while also
 
     <div class="doc doc-contents ">
 
-      <p>The ordered array for Cartesian XYZ atomic coordinates [a0]. Atom ordering is fixed; that is, a consumer who shuffles atoms must not reattach the input (pre-shuffling) molecule schema instance to any output (post-shuffling) per-atom results (e.g., gradient). Index of the first dimension matches the 0-indexed indices of all other per-atom settings like :attr:<code>~qcelemental.models.Molecule.symbols</code> and :attr:<code>~qcelemental.models.Molecule.real</code>.
+      <p>The ordered array for Cartesian XYZ atomic coordinates [a0]. Atom ordering is fixed; that is, a consumer who shuffles atoms must not reattach the input (pre-shuffling) molecule schema instance to any output (post-shuffling) per-atom results (e.g., gradient). Index of the first dimension matches the 0-indexed indices of all other per-atom settings like <code>symbols</code> and <code>real</code>.
 Serialized storage is always flat, (3<em>nat,), but QCSchema implementations will want to reshape it. QCElemental can also accept array-likes which can be mapped to (nat,3) such as a 1-D list of length 3</em>nat, or the serialized version of the array in (3*nat,) shape; all forms will be reshaped to (nat,3) for this attribute.</p>
     </div>
 
@@ -2736,7 +2736,7 @@ Serialized storage is always flat, (3<em>nat,), but QCSchema implementations wil
 
     <div class="doc doc-contents ">
 
-      <p>An optional dictionary of additional identifiers by which this molecule can be referenced, such as INCHI, canonical SMILES, etc. See the :class:<code>~qcelemental.models.results.Identifiers</code> model for more details.</p>
+      <p>An optional dictionary of additional identifiers by which this molecule can be referenced, such as INCHI, canonical SMILES, etc. See the :class:<code>Identifiers</code> model for more details.</p>
     </div>
 
   </div>
@@ -2780,7 +2780,7 @@ Serialized storage is always flat, (3<em>nat,), but QCSchema implementations wil
 
     <div class="doc doc-contents ">
 
-      <p>An optional ordered 1-D array-like object of atomic <em>mass</em> numbers of shape (nat). Index matches the 0-indexed indices of all other per-atom settings like :attr:<code>~qcelemental.models.Molecule.symbols</code> and :attr:<code>~qcelemental.models.Molecule.real</code>. Values are inferred from the most common isotopes of the :attr:<code>~qcelemental.models.Molecule.symbols</code> list if not explicitly set. If single isotope not (yet) known for an atom, -1 is placeholder.</p>
+      <p>An optional ordered 1-D array-like object of atomic <em>mass</em> numbers of shape (nat). Index matches the 0-indexed indices of all other per-atom settings like <code>symbols</code> and <code>real</code>. Values are inferred from the most common isotopes of the <code>symbols</code> list if not explicitly set. If single isotope not (yet) known for an atom, -1 is placeholder.</p>
     </div>
 
   </div>
@@ -2824,7 +2824,7 @@ Serialized storage is always flat, (3<em>nat,), but QCSchema implementations wil
 
     <div class="doc doc-contents ">
 
-      <p>The ordered array of atomic masses. Index order matches the 0-indexed indices of all other per-atom fields like :attr:<code>~qcelemental.models.Molecule.symbols</code> and :attr:<code>~qcelemental.models.Molecule.real</code>. If this is not provided, the mass of each atom is inferred from its most common isotope. If this is provided, it must be the same length as :attr:<code>~qcelemental.models.Molecule.symbols</code> but can accept <code>None</code> entries for standard masses to infer from the same index in the :attr:<code>~qcelemental.models.Molecule.symbols</code> field.</p>
+      <p>The ordered array of atomic masses. Index order matches the 0-indexed indices of all other per-atom fields like <code>symbols</code> and <code>real</code>. If this is not provided, the mass of each atom is inferred from its most common isotope. If this is provided, it must be the same length as <code>symbols</code> but can accept <code>None</code> entries for standard masses to infer from the same index in the <code>symbols</code> field.</p>
     </div>
 
   </div>
@@ -2890,7 +2890,7 @@ Serialized storage is always flat, (3<em>nat,), but QCSchema implementations wil
 
     <div class="doc doc-contents ">
 
-      <p>Common or human-readable name to assign to this molecule. This field can be arbitrary; see :attr:<code>~qcelemental.models.Molecule.identifiers</code> for well-defined labels.</p>
+      <p>Common or human-readable name to assign to this molecule. This field can be arbitrary; see <code>identifiers</code> for well-defined labels.</p>
     </div>
 
   </div>
@@ -2956,7 +2956,7 @@ Serialized storage is always flat, (3<em>nat,), but QCSchema implementations wil
 
     <div class="doc doc-contents ">
 
-      <p>The ordered array indicating if each atom is real (<code>True</code>) or ghost/virtual (<code>False</code>). Index matches the 0-indexed indices of all other per-atom settings like :attr:<code>~qcelemental.models.Molecule.symbols</code> and the first dimension of :attr:<code>~qcelemental.models.Molecule.geometry</code>. If this is not provided, all atoms are assumed to be real (<code>True</code>).If this is provided, the reality or ghostedness of every atom must be specified.</p>
+      <p>The ordered array indicating if each atom is real (<code>True</code>) or ghost/virtual (<code>False</code>). Index matches the 0-indexed indices of all other per-atom settings like <code>symbols</code> and the first dimension of <code>geometry</code>. If this is not provided, all atoms are assumed to be real (<code>True</code>).If this is provided, the reality or ghostedness of every atom must be specified.</p>
     </div>
 
   </div>
@@ -3000,7 +3000,7 @@ Serialized storage is always flat, (3<em>nat,), but QCSchema implementations wil
 
     <div class="doc doc-contents ">
 
-      <p>The version number of :attr:<code>~qcelemental.models.Molecule.schema_name</code> to which this model conforms.</p>
+      <p>The version number of <code>schema_name</code> to which this model conforms.</p>
     </div>
 
   </div>
@@ -3023,7 +3023,7 @@ Serialized storage is always flat, (3<em>nat,), but QCSchema implementations wil
 
     <div class="doc doc-contents ">
 
-      <p>The ordered array of atomic elemental symbols in title case. This field's index sets atomic order for all other per-atom fields like :attr:<code>~qcelemental.models.Molecule.real</code> and the first dimension of :attr:<code>~qcelemental.models.Molecule.geometry</code>. Ghost/virtual atoms must have an entry here in :attr:<code>~qcelemental.models.Molecule.symbols</code>; ghostedness is indicated through the :attr:<code>~qcelemental.models.Molecule.real</code> field.</p>
+      <p>The ordered array of atomic elemental symbols in title case. This field's index sets atomic order for all other per-atom fields like <code>real</code> and the first dimension of <code>geometry</code>. Ghost/virtual atoms must have an entry here in <code>symbols</code>; ghostedness is indicated through the <code>real</code> field.</p>
     </div>
 
   </div>
@@ -3584,10 +3584,10 @@ data : Dict[key, Any]
 
       <p>Compares the current object to the provided object recursively.</p>
 <h5 id="qcelemental.models.molecule.Molecule.compare--parameters">Parameters<a class="headerlink" href="#qcelemental.models.molecule.Molecule.compare--parameters" title="Permanent link">🔗</a></h5>
-<p>other
+<p>other : Model
     The model to compare to.
 **kwargs
-    Additional kwargs to pass to :func:<code>~qcelemental.compare_recursive</code>.</p>
+    Additional kwargs to pass to <code>qcelemental.compare_recursive</code>.</p>
 <h5 id="qcelemental.models.molecule.Molecule.compare--returns">Returns<a class="headerlink" href="#qcelemental.models.molecule.Molecule.compare--returns" title="Permanent link">🔗</a></h5>
 <p>bool
     True if the objects match.</p>
@@ -4661,20 +4661,24 @@ data : Dict[key, Any]
 
       <p>Generates a serialized representation of the model</p>
 <h5 id="qcelemental.models.molecule.Molecule.serialize--parameters">Parameters<a class="headerlink" href="#qcelemental.models.molecule.Molecule.serialize--parameters" title="Permanent link">🔗</a></h5>
-<p>encoding
+<p>encoding : str
     The serialization type, available types are: {'json', 'json-ext', 'msgpack-ext'}
-include
+include : Optional[Set[str]], optional
     Fields to be included in the serialization.
-exclude
+exclude : Optional[Set[str]], optional
     Fields to be excluded in the serialization.
-exclude_unset
-    If True, skips fields that have default values provided.
-exclude_defaults
-    If True, skips fields that have set or defaulted values equal to the default.
-exclude_none
-    If True, skips fields that have value <code>None</code>.</p>
+exclude_unset : Optional[bool], optional
+    If True, skips fields that have default values provided.</p>
+<div class="admonition exclude_defaults">
+<p class="admonition-title">Optional[bool], optional</p>
+<p>If True, skips fields that have set or defaulted values equal to the default.</p>
+</div>
+<div class="admonition exclude_none">
+<p class="admonition-title">Optional[bool], optional</p>
+<p>If True, skips fields that have value <code>None</code>.</p>
+</div>
 <h5 id="qcelemental.models.molecule.Molecule.serialize--returns">Returns<a class="headerlink" href="#qcelemental.models.molecule.Molecule.serialize--returns" title="Permanent link">🔗</a></h5>
-<p>~typing.Union[bytes, str]
+<p>Union[bytes, str]
     The serialized model.</p>
 
         <details class="quote">
@@ -4693,22 +4697,22 @@ exclude_none
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    encoding</span>
+<span class="sd">    encoding : str</span>
 <span class="sd">        The serialization type, available types are: {&#39;json&#39;, &#39;json-ext&#39;, &#39;msgpack-ext&#39;}</span>
-<span class="sd">    include</span>
+<span class="sd">    include : Optional[Set[str]], optional</span>
 <span class="sd">        Fields to be included in the serialization.</span>
-<span class="sd">    exclude</span>
+<span class="sd">    exclude : Optional[Set[str]], optional</span>
 <span class="sd">        Fields to be excluded in the serialization.</span>
-<span class="sd">    exclude_unset</span>
+<span class="sd">    exclude_unset : Optional[bool], optional</span>
 <span class="sd">        If True, skips fields that have default values provided.</span>
-<span class="sd">    exclude_defaults</span>
+<span class="sd">    exclude_defaults: Optional[bool], optional</span>
 <span class="sd">        If True, skips fields that have set or defaulted values equal to the default.</span>
-<span class="sd">    exclude_none</span>
+<span class="sd">    exclude_none: Optional[bool], optional</span>
 <span class="sd">        If True, skips fields that have value ``None``.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    ~typing.Union[bytes, str]</span>
+<span class="sd">    Union[bytes, str]</span>
 <span class="sd">        The serialized model.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 

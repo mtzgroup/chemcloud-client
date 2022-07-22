@@ -2,102 +2,102 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/</loc>
-         <lastmod>2022-07-20</lastmod>
+         <lastmod>2022-07-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/CHANGELOG/</loc>
-         <lastmod>2022-07-20</lastmod>
+         <lastmod>2022-07-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/code_reference/AtomicInput/</loc>
-         <lastmod>2022-07-20</lastmod>
+         <lastmod>2022-07-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/code_reference/AtomicResult/</loc>
-         <lastmod>2022-07-20</lastmod>
+         <lastmod>2022-07-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/code_reference/CCClient/</loc>
-         <lastmod>2022-07-20</lastmod>
+         <lastmod>2022-07-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/code_reference/ComputeError/</loc>
-         <lastmod>2022-07-20</lastmod>
+         <lastmod>2022-07-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/code_reference/FailedOperation/</loc>
-         <lastmod>2022-07-20</lastmod>
+         <lastmod>2022-07-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/code_reference/FutureResult/</loc>
-         <lastmod>2022-07-20</lastmod>
+         <lastmod>2022-07-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/code_reference/Molecule/</loc>
-         <lastmod>2022-07-20</lastmod>
+         <lastmod>2022-07-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/code_reference/OptimizationInput/</loc>
-         <lastmod>2022-07-20</lastmod>
+         <lastmod>2022-07-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/code_reference/OptimizationResult/</loc>
-         <lastmod>2022-07-20</lastmod>
+         <lastmod>2022-07-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/code_reference/exceptions/</loc>
-         <lastmod>2022-07-20</lastmod>
+         <lastmod>2022-07-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/code_reference/models/</loc>
-         <lastmod>2022-07-20</lastmod>
+         <lastmod>2022-07-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/development/core_decisions/</loc>
-         <lastmod>2022-07-20</lastmod>
+         <lastmod>2022-07-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/tutorial/authentication/</loc>
-         <lastmod>2022-07-20</lastmod>
+         <lastmod>2022-07-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/tutorial/batch_computations/</loc>
-         <lastmod>2022-07-20</lastmod>
+         <lastmod>2022-07-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/tutorial/bigchem_algorithms/</loc>
-         <lastmod>2022-07-20</lastmod>
+         <lastmod>2022-07-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/tutorial/compute/</loc>
-         <lastmod>2022-07-20</lastmod>
+         <lastmod>2022-07-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/tutorial/compute_engines/</loc>
-         <lastmod>2022-07-20</lastmod>
+         <lastmod>2022-07-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/tutorial/geometry_optimization/</loc>
-         <lastmod>2022-07-20</lastmod>
+         <lastmod>2022-07-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

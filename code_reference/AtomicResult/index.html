@@ -444,6 +444,19 @@
     qcelemental.models.results.AtomicResult
   </a>
   
+    <nav class="md-nav" aria-label="qcelemental.models.results.AtomicResult">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.results.AtomicResult--parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -846,6 +859,19 @@
     qcelemental.models.results.AtomicResult
   </a>
   
+    <nav class="md-nav" aria-label="qcelemental.models.results.AtomicResult">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qcelemental.models.results.AtomicResult--parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1156,6 +1182,48 @@
     <div class="doc doc-contents first">
 
       <p>Results from a CMS program execution.</p>
+<h3 id="qcelemental.models.results.AtomicResult--parameters">Parameters<a class="headerlink" href="#qcelemental.models.results.AtomicResult--parameters" title="Permanent link">🔗</a></h3>
+<p>id : str, Optional
+    The optional ID for the computation.
+schema_name : ConstrainedStrValue, Default: qcschema_output
+    The QCSchema specification this model conforms to. Explicitly fixed as qcschema_output.
+schema_version : int, Default: 1
+    The version number of <code>schema_name</code> to which this model conforms.
+molecule : :class:<code>Molecule</code>
+    The molecule to use in the computation.
+driver : {energy,gradient,hessian,properties}
+    Allowed computation driver values.
+model : :class:<code>Model</code>
+    The computational molecular sciences model to run.
+keywords : Dict[Any], Default: {}
+    The program-specific keywords to be used.
+protocols : :class:<code>AtomicResultProtocols</code>, Optional
+    Protocols regarding the manipulation of computational result data.
+extras : Dict[Any], Default: {}
+    Additional information to bundle with the computation. Use for schema development and scratch space.
+provenance : :class:<code>Provenance</code>
+    Provenance information.
+properties : :class:<code>AtomicResultProperties</code>
+    Named properties of quantum chemistry computations following the MolSSI QCSchema.</p>
+<div class="highlight"><pre><span></span><code>    All arrays are stored flat but must be reshapable into the dimensions in attribute ``shape``, with abbreviations as follows:
+
+      * nao: number of atomic orbitals = calcinfo_nbasis
+      * nmo: number of molecular orbitals
+</code></pre></div>
+<p>wavefunction : :class:<code>WavefunctionProperties</code>, Optional
+    Wavefunction properties resulting from a computation. Matrix quantities are stored in column-major order. Presence and contents configurable by protocol.
+return_result : Union[float, Array, Dict[Any]]
+    The primary return specified by the <code>driver</code> field. Scalar if energy; array if gradient or hessian; dictionary with property keys if properties.
+stdout : str, Optional
+    The primary logging output of the program, whether natively standard output or a file. Presence vs. absence (or null-ness?) configurable by protocol.
+stderr : str, Optional
+    The standard error of the program execution.
+native_files : Dict[Any], Optional
+    DSL files.
+success : bool
+    The success of program execution. If False, other fields may be blank.
+error : :class:<code>ComputeError</code>, Optional
+    Complete description of the error from an unsuccessful program execution.</p>
 
 
 
@@ -1362,12 +1430,11 @@
 
     <div class="doc doc-contents ">
 
-      <div class="highlight"><pre><span></span><code>Named properties of quantum chemistry computations following the MolSSI QCSchema.
+      <p>Named properties of quantum chemistry computations following the MolSSI QCSchema.</p>
+<div class="highlight"><pre><span></span><code>All arrays are stored flat but must be reshapable into the dimensions in attribute ``shape``, with abbreviations as follows:
 
-All arrays are stored flat but must be reshapable into the dimensions in attribute ``shape``, with abbreviations as follows:
-
-* nao: number of atomic orbitals = :attr:`~qcelemental.models.AtomicResultProperties.calcinfo_nbasis`
-* nmo: number of molecular orbitals = :attr:`~qcelemental.models.AtomicResultProperties.calcinfo_nmo`
+  * nao: number of atomic orbitals = calcinfo_nbasis
+  * nmo: number of molecular orbitals
 </code></pre></div>
     </div>
 
@@ -1436,7 +1503,7 @@ All arrays are stored flat but must be reshapable into the dimensions in attribu
 
     <div class="doc doc-contents ">
 
-      <p>The primary return specified by the :attr:<code>~qcelemental.models.AtomicInput.driver</code> field. Scalar if energy; array if gradient or hessian; dictionary with property keys if properties.</p>
+      <p>The primary return specified by the <code>driver</code> field. Scalar if energy; array if gradient or hessian; dictionary with property keys if properties.</p>
     </div>
 
   </div>
@@ -1480,7 +1547,7 @@ All arrays are stored flat but must be reshapable into the dimensions in attribu
 
     <div class="doc doc-contents ">
 
-      <p>The version number of :attr:<code>~qcelemental.models.AtomicInput.schema_name</code> to which this model conforms.</p>
+      <p>The version number of <code>schema_name</code> to which this model conforms.</p>
     </div>
 
   </div>
@@ -1787,10 +1854,10 @@ All arrays are stored flat but must be reshapable into the dimensions in attribu
 
       <p>Compares the current object to the provided object recursively.</p>
 <h5 id="qcelemental.models.results.AtomicResult.compare--parameters">Parameters<a class="headerlink" href="#qcelemental.models.results.AtomicResult.compare--parameters" title="Permanent link">🔗</a></h5>
-<p>other
+<p>other : Model
     The model to compare to.
 **kwargs
-    Additional kwargs to pass to :func:<code>~qcelemental.compare_recursive</code>.</p>
+    Additional kwargs to pass to <code>qcelemental.compare_recursive</code>.</p>
 <h5 id="qcelemental.models.results.AtomicResult.compare--returns">Returns<a class="headerlink" href="#qcelemental.models.results.AtomicResult.compare--returns" title="Permanent link">🔗</a></h5>
 <p>bool
     True if the objects match.</p>
@@ -1802,18 +1869,16 @@ All arrays are stored flat but must be reshapable into the dimensions in attribu
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    other</span>
+<span class="sd">    other : Model</span>
 <span class="sd">        The model to compare to.</span>
 <span class="sd">    **kwargs</span>
-<span class="sd">        Additional kwargs to pass to :func:`~qcelemental.compare_recursive`.</span>
+<span class="sd">        Additional kwargs to pass to ``qcelemental.compare_recursive``.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    bool</span>
 <span class="sd">        True if the objects match.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">..testing</span> <span class="kn">import</span> <span class="n">compare_recursive</span>
-
     <span class="k">return</span> <span class="n">compare_recursive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div>
         </details>
@@ -1916,20 +1981,24 @@ All arrays are stored flat but must be reshapable into the dimensions in attribu
 
       <p>Generates a serialized representation of the model</p>
 <h5 id="qcelemental.models.results.AtomicResult.serialize--parameters">Parameters<a class="headerlink" href="#qcelemental.models.results.AtomicResult.serialize--parameters" title="Permanent link">🔗</a></h5>
-<p>encoding
+<p>encoding : str
     The serialization type, available types are: {'json', 'json-ext', 'msgpack-ext'}
-include
+include : Optional[Set[str]], optional
     Fields to be included in the serialization.
-exclude
+exclude : Optional[Set[str]], optional
     Fields to be excluded in the serialization.
-exclude_unset
-    If True, skips fields that have default values provided.
-exclude_defaults
-    If True, skips fields that have set or defaulted values equal to the default.
-exclude_none
-    If True, skips fields that have value <code>None</code>.</p>
+exclude_unset : Optional[bool], optional
+    If True, skips fields that have default values provided.</p>
+<div class="admonition exclude_defaults">
+<p class="admonition-title">Optional[bool], optional</p>
+<p>If True, skips fields that have set or defaulted values equal to the default.</p>
+</div>
+<div class="admonition exclude_none">
+<p class="admonition-title">Optional[bool], optional</p>
+<p>If True, skips fields that have value <code>None</code>.</p>
+</div>
 <h5 id="qcelemental.models.results.AtomicResult.serialize--returns">Returns<a class="headerlink" href="#qcelemental.models.results.AtomicResult.serialize--returns" title="Permanent link">🔗</a></h5>
-<p>~typing.Union[bytes, str]
+<p>Union[bytes, str]
     The serialized model.</p>
 
         <details class="quote">
@@ -1948,22 +2017,22 @@ exclude_none
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    encoding</span>
+<span class="sd">    encoding : str</span>
 <span class="sd">        The serialization type, available types are: {&#39;json&#39;, &#39;json-ext&#39;, &#39;msgpack-ext&#39;}</span>
-<span class="sd">    include</span>
+<span class="sd">    include : Optional[Set[str]], optional</span>
 <span class="sd">        Fields to be included in the serialization.</span>
-<span class="sd">    exclude</span>
+<span class="sd">    exclude : Optional[Set[str]], optional</span>
 <span class="sd">        Fields to be excluded in the serialization.</span>
-<span class="sd">    exclude_unset</span>
+<span class="sd">    exclude_unset : Optional[bool], optional</span>
 <span class="sd">        If True, skips fields that have default values provided.</span>
-<span class="sd">    exclude_defaults</span>
+<span class="sd">    exclude_defaults: Optional[bool], optional</span>
 <span class="sd">        If True, skips fields that have set or defaulted values equal to the default.</span>
-<span class="sd">    exclude_none</span>
+<span class="sd">    exclude_none: Optional[bool], optional</span>
 <span class="sd">        If True, skips fields that have value ``None``.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    ~typing.Union[bytes, str]</span>
+<span class="sd">    Union[bytes, str]</span>
 <span class="sd">        The serialized model.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
