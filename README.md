@@ -121,6 +121,12 @@ Install `chemcloud` package and its dependencies
 flit install --deps develop --symlink
 ```
 
+Source the newly installed packages
+
+```sh
+source ./env/bin/activate
+```
+
 Run tests to check install
 
 ```sh
