@@ -24,7 +24,7 @@ class _RequestsClient:
     """Interface for making http requests to ChemCloud.
 
     This class should never be instantiated by end users. End users should use the
-    CCClient class to interact with QC Cloud.
+    CCClient class to interact with ChemCloud.
 
     Main Features:
         - Manages credentials for making authenticated requests.
@@ -112,7 +112,7 @@ class _RequestsClient:
                 print(e)
                 print(
                     "Login Failed! Did you enter your credentials correctly? If you "
-                    "do not have a QC Cloud account please visit "
+                    "do not have a ChemCloud account please visit "
                     f"{self._chemcloud_domain}/signup to create an account."
                 )
 
@@ -284,7 +284,7 @@ class _RequestsClient:
     def compute(
         self, input_data: AtomicInputOrList, engine: str, queue: Optional[str] = None
     ) -> Union[FutureResult, FutureResultGroup]:
-        """Submit a computation to QC Cloud"""
+        """Submit a computation to ChemCloud"""
         # Convery any bytes data to b64 encoding
         _bytes_to_b64(input_data)
 
@@ -302,7 +302,7 @@ class _RequestsClient:
         procedure: str,
         queue: Optional[str] = None,
     ) -> Union[FutureResult, FutureResultGroup]:
-        """Submit a procedure computation to QC Cloud"""
+        """Submit a procedure computation to ChemCloud"""
         # Convert any bytes data to b64 encoding
         _bytes_to_b64(input_data)
 
@@ -336,7 +336,7 @@ class _RequestsClient:
         return result["state"], result["result"]
 
     def hello_world(self, name: Optional[str] = None):
-        """Ping hello-world endpoint on QC Cloud"""
+        """Ping hello-world endpoint on ChemCloud"""
         return self._request(
             "get", "/hello-world", params={"name": name}, api_call=False
         )

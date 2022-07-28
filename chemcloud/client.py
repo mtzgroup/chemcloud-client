@@ -49,7 +49,7 @@ class CCClient:
         return f"{type(self).__name__}({self._client._chemcloud_domain}, profile={self.profile})"
 
     def _set_openapi_specification(self):
-        """Gets OpenAPI specification from QC Cloud Server"""
+        """Gets OpenAPI specification from ChemCloud Server"""
         self._openapi_spec = self._client._request(
             "get", "/openapi.json", api_call=False
         )
@@ -61,7 +61,7 @@ class CCClient:
 
     @property
     def profile(self) -> str:
-        """Profile being used for authentication with QC Cloud.
+        """Profile being used for authentication with ChemCloud.
 
         Returns:
             The name of the name of the credentials profile being used with
@@ -73,10 +73,10 @@ class CCClient:
 
     @property
     def supported_engines(self) -> List[str]:
-        """Compute engines currently supported by QC Cloud.
+        """Compute engines currently supported by ChemCloud.
 
         Returns:
-            List of engines currently supported by QC Cloud."""
+            List of engines currently supported by ChemCloud."""
         if not self._openapi_spec:
             self._set_openapi_specification()
         try:
@@ -91,10 +91,10 @@ class CCClient:
 
     @property
     def supported_procedures(self) -> List[str]:
-        """Compute procedures currently supported by QC Cloud.
+        """Compute procedures currently supported by ChemCloud.
 
         Returns:
-            List of procedures currently supported by QC Cloud."""
+            List of procedures currently supported by ChemCloud."""
         if not self._openapi_spec:
             self._set_openapi_specification()
         try:
@@ -108,13 +108,13 @@ class CCClient:
         return procedures
 
     def hello_world(self, name: Optional[str] = None) -> str:
-        """A simple endpoint to check connectivity to QC Cloud.
+        """A simple endpoint to check connectivity to ChemCloud.
 
         Parameters:
             name: Your name
 
         Returns:
-            A message from QC Cloud if the client was able to successfully
+            A message from ChemCloud if the client was able to successfully
             connect.
         """
         return self._client.hello_world(name)
@@ -122,7 +122,7 @@ class CCClient:
     def compute(
         self, input_data: AtomicInputOrList, engine: str, queue: Optional[str] = None
     ) -> Union[FutureResult, FutureResultGroup]:
-        """Submit a computation to QC Cloud.
+        """Submit a computation to ChemCloud.
 
         Parameters:
             input_data: Defines the structure of the desired computation.
@@ -147,7 +147,7 @@ class CCClient:
         procedure: str,
         queue: Optional[str] = None,
     ) -> Union[FutureResult, FutureResultGroup]:
-        """Submit a procedure computation to QC Cloud
+        """Submit a procedure computation to ChemCloud
 
         Parameters:
             input_data: Defines the inputs for an optimization computation
@@ -168,14 +168,14 @@ class CCClient:
     def configure(
         self, profile: str = settings.chemcloud_default_credentials_profile
     ) -> None:
-        """Configure profiles for authentication with QC Cloud.
+        """Configure profiles for authentication with ChemCloud.
 
         Parameters:
             profile: Optional value to create a named profile for use with QC
                 Cloud. No value needs to be passed and most users will only have one
-                login with QC Cloud. CCClient will access the profile by
+                login with ChemCloud. CCClient will access the profile by
                 default without a specific name being passed. Pass a value if you have
-                multiple logins to QC Cloud.
+                multiple logins to ChemCloud.
         Note:
             Configures `chemcloud` to use the passed credentials automatically in the
             future. You will not need to run `.configure()` the next time you use the

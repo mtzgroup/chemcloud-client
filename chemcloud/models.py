@@ -40,9 +40,9 @@ class FutureResultBase(BaseModel, ABC):
     """Base class for FutureResults
 
     Parameters:
-        id: The id for primary task submitted to QC Cloud. May correspond to a
+        id: The id for primary task submitted to ChemCloud. May correspond to a
             single task or group of tasks
-        client: The _RequestsClient to use for http requests to QC Cloud
+        client: The _RequestsClient to use for http requests to ChemCloud
         result: Primary return value resulting from computation
 
     Caution:
@@ -69,7 +69,7 @@ class FutureResultBase(BaseModel, ABC):
         Parameters:
             timeout: The number of seconds to wait for a computation before raising a
                 TimeOutError.
-            interval: The amount of time to wait between calls to QC Cloud to
+            interval: The amount of time to wait between calls to ChemCloud to
                 check a computation's status.
 
         Returns:

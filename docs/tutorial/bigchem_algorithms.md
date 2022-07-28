@@ -1,6 +1,6 @@
 # BigChem Algorithms
 
-BigChem implements some of its own concurrent algorithms that leverage its horizontally scalable backend infrastructure. These include a parallel hessian algorithm and parallel frequency analysis algorithm. To use them submit either a `hessian` or `properties` computation to QC Cloud using `bigchem` as the engine. Keywords specific to these algorithms are added to `.extras['bigchem:keywords']`. None are required and all are optional.
+BigChem implements some of its own concurrent algorithms that leverage its horizontally scalable backend infrastructure. These include a parallel hessian algorithm and parallel frequency analysis algorithm. To use them submit either a `hessian` or `properties` computation to ChemCloud using `bigchem` as the engine. Keywords specific to these algorithms are added to `.extras['bigchem:keywords']`. None are required and all are optional.
 
 ## Hessian
 
