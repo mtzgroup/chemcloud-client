@@ -612,7 +612,7 @@
                 
                 
                 <h1 id="bigchem-algorithms">BigChem Algorithms<a class="headerlink" href="#bigchem-algorithms" title="Permanent link">🔗</a></h1>
-<p>BigChem implements some of its own concurrent algorithms that leverage its horizontally scalable backend infrastructure. These include a parallel hessian algorithm and parallel frequency analysis algorithm. To use them submit either a <code>hessian</code> or <code>properties</code> computation to QC Cloud using <code>bigchem</code> as the engine. Keywords specific to these algorithms are added to <code>.extras['bigchem:keywords']</code>. None are required and all are optional.</p>
+<p>BigChem implements some of its own concurrent algorithms that leverage its horizontally scalable backend infrastructure. These include a parallel hessian algorithm and parallel frequency analysis algorithm. To use them submit either a <code>hessian</code> or <code>properties</code> computation to ChemCloud using <code>bigchem</code> as the engine. Keywords specific to these algorithms are added to <code>.extras['bigchem:keywords']</code>. None are required and all are optional.</p>
 <h2 id="hessian">Hessian<a class="headerlink" href="#hessian" title="Permanent link">🔗</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">chemcloud</span> <span class="kn">import</span> <span class="n">CCClient</span>
 <span class="kn">from</span> <span class="nn">chemcloud.models</span> <span class="kn">import</span> <span class="n">AtomicInput</span><span class="p">,</span> <span class="n">Molecule</span>

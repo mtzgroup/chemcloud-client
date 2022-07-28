@@ -797,7 +797,7 @@
 
     <div class="doc doc-contents ">
 
-      <p>Profile being used for authentication with QC Cloud.</p>
+      <p>Profile being used for authentication with ChemCloud.</p>
 
 <p><strong>Returns:</strong></p>
 <table>
@@ -837,7 +837,7 @@ the current client.</p></td>
 
     <div class="doc doc-contents ">
 
-      <p>Compute engines currently supported by QC Cloud.</p>
+      <p>Compute engines currently supported by ChemCloud.</p>
 
 <p><strong>Returns:</strong></p>
 <table>
@@ -850,7 +850,7 @@ the current client.</p></td>
   <tbody>
     <tr>
       <td><code>List[str]</code></td>
-      <td><p>List of engines currently supported by QC Cloud.</p></td>
+      <td><p>List of engines currently supported by ChemCloud.</p></td>
     </tr>
   </tbody>
 </table>    </div>
@@ -875,7 +875,7 @@ the current client.</p></td>
 
     <div class="doc doc-contents ">
 
-      <p>Compute procedures currently supported by QC Cloud.</p>
+      <p>Compute procedures currently supported by ChemCloud.</p>
 
 <p><strong>Returns:</strong></p>
 <table>
@@ -888,7 +888,7 @@ the current client.</p></td>
   <tbody>
     <tr>
       <td><code>List[str]</code></td>
-      <td><p>List of procedures currently supported by QC Cloud.</p></td>
+      <td><p>List of procedures currently supported by ChemCloud.</p></td>
     </tr>
   </tbody>
 </table>    </div>
@@ -1036,7 +1036,7 @@ securely set up your authentication credentials for ChemCloud.</p>
 
     <div class="doc doc-contents ">
 
-      <p>Submit a computation to QC Cloud.</p>
+      <p>Submit a computation to ChemCloud.</p>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -1091,7 +1091,7 @@ computation's status by runing <code>.status</code> on the <code>FutureResult</c
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">compute</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">input_data</span><span class="p">:</span> <span class="n">AtomicInputOrList</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">queue</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">FutureResult</span><span class="p">,</span> <span class="n">FutureResultGroup</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;Submit a computation to QC Cloud.</span>
+    <span class="sd">&quot;&quot;&quot;Submit a computation to ChemCloud.</span>
 
 <span class="sd">    Parameters:</span>
 <span class="sd">        input_data: Defines the structure of the desired computation.</span>
@@ -1129,7 +1129,7 @@ computation's status by runing <code>.status</code> on the <code>FutureResult</c
 
     <div class="doc doc-contents ">
 
-      <p>Submit a procedure computation to QC Cloud</p>
+      <p>Submit a procedure computation to ChemCloud</p>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -1187,7 +1187,7 @@ computation's status by runing <code>.status</code> on the <code>FutureResult</c
     <span class="n">procedure</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">queue</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">FutureResult</span><span class="p">,</span> <span class="n">FutureResultGroup</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;Submit a procedure computation to QC Cloud</span>
+    <span class="sd">&quot;&quot;&quot;Submit a procedure computation to ChemCloud</span>
 
 <span class="sd">    Parameters:</span>
 <span class="sd">        input_data: Defines the inputs for an optimization computation</span>
@@ -1224,7 +1224,7 @@ computation's status by runing <code>.status</code> on the <code>FutureResult</c
 
     <div class="doc doc-contents ">
 
-      <p>Configure profiles for authentication with QC Cloud.</p>
+      <p>Configure profiles for authentication with ChemCloud.</p>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -1242,9 +1242,9 @@ computation's status by runing <code>.status</code> on the <code>FutureResult</c
         <td><code>str</code></td>
         <td><p>Optional value to create a named profile for use with QC
 Cloud. No value needs to be passed and most users will only have one
-login with QC Cloud. CCClient will access the profile by
+login with ChemCloud. CCClient will access the profile by
 default without a specific name being passed. Pass a value if you have
-multiple logins to QC Cloud.</p></td>
+multiple logins to ChemCloud.</p></td>
         <td><code>&#39;default&#39;</code></td>
       </tr>
   </tbody>
@@ -1260,14 +1260,14 @@ future. You will not need to run <code>.configure()</code> the next time you use
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">configure</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">profile</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">chemcloud_default_credentials_profile</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Configure profiles for authentication with QC Cloud.</span>
+    <span class="sd">&quot;&quot;&quot;Configure profiles for authentication with ChemCloud.</span>
 
 <span class="sd">    Parameters:</span>
 <span class="sd">        profile: Optional value to create a named profile for use with QC</span>
 <span class="sd">            Cloud. No value needs to be passed and most users will only have one</span>
-<span class="sd">            login with QC Cloud. CCClient will access the profile by</span>
+<span class="sd">            login with ChemCloud. CCClient will access the profile by</span>
 <span class="sd">            default without a specific name being passed. Pass a value if you have</span>
-<span class="sd">            multiple logins to QC Cloud.</span>
+<span class="sd">            multiple logins to ChemCloud.</span>
 <span class="sd">    Note:</span>
 <span class="sd">        Configures `chemcloud` to use the passed credentials automatically in the</span>
 <span class="sd">        future. You will not need to run `.configure()` the next time you use the</span>
@@ -1304,7 +1304,7 @@ future. You will not need to run <code>.configure()</code> the next time you use
 
     <div class="doc doc-contents ">
 
-      <p>A simple endpoint to check connectivity to QC Cloud.</p>
+      <p>A simple endpoint to check connectivity to ChemCloud.</p>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -1336,7 +1336,7 @@ future. You will not need to run <code>.configure()</code> the next time you use
   <tbody>
     <tr>
       <td><code>str</code></td>
-      <td><p>A message from QC Cloud if the client was able to successfully
+      <td><p>A message from ChemCloud if the client was able to successfully
 connect.</p></td>
     </tr>
   </tbody>
@@ -1344,13 +1344,13 @@ connect.</p></td>
         <details class="quote">
           <summary>Source code in <code>chemcloud/client.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">hello_world</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;A simple endpoint to check connectivity to QC Cloud.</span>
+    <span class="sd">&quot;&quot;&quot;A simple endpoint to check connectivity to ChemCloud.</span>
 
 <span class="sd">    Parameters:</span>
 <span class="sd">        name: Your name</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        A message from QC Cloud if the client was able to successfully</span>
+<span class="sd">        A message from ChemCloud if the client was able to successfully</span>
 <span class="sd">        connect.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">hello_world</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
