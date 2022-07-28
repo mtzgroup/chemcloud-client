@@ -48,4 +48,4 @@ ai = AtomicInput(
 
 ## xtb
 
-xtb specific documentation on how to run calculations using the [QCSchema](https://molssi-qc-schema.readthedocs.io/en/latest/index.html) specification used QC Cloud can be found [here](https://xtb-python.readthedocs.io/en/latest/qcarchive.html?highlight=run_qcschema) and [here](https://xtb-python.readthedocs.io/en/latest/_modules/xtb/qcschema/harness.html).
+xtb specific documentation on how to run calculations using the [QCSchema](https://molssi-qc-schema.readthedocs.io/en/latest/index.html) specification used ChemCloud can be found [here](https://xtb-python.readthedocs.io/en/latest/qcarchive.html?highlight=run_qcschema) and [here](https://xtb-python.readthedocs.io/en/latest/_modules/xtb/qcschema/harness.html).
