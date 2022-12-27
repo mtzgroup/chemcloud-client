@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
+## [0.6.2] - 2022-12-27
+
+### Changed
+
+- Updated `qcelemental==0.24.0 -> 0.25.1`
+
 ## [0.6.1] - 2022-07-19
 
 ### Changed
@@ -116,7 +122,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - `_RequestsClient` class that handles all network requests to TeraChem Cloud server
 - `FutureResults` object that is created from a `task_id` and can be used to retrieve a result once finished.
 
-[unreleased]: https://github.com/mtzgroup/chemcloud-client/compare/0.6.1...HEAD
+[unreleased]: https://github.com/mtzgroup/chemcloud-client/compare/0.6.2...HEAD
+[0.6.2]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.6.2
 [0.6.1]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.6.1
 [0.6.0]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.6.0
 [0.5.0]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.5.0
