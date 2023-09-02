@@ -4,17 +4,16 @@ from pathlib import Path
 from time import sleep, time
 from typing import Any, List, Optional, Type, Union
 
-from pydantic import validator
+from pydantic import field_validator
 from pydantic.main import BaseModel
-from qcelemental.models import AtomicInput as AtomicInput  # noqa: F401
-from qcelemental.models import AtomicResult as AtomicResult  # noqa: F401
-from qcelemental.models import Molecule as Molecule  # noqa: F401
-from qcelemental.models import OptimizationInput as OptimizationInput  # noqa: F401
-from qcelemental.models import OptimizationResult as OptimizationResult  # noqa: F401
-from qcelemental.models.common_models import FailedOperation
-from qcelemental.models.common_models import Model as Model  # noqa: F401
-from qcelemental.models.procedures import (  # noqa: F401
-    QCInputSpecification as QCInputSpecification,
+from qcio import (
+    DualProgramInput,
+    FileInput,
+    FileOutput,
+    OptimizationOutput,
+    ProgramFailure,
+    ProgramInput,
+    SinglePointOutput,
 )
 
 from .exceptions import TimeoutError
@@ -22,10 +21,10 @@ from .exceptions import TimeoutError
 GROUP_ID_PREFIX = "group-"
 
 # Convenience types
-AtomicInputOrList = Union[AtomicInput, List[AtomicInput]]
-OptimizationInputOrList = Union[OptimizationInput, List[OptimizationInput]]
-PossibleResults = Union[AtomicResult, OptimizationResult, FailedOperation]
-PossibleResultsOrList = Union[PossibleResults, List[PossibleResults]]
+QCIOInputs = Union[ProgramInput, FileInput, DualProgramInput]
+QCIOInputsOrList = Union[QCIOInputs, List[QCIOInputs]]
+QCIOOutputs = Union[FileOutput, SinglePointOutput, OptimizationOutput, ProgramFailure]
+QCIOOutputsOrList = Union[QCIOOutputs, List[QCIOOutputs]]
 
 
 class TaskStatus(str, Enum):
@@ -51,19 +50,17 @@ class FutureResultBase(BaseModel, ABC):
     """
 
     id: str
-    result: Optional[Any] = None
+    result: Optional[QCIOOutputsOrList] = None
     client: Any
     _state: TaskStatus = TaskStatus.PENDING
 
-    class Config:
-        underscore_attrs_are_private = True
-        validate_assignment = True
+    model_config = {"validate_assignment": True}
 
     def get(
         self,
         timeout: Optional[float] = None,  # in seconds
         interval: float = 1.0,
-    ) -> PossibleResultsOrList:
+    ) -> QCIOOutputsOrList:
         """Block and return result.
 
         Parameters:
@@ -76,7 +73,7 @@ class FutureResultBase(BaseModel, ABC):
             Resultant values from a computation.
 
         Exceptions:
-            TimeoutError: Raised if timout interval exceeded.
+            TimeoutError: Raised if timeout interval exceeded.
         """
         if self.result:
             return self.result
@@ -95,9 +92,9 @@ class FutureResultBase(BaseModel, ABC):
 
         return self.result
 
-    def _result(self):
-        """Return result from server"""
-        return self.client.result(self.id)
+    def _output(self):
+        """Return output from server"""
+        return self.client.output(self.id)
 
     @property
     def status(self) -> str:
@@ -111,36 +108,37 @@ class FutureResultBase(BaseModel, ABC):
         """
         if self.result:
             return self._state
-        self._state, self.result = self._result()
+        self._state, self.result = self._output()
         return self._state
 
 
 class FutureResult(FutureResultBase):
     """Single computation result"""
 
-    result: Optional[PossibleResults] = None
+    result: Optional[QCIOOutputs] = None
 
 
 class FutureResultGroup(FutureResultBase):
     """Group computation result"""
 
-    result: Optional[List[PossibleResults]] = None
+    result: Optional[List[QCIOOutputs]] = None
 
-    def _result(self):
+    def _output(self):
         """Return result from server. Remove GROUP_ID_PREFIX from id."""
-        return self.client.result(self.id.replace(GROUP_ID_PREFIX, ""))
+        return self.client.output(self.id.replace(GROUP_ID_PREFIX, ""))
 
-    @validator("id")
-    def validate_id(cls, v):
+    @field_validator("id")
+    @classmethod
+    def validate_id(cls, val):
         """Prepend id with GROUP_ID_PREFIX.
 
         NOTE:
-            This makes instiating FutureResultGroups from saved ids easier because
+            This makes instantiating FutureResultGroups from saved ids easier because
             they are differentiated from FutureResult ids.
         """
-        if not v.startswith(GROUP_ID_PREFIX):
-            v = GROUP_ID_PREFIX + v
-        return v
+        if not val.startswith(GROUP_ID_PREFIX):
+            val = GROUP_ID_PREFIX + val
+        return val
 
 
 def to_file(

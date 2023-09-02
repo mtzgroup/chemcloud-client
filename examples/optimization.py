@@ -1,51 +1,42 @@
-from pprint import pprint
+from pathlib import Path
+
+from qcio import DualProgramInput, Molecule, OptimizationOutput
 
 from chemcloud import CCClient
-from chemcloud.models import Molecule, OptimizationInput, QCInputSpecification
+
+current_dir = Path(__file__).resolve().parent
+water = Molecule.open(current_dir / "h2o.xyz")
 
 client = CCClient()
 
-water = Molecule.from_data("pubchem:water")
-
-input_spec = QCInputSpecification(
-    model={"method": "b3lyp", "basis": "6-31g"},
-    # Keywords for the compute engine (e.g., psi4, terachem_fe)
-    keywords={},
-)
-
-opt_input = OptimizationInput(
-    initial_molecule=water,
-    input_specification=input_spec,
-    # Trajectory molecules to include in result, may be one of:
-    # 'all' or 'initial_and_final' or 'final' or 'none'
-    protocols={"trajectory": "all"},
-    # Must define compute engine "program": "engine_name"
-    # Define keywords for optimizer (pyberny or geomeTRIC)
-    keywords={"program": "terachem_fe", "maxsteps": 3},
+prog_inp = DualProgramInput(
+    molecule=water,
+    calctype="optimization",
+    keywords={"maxiter": 3},
+    subprogram="psi4",
+    subprogram_args={"model": {"method": "b3lyp", "basis": "6-31g"}},
 )
 
 
-# Optimizer can be "berny" or "geometric"
-future_result = client.compute_procedure(opt_input, "berny")
-result = future_result.get()
+# Submit calculation
+future_result = client.compute("geometric", prog_inp)
+output: OptimizationOutput = future_result.get()
 
-if result.success:
+if output.success:
     print("Optimization succeeded!")
     # Will be OptimizationResult object
-    print(result)
+    print(output)
     # The final molecule of the geometry optimization
-    print(result.final_molecule)
+    print(output.results.final_molecule)
     # Initial molecule
-    print(result.initial_molecule)
+    print(output.input_data.molecule)
     # A list of ordered AtomicResult objects for each step in the optimization
-    print(result.trajectory)
+    print(output.results.trajectory)
     # A list of ordered energies for each step in the optimization
-    print(result.energies)
+    print(output.results.energies)
 else:
     print("Optimization failed!")
     # Will be FailedOperation object
-    print(result)
+    print(output)
     # Error information
-    print(result.error)
-    # Detailed error message
-    pprint(result.error.error_message)
+    print(output.traceback)

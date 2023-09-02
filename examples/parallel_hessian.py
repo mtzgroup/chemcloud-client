@@ -1,24 +1,30 @@
+from pathlib import Path
+
+from qcio import DualProgramInput, Molecule, SinglePointOutput
+
 from chemcloud import CCClient
-from chemcloud.models import AtomicInput, Molecule
+
+current_dir = Path(__file__).resolve().parent
+water = Molecule.open(current_dir / "h2o.xyz")
 
 client = CCClient()
 
-water = Molecule.from_data("pubchem:water")
-
-# Hessian computation
-atomic_input = AtomicInput(
+prog_inp = DualProgramInput(
     molecule=water,
-    model={"method": "B3LYP", "basis": "6-31g"},
-    driver="hessian",
-    extras={
-        "bigchem:keywords": {
-            "dh": 5e-3,  # OPTIONAL: displacement for finite difference
-        },
-    },
+    calctype="hessian",
+    subprogram="psi4",
+    subprogram_args={"model": {"method": "b3lyp", "basis": "6-31g"}},
 )
-future_result = client.compute(atomic_input, engine="bigchem")
-result = future_result.get()
-# AtomicResult object containing all returned data
-print(result)
-# The hessian matrix
-print(result.return_result)
+
+
+# Submit calculation
+future_result = client.compute("bigchem", prog_inp)
+output: SinglePointOutput = future_result.get()
+
+# SinglePointOutput object containing all returned data
+print(output)
+print(output.results.hessian)
+# Frequency data always included too
+print(f"Wavenumbers: {output.results.freqs_wavenumber}")
+print(output.results.normal_modes_cartesian)
+print(output.results.gibbs_free_energy)

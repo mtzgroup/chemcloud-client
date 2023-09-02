@@ -7,17 +7,11 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 
 import httpx
 import toml
-from qcelemental.util.serialization import json_dumps
+from qcio.utils import json_dumps
 
-from chemcloud.models import (
-    AtomicInputOrList,
-    FutureResult,
-    FutureResultGroup,
-    OptimizationInputOrList,
-)
+from chemcloud.models import FutureResult, FutureResultGroup, QCIOInputs
 
 from .config import Settings, settings
-from .utils import _b64_to_bytes, _bytes_to_b64
 
 
 class _RequestsClient:
@@ -33,7 +27,7 @@ class _RequestsClient:
         - public methods:
             - hello_world()
             - compute()
-            - result()
+            - output()
             - write_tokens_to_credentials_file()
 
     """
@@ -50,11 +44,12 @@ class _RequestsClient:
         self._chemcloud_username = chemcloud_username
         self._chemcloud_password = chemcloud_password
         self._settings = settings
-        self._profile = profile or settings.chemcloud_default_credentials_profile
+        self._profile = profile or settings.chemcloud_credentials_profile
         self._access_token: str = ""
         self._refresh_token: str = ""
         self._chemcloud_domain = chemcloud_domain or settings.chemcloud_domain
-        # If set to True future refresh_tokens calls will also write new tokens to Credentials file
+        # If set to True future refresh_tokens calls will also write new tokens to
+        # Credentials file
         self._tokens_set_from_file: bool = False
 
     def __repr__(self) -> str:
@@ -126,10 +121,8 @@ class _RequestsClient:
                     self._refresh_tokens(self._refresh_token)
                 else:
                     self._set_tokens()
-
             else:
                 return self._access_token
-
         else:
             self._set_tokens()
 
@@ -140,7 +133,7 @@ class _RequestsClient:
         access_token: str,
         refresh_token: str,
         *,
-        profile: str = settings.chemcloud_default_credentials_profile,
+        profile: str = settings.chemcloud_credentials_profile,
     ) -> None:
         """Writes access_token and refresh_token to configuration file"""
         assert (
@@ -188,11 +181,7 @@ class _RequestsClient:
             data=data,
             params=params,
         )
-        # Leave default 5.0s timeout, increase read timeout to 20.0 seconds to handle
-        # httpx.ReadTimeout exceptions seen by Ethan. I think the issue is the client
-        # is waiting while QCC retrieves results from backend and with large results
-        # this can take longer than 5 seconds. Will see if this solves issue...
-        # https://www.python-httpx.org/advanced/#fine-tuning-the-configuration
+        # Longer read timeouts for large batches of files
         with httpx.Client(timeout=httpx.Timeout(5.0, read=20.0)) as client:
             response = client.send(request)
         response.raise_for_status()
@@ -217,7 +206,8 @@ class _RequestsClient:
             "grant_type": "password",
             "username": username,
             "password": password,
-            "scope": "offline_access compute:public compute:private",  # get refresh_token
+            # get refresh_token
+            "scope": "offline_access compute:public compute:private",
         }
         headers = {"content-type": "application/x-www-form-urlencoded"}
         response = self._request(
@@ -282,43 +272,24 @@ class _RequestsClient:
         return FutureResult(id=result_id, client=self)
 
     def compute(
-        self, input_data: AtomicInputOrList, engine: str, queue: Optional[str] = None
+        self,
+        inp_obj: QCIOInputs,
+        params: Optional[Dict[str, Any]] = None,
     ) -> Union[FutureResult, FutureResultGroup]:
         """Submit a computation to ChemCloud"""
-        # Convery any bytes data to b64 encoding
-        _bytes_to_b64(input_data)
-
         result_id = self._authenticated_request(
             "post",
             "/compute",
-            data=json_dumps(input_data),
-            params={"engine": engine, "queue": queue},
+            data=json_dumps(inp_obj),
+            params=params or {},
         )
-        return self._result_id_to_future_result(input_data, result_id)
+        return self._result_id_to_future_result(inp_obj, result_id)
 
-    def compute_procedure(
+    def output(
         self,
-        input_data: OptimizationInputOrList,
-        procedure: str,
-        queue: Optional[str] = None,
-    ) -> Union[FutureResult, FutureResultGroup]:
-        """Submit a procedure computation to ChemCloud"""
-        # Convert any bytes data to b64 encoding
-        _bytes_to_b64(input_data)
-
-        result_id = self._authenticated_request(
-            "post",
-            "/compute-procedure",
-            data=json_dumps(input_data),
-            params={"procedure": procedure, "queue": queue},
-        )
-        return self._result_id_to_future_result(input_data, result_id)
-
-    def result(
-        self,
-        result_id: str,
+        task_id: str,
     ) -> Tuple[str, Union[Optional[Any], Optional[List[Any]]]]:
-        """Check the result of a compute job, returns status and result (if available).
+        """Check the output of a compute job, returns status and output (if available).
 
         Parameters:
             result_id: The ID of the result.
@@ -328,12 +299,9 @@ class _RequestsClient:
                 compute_status: TaskStatus (str)
                 result: Optional[Union[PossibleResults, List[PossibleResults]]] = None
         """
-        result = self._authenticated_request("get", f"/compute/result/{result_id}")
-        if result["result"]:
-            # Convery b64 encoded native_files to bytes
-            _b64_to_bytes(result["result"])
+        response = self._authenticated_request("get", f"/compute/output/{task_id}")
 
-        return result["state"], result["result"]
+        return response["state"], response["result"]
 
     def hello_world(self, name: Optional[str] = None):
         """Ping hello-world endpoint on ChemCloud"""

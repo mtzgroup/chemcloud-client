@@ -6,6 +6,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
+### Changed
+
+- Dropped `QCElemental` in favor of `qcio`.
+- Updated client to work with `v2` of the ChemCloud server using `qcio`.
+- Updated DevOps stack to be in harmony with other qc\* packages (`poetry`, `GitHub Actions`, `pre-commit`, etc).
+- Updated from pydantic `v1` -> `v2`, added `pydantic-settings` to dependencies.
+- Changed settings `chemcloud_default_credentials_profile` to `chemcloud_credentials_profile`.
+- Updated a few names from `result` to `output` to be more in harmony with `qcio` nomenclature.
+
+### Added
+
+- Publish to pypi from GitHub actions.
+
 ## [0.6.2] - 2022-12-27
 
 ### Changed

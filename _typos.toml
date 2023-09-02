@@ -1,0 +1,7 @@
+[default.extend-words]
+# Abbreviation in geomeTRIC code example
+thre = "thre"
+
+[type.po]
+extend-glob = ["jwt.txt"]
+check-file = false

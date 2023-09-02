@@ -4,18 +4,14 @@ from pathlib import Path
 
 import toml
 from pytest_httpx import HTTPXMock
-from qcelemental.models.common_models import Model
+from qcio import Model, ProgramInput, SinglePointOutput
 
 from chemcloud.config import Settings
 from chemcloud.http_client import _RequestsClient
 from chemcloud.models import (
     GROUP_ID_PREFIX,
-    AtomicInput,
-    AtomicResult,
     FutureResult,
     FutureResultGroup,
-    OptimizationInput,
-    QCInputSpecification,
     TaskStatus,
 )
 
@@ -95,11 +91,11 @@ def test_credentials_file_used_for_auth_if_no_passed_values_or_envvars(
     assert client._refresh_token == refresh_token
 
 
-def test_username_password_requested_if_no_credentials_available_to_create_credentials_file(
+def test_username_pwd_requested_if_no_credentials_available_to_create_credentials_file(
     settings, monkeypatch, patch_token_endpoint, mocker
 ):
     # Hack using "no" for username since this will also return "no" for configuring
-    # crednetials file
+    # credentials file
     username = "user_input_username"
     password = "user_input_password"  # pragma: allowlist secret
 
@@ -143,11 +139,11 @@ def test_write_tokens_to_credentials_file(settings):
         data = toml.load(f)
 
     assert (
-        data[settings.chemcloud_default_credentials_profile]["access_token"]
+        data[settings.chemcloud_credentials_profile]["access_token"]
         == test_access_token
     )
     assert (
-        data[settings.chemcloud_default_credentials_profile]["refresh_token"]
+        data[settings.chemcloud_credentials_profile]["refresh_token"]
         == test_refresh_token
     )
 
@@ -174,11 +170,11 @@ def test_write_tokens_to_credentials_file_adds_new_profiles_to_credentials_file(
         data = toml.load(f)
 
     assert (
-        data[settings.chemcloud_default_credentials_profile]["access_token"]
+        data[settings.chemcloud_credentials_profile]["access_token"]
         == default_access_token
     )
     assert (
-        data[settings.chemcloud_default_credentials_profile]["refresh_token"]
+        data[settings.chemcloud_credentials_profile]["refresh_token"]
         == default_refresh_token
     )
 
@@ -195,11 +191,11 @@ def test_write_tokens_to_credentials_file_adds_new_profiles_to_credentials_file(
 
     # Default profile still exists
     assert (
-        data[settings.chemcloud_default_credentials_profile]["access_token"]
+        data[settings.chemcloud_credentials_profile]["access_token"]
         == default_access_token
     )
     assert (
-        data[settings.chemcloud_default_credentials_profile]["refresh_token"]
+        data[settings.chemcloud_credentials_profile]["refresh_token"]
         == default_refresh_token
     )
 
@@ -232,11 +228,11 @@ def test_write_tokens_to_credentials_file_overwrites_tokens_of_existing_profiles
         data = toml.load(f)
 
     assert (
-        data[settings.chemcloud_default_credentials_profile]["access_token"]
+        data[settings.chemcloud_credentials_profile]["access_token"]
         == original_access_token
     )
     assert (
-        data[settings.chemcloud_default_credentials_profile]["refresh_token"]
+        data[settings.chemcloud_credentials_profile]["refresh_token"]
         == original_refresh_token
     )
 
@@ -250,11 +246,10 @@ def test_write_tokens_to_credentials_file_overwrites_tokens_of_existing_profiles
 
     # Default profile has new tokens
     assert (
-        data[settings.chemcloud_default_credentials_profile]["access_token"]
-        == new_access_token
+        data[settings.chemcloud_credentials_profile]["access_token"] == new_access_token
     )
     assert (
-        data[settings.chemcloud_default_credentials_profile]["refresh_token"]
+        data[settings.chemcloud_credentials_profile]["refresh_token"]
         == new_refresh_token
     )
 
@@ -325,11 +320,11 @@ def test__refresh_tokens_writes_to_credentials_file_only_if_flag_set(
         data = toml.load(f)
 
     assert (
-        data[settings.chemcloud_default_credentials_profile]["access_token"]
+        data[settings.chemcloud_credentials_profile]["access_token"]
         == patch_token_endpoint["access_token"]
     )
     assert (
-        data[settings.chemcloud_default_credentials_profile]["refresh_token"]
+        data[settings.chemcloud_credentials_profile]["refresh_token"]
         == patch_token_endpoint["refresh_token"]
     )
 
@@ -368,10 +363,12 @@ def test_compute(settings, patch_compute_endpoints, water, jwt):
     client = _RequestsClient(settings=settings)
     client._access_token = jwt
 
-    model = Model(method="B3LYP", basis="6-31g")
-    atomic_input = AtomicInput(molecule=water, model=model, driver="energy")
+    Model(method="B3LYP", basis="6-31g")
+    atomic_input = ProgramInput(
+        molecule=water, model={"method": "b3lyp", "basis": "6-31g"}, calctype="energy"
+    )
 
-    future_result = client.compute(atomic_input, engine="psi4")
+    future_result = client.compute(atomic_input, {"program": "psi4"})
     assert isinstance(future_result, FutureResult)
     assert future_result.id == patch_compute_endpoints
     assert future_result.client is client
@@ -382,55 +379,9 @@ def test_compute_batch(settings, patch_compute_endpoints, water, jwt):
     client._access_token = jwt
 
     model = Model(method="B3LYP", basis="6-31g")
-    atomic_input = AtomicInput(molecule=water, model=model, driver="energy")
+    atomic_input = ProgramInput(molecule=water, model=model, calctype="energy")
 
-    future_result = client.compute([atomic_input, atomic_input], engine="psi4")
-
-    assert isinstance(future_result, FutureResultGroup)
-    assert future_result.id == f"{GROUP_ID_PREFIX}{patch_compute_endpoints}"
-    assert future_result.client is client
-
-
-def test_compute_procedure(settings, patch_compute_endpoints, water, jwt):
-    client = _RequestsClient(settings=settings)
-    client._access_token = jwt
-
-    input_spec = QCInputSpecification(
-        driver="gradient",
-        model={"method": "b3lyp", "basis": "6-31g"},
-    )
-
-    opt_input = OptimizationInput(
-        input_specification=input_spec,
-        initial_molecule=water,
-        protocols={"trajectory": "all"},
-        keywords={"program": "terachem_fe"},
-    )
-
-    future_result = client.compute_procedure(opt_input, "geometric")
-
-    assert isinstance(future_result, FutureResult)
-    assert future_result.id == patch_compute_endpoints
-    assert future_result.client is client
-
-
-def test_compute_procedure_batch(settings, patch_compute_endpoints, water, jwt):
-    client = _RequestsClient(settings=settings)
-    client._access_token = jwt
-
-    input_spec = QCInputSpecification(
-        driver="gradient",
-        model={"method": "b3lyp", "basis": "6-31g"},
-    )
-
-    opt_input = OptimizationInput(
-        input_specification=input_spec,
-        initial_molecule=water,
-        protocols={"trajectory": "all"},
-        keywords={"program": "terachem_fe"},
-    )
-
-    future_result = client.compute_procedure([opt_input] * 2, "geometric")
+    future_result = client.compute([atomic_input, atomic_input], {"program": "psi4"})
 
     assert isinstance(future_result, FutureResultGroup)
     assert future_result.id == f"{GROUP_ID_PREFIX}{patch_compute_endpoints}"
@@ -443,7 +394,7 @@ def test_result_pending(settings, jwt, httpx_mock: HTTPXMock):
 
     httpx_mock.add_response(json={"state": "PENDING", "result": None})
 
-    status, result = client.result("fake_id")
+    status, result = client.output("fake_id")
 
     assert status == TaskStatus.PENDING
     assert result is None
@@ -452,25 +403,25 @@ def test_result_pending(settings, jwt, httpx_mock: HTTPXMock):
 def test_result_success(settings, jwt, httpx_mock: HTTPXMock):
     client = _RequestsClient(settings=settings)
     client._access_token = jwt
-    atomic_result = AtomicResult.parse_file(
-        Path(__file__).parent / "water.b3lyp.6-31g.energy.json"
+    spo = SinglePointOutput.model_validate_json(
+        (Path(__file__).parent / "water.b3lyp.6-31g.energy.json").read_text()
     )
-    url = re.compile(".*/compute/result")
+    url = re.compile(".*/compute/output")
     httpx_mock.add_response(
         url=url,
-        json={"state": "SUCCESS", "result": json.loads(atomic_result.json())},
+        json={"state": "SUCCESS", "result": json.loads(spo.model_dump_json())},
     )
 
-    status, result = client.result("fake_id")
+    status, result = client.output("fake_id")
 
     assert status == "SUCCESS"
-    assert isinstance(AtomicResult(**result), AtomicResult)
+    assert isinstance(SinglePointOutput(**result), SinglePointOutput)
 
 
 def test__decode_access_token():
     client = _RequestsClient()
 
-    jwt = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Il9xLWdWTjlVZFRfQkdJeGgxOXJiNSJ9.eyJpc3MiOiJodHRwczovL2Rldi1tdHpsYWIudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVmYjg4MjhmMWJkYTAwMDA3NWUxNGIwYSIsImF1ZCI6Imh0dHBzOi8vdGVyYWNoZW1jbG91ZC5kZXYubXR6bGFiLmNvbSIsImlhdCI6MTYxMDU5OTcxNywiZXhwIjoxNjEwNjg2MTE3LCJhenAiOiJsUXZmS2RsZnhMRTBFOW1WRUlsNThXaTlnWDJBd1dvcCIsInNjb3BlIjoiY29tcHV0ZTpwdWJsaWMgY29tcHV0ZTpwcml2YXRlIG9mZmxpbmVfYWNjZXNzIiwiZ3R5IjoicGFzc3dvcmQiLCJwZXJtaXNzaW9ucyI6WyJjb21wdXRlOnByaXZhdGUiLCJjb21wdXRlOnB1YmxpYyJdfQ.OOV8KfmmzMIj049gzRHPqyxbQD7QfYqNT4tqLz6qUd8YmcWyc3rhcoU_We5RUfWsgN_-9w04p3KUsjUWopKO0curmdHsUVGPLg3yFsWbbjd_QgD2BOTwv_IEzGzTtx3a2tjoEepuxzbkyBWE_n2-cV9yPh0tX5p3UO9KFt1ptIE-ucsqH3liPypqR4TcUq_3pLPe_LcqUNTBrFUndZzvvxUSsdidHOekiqTL9eWC8XDqZ_x9kKSa32Whm_AMGFoAqJawUQKt13qItmoxk5xTZeSU7l3Cyi52vpnuSjG-5XAlH3pQ3yk1KUjLtq0GkWK0csmK-W7H7qMd2A9N_ZMQXQ"  # pragma: allowlist secret
+    jwt = (Path(__file__).resolve().parent / "jwt.txt").read_text()
 
     known_payload = {
         "iss": "https://dev-mtzlab.us.auth0.com/",

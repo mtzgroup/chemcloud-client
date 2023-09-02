@@ -8,7 +8,7 @@ from typing import Dict
 import pytest
 import toml
 from pytest_httpx import HTTPXMock
-from qcelemental.models import Molecule
+from qcio import Molecule
 
 from chemcloud.config import Settings
 
@@ -34,7 +34,7 @@ def credentials_file(settings):
     def _write_credentials_file(
         access_token: str,
         refresh_token: str = "credentials_file_refresh_token",
-        profile: str = settings.chemcloud_default_credentials_profile,
+        profile: str = settings.chemcloud_credentials_profile,
     ):
         credentials = {
             profile: {"access_token": access_token, "refresh_token": refresh_token}
@@ -83,7 +83,7 @@ def patch_compute_endpoints(httpx_mock: HTTPXMock):
 
 @pytest.fixture
 def water():
-    return Molecule.from_file(Path(__file__).parent / "water.json")
+    return Molecule.open(Path(__file__).parent / "water.json")
 
 
 @pytest.fixture

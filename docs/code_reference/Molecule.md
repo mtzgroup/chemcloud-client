@@ -31,7 +31,7 @@ water = Molecule.from_file("water.psi4")
 
 ```python
 water = Molecule.from_data("pubchem:water")
-# JSON is the prefered format since it preserves the most information
+# JSON is the preferred format since it preserves the most information
 water.to_file("water.json")
 water.to_file("water.xyz")
 water.to_file("water.psi4")

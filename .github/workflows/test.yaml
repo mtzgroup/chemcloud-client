@@ -1,0 +1,24 @@
+name: Tests
+
+on: [push]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        name: Set up Python
+        with:
+          python-version: "3.8"
+      - name: Install poetry
+        run: pip install poetry
+      - name: Install repo
+        run: poetry install --no-interaction --no-ansi
+      - name: Run tests
+        run: bash scripts/tests.sh
+      - name: Upload coverage HTML
+        uses: actions/upload-artifact@v3
+        with:
+          name: htmlcov
+          path: htmlcov

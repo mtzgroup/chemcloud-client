@@ -1,0 +1,86 @@
+name: Basic Code Quality
+
+on: [push]
+
+env:
+  POETRY_VIRTUALENVS_CREATE: false
+
+jobs:
+  ruff:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.8"
+      - name: Install ruff
+        run: pip install ruff
+      - name: ruff
+        run: ruff check .
+
+  mypy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.8"
+      - name: Install poetry
+        run: pip install poetry
+      - name: Install repo
+        run: poetry install --no-interaction --no-ansi
+      - name: mypy
+        run: mypy .
+
+  black:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.8"
+      - name: Install black
+        run: pip install black
+      - name: Check code formatting with black
+        run: black --check .
+
+  isort:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.8"
+      - name: Install poetry
+        run: pip install poetry
+      - name: Install repo
+        run: poetry install --no-interaction --no-ansi
+      - name: Check import formatting with isort
+        run: isort --check-only --diff .
+
+  detect-secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.8"
+      - name: Install detect secrets
+        run: pip install detect-secrets
+      - name: Look for secrets
+        # Ignore jwt.txt; the token is supposed to be there.
+        run: git ls-files -z | grep -v -z -F 'jwt.txt' | xargs -0 detect-secrets-hook -v
+
+  typos:
+    name: "spell check"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: crate-ci/typos@master
+        with:
+          files: .
