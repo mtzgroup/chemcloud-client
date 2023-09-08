@@ -1,21 +1,21 @@
+from pathlib import Path
+
+from qcio import Molecule, ProgramInput
+
 from chemcloud import CCClient
-from chemcloud.models import AtomicInput, Molecule
+
+current_dir = Path(__file__).resolve().parent
+water = Molecule.open(current_dir / "h2o.xyz")
 
 client = CCClient()
 
-water = Molecule.from_data("pubchem:water")
-
-atomic_input = AtomicInput(
+prog_inp = ProgramInput(
     molecule=water,
-    model={"method": "B3LYP", "basis": "6-31g"},
-    driver="energy",
-    keywords={
-        "closed": True,
-        "restricted": True,
-    },
+    model={"method": "b3lyp", "basis": "6-31g"},
+    calctype="energy",
+    keywords={},
 )
-
-future_result = client.compute([atomic_input] * 2, engine="terachem_fe")
-result = future_result.get()
-# Array of AtomicResult objects
-print(result)
+future_result = client.compute("psi4", [prog_inp] * 2)
+output = future_result.get()
+# Array of SinglePointOutput objects containing all returned data
+print(output)

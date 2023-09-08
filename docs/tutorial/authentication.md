@@ -56,6 +56,6 @@ You can directly pass a username and password to the `client` object. This is **
 ```python
 >>> from chemcloud import CCClient
 >>> client = CCClient(
-    qccloud_username="your_username@email.com", qccloud_password="super_secret_password"
+    qccloud_username="your_username@email.com", qccloud_password="super_secret_password"  # pragma: allowlist secret
     )
 ```

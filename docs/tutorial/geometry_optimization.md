@@ -51,7 +51,7 @@ The `berny` procedure uses the [pyberny](https://github.com/jhrmnn/pyberny) pack
 
 ## geomeTRIC Specifics
 
-The `geometric` procedure uses the [geomeTRIC](https://github.com/leeping/geomeTRIC) package to perform a geometry optimization. `geomeTRIC` specific keywords are subject to change as the `geomeTRIC` package evolves. Since `geomeTRIC` has considerably more keywords, here's the source code that defines varous parameters for an optimization. Keywords noted below can be included in the `OptimizationInput` keywords dictionary. If these options are overwhelming, keep in mind you can run both the `berny` and `geometric` optimizers without any keywords and the optimizers will use sensible defaults.
+The `geometric` procedure uses the [geomeTRIC](https://github.com/leeping/geomeTRIC) package to perform a geometry optimization. `geomeTRIC` specific keywords are subject to change as the `geomeTRIC` package evolves. Since `geomeTRIC` has considerably more keywords, here's the source code that defines various parameters for an optimization. Keywords noted below can be included in the `OptimizationInput` keywords dictionary. If these options are overwhelming, keep in mind you can run both the `berny` and `geometric` optimizers without any keywords and the optimizers will use sensible defaults.
 
 ```python
 class OptParams(object):
