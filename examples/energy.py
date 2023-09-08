@@ -11,7 +11,7 @@ client = CCClient()
 
 prog_inp = ProgramInput(
     molecule=water,
-    model={"method": "b3lyp", "basis": "6-31gg"},
+    model={"method": "b3lyp", "basis": "6-31g"},
     calctype="energy",
     keywords={},
 )
