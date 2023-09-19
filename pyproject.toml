@@ -6,7 +6,6 @@ authors = ["Colton Hicks <github@coltonhicks.com>"]
 license = "MIT"
 readme = "README.md"
 homepage = "https://github.com/mtzgroup/chemcloud-client"
-documentation = "https://mtzgroup.github.io/chemcloud-client/"
 classifiers = [
     "Intended Audience :: Science/Research",
     "Operating System :: OS Independent",
