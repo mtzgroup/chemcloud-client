@@ -632,27 +632,32 @@
 
 <h1 id="batch-computations">Batch Computations<a class="headerlink" href="#batch-computations" title="Permanent link">🔗</a></h1>
 <p>Calculations can be submitted in bulk by passing a list of <code>Input</code> objects to <code>client.compute()</code> rather than a single object.</p>
-<p>from qcio import Molecule, ProgramInput</p>
-<p>from chemcloud import CCClient</p>
-<p>water = Molecule(
-    symbols=["O", "H", "H"],
-    geometry=[
-        [0.0000, 0.00000, 0.0000],
-        [0.2774, 0.89290, 0.2544],
-        [0.6067, -0.23830, -0.7169],
-    ],
-)</p>
-<p>client = CCClient()</p>
-<p>prog_inp = ProgramInput(
-    molecule=water,
-    model={"method": "b3lyp", "basis": "6-31g"},
-    calctype="energy",
-    keywords={},
-)
-future_result = client.compute("psi4", [prog_inp] * 2)
-output = future_result.get()</p>
-<h1 id="array-of-singlepointoutput-objects-containing-all-returned-data">Array of SinglePointOutput objects containing all returned data<a class="headerlink" href="#array-of-singlepointoutput-objects-containing-all-returned-data" title="Permanent link">🔗</a></h1>
-<p>print(output)</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">qcio</span> <span class="kn">import</span> <span class="n">Molecule</span><span class="p">,</span> <span class="n">ProgramInput</span>
+
+<span class="kn">from</span> <span class="nn">chemcloud</span> <span class="kn">import</span> <span class="n">CCClient</span>
+
+<span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span>
+    <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">],</span>
+    <span class="n">geometry</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">[</span><span class="mf">0.0000</span><span class="p">,</span> <span class="mf">0.00000</span><span class="p">,</span> <span class="mf">0.0000</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.2774</span><span class="p">,</span> <span class="mf">0.89290</span><span class="p">,</span> <span class="mf">0.2544</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.6067</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.23830</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.7169</span><span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">()</span>
+
+<span class="n">prog_inp</span> <span class="o">=</span> <span class="n">ProgramInput</span><span class="p">(</span>
+    <span class="n">molecule</span><span class="o">=</span><span class="n">water</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;b3lyp&quot;</span><span class="p">,</span> <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="s2">&quot;6-31g&quot;</span><span class="p">},</span>
+    <span class="n">calctype</span><span class="o">=</span><span class="s2">&quot;energy&quot;</span><span class="p">,</span>
+    <span class="n">keywords</span><span class="o">=</span><span class="p">{},</span>
+<span class="p">)</span>
+<span class="n">future_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="s2">&quot;psi4&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">prog_inp</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">future_result</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="c1"># Array of SinglePointOutput objects containing all returned data</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</code></pre></div>
 
 
 
