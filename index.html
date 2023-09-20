@@ -743,7 +743,7 @@
 <a href="https://github.com/mtzgroup/chemcloud-client/actions"><img alt="Actions status" src="https://github.com/mtzgroup/chemcloud-client/workflows/Basic%20Code%20Quality/badge.svg" /></a>
 <a href="https://github.com/charliermarsh/ruff"><img alt="Ruff" src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v1.json" /></a></p>
 <h1 id="chemcloud-a-python-client-for-chemcloud">chemcloud - A Python Client for ChemCloud<a class="headerlink" href="#chemcloud-a-python-client-for-chemcloud" title="Permanent link">🔗</a></h1>
-<p><code>chemcloud</code> is a python client for the <a href="https://github.com/mtzgroup/chemcloud-server">ChemCloud Server</a>. A ChemCloud server securely exposes a <a href="https://github.com/mtzgroup/bigchem">BigChem</a> compute system over the open internet. All input and output data structures come from <a href="https://github.com/coltonbh/qcio">qcio</a> and using the ChemCloud client looks almost identical to using the <a href="https://github.com/coltonbh/qcop">qcop</a> library except that calculations are performed on a remote machine rather than the end user's machine. The client provides a simple, yet powerful interface to perform computational chemistry calculation using nothing but modern python and an internet connection.</p>
+<p><code>chemcloud</code> is a python client for the <a href="https://github.com/mtzgroup/chemcloud-server">ChemCloud Server</a>. A ChemCloud server securely exposes a <a href="https://github.com/mtzgroup/bigchem">BigChem</a> compute system over the open internet. All input and output data structures come from <a href="https://github.com/coltonbh/qcio">qcio</a>. Using the ChemCloud client looks almost identical to using the <a href="https://github.com/coltonbh/qcop">qcop</a> library except that calculations are performed on a remote machine rather than the end user's machine. The client provides a simple, yet powerful interface to perform computational chemistry calculations using nothing but modern python and an internet connection.</p>
 <p><strong>Documentation</strong>: <a href="https://mtzgroup.github.io/chemcloud-client">https://mtzgroup.github.io/chemcloud-client</a></p>
 <p><code>chemcloud</code> works in harmony with a suite of other quantum chemistry tools for fast, structured, and interoperable quantum chemistry.</p>
 <h2 id="the-qc-suite-of-programs">The QC Suite of Programs<a class="headerlink" href="#the-qc-suite-of-programs" title="Permanent link">🔗</a></h2>
@@ -796,10 +796,8 @@
 
 <span class="c1"># Submit the calculation to the server</span>
 <span class="n">future_output</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="s2">&quot;terachem&quot;</span><span class="p">,</span> <span class="n">prog_input</span><span class="p">,</span> <span class="n">collect_files</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
 <span class="c1"># Status can be checked at any time</span>
 <span class="n">future_result</span><span class="o">.</span><span class="n">status</span>
-
 <span class="c1"># Get the output (blocking)</span>
 <span class="n">output</span> <span class="o">=</span> <span class="n">future_output</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 
