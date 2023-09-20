@@ -9,7 +9,7 @@ import httpx
 import toml
 from qcio.utils import json_dumps
 
-from chemcloud.models import FutureResult, FutureResultGroup, QCIOInputs
+from chemcloud.models import FutureOutput, FutureOutputGroup, QCIOInputs
 
 from .config import Settings, settings
 
@@ -268,14 +268,14 @@ class _RequestsClient:
 
     def _result_id_to_future_result(self, input_data, result_id):
         if isinstance(input_data, list):
-            return FutureResultGroup(id=result_id, client=self)
-        return FutureResult(id=result_id, client=self)
+            return FutureOutputGroup(task_id=result_id, client=self)
+        return FutureOutput(task_id=result_id, client=self)
 
     def compute(
         self,
         inp_obj: QCIOInputs,
         params: Optional[Dict[str, Any]] = None,
-    ) -> Union[FutureResult, FutureResultGroup]:
+    ) -> Union[FutureOutput, FutureOutputGroup]:
         """Submit a computation to ChemCloud"""
         result_id = self._authenticated_request(
             "post",

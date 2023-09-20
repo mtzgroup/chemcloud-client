@@ -1,36 +1,32 @@
-# Geometry Optimization
-
 ## Basic Working Example
 
-- Create a Molecule
-- Define parameters for the compute engine
-- Define the optimization parameters for the optimizer and specify the compute engine
-- Specify the optimizer to run
-
-```Python hl_lines="8 10-14 21 24 29"
+```python
 {!../examples/optimization.py!}
 ```
 
 ## Using Force Fields
 
-`rdkit` can be specified as a compute backend to perform optimizations using force field methods instead of quantum chemistry backends. To use `rdkit` force field methods simply modify the model specification and `program` specification as shown below. Also note that `rdkit` requires the molecular connectivity to be defined.
+`rdkit` can be specified as a compute backend to perform optimizations using force field methods instead of quantum chemistry backends. To use `rdkit` force field methods simply modify the model specification and `subprogram` specification as shown below. Also note that `rdkit` requires the molecular connectivity to be defined.
 
 ```python
-# Hack to quickly drop in water's connectivity
-water = Molecule.from_data("pubchem:water")
-water = Molecule(**{**water.dict(), "connectivity": [(0, 1, 1.0), (0, 2, 1.0)]})
-
-input_spec = QCInputSpecification(
-    ...
-    model = {"method": "UFF"} # or any other force field
+water = Molecule(
+    symbols=["O", "H", "H"],
+    geometry=[
+        [0.0000, 0.00000, 0.0000],
+        [0.2774, 0.89290, 0.2544],
+        [0.6067, -0.23830, -0.7169],
+    ],
+    # Add bond connectivity to water (from_atom, to_atom, bond_order)
+    connectivity=[(0, 1, 1.0), (0, 2, 1.0)],
 )
 
-opt_input = OptimizationInput(
+opt_input = DualProgramInput(
     ...
-    keywords={"program": "rdkit"},
+    subprogram="rdkit",
+    subprogram_args={"model": {"method": "UFF"}} # or any other force field
 )
 
-future_result = client.compute_procedure(opt_input, "geometric")
+future_output = client.compute("geometric", opt_input)
 
 ```
 

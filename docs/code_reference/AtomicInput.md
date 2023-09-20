@@ -1,3 +1,0 @@
-# AtomicInput
-
-::: chemcloud.models:AtomicInput

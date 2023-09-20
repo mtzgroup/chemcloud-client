@@ -1,3 +1,0 @@
-# AtomicResult
-
-::: chemcloud.models:AtomicResult

@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
+### Changed
+
+- `FutureResult` objects now called `FutureOutput` to keep in harmony with `qcio` nomenclature.
+- Documentation rewritten to capture API changes with `qcio` and `qcop`.
+- `/examples` scripts instantiate a `Molecule` directly rather than opening `h2o.xyz` so that code examples can be run directly from the documentation website.
+- All `mkdocs` and associated documentation packages updated to the latest versions.
+
 ## [0.7.0] - 2023-09-08
 
 ### Changed

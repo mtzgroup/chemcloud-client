@@ -3,7 +3,7 @@ from typing import Dict, List, Optional, Union
 from . import __version__
 from .config import settings
 from .http_client import _RequestsClient
-from .models import FutureResult, FutureResultGroup, QCIOInputsOrList
+from .models import FutureOutput, FutureOutputGroup, QCIOInputsOrList
 
 
 class CCClient:
@@ -54,7 +54,7 @@ class CCClient:
 
     @property
     def version(self) -> str:
-        """Return chemcloud version"""
+        """Returns chemcloud client version"""
         return __version__
 
     @property
@@ -62,8 +62,7 @@ class CCClient:
         """Profile being used for authentication with ChemCloud.
 
         Returns:
-            The name of the name of the credentials profile being used with
-            the current client.
+            The name of the credentials profile being used with the current client.
         """
         return self._client._profile
 
@@ -108,7 +107,7 @@ class CCClient:
         rm_scratch_dir: bool = True,
         propagate_wfn: bool = False,
         queue: Optional[str] = None,
-    ) -> Union[FutureResult, FutureResultGroup]:
+    ) -> Union[FutureOutput, FutureOutputGroup]:
         """Submit a computation to ChemCloud.
 
         Parameters:
@@ -132,7 +131,7 @@ class CCClient:
 
         Returns:
             Object providing access to a computation's eventual result. You can check a
-            computation's status by running `.status` on the `FutureResult` object or
+            computation's status by running `.status` on the `FutureOutput` object or
             `.get()` to block and retrieve the computation's final result.
         """
         if self.supported_programs is not None:

@@ -1,3 +1,1 @@
-# Exceptions
-
 ::: chemcloud.exceptions
