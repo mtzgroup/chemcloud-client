@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "chemcloud"
-version = "0.8.0"
+version = "0.8.1"
 description = "Fast, secure, scalable quantum chemistry. A Python client for the the ChemCloud server."
 authors = ["Colton Hicks <github@coltonhicks.com>"]
 license = "MIT"
@@ -28,7 +28,7 @@ classifiers = [
 python = "^3.8"
 toml = "^0.10.2"
 httpx = "^0.23.1"
-qcio = "^0.6.0"
+qcio = "^0.7.0"
 pydantic = ">=2.0.0"
 pydantic-settings = "^2.0.3"
 
