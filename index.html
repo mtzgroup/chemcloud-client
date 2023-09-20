@@ -7,14 +7,18 @@
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
       
-      
         <meta name="author" content="Colton Hicks">
       
       
         <link rel="canonical" href="https://mtzgroup.github.io/chemcloud-client/">
       
-      <link rel="shortcut icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-7.0.3">
+      
+      
+        <link rel="next" href="tutorial/compute/">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.3.2">
     
     
       
@@ -22,30 +26,37 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.1655a90d.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.30068a00.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.7fa14f5b.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.85d0ee34.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
         
-      
-    
-    
-    
-      
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
-        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
-    
     
     
       <link rel="stylesheet" href="assets/_mkdocstrings.css">
     
       <link rel="stylesheet" href="css/extra.css">
     
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
+
+    
     
     
   </head>
@@ -59,8 +70,10 @@
     
     
     <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber">
-      
   
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -77,18 +90,22 @@
       
     </div>
     
+    
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="https://mtzgroup.github.io/chemcloud-client/" title="chemcloud" class="md-header__button md-logo" aria-label="chemcloud">
+    <a href="." title="chemcloud" class="md-header__button md-logo" aria-label="chemcloud" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
@@ -106,26 +123,46 @@
         </div>
       </div>
     </div>
-    <div class="md-header__options">
+    
       
-    </div>
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+    
+  
+</form>
+      
+    
+    
     
       <label class="md-header__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
       </label>
-      
-<div class="md-search" data-md-component="search" role="dialog">
+      <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
       </label>
-      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
-      </button>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" data-md-scrollfix>
@@ -133,7 +170,7 @@
           <div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
         </div>
       </div>
     </div>
@@ -142,11 +179,10 @@
     
     
       <div class="md-header__source">
-        
-<a href="https://github.com/mtzgroup/chemcloud-client" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/mtzgroup/chemcloud-client" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -155,11 +191,14 @@
       </div>
     
   </nav>
+  
 </header>
     
     <div class="md-container" data-md-component="container">
       
       
+        
+          
         
       
       <main class="md-main" data-md-component="main">
@@ -174,24 +213,22 @@
 
 
 
-
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="https://mtzgroup.github.io/chemcloud-client/" title="chemcloud" class="md-nav__button md-logo" aria-label="chemcloud">
+    <a href="." title="chemcloud" class="md-nav__button md-logo" aria-label="chemcloud" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
 
     </a>
     chemcloud
   </label>
   
     <div class="md-nav__source">
-      
-<a href="https://github.com/mtzgroup/chemcloud-client" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/mtzgroup/chemcloud-client" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -203,8 +240,6 @@
     
       
       
-      
-
   
   
     
@@ -212,22 +247,37 @@
   
     <li class="md-nav__item md-nav__item--active">
       
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
       
         
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          chemcloud
+          
+  
+  <span class="md-ellipsis">
+    chemcloud
+  </span>
+  
+
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="." class="md-nav__link md-nav__link--active">
-        chemcloud
+        
+  
+  <span class="md-ellipsis">
+    chemcloud
+  </span>
+  
+
       </a>
       
         
+
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
   
   
     
@@ -240,8 +290,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
-    Requirements
+  <a href="#the-qc-suite-of-programs" class="md-nav__link">
+    The QC Suite of Programs
   </a>
   
 </li>
@@ -254,35 +304,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
+  <a href="#quickstart" class="md-nav__link">
+    Quickstart
   </a>
   
-    <nav class="md-nav" aria-label="Usage">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#examples" class="md-nav__link">
     Examples
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
       
         <li class="md-nav__item">
-  <a href="#development" class="md-nav__link">
-    Development
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#licence" class="md-nav__link">
-    Licence
+  <a href="#support" class="md-nav__link">
+    Support
   </a>
   
 </li>
@@ -297,278 +334,324 @@
     
       
       
-      
-
   
   
   
     
+    
+    
     <li class="md-nav__item md-nav__item--nested">
       
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" data-md-state="indeterminate" type="checkbox" id="__nav_2" checked>
-      
-      <label class="md-nav__link" for="__nav_2">
-        Tutorial - Users Guide
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="Tutorial - Users Guide" data-md-level="1">
-        <label class="md-nav__title" for="__nav_2">
-          <span class="md-nav__icon md-icon"></span>
-          Tutorial - Users Guide
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        
+        
           
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
             
+  
+  <span class="md-ellipsis">
+    Tutorial - Users Guide
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Tutorial - Users Guide
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
   
   
   
     <li class="md-nav__item">
       <a href="tutorial/compute/" class="md-nav__link">
-        Compute
+        
+  
+  <span class="md-ellipsis">
+    Compute
+  </span>
+  
+
       </a>
     </li>
   
 
-          
+              
             
+              
+                
   
   
   
     <li class="md-nav__item">
-      <a href="tutorial/compute_engines/" class="md-nav__link">
-        Compute Engines
+      <a href="tutorial/supported-programs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Supported programs
+  </span>
+  
+
       </a>
     </li>
   
 
-          
+              
             
+              
+                
   
   
   
     <li class="md-nav__item">
       <a href="tutorial/authentication/" class="md-nav__link">
-        Authentication
+        
+  
+  <span class="md-ellipsis">
+    Authentication
+  </span>
+  
+
       </a>
     </li>
   
 
-          
+              
             
+              
+                
   
   
   
     <li class="md-nav__item">
-      <a href="tutorial/geometry_optimization/" class="md-nav__link">
-        Geometry Optimization
+      <a href="tutorial/geometry-optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Geometry Optimization
+  </span>
+  
+
       </a>
     </li>
   
 
-          
+              
             
+              
+                
   
   
   
     <li class="md-nav__item">
-      <a href="tutorial/batch_computations/" class="md-nav__link">
-        Batch Computations
+      <a href="tutorial/batch-computations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Batch Computations
+  </span>
+  
+
       </a>
     </li>
   
 
-          
+              
             
+              
+                
   
   
   
     <li class="md-nav__item">
-      <a href="tutorial/bigchem_algorithms/" class="md-nav__link">
-        BigChem Algorithms
+      <a href="tutorial/bigchem-algorithms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    BigChem Algorithms
+  </span>
+  
+
       </a>
     </li>
   
 
-          
-        </ul>
-      </nav>
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
     
       
       
-      
-
   
   
   
+    
+    
     
     <li class="md-nav__item md-nav__item--nested">
       
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Code Reference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Code Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="code-reference/CCClient/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CCClient
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="code-reference/future-results/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Future results
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="code-reference/inputs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inputs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="code-reference/outputs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Outputs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="code-reference/exceptions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exceptions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" data-md-state="indeterminate" type="checkbox" id="__nav_3" checked>
-      
-      <label class="md-nav__link" for="__nav_3">
-        Code Reference
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="Code Reference" data-md-level="1">
-        <label class="md-nav__title" for="__nav_3">
-          <span class="md-nav__icon md-icon"></span>
-          Code Reference
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="code_reference/CCClient/" class="md-nav__link">
-        CCClient
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="code_reference/models/" class="md-nav__link">
-        Models
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="code_reference/FutureResult/" class="md-nav__link">
-        FutureResult
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="code_reference/Molecule/" class="md-nav__link">
-        Molecule
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="code_reference/AtomicInput/" class="md-nav__link">
-        AtomicInput
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="code_reference/AtomicResult/" class="md-nav__link">
-        AtomicResult
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="code_reference/OptimizationInput/" class="md-nav__link">
-        Optimization Input
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="code_reference/OptimizationResult/" class="md-nav__link">
-        Optimization Result
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="code_reference/FailedOperation/" class="md-nav__link">
-        FailedOperation
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="code_reference/ComputeError/" class="md-nav__link">
-        ComputeError
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="code_reference/exceptions/" class="md-nav__link">
-        Exceptions
-      </a>
-    </li>
-  
-
-          
-        </ul>
-      </nav>
     </li>
   
 
     
       
       
-      
-
   
   
   
     <li class="md-nav__item">
       <a href="CHANGELOG/" class="md-nav__link">
-        Changelog
+        
+  
+  <span class="md-ellipsis">
+    Changelog
+  </span>
+  
+
       </a>
     </li>
   
@@ -586,7 +669,9 @@
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
+
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
   
   
     
@@ -599,8 +684,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#requirements" class="md-nav__link">
-    Requirements
+  <a href="#the-qc-suite-of-programs" class="md-nav__link">
+    The QC Suite of Programs
   </a>
   
 </li>
@@ -613,35 +698,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
+  <a href="#quickstart" class="md-nav__link">
+    Quickstart
   </a>
   
-    <nav class="md-nav" aria-label="Usage">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#examples" class="md-nav__link">
     Examples
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
       
         <li class="md-nav__item">
-  <a href="#development" class="md-nav__link">
-    Development
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#licence" class="md-nav__link">
-    Licence
+  <a href="#support" class="md-nav__link">
+    Support
   </a>
   
 </li>
@@ -654,164 +726,126 @@
               </div>
             
           
-          <div class="md-content" data-md-component="content">
-            <article class="md-content__inner md-typeset">
-              
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
                 
-                  <a href="https://github.com/mtzgroup/chemcloud-client/edit/develop/docs/index.md" title="Edit this page" class="md-content__button md-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
-                  </a>
-                
-                
-                <h1 id="chemcloud-a-python-client-for-chemcloud">chemcloud - A Python Client for ChemCloud<a class="headerlink" href="#chemcloud-a-python-client-for-chemcloud" title="Permanent link">🔗</a></h1>
-<p><code>chemcloud</code> is a python client for the <a href="https://github.com/mtzgroup/chemcloud-server">ChemCloud Server</a> that makes performing computational chemistry calculations easy, fast, and fun. All input and output data structures are based on the <a href="https://molssi-qc-schema.readthedocs.io/en/latest/index.html#">QCSchema</a> specification designed by <a href="https://molssi.org">The Molecular Sciences Software Institute</a>. The client provides a simple, yet powerful interface to perform computational chemistry calculation using nothing but modern python and an internet connection.</p>
+                  
+
+  
+  
+
+
+<p><a href="https://pypi.python.org/pypi/chemcloud"><img alt="image" src="https://img.shields.io/pypi/v/chemcloud.svg" /></a>
+<a href="https://pypi.python.org/pypi/chemcloud"><img alt="image" src="https://img.shields.io/pypi/l/chemcloud.svg" /></a>
+<a href="https://pypi.python.org/pypi/chemcloud"><img alt="image" src="https://img.shields.io/pypi/pyversions/chemcloud.svg" /></a>
+<a href="https://github.com/mtzgroup/chemcloud-client/actions"><img alt="Actions status" src="https://github.com/mtzgroup/chemcloud-client/workflows/Tests/badge.svg" /></a>
+<a href="https://github.com/mtzgroup/chemcloud-client/actions"><img alt="Actions status" src="https://github.com/mtzgroup/chemcloud-client/workflows/Basic%20Code%20Quality/badge.svg" /></a>
+<a href="https://github.com/charliermarsh/ruff"><img alt="Ruff" src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v1.json" /></a></p>
+<h1 id="chemcloud-a-python-client-for-chemcloud">chemcloud - A Python Client for ChemCloud<a class="headerlink" href="#chemcloud-a-python-client-for-chemcloud" title="Permanent link">🔗</a></h1>
+<p><code>chemcloud</code> is a python client for the <a href="https://github.com/mtzgroup/chemcloud-server">ChemCloud Server</a>. A ChemCloud server securely exposes a <a href="https://github.com/mtzgroup/bigchem">BigChem</a> compute system over the open internet. All input and output data structures come from <a href="https://github.com/coltonbh/qcio">qcio</a> and using the ChemCloud client looks almost identical to using the <a href="https://github.com/coltonbh/qcop">qcop</a> library except that calculations are performed on a remote machine rather than the end user's machine. The client provides a simple, yet powerful interface to perform computational chemistry calculation using nothing but modern python and an internet connection.</p>
 <p><strong>Documentation</strong>: <a href="https://mtzgroup.github.io/chemcloud-client">https://mtzgroup.github.io/chemcloud-client</a></p>
-<p><strong>Source Code</strong>: <a href="https://github.com/mtzgroup/chemcloud-client">https://github.com/mtzgroup/chemcloud-client</a></p>
-<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">🔗</a></h2>
+<p><code>chemcloud</code> works in harmony with a suite of other quantum chemistry tools for fast, structured, and interoperable quantum chemistry.</p>
+<h2 id="the-qc-suite-of-programs">The QC Suite of Programs<a class="headerlink" href="#the-qc-suite-of-programs" title="Permanent link">🔗</a></h2>
 <ul>
-<li>Python 3.7+</li>
-<li><code>chemcloud</code> stands on the shoulders of giants. It internally depends upon <a href="http://docs.qcarchive.molssi.org/projects/QCElemental/en/stable/">QCElemental</a>, <a href="https://www.python-httpx.org">httpx</a>, and <a href="https://pypi.org/project/toml/">toml</a>.</li>
-<li>The <code>AtomicInput</code>, <code>Molecule</code>, <code>Model</code>, and <code>AtomicResult</code> models used throughout the package come directly from <a href="http://docs.qcarchive.molssi.org/projects/QCElemental/en/stable/">QCElemental</a>. They are included in <code>chemcloud.models</code> for your convenience.</li>
+<li><a href="https://github.com/coltonbh/qcio">qcio</a> - Beautiful and user friendly data structures for quantum chemistry.</li>
+<li><a href="https://github.com/coltonbh/qcparse">qcparse</a> - A library for efficient parsing of quantum chemistry data into structured <code>qcio</code> objects.</li>
+<li><a href="https://github.com/coltonbh/qcop">qcop</a> - A package for operating quantum chemistry programs using <code>qcio</code> standardized data structures. Compatible with <code>TeraChem</code>, <code>psi4</code>, <code>QChem</code>, <code>NWChem</code>, <code>ORCA</code>, <code>Molpro</code>, <code>geomeTRIC</code> and many more.</li>
+<li><a href="https://github.com/mtzgroup/bigchem">BigChem</a> - A distributed application for running quantum chemistry calculations at scale across clusters of computers or the cloud. Bring multi-node scaling to your favorite quantum chemistry program.</li>
+<li><code>ChemCloud</code> - A <a href="https://github.com/mtzgroup/chemcloud-server">web application</a> and associated <a href="https://github.com/mtzgroup/chemcloud-client">Python client</a> for exposing a BigChem cluster securely over the internet.</li>
 </ul>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">🔗</a></h2>
-<div class="highlight"><pre><span></span><code>pip install chemcloud
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>chemcloud
 </code></pre></div>
-<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">🔗</a></h2>
+<h2 id="quickstart">Quickstart<a class="headerlink" href="#quickstart" title="Permanent link">🔗</a></h2>
 <ul>
-<li>Create a ChemCloud account at <a href="https://chemcloud.mtzlab.com/signup">https://chemcloud.mtzlab.com/signup</a> (or wherever a ChemCloud Server is running)</li>
+<li>Create a ChemCloud account at <a href="https://chemcloud.mtzlab.com/signup">https://chemcloud.mtzlab.com/signup</a> (or the address of the ChemCloud Server you want to communicate with).</li>
 <li>Instantiate a client</li>
 <li>Configure client (only required the very first time you use <code>CCClient</code>)</li>
+<li>Run calculations</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">chemcloud</span> <span class="kn">import</span> <span class="n">CCClient</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">chemcloud</span> <span class="kn">import</span> <span class="n">CCClient</span>
 
-<span class="o">&gt;&gt;&gt;</span> <span class="n">client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">client</span><span class="o">.</span><span class="n">configure</span><span class="p">()</span> <span class="c1"># only run this the very first time you use CCClient</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">()</span>
+<span class="n">client</span><span class="o">.</span><span class="n">configure</span><span class="p">()</span> <span class="c1"># only run this the very first time you use CCClient</span>
 <span class="c1"># See supported compute engines on the ChemCloud Server</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">client</span><span class="o">.</span><span class="n">supported_engines</span>
-<span class="p">[</span><span class="s1">&#39;psi4&#39;</span><span class="p">,</span> <span class="s1">&#39;terachem_fe&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+<span class="n">client</span><span class="o">.</span><span class="n">supported_engines</span>
+<span class="p">[</span><span class="s1">&#39;psi4&#39;</span><span class="p">,</span> <span class="s1">&#39;terachem&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
 <span class="c1"># Test connection to ChemCloud</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">client</span><span class="o">.</span><span class="n">hello_world</span><span class="p">(</span><span class="s2">&quot;Colton&quot;</span><span class="p">)</span>
+<span class="n">client</span><span class="o">.</span><span class="n">hello_world</span><span class="p">(</span><span class="s2">&quot;Colton&quot;</span><span class="p">)</span>
 <span class="s1">&#39;Welcome to ChemCloud, Colton&#39;</span>
 </code></pre></div>
 <ul>
-<li>Create a <a href="https://mtzgroup.github.io/chemcloud-client/code_reference/Molecule/">Molecule</a>.</li>
-<li><code>Molecules</code> can be created from <a href="https://pubchem.ncbi.nlm.nih.gov">pubchem</a>, local files such as <code>.xyz</code> or <code>.psi4</code> files, or using pure python.</li>
+<li>Perform calculations just like you would with <code>qcop</code> except calling <code>client.compute</code> instead of <code>qcop.compute</code>. Rather than getting back an <code>Output</code> object directly, <code>client.compute</code> returns a <code>FutureResult</code> object which can be used to get the output of the computation once it is complete.</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">chemcloud.models</span> <span class="kn">import</span> <span class="n">Molecule</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="s2">&quot;pubchem:water&quot;</span><span class="p">)</span>
-</code></pre></div>
-<ul>
-<li>Specify your compute job using an <a href="https://mtzgroup.github.io/chemcloud-client/code_reference/AtomicInput/">AtomicInput</a></li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">chemcloud.models</span> <span class="kn">import</span> <span class="n">AtomicInput</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">atomic_input</span> <span class="o">=</span> <span class="n">AtomicInput</span><span class="p">(</span><span class="n">molecule</span><span class="o">=</span><span class="n">water</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;B3LYP&quot;</span><span class="p">,</span> <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="s2">&quot;6-31g&quot;</span><span class="p">},</span> <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;energy&quot;</span><span class="p">)</span>
-</code></pre></div>
-<ul>
-<li>Submit a computation, specify a target quantum chemistry engine, and get back an <a href="https://mtzgroup.github.io/chemcloud-client/code_reference/AtomicResult/">AtomicResult</a></li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">future_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">atomic_input</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;terachem_fe&quot;</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">future_result</span><span class="o">.</span><span class="n">status</span>
-<span class="s1">&#39;STARTED&#39;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">qcio</span> <span class="kn">import</span> <span class="n">Molecule</span><span class="p">,</span> <span class="n">ProgramInput</span>
+<span class="kn">from</span> <span class="nn">chemcloud</span> <span class="kn">import</span> <span class="n">CCClient</span>
 
-<span class="c1"># Get result</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">future_result</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-<span class="c1"># Successful result</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span>
-<span class="kc">True</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">result</span>
-<span class="n">AtomicResult</span><span class="p">(</span><span class="n">driver</span><span class="o">=</span><span class="s1">&#39;energy&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="s1">&#39;B3LYP&#39;</span><span class="p">,</span> <span class="s1">&#39;basis&#39;</span><span class="p">:</span> <span class="s1">&#39;6-31g&#39;</span><span class="p">},</span> <span class="n">molecule_hash</span><span class="o">=</span><span class="s1">&#39;b6ec4fa&#39;</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">result</span><span class="o">.</span><span class="n">return_result</span>
-<span class="o">-</span><span class="mf">76.38545794119997</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">()</span>
 
-<span class="c1"># Failed result</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span>
-<span class="kc">False</span>
-<span class="c1"># View result</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">result</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">FailedOperation</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="n">ComputeError</span><span class="p">(</span><span class="n">error_type</span><span class="o">=</span><span class="s1">&#39;input_error&#39;</span><span class="p">,</span> <span class="n">error_message</span><span class="o">=</span><span class="s1">&#39;QCEngine Input Error: Traceback (most recent call last):...&#39;</span><span class="p">))</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">pprint</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="o">.</span><span class="n">error_message</span><span class="p">)</span>
-</code></pre></div>
-<ul>
-<li>Putting it all together</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">chemcloud</span> <span class="kn">import</span> <span class="n">CCClient</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">chemcloud.models</span> <span class="kn">import</span> <span class="n">AtomicInput</span><span class="p">,</span> <span class="n">Molecule</span>
+<span class="c1"># Create the molecule</span>
+<span class="n">h2o</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;h2o.xyz&quot;</span><span class="p">)</span>
 
-<span class="o">&gt;&gt;&gt;</span> <span class="n">client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="s2">&quot;pubchem:water&quot;</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">atomic_input</span> <span class="o">=</span> <span class="n">AtomicInput</span><span class="p">(</span><span class="n">molecule</span><span class="o">=</span><span class="n">water</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;B3LYP&quot;</span><span class="p">,</span> <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="s2">&quot;6-31g&quot;</span><span class="p">},</span> <span class="n">driver</span><span class="o">=</span><span class="s2">&quot;energy&quot;</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">future_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">atomic_input</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;terachem_fe&quot;</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">future_result</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">result</span>
-<span class="n">AtomicResult</span><span class="p">(</span><span class="n">driver</span><span class="o">=</span><span class="s1">&#39;energy&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="s1">&#39;B3LYP&#39;</span><span class="p">,</span> <span class="s1">&#39;basis&#39;</span><span class="p">:</span> <span class="s1">&#39;6-31g&#39;</span><span class="p">},</span> <span class="n">molecule_hash</span><span class="o">=</span><span class="s1">&#39;b6ec4fa&#39;</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">result</span><span class="o">.</span><span class="n">return_result</span>
-<span class="o">-</span><span class="mf">76.38545794119997</span>
+<span class="c1"># Define the program input</span>
+<span class="n">prog_input</span> <span class="o">=</span> <span class="n">ProgramInput</span><span class="p">(</span>
+    <span class="n">molecule</span><span class="o">=</span><span class="n">h2o</span><span class="p">,</span>
+    <span class="n">calctype</span><span class="o">=</span><span class="s2">&quot;energy&quot;</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;hf&quot;</span><span class="p">,</span> <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="s2">&quot;sto-3g&quot;</span><span class="p">},</span>
+    <span class="n">keywords</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;purify&quot;</span><span class="p">:</span> <span class="s2">&quot;no&quot;</span><span class="p">,</span> <span class="s2">&quot;restricted&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+<span class="p">)</span>
+
+<span class="c1"># Submit the calculation to the server</span>
+<span class="n">future_output</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="s2">&quot;terachem&quot;</span><span class="p">,</span> <span class="n">prog_input</span><span class="p">,</span> <span class="n">collect_files</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Status can be checked at any time</span>
+<span class="n">future_result</span><span class="o">.</span><span class="n">status</span>
+
+<span class="c1"># Get the output (blocking)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">future_output</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+<span class="c1"># Inspect the output</span>
+<span class="n">output</span><span class="o">.</span><span class="n">input_data</span> <span class="c1"># Input data used by the QC program</span>
+<span class="n">output</span><span class="o">.</span><span class="n">success</span> <span class="c1"># Whether the calculation succeeded</span>
+<span class="n">output</span><span class="o">.</span><span class="n">results</span> <span class="c1"># All structured results from the calculation</span>
+<span class="n">output</span><span class="o">.</span><span class="n">stdout</span> <span class="c1"># Stdout log from the calculation</span>
+<span class="n">output</span><span class="o">.</span><span class="n">pstdout</span> <span class="c1"># Shortcut to print out the stdout in human readable format</span>
+<span class="n">output</span><span class="o">.</span><span class="n">files</span> <span class="c1"># Any files returned by the calculation</span>
+<span class="n">output</span><span class="o">.</span><span class="n">provenance</span> <span class="c1"># Provenance information about the calculation</span>
+<span class="n">output</span><span class="o">.</span><span class="n">extras</span> <span class="c1"># Any extra information not in the schema</span>
+<span class="n">output</span><span class="o">.</span><span class="n">traceback</span> <span class="c1"># Stack trace if calculation failed</span>
+<span class="n">output</span><span class="o">.</span><span class="n">ptraceback</span> <span class="c1"># Shortcut to print out the traceback in human readable format</span>
 </code></pre></div>
-<h3 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">🔗</a></h3>
-<p>Examples of various computations can be found in the <a href="https://mtzgroup.github.io/chemcloud-client/">documentation</a> and in the GiHub repo's <a href="https://github.com/mtzgroup/chemcloud-client/tree/main/examples">examples directory</a>.</p>
-<h2 id="development">Development<a class="headerlink" href="#development" title="Permanent link">🔗</a></h2>
-<p>Create and source a virtual environment using python 3.7+</p>
-<div class="highlight"><pre><span></span><code>python -m venv env
-<span class="nb">source</span> ./env/bin/activate
-</code></pre></div>
-<p>Install flit</p>
-<div class="highlight"><pre><span></span><code>python -m pip install flit
-</code></pre></div>
-<p>Install <code>chemcloud</code> package and its dependencies</p>
-<div class="highlight"><pre><span></span><code>flit install --deps develop --symlink
-</code></pre></div>
-<p>Source the newly installed packages</p>
-<div class="highlight"><pre><span></span><code><span class="nb">source</span> ./env/bin/activate
-</code></pre></div>
-<p>Run tests to check install</p>
-<div class="highlight"><pre><span></span><code>pytest
-</code></pre></div>
-<h2 id="licence">Licence<a class="headerlink" href="#licence" title="Permanent link">🔗</a></h2>
-<p>This project is licensed under the terms of the MIT license.</p>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">🔗</a></h2>
+<p>Examples of various computations can be found in the <a href="https://github.com/mtzgroup/chemcloud-client/tree/main/examples">examples directory</a>.</p>
+<h2 id="support">Support<a class="headerlink" href="#support" title="Permanent link">🔗</a></h2>
+<p>If you have any issues with <code>chemcloud</code> or would like to request a feature, please open an <a href="https://github.com/mtzgroup/chemcloud-client/issues">issue</a>.</p>
+
+
+
+
+
                 
-              
-              
-                
-
-
-              
-            </article>
-          </div>
+              </article>
+            </div>
+          
+          
         </div>
+        
       </main>
       
-        
-<footer class="md-footer">
-  
-    <nav class="md-footer__inner md-grid" aria-label="Footer">
-      
-      
-        <a href="tutorial/compute/" class="md-footer__link md-footer__link--next" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              Compute
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
+        <footer class="md-footer">
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
-        
-        Made with
-        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-          Material for MkDocs
-        </a>
-      </div>
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
       
     </div>
   </div>
@@ -821,10 +855,11 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["search.suggest", "search.highlight", "navigation.instant", "navigation.expand"], "search": "assets/javascripts/workers/search.fb4a9340.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing"}, "version": null}</script>
+    
+    <script id="__config" type="application/json">{"base": ".", "features": ["search.suggest", "search.highlight", "navigation.instant", "navigation.expand"], "search": "assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.ca5457b8.min.js"></script>
+      <script src="assets/javascripts/bundle.dff1b7c8.min.js"></script>
       
     
   </body>

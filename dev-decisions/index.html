@@ -10,28 +10,24 @@
         <meta name="author" content="Colton Hicks">
       
       
-        <link rel="canonical" href="https://mtzgroup.github.io/chemcloud-client/tutorial/compute/">
+        <link rel="canonical" href="https://mtzgroup.github.io/chemcloud-client/dev-decisions/">
       
       
-        <link rel="prev" href="../..">
       
       
-        <link rel="next" href="../supported-programs/">
-      
-      
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.3.2">
     
     
       
-        <title>Compute - chemcloud</title>
+        <title>Core Development Decisions - chemcloud</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.30068a00.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.30068a00.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.85d0ee34.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.85d0ee34.min.css">
       
       
 
@@ -50,11 +46,11 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="../../css/extra.css">
+      <link rel="stylesheet" href="../css/extra.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -83,7 +79,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#compute" class="md-skip">
+        <a href="#core-development-decisions" class="md-skip">
           Skip to content
         </a>
       
@@ -99,7 +95,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="chemcloud" class="md-header__button md-logo" aria-label="chemcloud" data-md-component="logo">
+    <a href=".." title="chemcloud" class="md-header__button md-logo" aria-label="chemcloud" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -119,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Compute
+              Core Development Decisions
             
           </span>
         </div>
@@ -217,7 +213,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="chemcloud" class="md-nav__button md-logo" aria-label="chemcloud" data-md-component="logo">
+    <a href=".." title="chemcloud" class="md-nav__button md-logo" aria-label="chemcloud" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -246,7 +242,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -263,19 +259,19 @@
       
   
   
-    
-  
   
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
         
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
             
@@ -288,7 +284,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Tutorial - Users Guide
@@ -299,29 +295,9 @@
                 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Compute
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../tutorial/compute/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -330,33 +306,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#basic-energy-calculation" class="md-nav__link">
-    Basic Energy Calculation
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -368,7 +317,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../supported-programs/" class="md-nav__link">
+      <a href="../tutorial/supported-programs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -388,7 +337,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../authentication/" class="md-nav__link">
+      <a href="../tutorial/authentication/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -408,7 +357,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../geometry-optimization/" class="md-nav__link">
+      <a href="../tutorial/geometry-optimization/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -428,7 +377,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../batch-computations/" class="md-nav__link">
+      <a href="../tutorial/batch-computations/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -448,7 +397,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../bigchem-algorithms/" class="md-nav__link">
+      <a href="../tutorial/bigchem-algorithms/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -511,7 +460,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-reference/CCClient/" class="md-nav__link">
+      <a href="../code-reference/CCClient/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -531,7 +480,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-reference/future-results/" class="md-nav__link">
+      <a href="../code-reference/future-results/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -551,7 +500,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-reference/inputs/" class="md-nav__link">
+      <a href="../code-reference/inputs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -571,7 +520,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-reference/outputs/" class="md-nav__link">
+      <a href="../code-reference/outputs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -591,7 +540,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-reference/exceptions/" class="md-nav__link">
+      <a href="../code-reference/exceptions/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -618,7 +567,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../CHANGELOG/" class="md-nav__link">
+      <a href="../CHANGELOG/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -658,8 +607,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#basic-energy-calculation" class="md-nav__link">
-    Basic Energy Calculation
+  <a href="#_requestsclient-class" class="md-nav__link">
+    _RequestsClient Class
   </a>
   
 </li>
@@ -682,40 +631,12 @@
   
 
 
-<h1 id="compute">Compute<a class="headerlink" href="#compute" title="Permanent link">🔗</a></h1>
-<p>Computations are physically executed by a BigChem instance fronted by a ChemCloud server. The chemcloud python client submits jobs to and retrieves work from the ChemCloud server. Computations are submitted using the <a class="autorefs autorefs-internal" href="../../code-reference/CCClient/#chemcloud.client.CCClient">CCClient</a> object.</p>
-<p>Computations require a QC proram and <code>ProgramInput</code> or <code>DualProgramInput</code> object. The <code>ProgramInput</code> object contains all the information necessary to run a single calculation. The <code>DualProgramInput</code> object is used when two QC programs are used in tandem, such as when performing a geometry optimization with one program that uses a subprogram for the energy and gradient calculations.</p>
-<h2 id="basic-energy-calculation">Basic Energy Calculation<a class="headerlink" href="#basic-energy-calculation" title="Permanent link">🔗</a></h2>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">qcio</span> <span class="kn">import</span> <span class="n">Molecule</span><span class="p">,</span> <span class="n">ProgramInput</span><span class="p">,</span> <span class="n">SinglePointOutput</span>
-
-<span class="kn">from</span> <span class="nn">chemcloud</span> <span class="kn">import</span> <span class="n">CCClient</span>
-
-<span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span>
-    <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">],</span>
-    <span class="n">geometry</span><span class="o">=</span><span class="p">[</span>
-        <span class="p">[</span><span class="mf">0.0000</span><span class="p">,</span> <span class="mf">0.00000</span><span class="p">,</span> <span class="mf">0.0000</span><span class="p">],</span>
-        <span class="p">[</span><span class="mf">0.2774</span><span class="p">,</span> <span class="mf">0.89290</span><span class="p">,</span> <span class="mf">0.2544</span><span class="p">],</span>
-        <span class="p">[</span><span class="mf">0.6067</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.23830</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.7169</span><span class="p">],</span>
-    <span class="p">],</span>
-<span class="p">)</span>
-
-<span class="n">client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">()</span>
-
-<span class="n">prog_inp</span> <span class="o">=</span> <span class="n">ProgramInput</span><span class="p">(</span>
-    <span class="n">molecule</span><span class="o">=</span><span class="n">water</span><span class="p">,</span>
-    <span class="n">model</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;b3lyp&quot;</span><span class="p">,</span> <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="s2">&quot;6-31g&quot;</span><span class="p">},</span>
-    <span class="n">calctype</span><span class="o">=</span><span class="s2">&quot;energy&quot;</span><span class="p">,</span>
-    <span class="n">keywords</span><span class="o">=</span><span class="p">{},</span>
-<span class="p">)</span>
-<span class="n">future_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="s2">&quot;psi4&quot;</span><span class="p">,</span> <span class="n">prog_inp</span><span class="p">,</span> <span class="n">collect_files</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">output</span><span class="p">:</span> <span class="n">SinglePointOutput</span> <span class="o">=</span> <span class="n">future_result</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-<span class="c1"># SinglePointOutput object containing all returned data</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-<span class="c1"># The energy value requested</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">return_result</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">files</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-</code></pre></div>
+<h1 id="core-development-decisions">Core Development Decisions<a class="headerlink" href="#core-development-decisions" title="Permanent link">🔗</a></h1>
+<h2 id="_requestsclient-class">_RequestsClient Class<a class="headerlink" href="#_requestsclient-class" title="Permanent link">🔗</a></h2>
+<ul>
+<li><code>_RequestsClient</code> public http methods (like <code>compute()</code> and <code>result()</code> should always return Python objects. This gives a layer of abstraction between callers who want to think in terms of Python data objects and the <code>_RequestsClient</code> which thinks in terms of http requests and <code>json</code> data structures.</li>
+</ul>
+<p>I'm starting to have second thoughts about this ^^ decision. It feels like the <code>_RequestsClient</code> is starting to take on too much responsibility. It accepts python data types as parameters, and returns python data types as it if were an end-user class. It isn't. It's meant to be a utility class used by end-user objects such as <code>CCClient</code> and <code>FutureResult</code> objects. I think it should return data more directly from the ChemCloud API and let the other classes handle this data. This becomes more apparent as I add <code>pydantic</code> to my data models and realize I'd rather have them pass rawer data types to the <code>_RequestsClient</code> and then handle the results of an API call inside their own class. Maybe the <code>compute()</code> method on the <code>_RequestsClient</code> should go away and these should live exclusively on the <code>CCClient</code> object which then utilizes <code>request</code> and <code>authenticated_request</code> to access ChemCloud.</p>
 
 
 
@@ -753,10 +674,10 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["search.suggest", "search.highlight", "navigation.instant", "navigation.expand"], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight", "navigation.instant", "navigation.expand"], "search": "../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.dff1b7c8.min.js"></script>
+      <script src="../assets/javascripts/bundle.dff1b7c8.min.js"></script>
       
     
   </body>

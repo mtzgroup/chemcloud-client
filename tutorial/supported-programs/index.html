@@ -10,13 +10,13 @@
         <meta name="author" content="Colton Hicks">
       
       
-        <link rel="canonical" href="https://mtzgroup.github.io/chemcloud-client/tutorial/compute/">
+        <link rel="canonical" href="https://mtzgroup.github.io/chemcloud-client/tutorial/supported-programs/">
       
       
-        <link rel="prev" href="../..">
+        <link rel="prev" href="../compute/">
       
       
-        <link rel="next" href="../supported-programs/">
+        <link rel="next" href="../authentication/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>Compute - chemcloud</title>
+        <title>Supported programs - chemcloud</title>
       
     
     
@@ -82,11 +82,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#compute" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -119,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Compute
+              Supported programs
             
           </span>
         </div>
@@ -299,29 +294,9 @@
                 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Compute
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -330,33 +305,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#basic-energy-calculation" class="md-nav__link">
-    Basic Energy Calculation
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -366,9 +314,16 @@
                 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../supported-programs/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -377,6 +332,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -648,23 +604,6 @@
   
   
   
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#basic-energy-calculation" class="md-nav__link">
-    Basic Energy Calculation
-  </a>
-  
-</li>
-      
-    </ul>
   
 </nav>
                   </div>
@@ -682,40 +621,16 @@
   
 
 
-<h1 id="compute">Compute<a class="headerlink" href="#compute" title="Permanent link">🔗</a></h1>
-<p>Computations are physically executed by a BigChem instance fronted by a ChemCloud server. The chemcloud python client submits jobs to and retrieves work from the ChemCloud server. Computations are submitted using the <a class="autorefs autorefs-internal" href="../../code-reference/CCClient/#chemcloud.client.CCClient">CCClient</a> object.</p>
-<p>Computations require a QC proram and <code>ProgramInput</code> or <code>DualProgramInput</code> object. The <code>ProgramInput</code> object contains all the information necessary to run a single calculation. The <code>DualProgramInput</code> object is used when two QC programs are used in tandem, such as when performing a geometry optimization with one program that uses a subprogram for the energy and gradient calculations.</p>
-<h2 id="basic-energy-calculation">Basic Energy Calculation<a class="headerlink" href="#basic-energy-calculation" title="Permanent link">🔗</a></h2>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">qcio</span> <span class="kn">import</span> <span class="n">Molecule</span><span class="p">,</span> <span class="n">ProgramInput</span><span class="p">,</span> <span class="n">SinglePointOutput</span>
+  <h1>Supported programs</h1>
 
-<span class="kn">from</span> <span class="nn">chemcloud</span> <span class="kn">import</span> <span class="n">CCClient</span>
-
-<span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span>
-    <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">],</span>
-    <span class="n">geometry</span><span class="o">=</span><span class="p">[</span>
-        <span class="p">[</span><span class="mf">0.0000</span><span class="p">,</span> <span class="mf">0.00000</span><span class="p">,</span> <span class="mf">0.0000</span><span class="p">],</span>
-        <span class="p">[</span><span class="mf">0.2774</span><span class="p">,</span> <span class="mf">0.89290</span><span class="p">,</span> <span class="mf">0.2544</span><span class="p">],</span>
-        <span class="p">[</span><span class="mf">0.6067</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.23830</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.7169</span><span class="p">],</span>
-    <span class="p">],</span>
-<span class="p">)</span>
+<p>Supported compute engines in chemcloud can be checked as follows:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">chemcloud</span> <span class="kn">import</span> <span class="n">CCClient</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">()</span>
-
-<span class="n">prog_inp</span> <span class="o">=</span> <span class="n">ProgramInput</span><span class="p">(</span>
-    <span class="n">molecule</span><span class="o">=</span><span class="n">water</span><span class="p">,</span>
-    <span class="n">model</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;b3lyp&quot;</span><span class="p">,</span> <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="s2">&quot;6-31g&quot;</span><span class="p">},</span>
-    <span class="n">calctype</span><span class="o">=</span><span class="s2">&quot;energy&quot;</span><span class="p">,</span>
-    <span class="n">keywords</span><span class="o">=</span><span class="p">{},</span>
-<span class="p">)</span>
-<span class="n">future_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="s2">&quot;psi4&quot;</span><span class="p">,</span> <span class="n">prog_inp</span><span class="p">,</span> <span class="n">collect_files</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">output</span><span class="p">:</span> <span class="n">SinglePointOutput</span> <span class="o">=</span> <span class="n">future_result</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-<span class="c1"># SinglePointOutput object containing all returned data</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-<span class="c1"># The energy value requested</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">return_result</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">files</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">client</span><span class="o">.</span><span class="n">supported_engines</span>
+<span class="p">[</span><span class="s2">&quot;psi4&quot;</span><span class="p">,</span> <span class="s2">&quot;terachem_fe&quot;</span><span class="p">,</span> <span class="s2">&quot;rdkit&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
 </code></pre></div>
+<p>Please see <a href="https://github.com/mtzgroup/chemcloud-client/blob/main/docs/tutorial/bigchem_algorithms.md">BigChem Algorithms</a> for details on parallel execution algorithms unique to the BigChem compute engine.</p>
 
 
 

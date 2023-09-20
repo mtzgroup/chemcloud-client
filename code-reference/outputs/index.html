@@ -1,0 +1,2651 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Colton Hicks">
+      
+      
+        <link rel="canonical" href="https://mtzgroup.github.io/chemcloud-client/code-reference/outputs/">
+      
+      
+        <link rel="prev" href="../inputs/">
+      
+      
+        <link rel="next" href="../exceptions/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.3.2">
+    
+    
+      
+        <title>Outputs - chemcloud</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.30068a00.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.85d0ee34.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#qcio.models.outputs" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="chemcloud" class="md-header__button md-logo" aria-label="chemcloud" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            chemcloud
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Outputs
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber"  aria-hidden="true"  type="radio" name="__palette" id="__palette_1">
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/mtzgroup/chemcloud-client" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="chemcloud" class="md-nav__button md-logo" aria-label="chemcloud" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    chemcloud
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/mtzgroup/chemcloud-client" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    chemcloud
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tutorial - Users Guide
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Tutorial - Users Guide
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/compute/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Compute
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/supported-programs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Supported programs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/authentication/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Authentication
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/geometry-optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Geometry Optimization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/batch-computations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Batch Computations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/bigchem-algorithms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    BigChem Algorithms
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Code Reference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Code Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CCClient/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CCClient
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../future-results/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Future results
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../inputs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inputs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Outputs
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Outputs
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#qcio.models.outputs" class="md-nav__link">
+    outputs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qcio.models.outputs.FileOutput" class="md-nav__link">
+    FileOutput
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qcio.models.outputs.OptimizationOutput" class="md-nav__link">
+    OptimizationOutput
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qcio.models.outputs.OptimizationResults" class="md-nav__link">
+    OptimizationResults
+  </a>
+  
+    <nav class="md-nav" aria-label="OptimizationResults">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qcio.models.outputs.OptimizationResults.energies" class="md-nav__link">
+    energies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcio.models.outputs.OptimizationResults.final_molecule" class="md-nav__link">
+    final_molecule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcio.models.outputs.OptimizationResults.molecules" class="md-nav__link">
+    molecules
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcio.models.outputs.OptimizationResults.__repr_args__" class="md-nav__link">
+    __repr_args__()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qcio.models.outputs.ProgramFailure" class="md-nav__link">
+    ProgramFailure
+  </a>
+  
+    <nav class="md-nav" aria-label="ProgramFailure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qcio.models.outputs.ProgramFailure.ptraceback" class="md-nav__link">
+    ptraceback
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcio.models.outputs.ProgramFailure.__repr_args__" class="md-nav__link">
+    __repr_args__()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qcio.models.outputs.SinglePointOutput" class="md-nav__link">
+    SinglePointOutput
+  </a>
+  
+    <nav class="md-nav" aria-label="SinglePointOutput">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qcio.models.outputs.SinglePointOutput.return_result" class="md-nav__link">
+    return_result
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qcio.models.outputs.SinglePointResults" class="md-nav__link">
+    SinglePointResults
+  </a>
+  
+    <nav class="md-nav" aria-label="SinglePointResults">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qcio.models.outputs.SinglePointResults.validate_gradient_shape" class="md-nav__link">
+    validate_gradient_shape()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcio.models.outputs.SinglePointResults.validate_hessian_shape" class="md-nav__link">
+    validate_hessian_shape()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qcio.models.outputs.Wavefunction" class="md-nav__link">
+    Wavefunction
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exceptions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exceptions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CHANGELOG/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Changelog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#qcio.models.outputs" class="md-nav__link">
+    outputs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qcio.models.outputs.FileOutput" class="md-nav__link">
+    FileOutput
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qcio.models.outputs.OptimizationOutput" class="md-nav__link">
+    OptimizationOutput
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qcio.models.outputs.OptimizationResults" class="md-nav__link">
+    OptimizationResults
+  </a>
+  
+    <nav class="md-nav" aria-label="OptimizationResults">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qcio.models.outputs.OptimizationResults.energies" class="md-nav__link">
+    energies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcio.models.outputs.OptimizationResults.final_molecule" class="md-nav__link">
+    final_molecule
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcio.models.outputs.OptimizationResults.molecules" class="md-nav__link">
+    molecules
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcio.models.outputs.OptimizationResults.__repr_args__" class="md-nav__link">
+    __repr_args__()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qcio.models.outputs.ProgramFailure" class="md-nav__link">
+    ProgramFailure
+  </a>
+  
+    <nav class="md-nav" aria-label="ProgramFailure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qcio.models.outputs.ProgramFailure.ptraceback" class="md-nav__link">
+    ptraceback
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcio.models.outputs.ProgramFailure.__repr_args__" class="md-nav__link">
+    __repr_args__()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qcio.models.outputs.SinglePointOutput" class="md-nav__link">
+    SinglePointOutput
+  </a>
+  
+    <nav class="md-nav" aria-label="SinglePointOutput">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qcio.models.outputs.SinglePointOutput.return_result" class="md-nav__link">
+    return_result
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qcio.models.outputs.SinglePointResults" class="md-nav__link">
+    SinglePointResults
+  </a>
+  
+    <nav class="md-nav" aria-label="SinglePointResults">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qcio.models.outputs.SinglePointResults.validate_gradient_shape" class="md-nav__link">
+    validate_gradient_shape()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#qcio.models.outputs.SinglePointResults.validate_hessian_shape" class="md-nav__link">
+    validate_hessian_shape()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#qcio.models.outputs.Wavefunction" class="md-nav__link">
+    Wavefunction
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+  <h1>Outputs</h1>
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="qcio.models.outputs"></a>
+  <div class="doc doc-contents first">
+  
+      <p>End user output and results objects from a calculation.</p>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h2 id="qcio.models.outputs.FileOutput" class="doc doc-heading">
+          <code>FileOutput</code>
+
+
+<a href="#qcio.models.outputs.FileOutput" class="headerlink" title="Permanent link">🔗</a></h2>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="qcio.models.outputs_base.SuccessfulOutputBase">SuccessfulOutputBase</span></code></p>
+
+  
+      <p>Generic output class for pure file based I/O.</p>
+
+
+
+  <p><strong>Attributes:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>input_data</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="qcio.models.inputs.FileInput" href="../inputs/#qcio.models.inputs.FileInput">FileInput</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The FileInput object used for the computation.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>files</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="qcio.models.inputs.FileInput" href="../inputs/#qcio.models.inputs.FileInput">FileInput</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>A dict mapping filename to str or bytes data.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>success</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="qcio.models.inputs.FileInput" href="../inputs/#qcio.models.inputs.FileInput">FileInput</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>A boolean indicator that the operation succeeded (always True)</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>stdout</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="qcio.models.inputs.FileInput" href="../inputs/#qcio.models.inputs.FileInput">FileInput</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The primary logging output of the program. Contains a union of stdout
+and stderr.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>provenance</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="qcio.models.inputs.FileInput" href="../inputs/#qcio.models.inputs.FileInput">FileInput</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>An object containing the provenance information for the results.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>extras</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="qcio.models.inputs.FileInput" href="../inputs/#qcio.models.inputs.FileInput">FileInput</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Additional information to bundle with the object. Use for schema
+development and scratch space.</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+            <details class="quote">
+              <summary>Source code in <code>/home/cbh/.cache/pypoetry/virtualenvs/chemcloud-cIGgXbph-py3.8/lib/python3.8/site-packages/qcio/models/outputs.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">FileOutput</span><span class="p">(</span><span class="n">SuccessfulOutputBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generic output class for pure file based I/O.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        input_data: The FileInput object used for the computation.</span>
+<span class="sd">        files: A dict mapping filename to str or bytes data.</span>
+<span class="sd">        success: A boolean indicator that the operation succeeded (always True)</span>
+<span class="sd">        stdout: The primary logging output of the program. Contains a union of stdout</span>
+<span class="sd">            and stderr.</span>
+<span class="sd">        provenance: An object containing the provenance information for the results.</span>
+<span class="sd">        extras: Additional information to bundle with the object. Use for schema</span>
+<span class="sd">            development and scratch space.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">input_data</span><span class="p">:</span> <span class="n">FileInput</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h2 id="qcio.models.outputs.OptimizationOutput" class="doc doc-heading">
+          <code>OptimizationOutput</code>
+
+
+<a href="#qcio.models.outputs.OptimizationOutput" class="headerlink" title="Permanent link">🔗</a></h2>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="qcio.models.outputs_base.SuccessfulOutputBase">SuccessfulOutputBase</span></code></p>
+
+  
+      <p>Output from a successful optimization.</p>
+
+
+
+  <p><strong>Attributes:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>input_data</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<a class="autorefs autorefs-internal" title="qcio.models.inputs.DualProgramInput" href="../inputs/#qcio.models.inputs.DualProgramInput">DualProgramInput</a>, <a class="autorefs autorefs-internal" title="qcio.models.inputs.ProgramInput" href="../inputs/#qcio.models.inputs.ProgramInput">ProgramInput</a>]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The OptimizationInput object for the computation.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>results</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="qcio.models.outputs.OptimizationResults" href="#qcio.models.outputs.OptimizationResults">OptimizationResults</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The results computed by the program.</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+            <details class="quote">
+              <summary>Source code in <code>/home/cbh/.cache/pypoetry/virtualenvs/chemcloud-cIGgXbph-py3.8/lib/python3.8/site-packages/qcio/models/outputs.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">OptimizationOutput</span><span class="p">(</span><span class="n">SuccessfulOutputBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Output from a successful optimization.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        input_data: The OptimizationInput object for the computation.</span>
+<span class="sd">        results: The results computed by the program.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">input_data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">DualProgramInput</span><span class="p">,</span> <span class="n">ProgramInput</span><span class="p">]</span>
+    <span class="n">results</span><span class="p">:</span> <span class="n">OptimizationResults</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h2 id="qcio.models.outputs.OptimizationResults" class="doc doc-heading">
+          <code>OptimizationResults</code>
+
+
+<a href="#qcio.models.outputs.OptimizationResults" class="headerlink" title="Permanent link">🔗</a></h2>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="qcio.models.outputs_base.ResultsBase">ResultsBase</span></code></p>
+
+  
+      <p>Computed properties for an optimization.</p>
+
+
+
+  <p><strong>Attributes:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>energies</code></td>
+          <td>
+                <code><span title="typing.List">List</span>[float]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The energies for each step of the optimization.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>molecules</code></td>
+          <td>
+                <code><span title="typing.List">List</span>[<span title="qcio.models.molecule.Molecule">Molecule</span>]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The Molecule objects for each step of the optimization.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>final_molecule</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[<span title="qcio.models.molecule.Molecule">Molecule</span>]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The final, optimized molecule.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>trajectory</code></td>
+          <td>
+                <code><span title="typing.List">List</span>[<a class="autorefs autorefs-internal" title="qcio.models.outputs.SinglePointOutput" href="#qcio.models.outputs.SinglePointOutput">SinglePointOutput</a>]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The SinglePointOutput objects for each step of the optimization.</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+            <details class="quote">
+              <summary>Source code in <code>/home/cbh/.cache/pypoetry/virtualenvs/chemcloud-cIGgXbph-py3.8/lib/python3.8/site-packages/qcio/models/outputs.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">OptimizationResults</span><span class="p">(</span><span class="n">ResultsBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computed properties for an optimization.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        energies: The energies for each step of the optimization.</span>
+<span class="sd">        molecules: The Molecule objects for each step of the optimization.</span>
+<span class="sd">        final_molecule: The final, optimized molecule.</span>
+<span class="sd">        trajectory: The SinglePointOutput objects for each step of the optimization.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">trajectory</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">SinglePointOutput</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">final_molecule</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Molecule</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The final molecule in the optimization.&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">input_data</span><span class="o">.</span><span class="n">molecule</span>
+        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>  <span class="c1"># Empty trajectory</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">energies</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The energies for each step of the optimization.&quot;&quot;&quot;</span>
+        <span class="c1"># or 0.0 covers null case for mypy</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">output</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">energy</span> <span class="ow">or</span> <span class="mf">0.0</span> <span class="k">for</span> <span class="n">output</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trajectory</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">molecules</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Molecule</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The Molecule objects for each step of the optimization.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">output</span><span class="o">.</span><span class="n">input_data</span><span class="o">.</span><span class="n">molecule</span> <span class="k">for</span> <span class="n">output</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">trajectory</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__repr_args__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Custom repr to avoid printing the entire collection objects.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">(</span><span class="s2">&quot;final_molecule&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">final_molecule</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;trajectory&quot;</span><span class="p">,</span> <span class="s2">&quot;[...]&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;energies&quot;</span><span class="p">,</span> <span class="s2">&quot;[...]&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;molecules&quot;</span><span class="p">,</span> <span class="s2">&quot;[...]&quot;</span><span class="p">),</span>
+        <span class="p">]</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h3 id="qcio.models.outputs.OptimizationResults.energies" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">energies</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+<a href="#qcio.models.outputs.OptimizationResults.energies" class="headerlink" title="Permanent link">🔗</a></h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>The energies for each step of the optimization.</p>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h3 id="qcio.models.outputs.OptimizationResults.final_molecule" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">final_molecule</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Molecule</span><span class="p">]</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+<a href="#qcio.models.outputs.OptimizationResults.final_molecule" class="headerlink" title="Permanent link">🔗</a></h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>The final molecule in the optimization.</p>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h3 id="qcio.models.outputs.OptimizationResults.molecules" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">molecules</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Molecule</span><span class="p">]</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+<a href="#qcio.models.outputs.OptimizationResults.molecules" class="headerlink" title="Permanent link">🔗</a></h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>The Molecule objects for each step of the optimization.</p>
+  </div>
+
+</div>
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="qcio.models.outputs.OptimizationResults.__repr_args__" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">__repr_args__</span><span class="p">()</span></code>
+
+<a href="#qcio.models.outputs.OptimizationResults.__repr_args__" class="headerlink" title="Permanent link">🔗</a></h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Custom repr to avoid printing the entire collection objects.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>/home/cbh/.cache/pypoetry/virtualenvs/chemcloud-cIGgXbph-py3.8/lib/python3.8/site-packages/qcio/models/outputs.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__repr_args__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Custom repr to avoid printing the entire collection objects.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;final_molecule&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">final_molecule</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;trajectory&quot;</span><span class="p">,</span> <span class="s2">&quot;[...]&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;energies&quot;</span><span class="p">,</span> <span class="s2">&quot;[...]&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;molecules&quot;</span><span class="p">,</span> <span class="s2">&quot;[...]&quot;</span><span class="p">),</span>
+    <span class="p">]</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h2 id="qcio.models.outputs.ProgramFailure" class="doc doc-heading">
+          <code>ProgramFailure</code>
+
+
+<a href="#qcio.models.outputs.ProgramFailure" class="headerlink" title="Permanent link">🔗</a></h2>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="qcio.models.outputs_base.OutputBase">OutputBase</span></code></p>
+
+  
+      <p>A object containing details about a failed calculation.</p>
+
+
+
+  <p><strong>Attributes:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>input_data</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<a class="autorefs autorefs-internal" title="qcio.models.inputs.DualProgramInput" href="../inputs/#qcio.models.inputs.DualProgramInput">DualProgramInput</a>, <a class="autorefs autorefs-internal" title="qcio.models.inputs.ProgramInput" href="../inputs/#qcio.models.inputs.ProgramInput">ProgramInput</a>, <a class="autorefs autorefs-internal" title="qcio.models.inputs.FileInput" href="../inputs/#qcio.models.inputs.FileInput">FileInput</a>]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The input object for the computation.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>success</code></td>
+          <td>
+                <code><span title="typing.Literal">Literal</span>[False]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Always False for a Failed output.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>traceback</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[str]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>String representation of the traceback of the exception that caused
+the failure.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>results</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[str]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any compted data that was able to be extracted before program failed.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>stdout</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[str]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The primary logging output of the program. Contains a union of stdout
+and stderr.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>provenance</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[str]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>An object containing the provenance information for the output.</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+            <details class="quote">
+              <summary>Source code in <code>/home/cbh/.cache/pypoetry/virtualenvs/chemcloud-cIGgXbph-py3.8/lib/python3.8/site-packages/qcio/models/outputs.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">ProgramFailure</span><span class="p">(</span><span class="n">OutputBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A object containing details about a failed calculation.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        input_data: The input object for the computation.</span>
+<span class="sd">        success: Always False for a Failed output.</span>
+<span class="sd">        traceback: String representation of the traceback of the exception that caused</span>
+<span class="sd">            the failure.</span>
+<span class="sd">        results: Any compted data that was able to be extracted before program failed.</span>
+<span class="sd">        stdout: The primary logging output of the program. Contains a union of stdout</span>
+<span class="sd">            and stderr.</span>
+<span class="sd">        provenance: An object containing the provenance information for the output.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">input_data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">DualProgramInput</span><span class="p">,</span> <span class="n">ProgramInput</span><span class="p">,</span> <span class="n">FileInput</span><span class="p">]</span>
+    <span class="n">success</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">traceback</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ptraceback</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Print the traceback text&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">traceback</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__repr_args__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;ReprArgs&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Exclude traceback from the repr&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="k">if</span> <span class="n">key</span> <span class="o">!=</span> <span class="s2">&quot;traceback&quot;</span> <span class="k">else</span> <span class="s2">&quot;&lt;...&gt;&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__repr_args__</span><span class="p">()</span>
+        <span class="p">]</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h3 id="qcio.models.outputs.ProgramFailure.ptraceback" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">ptraceback</span><span class="p">:</span> <span class="kc">None</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+<a href="#qcio.models.outputs.ProgramFailure.ptraceback" class="headerlink" title="Permanent link">🔗</a></h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Print the traceback text</p>
+  </div>
+
+</div>
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="qcio.models.outputs.ProgramFailure.__repr_args__" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">__repr_args__</span><span class="p">()</span></code>
+
+<a href="#qcio.models.outputs.ProgramFailure.__repr_args__" class="headerlink" title="Permanent link">🔗</a></h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Exclude traceback from the repr</p>
+
+          <details class="quote">
+            <summary>Source code in <code>/home/cbh/.cache/pypoetry/virtualenvs/chemcloud-cIGgXbph-py3.8/lib/python3.8/site-packages/qcio/models/outputs.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__repr_args__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;ReprArgs&quot;</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Exclude traceback from the repr&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="k">if</span> <span class="n">key</span> <span class="o">!=</span> <span class="s2">&quot;traceback&quot;</span> <span class="k">else</span> <span class="s2">&quot;&lt;...&gt;&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__repr_args__</span><span class="p">()</span>
+    <span class="p">]</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h2 id="qcio.models.outputs.SinglePointOutput" class="doc doc-heading">
+          <code>SinglePointOutput</code>
+
+
+<a href="#qcio.models.outputs.SinglePointOutput" class="headerlink" title="Permanent link">🔗</a></h2>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="qcio.models.outputs_base.SuccessfulOutputBase">SuccessfulOutputBase</span></code></p>
+
+  
+      <p>Output from a successful single point calculation.</p>
+
+
+
+  <p><strong>Attributes:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>input_data</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="qcio.models.inputs.ProgramInput" href="../inputs/#qcio.models.inputs.ProgramInput">ProgramInput</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The SinglePointInput object for the computation.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>success</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="qcio.models.inputs.ProgramInput" href="../inputs/#qcio.models.inputs.ProgramInput">ProgramInput</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Always True for a successful computation.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>results</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="qcio.models.outputs.SinglePointResults" href="#qcio.models.outputs.SinglePointResults">SinglePointResults</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The results computed by the program.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>files</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="qcio.models.outputs.SinglePointResults" href="#qcio.models.outputs.SinglePointResults">SinglePointResults</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>A dict mapping filename to str or bytes data.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>stdout</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="qcio.models.outputs.SinglePointResults" href="#qcio.models.outputs.SinglePointResults">SinglePointResults</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The primary logging output of the program. Contains a union of stdout
+and stderr.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>provenance</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="qcio.models.outputs.SinglePointResults" href="#qcio.models.outputs.SinglePointResults">SinglePointResults</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>An object containing the provenance information for the results.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>extras</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="qcio.models.outputs.SinglePointResults" href="#qcio.models.outputs.SinglePointResults">SinglePointResults</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Additional information to bundle with the object. Use for schema
+development and scratch space.</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+            <details class="quote">
+              <summary>Source code in <code>/home/cbh/.cache/pypoetry/virtualenvs/chemcloud-cIGgXbph-py3.8/lib/python3.8/site-packages/qcio/models/outputs.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">SinglePointOutput</span><span class="p">(</span><span class="n">SuccessfulOutputBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Output from a successful single point calculation.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        input_data: The SinglePointInput object for the computation.</span>
+<span class="sd">        success: Always True for a successful computation.</span>
+<span class="sd">        results: The results computed by the program.</span>
+<span class="sd">        files: A dict mapping filename to str or bytes data.</span>
+<span class="sd">        stdout: The primary logging output of the program. Contains a union of stdout</span>
+<span class="sd">            and stderr.</span>
+<span class="sd">        provenance: An object containing the provenance information for the results.</span>
+<span class="sd">        extras: Additional information to bundle with the object. Use for schema</span>
+<span class="sd">            development and scratch space.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">input_data</span><span class="p">:</span> <span class="n">ProgramInput</span>
+    <span class="n">results</span><span class="p">:</span> <span class="n">SinglePointResults</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">return_result</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">ArrayLike2D</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the result of the calculation.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The explicitly requested result of the calculation, i.e., the energy,</span>
+<span class="sd">                gradient, or hessian.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_data</span><span class="o">.</span><span class="n">calctype</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h3 id="qcio.models.outputs.SinglePointOutput.return_result" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">return_result</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">ArrayLike2D</span><span class="p">]</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+<a href="#qcio.models.outputs.SinglePointOutput.return_result" class="headerlink" title="Permanent link">🔗</a></h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Return the result of the calculation.</p>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="typing.Union">Union</span>[float, <span title="qcio.helper_types.ArrayLike2D">ArrayLike2D</span>]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The explicitly requested result of the calculation, i.e., the energy,
+gradient, or hessian.</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+  </div>
+
+</div>
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h2 id="qcio.models.outputs.SinglePointResults" class="doc doc-heading">
+          <code>SinglePointResults</code>
+
+
+<a href="#qcio.models.outputs.SinglePointResults" class="headerlink" title="Permanent link">🔗</a></h2>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="qcio.models.outputs_base.ResultsBase">ResultsBase</span></code></p>
+
+  
+      <p>The computed results from a single point calculation.</p>
+
+
+
+  <p><strong>Attributes:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>calcinfo_natoms</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[int]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The number of atoms as computed by the program.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>calcinfo_nalpha</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[int]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The number of alpha electrons as computed by the program.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>calcinfo_nbeta</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[int]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The number of beta electrons as computed by the program.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>calcinfo_nbasis</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[int]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The number of basis functions in the calculation.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>calcinfo_nmo</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[int]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The number of molecular orbitals in the calculation</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>energy</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[float]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The electronic energy of the molecule in Hartrees.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>gradient</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[<span title="qcio.helper_types.ArrayLike2D">ArrayLike2D</span>]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The gradient of the molecule in Hartrees/Bohr.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>hessian</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[<span title="qcio.helper_types.ArrayLike2D">ArrayLike2D</span>]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The hessian of the molecule in Hartrees/Bohr^2.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>nuclear_repulsion_energy</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[float]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The nuclear repulsion energy of the molecule in
+Hartrees.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>wavefunction</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="qcio.models.outputs.Wavefunction" href="#qcio.models.outputs.Wavefunction">Wavefunction</a>]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Wavefunction data from the calculation.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>freqs_wavenumber</code></td>
+          <td>
+                <code><span title="typing.List">List</span>[float]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The frequencies of the molecule in wavenumbers.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>normal_modes_cartesian</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[<span title="qcio.helper_types.ArrayLike3D">ArrayLike3D</span>]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>3D n_vibmodes x n_atoms x 3 array containing
+un-mass-weighted Cartesian displacements of each normal mode.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>gibbs_free_energy</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[float]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Gibbs free energy (i.e. thermochemical analysis) in Hartrees
+of a system where translation / rotation / vibration degrees of freedom are
+approximated using ideal gas / rigid rotor / harmonic oscillator
+respectively.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>scf_dipole_moment</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[float]]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The x, y, z component of the dipole moment of the molecule
+in units of e a0 (NOT Debye!).</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+            <details class="quote">
+              <summary>Source code in <code>/home/cbh/.cache/pypoetry/virtualenvs/chemcloud-cIGgXbph-py3.8/lib/python3.8/site-packages/qcio/models/outputs.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">SinglePointResults</span><span class="p">(</span><span class="n">ResultsBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The computed results from a single point calculation.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        calcinfo_natoms: The number of atoms as computed by the program.</span>
+<span class="sd">        calcinfo_nalpha: The number of alpha electrons as computed by the program.</span>
+<span class="sd">        calcinfo_nbeta: The number of beta electrons as computed by the program.</span>
+<span class="sd">        calcinfo_nbasis: The number of basis functions in the calculation.</span>
+<span class="sd">        calcinfo_nmo: The number of molecular orbitals in the calculation</span>
+
+<span class="sd">        energy: The electronic energy of the molecule in Hartrees.</span>
+<span class="sd">        gradient: The gradient of the molecule in Hartrees/Bohr.</span>
+<span class="sd">        hessian: The hessian of the molecule in Hartrees/Bohr^2.</span>
+<span class="sd">        nuclear_repulsion_energy: The nuclear repulsion energy of the molecule in</span>
+<span class="sd">            Hartrees.</span>
+
+<span class="sd">        wavefunction: Wavefunction data from the calculation.</span>
+
+<span class="sd">        freqs_wavenumber: The frequencies of the molecule in wavenumbers.</span>
+<span class="sd">        normal_modes_cartesian: 3D n_vibmodes x n_atoms x 3 array containing</span>
+<span class="sd">            un-mass-weighted Cartesian displacements of each normal mode.</span>
+<span class="sd">        gibbs_free_energy: Gibbs free energy (i.e. thermochemical analysis) in Hartrees</span>
+<span class="sd">            of a system where translation / rotation / vibration degrees of freedom are</span>
+<span class="sd">            approximated using ideal gas / rigid rotor / harmonic oscillator</span>
+<span class="sd">            respectively.</span>
+<span class="sd">        scf_dipole_moment: The x, y, z component of the dipole moment of the molecule</span>
+<span class="sd">            in units of e a0 (NOT Debye!).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># calcinfo contains general information about the calculation</span>
+    <span class="n">calcinfo_natoms</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">calcinfo_nbasis</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">calcinfo_nmo</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">calcinfo_nalpha</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">calcinfo_nbeta</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># Core properties</span>
+    <span class="n">energy</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">gradient</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ArrayLike2D</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">hessian</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ArrayLike2D</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">nuclear_repulsion_energy</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># Wavefunction data</span>
+    <span class="n">wavefunction</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Wavefunction</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># Frequency data</span>
+    <span class="n">freqs_wavenumber</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">normal_modes_cartesian</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ArrayLike3D</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">gibbs_free_energy</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># SCF results</span>
+    <span class="n">scf_dipole_moment</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;normal_modes_cartesian&quot;</span><span class="p">)</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">validate_normal_modes_cartesian_shape</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">ArrayLike3D</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># Assume array has length of the number of normal modes</span>
+            <span class="n">n_normal_modes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n_normal_modes</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+    <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;gradient&quot;</span><span class="p">)</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">validate_gradient_shape</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">ArrayLike2D</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate gradient is n x 3&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+    <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;hessian&quot;</span><span class="p">)</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">validate_hessian_shape</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">ArrayLike2D</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate hessian is square&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">v</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="qcio.models.outputs.SinglePointResults.validate_gradient_shape" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">validate_gradient_shape</span><span class="p">(</span><span class="n">v</span><span class="p">)</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-classmethod"><code>classmethod</code></small>
+  </span>
+
+<a href="#qcio.models.outputs.SinglePointResults.validate_gradient_shape" class="headerlink" title="Permanent link">🔗</a></h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Validate gradient is n x 3</p>
+
+          <details class="quote">
+            <summary>Source code in <code>/home/cbh/.cache/pypoetry/virtualenvs/chemcloud-cIGgXbph-py3.8/lib/python3.8/site-packages/qcio/models/outputs.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;gradient&quot;</span><span class="p">)</span>
+<span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">validate_gradient_shape</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">ArrayLike2D</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate gradient is n x 3&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="qcio.models.outputs.SinglePointResults.validate_hessian_shape" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">validate_hessian_shape</span><span class="p">(</span><span class="n">v</span><span class="p">)</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-classmethod"><code>classmethod</code></small>
+  </span>
+
+<a href="#qcio.models.outputs.SinglePointResults.validate_hessian_shape" class="headerlink" title="Permanent link">🔗</a></h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Validate hessian is square</p>
+
+          <details class="quote">
+            <summary>Source code in <code>/home/cbh/.cache/pypoetry/virtualenvs/chemcloud-cIGgXbph-py3.8/lib/python3.8/site-packages/qcio/models/outputs.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;hessian&quot;</span><span class="p">)</span>
+<span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">validate_hessian_shape</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">ArrayLike2D</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate hessian is square&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">v</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h2 id="qcio.models.outputs.Wavefunction" class="doc doc-heading">
+          <code>Wavefunction</code>
+
+
+<a href="#qcio.models.outputs.Wavefunction" class="headerlink" title="Permanent link">🔗</a></h2>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="qcio.models.base_models.QCIOModelBase">QCIOModelBase</span></code></p>
+
+  
+      <p>The wavefunction for a single point calculation.</p>
+
+
+
+  <p><strong>Attributes:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>scf_eigenvalues_a</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[<span title="qcio.helper_types.ArrayLike2D">ArrayLike2D</span>]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The SCF alpha-spin orbital eigenvalues.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>scf_eigenvalues_b</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[<span title="qcio.helper_types.ArrayLike2D">ArrayLike2D</span>]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The SCF beta-spin orbital eigenvalues.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>scf_occupations_a</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[<span title="qcio.helper_types.ArrayLike2D">ArrayLike2D</span>]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The SCF alpha-spin orbital occupations.</p>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><code>scf_occupations_b</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[<span title="qcio.helper_types.ArrayLike2D">ArrayLike2D</span>]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The SCF beta-spin orbital occupations.</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+            <details class="quote">
+              <summary>Source code in <code>/home/cbh/.cache/pypoetry/virtualenvs/chemcloud-cIGgXbph-py3.8/lib/python3.8/site-packages/qcio/models/outputs.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Wavefunction</span><span class="p">(</span><span class="n">QCIOModelBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The wavefunction for a single point calculation.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        scf_eigenvalues_a: The SCF alpha-spin orbital eigenvalues.</span>
+<span class="sd">        scf_eigenvalues_b: The SCF beta-spin orbital eigenvalues.</span>
+<span class="sd">        scf_occupations_a: The SCF alpha-spin orbital occupations.</span>
+<span class="sd">        scf_occupations_b: The SCF beta-spin orbital occupations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">scf_eigenvalues_a</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ArrayLike2D</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">scf_eigenvalues_b</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ArrayLike2D</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">scf_occupations_a</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ArrayLike2D</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">scf_occupations_b</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ArrayLike2D</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@field_validator</span><span class="p">(</span>
+        <span class="s2">&quot;scf_eigenvalues_a&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;scf_eigenvalues_b&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;scf_occupations_a&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;scf_occupations_b&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">to_numpy</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">_info</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="k">if</span> <span class="n">val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["search.suggest", "search.highlight", "navigation.instant", "navigation.expand"], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.dff1b7c8.min.js"></script>
+      
+    
+  </body>
+</html>
