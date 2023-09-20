@@ -24,7 +24,7 @@
     
     
       
-        <title>Geometry Optimization - chemcloud</title>
+        <title>Geometry optimization - chemcloud</title>
       
     
     
@@ -83,7 +83,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#geometry-optimization" class="md-skip">
+        <a href="#basic-working-example" class="md-skip">
           Skip to content
         </a>
       
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Geometry Optimization
+              Geometry optimization
             
           </span>
         </div>
@@ -367,14 +367,12 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
   <span class="md-ellipsis">
-    Geometry Optimization
+    Geometry optimization
   </span>
   
 
@@ -385,7 +383,7 @@
         
   
   <span class="md-ellipsis">
-    Geometry Optimization
+    Geometry optimization
   </span>
   
 
@@ -396,8 +394,6 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
-  
-    
   
   
     <label class="md-nav__title" for="__toc">
@@ -669,8 +665,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -724,14 +718,9 @@
   
 
 
-<h1 id="geometry-optimization">Geometry Optimization<a class="headerlink" href="#geometry-optimization" title="Permanent link">🔗</a></h1>
+  <h1>Geometry optimization</h1>
+
 <h2 id="basic-working-example">Basic Working Example<a class="headerlink" href="#basic-working-example" title="Permanent link">🔗</a></h2>
-<ul>
-<li>Create a Molecule</li>
-<li>Define parameters for the compute engine</li>
-<li>Define the optimization parameters for the optimizer and specify the compute engine</li>
-<li>Specify the optimizer to run</li>
-</ul>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">qcio</span> <span class="kn">import</span> <span class="n">DualProgramInput</span><span class="p">,</span> <span class="n">Molecule</span><span class="p">,</span> <span class="n">OptimizationOutput</span>
 
 <span class="kn">from</span> <span class="nn">chemcloud</span> <span class="kn">import</span> <span class="n">CCClient</span>
@@ -739,29 +728,29 @@
 <span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span>
     <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">],</span>
     <span class="n">geometry</span><span class="o">=</span><span class="p">[</span>
-<span class="hll">        <span class="p">[</span><span class="mf">0.0000</span><span class="p">,</span> <span class="mf">0.00000</span><span class="p">,</span> <span class="mf">0.0000</span><span class="p">],</span>
-</span>        <span class="p">[</span><span class="mf">0.2774</span><span class="p">,</span> <span class="mf">0.89290</span><span class="p">,</span> <span class="mf">0.2544</span><span class="p">],</span>
-<span class="hll">        <span class="p">[</span><span class="mf">0.6067</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.23830</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.7169</span><span class="p">],</span>
-</span><span class="hll">    <span class="p">],</span>
-</span><span class="hll"><span class="p">)</span>
-</span><span class="hll">
-</span><span class="hll"><span class="n">client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">()</span>
-</span>
+        <span class="p">[</span><span class="mf">0.0000</span><span class="p">,</span> <span class="mf">0.00000</span><span class="p">,</span> <span class="mf">0.0000</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.2774</span><span class="p">,</span> <span class="mf">0.89290</span><span class="p">,</span> <span class="mf">0.2544</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.6067</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.23830</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.7169</span><span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">()</span>
+
 <span class="n">prog_inp</span> <span class="o">=</span> <span class="n">DualProgramInput</span><span class="p">(</span>
     <span class="n">molecule</span><span class="o">=</span><span class="n">water</span><span class="p">,</span>
     <span class="n">calctype</span><span class="o">=</span><span class="s2">&quot;optimization&quot;</span><span class="p">,</span>
     <span class="n">keywords</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;maxiter&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">},</span>
     <span class="n">subprogram</span><span class="o">=</span><span class="s2">&quot;psi4&quot;</span><span class="p">,</span>
-<span class="hll">    <span class="n">subprogram_args</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;b3lyp&quot;</span><span class="p">,</span> <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="s2">&quot;6-31g&quot;</span><span class="p">}},</span>
-</span><span class="p">)</span>
+    <span class="n">subprogram_args</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;b3lyp&quot;</span><span class="p">,</span> <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="s2">&quot;6-31g&quot;</span><span class="p">}},</span>
+<span class="p">)</span>
 
-<span class="hll">
-</span><span class="c1"># Submit calculation</span>
+
+<span class="c1"># Submit calculation</span>
 <span class="n">future_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="s2">&quot;geometric&quot;</span><span class="p">,</span> <span class="n">prog_inp</span><span class="p">)</span>
 <span class="n">output</span><span class="p">:</span> <span class="n">OptimizationOutput</span> <span class="o">=</span> <span class="n">future_result</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 
-<span class="hll"><span class="k">if</span> <span class="n">output</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
-</span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Optimization succeeded!&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">output</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Optimization succeeded!&quot;</span><span class="p">)</span>
     <span class="c1"># Will be OptimizationResult object</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
     <span class="c1"># The final molecule of the geometry optimization</span>
@@ -780,22 +769,25 @@
     <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">traceback</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="using-force-fields">Using Force Fields<a class="headerlink" href="#using-force-fields" title="Permanent link">🔗</a></h2>
-<p><code>rdkit</code> can be specified as a compute backend to perform optimizations using force field methods instead of quantum chemistry backends. To use <code>rdkit</code> force field methods simply modify the model specification and <code>program</code> specification as shown below. Also note that <code>rdkit</code> requires the molecular connectivity to be defined.</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Hack to quickly drop in water&#39;s connectivity</span>
-<span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">from_data</span><span class="p">(</span><span class="s2">&quot;pubchem:water&quot;</span><span class="p">)</span>
-<span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="o">**</span><span class="n">water</span><span class="o">.</span><span class="n">dict</span><span class="p">(),</span> <span class="s2">&quot;connectivity&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)]})</span>
-
-<span class="n">input_spec</span> <span class="o">=</span> <span class="n">QCInputSpecification</span><span class="p">(</span>
-    <span class="o">...</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;UFF&quot;</span><span class="p">}</span> <span class="c1"># or any other force field</span>
+<p><code>rdkit</code> can be specified as a compute backend to perform optimizations using force field methods instead of quantum chemistry backends. To use <code>rdkit</code> force field methods simply modify the model specification and <code>subprogram</code> specification as shown below. Also note that <code>rdkit</code> requires the molecular connectivity to be defined.</p>
+<div class="highlight"><pre><span></span><code><span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span>
+    <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">],</span>
+    <span class="n">geometry</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">[</span><span class="mf">0.0000</span><span class="p">,</span> <span class="mf">0.00000</span><span class="p">,</span> <span class="mf">0.0000</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.2774</span><span class="p">,</span> <span class="mf">0.89290</span><span class="p">,</span> <span class="mf">0.2544</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.6067</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.23830</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.7169</span><span class="p">],</span>
+    <span class="p">],</span>
+    <span class="c1"># Add bond connectivity to water (from_atom, to_atom, bond_order)</span>
+    <span class="n">connectivity</span><span class="o">=</span><span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)],</span>
 <span class="p">)</span>
 
-<span class="n">opt_input</span> <span class="o">=</span> <span class="n">OptimizationInput</span><span class="p">(</span>
+<span class="n">opt_input</span> <span class="o">=</span> <span class="n">DualProgramInput</span><span class="p">(</span>
     <span class="o">...</span>
-    <span class="n">keywords</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;program&quot;</span><span class="p">:</span> <span class="s2">&quot;rdkit&quot;</span><span class="p">},</span>
+    <span class="n">subprogram</span><span class="o">=</span><span class="s2">&quot;rdkit&quot;</span><span class="p">,</span>
+    <span class="n">subprogram_args</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;UFF&quot;</span><span class="p">}}</span> <span class="c1"># or any other force field</span>
 <span class="p">)</span>
 
-<span class="n">future_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute_procedure</span><span class="p">(</span><span class="n">opt_input</span><span class="p">,</span> <span class="s2">&quot;geometric&quot;</span><span class="p">)</span>
+<span class="n">future_output</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="s2">&quot;geometric&quot;</span><span class="p">,</span> <span class="n">opt_input</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="berny-specifics">Berny Specifics<a class="headerlink" href="#berny-specifics" title="Permanent link">🔗</a></h2>
 <p>The <code>berny</code> procedure uses the <a href="https://github.com/jhrmnn/pyberny">pyberny</a> package to perform a geometry optimization. <code>berny</code> specific keywords are subject to change as the <code>berny</code> package evolves, but for simplicity a short list is included here with default values noted:</p>
