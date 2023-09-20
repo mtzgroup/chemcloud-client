@@ -538,11 +538,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-reference/future-results/" class="md-nav__link">
+      <a href="../../code-reference/future-outputs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Future results
+    Future outputs
   </span>
   
 
@@ -718,7 +718,7 @@
 <span class="n">prog_inp</span> <span class="o">=</span> <span class="n">ProgramInput</span><span class="p">(</span>
     <span class="n">molecule</span><span class="o">=</span><span class="n">water</span><span class="p">,</span>
     <span class="n">model</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;b3lyp&quot;</span><span class="p">,</span> <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="s2">&quot;6-31g&quot;</span><span class="p">},</span>
-    <span class="n">calctype</span><span class="o">=</span><span class="s2">&quot;energy&quot;</span><span class="p">,</span> <span class="c1"># Or &quot;gradient&quot; or &quot;hessian&quot;</span>
+    <span class="n">calctype</span><span class="o">=</span><span class="s2">&quot;energy&quot;</span><span class="p">,</span>  <span class="c1"># Or &quot;gradient&quot; or &quot;hessian&quot;</span>
     <span class="n">keywords</span><span class="o">=</span><span class="p">{},</span>
 <span class="p">)</span>
 <span class="n">future_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="s2">&quot;psi4&quot;</span><span class="p">,</span> <span class="n">prog_inp</span><span class="p">,</span> <span class="n">collect_files</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -763,6 +763,9 @@
 <span class="c1"># The energy value requested</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">return_result</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">files</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</code></pre></div>
+<p>Files can also be added to an input objects using the <code>open_file</code> method.</p>
+<div class="highlight"><pre><span></span><code><span class="n">prog_input</span><span class="o">.</span><span class="n">open_file</span><span class="p">(</span><span class="s2">&quot;some_file.dat&quot;</span><span class="p">)</span>
 </code></pre></div>
 
 

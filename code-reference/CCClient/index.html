@@ -16,7 +16,7 @@
         <link rel="prev" href="../../tutorial/bigchem-algorithms/">
       
       
-        <link rel="next" href="../future-results/">
+        <link rel="next" href="../future-outputs/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -576,11 +576,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../future-results/" class="md-nav__link">
+      <a href="../future-outputs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Future results
+    Future outputs
   </span>
   
 
@@ -1059,7 +1059,7 @@
         <span class="n">rm_scratch_dir</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">propagate_wfn</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">queue</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">FutureResult</span><span class="p">,</span> <span class="n">FutureResultGroup</span><span class="p">]:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">FutureOutput</span><span class="p">,</span> <span class="n">FutureOutputGroup</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Submit a computation to ChemCloud.</span>
 
 <span class="sd">        Parameters:</span>
@@ -1083,7 +1083,7 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Object providing access to a computation&#39;s eventual result. You can check a</span>
-<span class="sd">            computation&#39;s status by running `.status` on the `FutureResult` object or</span>
+<span class="sd">            computation&#39;s status by running `.status` on the `FutureOutput` object or</span>
 <span class="sd">            `.get()` to block and retrieve the computation&#39;s final result.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">supported_programs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -1586,7 +1586,7 @@ be ignored if the adapter for a given qc program does not support it.</p>
     <tbody>
         <tr>
           <td>
-                <code><span title="typing.Union">Union</span>[<a class="autorefs autorefs-internal" title="chemcloud.models.FutureResult" href="../future-results/#chemcloud.models.FutureResult">FutureResult</a>, <a class="autorefs autorefs-internal" title="chemcloud.models.FutureResultGroup" href="../future-results/#chemcloud.models.FutureResultGroup">FutureResultGroup</a>]</code>
+                <code><span title="typing.Union">Union</span>[<a class="autorefs autorefs-internal" title="chemcloud.models.FutureOutput" href="../future-outputs/#chemcloud.models.FutureOutput">FutureOutput</a>, <a class="autorefs autorefs-internal" title="chemcloud.models.FutureOutputGroup" href="../future-outputs/#chemcloud.models.FutureOutputGroup">FutureOutputGroup</a>]</code>
           </td>
           <td>
             <div class="doc-md-description">
@@ -1596,17 +1596,17 @@ be ignored if the adapter for a given qc program does not support it.</p>
         </tr>
         <tr>
           <td>
-                <code><span title="typing.Union">Union</span>[<a class="autorefs autorefs-internal" title="chemcloud.models.FutureResult" href="../future-results/#chemcloud.models.FutureResult">FutureResult</a>, <a class="autorefs autorefs-internal" title="chemcloud.models.FutureResultGroup" href="../future-results/#chemcloud.models.FutureResultGroup">FutureResultGroup</a>]</code>
+                <code><span title="typing.Union">Union</span>[<a class="autorefs autorefs-internal" title="chemcloud.models.FutureOutput" href="../future-outputs/#chemcloud.models.FutureOutput">FutureOutput</a>, <a class="autorefs autorefs-internal" title="chemcloud.models.FutureOutputGroup" href="../future-outputs/#chemcloud.models.FutureOutputGroup">FutureOutputGroup</a>]</code>
           </td>
           <td>
             <div class="doc-md-description">
-              <p>computation's status by running <code>.status</code> on the <code>FutureResult</code> object or</p>
+              <p>computation's status by running <code>.status</code> on the <code>FutureOutput</code> object or</p>
             </div>
           </td>
         </tr>
         <tr>
           <td>
-                <code><span title="typing.Union">Union</span>[<a class="autorefs autorefs-internal" title="chemcloud.models.FutureResult" href="../future-results/#chemcloud.models.FutureResult">FutureResult</a>, <a class="autorefs autorefs-internal" title="chemcloud.models.FutureResultGroup" href="../future-results/#chemcloud.models.FutureResultGroup">FutureResultGroup</a>]</code>
+                <code><span title="typing.Union">Union</span>[<a class="autorefs autorefs-internal" title="chemcloud.models.FutureOutput" href="../future-outputs/#chemcloud.models.FutureOutput">FutureOutput</a>, <a class="autorefs autorefs-internal" title="chemcloud.models.FutureOutputGroup" href="../future-outputs/#chemcloud.models.FutureOutputGroup">FutureOutputGroup</a>]</code>
           </td>
           <td>
             <div class="doc-md-description">
@@ -1682,7 +1682,7 @@ be ignored if the adapter for a given qc program does not support it.</p>
     <span class="n">rm_scratch_dir</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">propagate_wfn</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">queue</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">FutureResult</span><span class="p">,</span> <span class="n">FutureResultGroup</span><span class="p">]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">FutureOutput</span><span class="p">,</span> <span class="n">FutureOutputGroup</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Submit a computation to ChemCloud.</span>
 
 <span class="sd">    Parameters:</span>
@@ -1706,7 +1706,7 @@ be ignored if the adapter for a given qc program does not support it.</p>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Object providing access to a computation&#39;s eventual result. You can check a</span>
-<span class="sd">        computation&#39;s status by running `.status` on the `FutureResult` object or</span>
+<span class="sd">        computation&#39;s status by running `.status` on the `FutureOutput` object or</span>
 <span class="sd">        `.get()` to block and retrieve the computation&#39;s final result.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">supported_programs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>

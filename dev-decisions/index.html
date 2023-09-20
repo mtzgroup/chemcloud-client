@@ -480,11 +480,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../code-reference/future-results/" class="md-nav__link">
+      <a href="../code-reference/future-outputs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Future results
+    Future outputs
   </span>
   
 
@@ -636,7 +636,7 @@
 <ul>
 <li><code>_RequestsClient</code> public http methods (like <code>compute()</code> and <code>result()</code> should always return Python objects. This gives a layer of abstraction between callers who want to think in terms of Python data objects and the <code>_RequestsClient</code> which thinks in terms of http requests and <code>json</code> data structures.</li>
 </ul>
-<p>I'm starting to have second thoughts about this ^^ decision. It feels like the <code>_RequestsClient</code> is starting to take on too much responsibility. It accepts python data types as parameters, and returns python data types as it if were an end-user class. It isn't. It's meant to be a utility class used by end-user objects such as <code>CCClient</code> and <code>FutureResult</code> objects. I think it should return data more directly from the ChemCloud API and let the other classes handle this data. This becomes more apparent as I add <code>pydantic</code> to my data models and realize I'd rather have them pass rawer data types to the <code>_RequestsClient</code> and then handle the results of an API call inside their own class. Maybe the <code>compute()</code> method on the <code>_RequestsClient</code> should go away and these should live exclusively on the <code>CCClient</code> object which then utilizes <code>request</code> and <code>authenticated_request</code> to access ChemCloud.</p>
+<p>I'm starting to have second thoughts about this ^^ decision. It feels like the <code>_RequestsClient</code> is starting to take on too much responsibility. It accepts python data types as parameters, and returns python data types as it if were an end-user class. It isn't. It's meant to be a utility class used by end-user objects such as <code>CCClient</code> and <code>FutureOutput</code> objects. I think it should return data more directly from the ChemCloud API and let the other classes handle this data. This becomes more apparent as I add <code>pydantic</code> to my data models and realize I'd rather have them pass rawer data types to the <code>_RequestsClient</code> and then handle the results of an API call inside their own class. Maybe the <code>compute()</code> method on the <code>_RequestsClient</code> should go away and these should live exclusively on the <code>CCClient</code> object which then utilizes <code>request</code> and <code>authenticated_request</code> to access ChemCloud.</p>
 
 
 
