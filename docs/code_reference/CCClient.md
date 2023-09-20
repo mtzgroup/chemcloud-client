@@ -1,3 +1,0 @@
-# CCClient
-
-::: chemcloud.client:CCClient

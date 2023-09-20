@@ -1,11 +1,15 @@
-from pathlib import Path
-
 from qcio import DualProgramInput, Molecule, SinglePointOutput
 
 from chemcloud import CCClient
 
-current_dir = Path(__file__).resolve().parent
-water = Molecule.open(current_dir / "h2o.xyz")
+water = Molecule(
+    symbols=["O", "H", "H"],
+    geometry=[
+        [0.0000, 0.00000, 0.0000],
+        [0.2774, 0.89290, 0.2544],
+        [0.6067, -0.23830, -0.7169],
+    ],
+)
 
 client = CCClient()
 

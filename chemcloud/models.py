@@ -35,21 +35,21 @@ class TaskStatus(str, Enum):
     COMPLETE = "COMPLETE"
 
 
-class FutureResultBase(BaseModel, ABC):
-    """Base class for FutureResults
+class FutureOutputBase(BaseModel, ABC):
+    """Base class for FutureOutputs
 
-    Parameters:
-        id: The id for primary task submitted to ChemCloud. May correspond to a
-            single task or group of tasks
-        client: The _RequestsClient to use for http requests to ChemCloud
-        result: Primary return value resulting from computation
+    Attributes:
+        task_id: The task_id for primary task submitted to ChemCloud. May correspond to
+            a single task or group of tasks.
+        client: The _RequestsClient to use for http requests to ChemCloud.
+        result: Primary return value resulting from computation.
 
     Caution:
-        A FutureResult should never be instantiated directly.
+        A FutureOutput should never be instantiated directly.
         `CCClient.compute(...)` will return one when you submit a computation.
     """
 
-    id: str
+    task_id: str
     result: Optional[QCIOOutputsOrList] = None
     client: Any
     _state: TaskStatus = TaskStatus.PENDING
@@ -61,7 +61,7 @@ class FutureResultBase(BaseModel, ABC):
         timeout: Optional[float] = None,  # in seconds
         interval: float = 1.0,
     ) -> QCIOOutputsOrList:
-        """Block and return result.
+        """Block until a calculation is complete and return the result.
 
         Parameters:
             timeout: The number of seconds to wait for a computation before raising a
@@ -94,7 +94,7 @@ class FutureResultBase(BaseModel, ABC):
 
     def _output(self):
         """Return output from server"""
-        return self.client.output(self.id)
+        return self.client.output(self.task_id)
 
     @property
     def status(self) -> str:
@@ -112,29 +112,29 @@ class FutureResultBase(BaseModel, ABC):
         return self._state
 
 
-class FutureResult(FutureResultBase):
+class FutureOutput(FutureOutputBase):
     """Single computation result"""
 
     result: Optional[QCIOOutputs] = None
 
 
-class FutureResultGroup(FutureResultBase):
+class FutureOutputGroup(FutureOutputBase):
     """Group computation result"""
 
     result: Optional[List[QCIOOutputs]] = None
 
     def _output(self):
         """Return result from server. Remove GROUP_ID_PREFIX from id."""
-        return self.client.output(self.id.replace(GROUP_ID_PREFIX, ""))
+        return self.client.output(self.task_id.replace(GROUP_ID_PREFIX, ""))
 
-    @field_validator("id")
+    @field_validator("task_id")
     @classmethod
     def validate_id(cls, val):
         """Prepend id with GROUP_ID_PREFIX.
 
         NOTE:
-            This makes instantiating FutureResultGroups from saved ids easier because
-            they are differentiated from FutureResult ids.
+            This makes instantiating FutureOutputGroups from saved ids easier because
+            they are differentiated from FutureOutput ids.
         """
         if not val.startswith(GROUP_ID_PREFIX):
             val = GROUP_ID_PREFIX + val
@@ -142,15 +142,15 @@ class FutureResultGroup(FutureResultBase):
 
 
 def to_file(
-    future_results: Union[FutureResultBase, List[FutureResultBase]],
+    future_results: Union[FutureOutputBase, List[FutureOutputBase]],
     path: Union[str, Path],
     *,
     append: bool = False,
 ) -> None:
-    """Write FutureResults to disk for later retrieval
+    """Write FutureOutputs to disk for later retrieval
 
     Params:
-        future_results: List of or single FutureResult or FutureResultGroup
+        future_results: List of or single FutureOutput or FutureOutputGroup
         path: File path to results file
         append: Append results to an existing file if True, else create new file
     """
@@ -158,29 +158,29 @@ def to_file(
         future_results = [future_results]
 
     with open(path, f"{'a' if append else 'w'}") as f:
-        f.writelines([f"{fr.id}\n" for fr in future_results])
+        f.writelines([f"{fr.task_id}\n" for fr in future_results])
 
 
 def from_file(
     path: Union[str, Path],
     client: Any,
-) -> List[Union[FutureResult, FutureResultGroup]]:
-    """Instantiate FutureResults or FutureResultGroups from file of result ids
+) -> List[Union[FutureOutput, FutureOutputGroup]]:
+    """Instantiate FutureOutputs or FutureOutputGroups from file of result ids
 
     Params:
         path: Path to file containing the ids
         client: Instantiated CCClient object
     """
-    frs: List[Union[FutureResult, FutureResultGroup]] = []
+    frs: List[Union[FutureOutput, FutureOutputGroup]] = []
     with open(path) as f:
         for id in f.readlines():
             id = id.strip()
-            model: Union[Type[FutureResult], Type[FutureResultGroup]]
+            model: Union[Type[FutureOutput], Type[FutureOutputGroup]]
             if id.startswith(GROUP_ID_PREFIX):
-                model = FutureResultGroup
+                model = FutureOutputGroup
             else:
-                model = FutureResult
-            frs.append(model(id=id, client=client._client))
+                model = FutureOutput
+            frs.append(model(task_id=id, client=client._client))
 
     assert len(frs) > 0, "No ids found in file!"
     return frs

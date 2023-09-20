@@ -45,6 +45,14 @@ pytest-httpx = "<0.23.0"
 pytest-mock = "^3.11.1"
 types-toml = "^0.10.8.7"
 
+
+[tool.poetry.group.docs.dependencies]
+mkdocs = "^1.5.3"
+mkdocs-material = "^9.3.2"
+mkdocstrings = {extras = ["python"], version = "^0.23.0"}
+markdown-include = "^0.8.1"
+pymdown-extensions = "^10.3"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

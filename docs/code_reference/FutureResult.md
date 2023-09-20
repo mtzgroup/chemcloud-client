@@ -1,3 +1,0 @@
-# FutureResult
-
-::: chemcloud.models:FutureResult

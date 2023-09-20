@@ -10,8 +10,8 @@ from chemcloud.config import Settings
 from chemcloud.http_client import _RequestsClient
 from chemcloud.models import (
     GROUP_ID_PREFIX,
-    FutureResult,
-    FutureResultGroup,
+    FutureOutput,
+    FutureOutputGroup,
     TaskStatus,
 )
 
@@ -369,8 +369,8 @@ def test_compute(settings, patch_compute_endpoints, water, jwt):
     )
 
     future_result = client.compute(atomic_input, {"program": "psi4"})
-    assert isinstance(future_result, FutureResult)
-    assert future_result.id == patch_compute_endpoints
+    assert isinstance(future_result, FutureOutput)
+    assert future_result.task_id == patch_compute_endpoints
     assert future_result.client is client
 
 
@@ -383,8 +383,8 @@ def test_compute_batch(settings, patch_compute_endpoints, water, jwt):
 
     future_result = client.compute([atomic_input, atomic_input], {"program": "psi4"})
 
-    assert isinstance(future_result, FutureResultGroup)
-    assert future_result.id == f"{GROUP_ID_PREFIX}{patch_compute_endpoints}"
+    assert isinstance(future_result, FutureOutputGroup)
+    assert future_result.task_id == f"{GROUP_ID_PREFIX}{patch_compute_endpoints}"
     assert future_result.client is client
 
 

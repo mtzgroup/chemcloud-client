@@ -22,8 +22,6 @@ extra_css:
 plugins:
   - search
   - mkdocstrings:
-      watch:
-        - chemcloud
       handlers:
         python:
           rendering:
@@ -47,9 +45,6 @@ markdown_extensions:
   - admonition
   - toc:
       permalink: 🔗
-  - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
   - markdown_include.include:
       base_path: docs
 
@@ -57,21 +52,15 @@ nav:
   - chemcloud: index.md
   - Tutorial - Users Guide:
       - tutorial/compute.md
-      - tutorial/compute_engines.md
+      - tutorial/supported-programs.md
       - tutorial/authentication.md
-      - tutorial/geometry_optimization.md
-      - tutorial/batch_computations.md
-      - tutorial/bigchem_algorithms.md
+      - tutorial/geometry-optimization.md
+      - tutorial/batch-computations.md
+      - tutorial/bigchem-algorithms.md
   - Code Reference:
-      - code_reference/CCClient.md
-      - code_reference/models.md
-      - code_reference/FutureResult.md
-      - code_reference/Molecule.md
-      - code_reference/AtomicInput.md
-      - code_reference/AtomicResult.md
-      - code_reference/OptimizationInput.md
-      - code_reference/OptimizationResult.md
-      - code_reference/FailedOperation.md
-      - code_reference/ComputeError.md
-      - code_reference/exceptions.md
+      - code-reference/CCClient.md
+      - code-reference/future-outputs.md
+      - code-reference/inputs.md
+      - code-reference/outputs.md
+      - code-reference/exceptions.md
   - Changelog: CHANGELOG.md

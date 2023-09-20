@@ -7,7 +7,7 @@
 
 # chemcloud - A Python Client for ChemCloud
 
-`chemcloud` is a python client for the [ChemCloud Server](https://github.com/mtzgroup/chemcloud-server). A ChemCloud server securely exposes a [BigChem](https://github.com/mtzgroup/bigchem) compute system over the open internet. All input and output data structures come from [qcio](https://github.com/coltonbh/qcio) and using the ChemCloud client looks almost identical to using the [qcop](https://github.com/coltonbh/qcop) library except that calculations are performed on a remote machine rather than the end user's machine. The client provides a simple, yet powerful interface to perform computational chemistry calculation using nothing but modern python and an internet connection.
+`chemcloud` is a python client for the [ChemCloud Server](https://github.com/mtzgroup/chemcloud-server). The client provides a simple yet powerful interface to perform computational chemistry calculations using nothing but modern Python and an internet connection.
 
 **Documentation**: <https://mtzgroup.github.io/chemcloud-client>
 
@@ -32,7 +32,6 @@ pip install chemcloud
 - Create a ChemCloud account at [https://chemcloud.mtzlab.com/signup](https://chemcloud.mtzlab.com/signup) (or the address of the ChemCloud Server you want to communicate with).
 - Instantiate a client
 - Configure client (only required the very first time you use `CCClient`)
-- Run calculations
 
 ```python
 from chemcloud import CCClient
@@ -47,10 +46,14 @@ client.hello_world("Colton")
 'Welcome to ChemCloud, Colton'
 ```
 
-- Perform calculations just like you would with `qcop` except calling `client.compute` instead of `qcop.compute`. Rather than getting back an `Output` object directly, `client.compute` returns a `FutureResult` object which can be used to get the output of the computation once it is complete.
+- Run calculations just like you would with `qcop` except calling `client.compute` instead of `qcop.compute`. Rather than getting back an `Output` object directly, `client.compute` returns a `FutureOutput` object which can be used to get the output of the computation once it is complete.
 
 ```python
 from qcio import Molecule, ProgramInput
+from chemcloud import CCClient
+
+client = CCClient()
+
 # Create the molecule
 h2o = Molecule.open("h2o.xyz")
 
@@ -64,10 +67,8 @@ prog_input = ProgramInput(
 
 # Submit the calculation to the server
 future_output = client.compute("terachem", prog_input, collect_files=True)
-
 # Status can be checked at any time
 future_result.status
-
 # Get the output (blocking)
 output = future_output.get()
 
@@ -84,9 +85,9 @@ output.traceback # Stack trace if calculation failed
 output.ptraceback # Shortcut to print out the traceback in human readable format
 ```
 
-### Examples
+## Examples
 
-Examples of various computations can be found in the [/examples directory](https://github.com/mtzgroup/chemcloud-client/tree/main/examples).
+Examples of various computations can be found in the [examples directory](https://github.com/mtzgroup/chemcloud-client/tree/main/examples).
 
 ## Support
 
