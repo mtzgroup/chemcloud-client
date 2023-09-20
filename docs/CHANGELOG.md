@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
+## [0.8.0] - 2023-09-19
+
 ### Changed
 
 - `FutureResult` objects now called `FutureOutput` to keep in harmony with `qcio` nomenclature.
@@ -144,7 +146,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - `_RequestsClient` class that handles all network requests to TeraChem Cloud server
 - `FutureResults` object that is created from a `task_id` and can be used to retrieve a result once finished.
 
-[unreleased]: https://github.com/mtzgroup/chemcloud-client/compare/0.7.0...HEAD
+[unreleased]: https://github.com/mtzgroup/chemcloud-client/compare/0.8.0...HEAD
+[0.8.0]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.8.0
 [0.7.0]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.7.0
 [0.6.2]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.6.2
 [0.6.1]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.6.1
