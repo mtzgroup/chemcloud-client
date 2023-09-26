@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
+## [0.8.2] - 2023-09-25
+
+### Changed
+
+- Removed `pydantic==2.4.0` from supported versions due to immediate bug upon this release. When trying to import `CCClient` a reference count error appears to trigger a `KeyError`. Bugs are being tracked here: https://github.com/pydantic/pydantic/issues/7617.
+
 ## [0.8.1] - 2023-09-20
 
 ### Changed
@@ -152,7 +158,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - `_RequestsClient` class that handles all network requests to TeraChem Cloud server
 - `FutureResults` object that is created from a `task_id` and can be used to retrieve a result once finished.
 
-[unreleased]: https://github.com/mtzgroup/chemcloud-client/compare/0.8.1...HEAD
+[unreleased]: https://github.com/mtzgroup/chemcloud-client/compare/0.8.2...HEAD
+[0.8.2]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.8.2
 [0.8.1]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.8.1
 [0.8.0]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.8.0
 [0.7.0]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.7.0
