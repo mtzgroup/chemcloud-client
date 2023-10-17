@@ -6,7 +6,7 @@ from time import time
 from typing import Dict
 
 import pytest
-import toml
+import tomli_w
 from pytest_httpx import HTTPXMock
 from qcio import Molecule
 
@@ -42,8 +42,8 @@ def credentials_file(settings):
         credentials_file = (
             settings.chemcloud_base_directory / settings.chemcloud_credentials_file
         )
-        with open(credentials_file, "w+") as f:
-            toml.dump(credentials, f)
+        with open(credentials_file, "wb+") as f:
+            tomli_w.dump(credentials, f)
 
     return _write_credentials_file
 

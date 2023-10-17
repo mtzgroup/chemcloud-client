@@ -1,4 +1,5 @@
 import json
+import sys
 from base64 import urlsafe_b64decode
 from getpass import getpass
 from pathlib import Path
@@ -6,7 +7,13 @@ from time import time
 from typing import Any, Dict, List, Optional, Tuple, Union
 
 import httpx
-import toml
+
+if sys.version_info >= (3, 11):
+    import tomllib
+else:
+    import tomli as tomllib
+
+import tomli_w
 from qcio.utils import json_dumps
 
 from chemcloud.models import FutureOutput, FutureOutputGroup, QCIOInputs
@@ -72,8 +79,8 @@ class _RequestsClient:
             access_token, refresh_token = self._tokens_from_username_password(un, pw)
 
         elif credentials_file.is_file():  # Look for tokens in credentials file
-            with open(credentials_file) as f:
-                credentials = toml.load(f)
+            with open(credentials_file, "rb") as f:
+                credentials = tomllib.load(f)
             try:
                 access_token = credentials[self._profile]["access_token"]
                 refresh_token = credentials[self._profile]["refresh_token"]
@@ -146,8 +153,8 @@ class _RequestsClient:
         )
 
         if credentials_file.is_file():
-            with open(credentials_file, "r") as f:
-                credentials = toml.load(f)
+            with open(credentials_file, "rb") as f:
+                credentials = tomllib.load(f)
         else:
             credentials_file.parent.mkdir(parents=True, exist_ok=True)
             credentials = {}
@@ -156,8 +163,8 @@ class _RequestsClient:
             "access_token": access_token,
             "refresh_token": refresh_token,
         }
-        with open(credentials_file, "w") as f:
-            toml.dump(credentials, f)
+        with open(credentials_file, "wb") as f:
+            tomli_w.dump(credentials, f)
 
     def _request(
         self,

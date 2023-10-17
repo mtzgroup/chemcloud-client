@@ -1,8 +1,12 @@
 import json
 import re
+import sys
 from pathlib import Path
 
-import toml
+if sys.version_info >= (3, 11):
+    import tomllib
+else:
+    import tomli as tomllib
 from pytest_httpx import HTTPXMock
 from qcio import Model, ProgramInput, SinglePointOutput
 
@@ -135,8 +139,8 @@ def test_write_tokens_to_credentials_file(settings):
 
     assert credentials_file.is_file()
 
-    with open(credentials_file) as f:
-        data = toml.load(f)
+    with open(credentials_file, "rb") as f:
+        data = tomllib.load(f)
 
     assert (
         data[settings.chemcloud_credentials_profile]["access_token"]
@@ -166,8 +170,8 @@ def test_write_tokens_to_credentials_file_adds_new_profiles_to_credentials_file(
 
     assert credentials_file.is_file()
 
-    with open(credentials_file) as f:
-        data = toml.load(f)
+    with open(credentials_file, "rb") as f:
+        data = tomllib.load(f)
 
     assert (
         data[settings.chemcloud_credentials_profile]["access_token"]
@@ -186,8 +190,8 @@ def test_write_tokens_to_credentials_file_adds_new_profiles_to_credentials_file(
         new_profile_access_token, new_profile_refresh_token, profile=new_profile_name
     )
 
-    with open(credentials_file) as f:
-        data = toml.load(f)
+    with open(credentials_file, "rb") as f:
+        data = tomllib.load(f)
 
     # Default profile still exists
     assert (
@@ -224,8 +228,8 @@ def test_write_tokens_to_credentials_file_overwrites_tokens_of_existing_profiles
 
     assert credentials_file.is_file()
 
-    with open(credentials_file) as f:
-        data = toml.load(f)
+    with open(credentials_file, "rb") as f:
+        data = tomllib.load(f)
 
     assert (
         data[settings.chemcloud_credentials_profile]["access_token"]
@@ -241,8 +245,8 @@ def test_write_tokens_to_credentials_file_overwrites_tokens_of_existing_profiles
 
     client.write_tokens_to_credentials_file(new_access_token, new_refresh_token)
 
-    with open(credentials_file) as f:
-        data = toml.load(f)
+    with open(credentials_file, "rb") as f:
+        data = tomllib.load(f)
 
     # Default profile has new tokens
     assert (
@@ -316,8 +320,8 @@ def test__refresh_tokens_writes_to_credentials_file_only_if_flag_set(
     client._refresh_tokens(original_refresh_token)
     assert credentials_file.is_file()
 
-    with open(credentials_file) as f:
-        data = toml.load(f)
+    with open(credentials_file, "rb") as f:
+        data = tomllib.load(f)
 
     assert (
         data[settings.chemcloud_credentials_profile]["access_token"]

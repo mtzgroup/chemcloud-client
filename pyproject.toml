@@ -26,7 +26,8 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.8"
-toml = "^0.10.2"
+tomli = { version = ">=1.1.0", python = "<3.11" }
+tomli-w = "^1.0.0"
 httpx = "^0.23.1"
 qcio = "^0.7.0"
 pydantic = ">=2.0.0, !=2.4.0"
@@ -43,7 +44,6 @@ pytest-cov = "^4.1.0"
 coverage = "^7.3.0"
 pytest-httpx = "<0.23.0"
 pytest-mock = "^3.11.1"
-types-toml = "^0.10.8.7"
 
 
 [tool.poetry.group.docs.dependencies]
