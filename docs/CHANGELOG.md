@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
+### Changed
+
+- Updated GitHub actions to run on `pull_request` in addition to `push`.
+
 ## [0.8.2] - 2023-09-25
 
 ### Changed
