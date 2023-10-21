@@ -9,6 +9,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 
 - Updated GitHub actions to run on `pull_request` in addition to `push`.
+- Migrated dependency `uiri/toml` to `hukkin/tomli` (Python < 3.11) or the built-in `tomllib` (Python >= 3.11)
+- Updated GitHub actions to test against both Python 3.8 and Python 3.11
 
 ## [0.8.2] - 2023-09-25
 
