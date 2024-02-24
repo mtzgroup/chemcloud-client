@@ -455,6 +455,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#frequency-analysis" class="md-nav__link">
+    Frequency Analysis
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -668,6 +675,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#frequency-analysis" class="md-nav__link">
+    Frequency Analysis
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -689,59 +703,75 @@
 <h1 id="bigchem-algorithms">BigChem Algorithms<a class="headerlink" href="#bigchem-algorithms" title="Permanent link">🔗</a></h1>
 <p>BigChem implements some of its own concurrent algorithms that leverage its horizontally scalable backend infrastructure. These include a parallel hessian algorithm and parallel frequency analysis algorithm. To use them submit a <code>hessian</code> calculation to ChemCloud using <code>bigchem</code> as the engine. See examples the <code>parallel_hessian.py</code> and <code>parallel_frequency_analysis.py</code> scripts in the <a href="https://github.com/mtzgroup/chemcloud-client/tree/main/examples">examples directory</a>.</p>
 <h2 id="hessian">Hessian<a class="headerlink" href="#hessian" title="Permanent link">🔗</a></h2>
-<p>from qcio import DualProgramInput, Molecule, SinglePointOutput</p>
-<p>from chemcloud import CCClient</p>
-<p>water = Molecule(
-    symbols=["O", "H", "H"],
-    geometry=[
-        [0.0000, 0.00000, 0.0000],
-        [0.2774, 0.89290, 0.2544],
-        [0.6067, -0.23830, -0.7169],
-    ],
-)</p>
-<p>client = CCClient()</p>
-<p>prog_inp = DualProgramInput(
-    molecule=water,
-    calctype="hessian",
-    subprogram="psi4",
-    subprogram_args={"model": {"method": "b3lyp", "basis": "6-31g"}},
-)</p>
-<h1 id="submit-calculation">Submit calculation<a class="headerlink" href="#submit-calculation" title="Permanent link">🔗</a></h1>
-<p>future_result = client.compute("bigchem", prog_inp)
-output: SinglePointOutput = future_result.get()</p>
-<h1 id="singlepointoutput-object-containing-all-returned-data">SinglePointOutput object containing all returned data<a class="headerlink" href="#singlepointoutput-object-containing-all-returned-data" title="Permanent link">🔗</a></h1>
-<p>print(output)
-print(output.results.hessian)</p>
-<h1 id="frequency-data-always-included-too">Frequency data always included too<a class="headerlink" href="#frequency-data-always-included-too" title="Permanent link">🔗</a></h1>
-<p>print(f"Wavenumbers: {output.results.freqs_wavenumber}")
-print(output.results.normal_modes_cartesian)
-print(output.results.gibbs_free_energy)</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">qcio</span> <span class="kn">import</span> <span class="n">DualProgramInput</span><span class="p">,</span> <span class="n">Molecule</span><span class="p">,</span> <span class="n">SinglePointOutput</span>
+
+<span class="kn">from</span> <span class="nn">chemcloud</span> <span class="kn">import</span> <span class="n">CCClient</span>
+
+<span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span>
+    <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">],</span>
+    <span class="n">geometry</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">[</span><span class="mf">0.0000</span><span class="p">,</span> <span class="mf">0.00000</span><span class="p">,</span> <span class="mf">0.0000</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.2774</span><span class="p">,</span> <span class="mf">0.89290</span><span class="p">,</span> <span class="mf">0.2544</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.6067</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.23830</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.7169</span><span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">()</span>
+
+<span class="n">prog_inp</span> <span class="o">=</span> <span class="n">DualProgramInput</span><span class="p">(</span>
+    <span class="n">molecule</span><span class="o">=</span><span class="n">water</span><span class="p">,</span>
+    <span class="n">calctype</span><span class="o">=</span><span class="s2">&quot;hessian&quot;</span><span class="p">,</span>
+    <span class="n">subprogram</span><span class="o">=</span><span class="s2">&quot;psi4&quot;</span><span class="p">,</span>
+    <span class="n">subprogram_args</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;b3lyp&quot;</span><span class="p">,</span> <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="s2">&quot;6-31g&quot;</span><span class="p">}},</span>
+<span class="p">)</span>
+
+
+<span class="c1"># Submit calculation</span>
+<span class="n">future_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="s2">&quot;bigchem&quot;</span><span class="p">,</span> <span class="n">prog_inp</span><span class="p">)</span>
+<span class="n">output</span><span class="p">:</span> <span class="n">SinglePointOutput</span> <span class="o">=</span> <span class="n">future_result</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+<span class="c1"># SinglePointOutput object containing all returned data</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">hessian</span><span class="p">)</span>
+<span class="c1"># Frequency data always included too</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Wavenumbers: </span><span class="si">{</span><span class="n">output</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">freqs_wavenumber</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">normal_modes_cartesian</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">gibbs_free_energy</span><span class="p">)</span>
+</code></pre></div>
 <h2 id="frequency-analysis">Frequency Analysis<a class="headerlink" href="#frequency-analysis" title="Permanent link">🔗</a></h2>
-<p>from qcio import DualProgramInput, Molecule, SinglePointOutput</p>
-<p>from chemcloud import CCClient</p>
-<p>water = Molecule(
-    symbols=["O", "H", "H"],
-    geometry=[
-        [0.0000, 0.00000, 0.0000],
-        [0.2774, 0.89290, 0.2544],
-        [0.6067, -0.23830, -0.7169],
-    ],
-)</p>
-<p>client = CCClient()</p>
-<p>prog_inp = DualProgramInput(
-    molecule=water,
-    calctype="hessian",
-    subprogram="psi4",
-    subprogram_args={"model": {"method": "b3lyp", "basis": "6-31g"}},
-)</p>
-<h1 id="submit-calculation_1">Submit calculation<a class="headerlink" href="#submit-calculation_1" title="Permanent link">🔗</a></h1>
-<p>future_result = client.compute("bigchem", prog_inp)
-output: SinglePointOutput = future_result.get()</p>
-<h1 id="singlepointoutput-object-containing-all-returned-data_1">SinglePointOutput object containing all returned data<a class="headerlink" href="#singlepointoutput-object-containing-all-returned-data_1" title="Permanent link">🔗</a></h1>
-<p>print(output)
-print(f"Wavenumbers: {output.results.freqs_wavenumber}")
-print(output.results.normal_modes_cartesian)
-print(output.results.gibbs_free_energy)</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">qcio</span> <span class="kn">import</span> <span class="n">DualProgramInput</span><span class="p">,</span> <span class="n">Molecule</span><span class="p">,</span> <span class="n">SinglePointOutput</span>
+
+<span class="kn">from</span> <span class="nn">chemcloud</span> <span class="kn">import</span> <span class="n">CCClient</span>
+
+<span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span>
+    <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">],</span>
+    <span class="n">geometry</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">[</span><span class="mf">0.0000</span><span class="p">,</span> <span class="mf">0.00000</span><span class="p">,</span> <span class="mf">0.0000</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.2774</span><span class="p">,</span> <span class="mf">0.89290</span><span class="p">,</span> <span class="mf">0.2544</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.6067</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.23830</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.7169</span><span class="p">],</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">()</span>
+
+<span class="n">prog_inp</span> <span class="o">=</span> <span class="n">DualProgramInput</span><span class="p">(</span>
+    <span class="n">molecule</span><span class="o">=</span><span class="n">water</span><span class="p">,</span>
+    <span class="n">calctype</span><span class="o">=</span><span class="s2">&quot;hessian&quot;</span><span class="p">,</span>
+    <span class="n">subprogram</span><span class="o">=</span><span class="s2">&quot;psi4&quot;</span><span class="p">,</span>
+    <span class="n">subprogram_args</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;b3lyp&quot;</span><span class="p">,</span> <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="s2">&quot;6-31g&quot;</span><span class="p">}},</span>
+<span class="p">)</span>
+
+
+<span class="c1"># Submit calculation</span>
+<span class="n">future_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="s2">&quot;bigchem&quot;</span><span class="p">,</span> <span class="n">prog_inp</span><span class="p">)</span>
+<span class="n">output</span><span class="p">:</span> <span class="n">SinglePointOutput</span> <span class="o">=</span> <span class="n">future_result</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+<span class="c1"># SinglePointOutput object containing all returned data</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Wavenumbers: </span><span class="si">{</span><span class="n">output</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">freqs_wavenumber</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">normal_modes_cartesian</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">gibbs_free_energy</span><span class="p">)</span>
+</code></pre></div>
 <p>Keywords for the BigChem algorithms:</p>
 <table>
 <thead>
