@@ -16,15 +16,15 @@ client = CCClient()
 prog_inp = DualProgramInput(
     molecule=water,
     calctype="optimization",
-    keywords={"maxiter": 3},
+    keywords={"maxiter": 25},
     subprogram="psi4",
     subprogram_args={"model": {"method": "b3lyp", "basis": "6-31g"}},
 )
 
 
 # Submit calculation
-future_result = client.compute("geometric", [prog_inp] * 2)
-output = future_result.get()
+future_result = client.compute("geometric", prog_inp)
+prog_output = future_result.get()
 
 # Array of OptimizationOutput objects
-print(output)
+print(prog_output)

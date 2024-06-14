@@ -1,4 +1,4 @@
-from qcio import Molecule, ProgramInput, SinglePointOutput
+from qcio import Molecule, ProgramInput, ProgramOutput
 
 from chemcloud import CCClient
 
@@ -23,10 +23,10 @@ prog_inp = ProgramInput(
     },
 )
 future_result = client.compute("terachem", prog_inp)
-output: SinglePointOutput = future_result.get()
-# SinglePointOutput object containing all returned data
-print(output.stdout)
-print(output)
+prog_output: ProgramOutput = future_result.get()
+# ProgramOutput object containing all returned data
+print(prog_output.stdout)
+print(prog_output)
 # The energy value requested
-print(output.return_result)
-print(output.files.keys())
+print(prog_output.return_result)
+print(prog_output.files.keys())

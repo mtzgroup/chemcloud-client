@@ -16,9 +16,10 @@ else:
 import tomli_w
 from qcio.utils import json_dumps
 
-from chemcloud.models import FutureOutput, FutureOutputGroup, QCIOInputs
+from chemcloud.models import FutureOutput, FutureOutputGroup
 
 from .config import Settings, settings
+from .models import QCIOInputsOrList
 
 
 class _RequestsClient:
@@ -280,14 +281,14 @@ class _RequestsClient:
 
     def compute(
         self,
-        inp_obj: QCIOInputs,
+        inp_obj: QCIOInputsOrList,
         params: Optional[Dict[str, Any]] = None,
     ) -> Union[FutureOutput, FutureOutputGroup]:
         """Submit a computation to ChemCloud"""
         result_id = self._authenticated_request(
             "post",
             "/compute",
-            data=json_dumps(inp_obj),
+            data=json_dumps(inp_obj),  # type: ignore
             params=params or {},
         )
         return self._result_id_to_future_result(inp_obj, result_id)

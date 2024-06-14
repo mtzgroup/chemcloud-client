@@ -8,7 +8,7 @@ if sys.version_info >= (3, 11):
 else:
     import tomli as tomllib
 from pytest_httpx import HTTPXMock
-from qcio import Model, ProgramInput, SinglePointOutput
+from qcio import Model, ProgramInput, ProgramOutput
 
 from chemcloud.config import Settings
 from chemcloud.http_client import _RequestsClient
@@ -407,19 +407,20 @@ def test_result_pending(settings, jwt, httpx_mock: HTTPXMock):
 def test_result_success(settings, jwt, httpx_mock: HTTPXMock):
     client = _RequestsClient(settings=settings)
     client._access_token = jwt
-    spo = SinglePointOutput.model_validate_json(
+    prog_output: ProgramOutput = ProgramOutput.model_validate_json(
         (Path(__file__).parent / "water.b3lyp.6-31g.energy.json").read_text()
     )
     url = re.compile(".*/compute/output")
     httpx_mock.add_response(
         url=url,
-        json={"state": "SUCCESS", "result": json.loads(spo.model_dump_json())},
+        json={"state": "SUCCESS", "result": json.loads(prog_output.model_dump_json())},
     )
 
     status, result = client.output("fake_id")
 
     assert status == "SUCCESS"
-    assert isinstance(SinglePointOutput(**result), SinglePointOutput)
+    # Being laze on this type: ignore. Investigate more later...
+    assert isinstance(ProgramOutput(**result), ProgramOutput)  # type: ignore
 
 
 def test__decode_access_token():

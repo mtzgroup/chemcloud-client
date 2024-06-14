@@ -6,25 +6,18 @@ from typing import Any, List, Optional, Type, Union
 
 from pydantic import field_validator
 from pydantic.main import BaseModel
-from qcio import (
-    DualProgramInput,
-    FileInput,
-    FileOutput,
-    OptimizationOutput,
-    ProgramFailure,
-    ProgramInput,
-    SinglePointOutput,
-)
+from qcio import DualProgramInput, FileInput, ProgramInput, ProgramOutput
+from typing_extensions import TypeAlias
 
 from .exceptions import TimeoutError
 
 GROUP_ID_PREFIX = "group-"
 
 # Convenience types
-QCIOInputs = Union[ProgramInput, FileInput, DualProgramInput]
-QCIOInputsOrList = Union[QCIOInputs, List[QCIOInputs]]
-QCIOOutputs = Union[FileOutput, SinglePointOutput, OptimizationOutput, ProgramFailure]
-QCIOOutputsOrList = Union[QCIOOutputs, List[QCIOOutputs]]
+QCIOInputs: TypeAlias = Union[ProgramInput, FileInput, DualProgramInput]
+QCIOInputsOrList: TypeAlias = Union[QCIOInputs, List[QCIOInputs]]
+QCIOOutputs: TypeAlias = ProgramOutput
+QCIOOutputsOrList: TypeAlias = Union[QCIOOutputs, List[QCIOOutputs]]
 
 
 class TaskStatus(str, Enum):
@@ -33,6 +26,7 @@ class TaskStatus(str, Enum):
     #: Task state is unknown (assumed pending since you know the id).
     PENDING = "PENDING"
     COMPLETE = "COMPLETE"
+    FAILURE = "FAILURE"
 
 
 class FutureOutputBase(BaseModel, ABC):
@@ -60,7 +54,7 @@ class FutureOutputBase(BaseModel, ABC):
         self,
         timeout: Optional[float] = None,  # in seconds
         interval: float = 1.0,
-    ) -> QCIOOutputsOrList:
+    ) -> Optional[QCIOOutputsOrList]:
         """Block until a calculation is complete and return the result.
 
         Parameters:
@@ -80,7 +74,13 @@ class FutureOutputBase(BaseModel, ABC):
 
         start_time = time()
 
-        while not self.result:
+        # self._state check prevents 401 errors from ChemCloud when the job completed
+        # but the server failed to return a result (e.g., due to .program_output not)
+        # being set correctly by qcio/BigChem.
+        # TODO: Make a clearer contract between Server and Client re: states. This got
+        # a bit messy as I switched mimicking celery states to the more simplified setup
+        # I have now. This can be simplified further.
+        while not self.result and self._state not in {"COMPLETE", "FAILURE"}:
             # Calling self.status returns status and sets self.result if task complete
             self.status
             if timeout:

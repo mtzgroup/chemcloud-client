@@ -20,6 +20,6 @@ prog_inp = ProgramInput(
     keywords={},
 )
 future_result = client.compute("psi4", [prog_inp] * 2)
-output = future_result.get()
-# Array of SinglePointOutput objects containing all returned data
-print(output)
+prog_output = future_result.get()
+# Array of ProgramOutput objects containing all returned data
+print(prog_output)
