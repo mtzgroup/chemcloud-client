@@ -59,8 +59,8 @@ nav:
       - tutorial/bigchem-algorithms.md
   - Code Reference:
       - code-reference/CCClient.md
-      - code-reference/future-outputs.md
-      - code-reference/inputs.md
-      - code-reference/outputs.md
+      - code-reference/FutureOutputs.md
+      - code-reference/ProgramInputs.md
+      - code-reference/ProgramOutputs.md
       - code-reference/exceptions.md
   - Changelog: CHANGELOG.md

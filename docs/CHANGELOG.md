@@ -10,6 +10,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - Upgraded to `qcio` Generics data structures.
 - Upgraded `black` from `^23.0.0` to `^24.0.0`.
+- Renamed `collect_wavefucntion` kwarg to `CCClient.compute(...)` to `collect_wfn`.
+- Updated the response returned by ChemCloud server to have attributes `status` and `program_output` from `state` and `results`.
+- Rebuilt documentation to reflect new `qcio` Generics and renamed kwargs.
 
 ## [0.8.3] - 2023-10-20
 
