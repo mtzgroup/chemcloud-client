@@ -29,13 +29,13 @@ python = "^3.8"
 tomli = { version = ">=1.1.0", python = "<3.11" }
 tomli-w = "^1.0.0"
 httpx = "^0.23.1"
-qcio = "^0.7.0"
+qcio = "^0.9.3"
 pydantic = ">=2.0.0, !=2.4.0"
 pydantic-settings = "^2.0.3"
 
 
 [tool.poetry.group.dev.dependencies]
-black = "^23.7.0"
+black = "^24.4.0"
 isort = "^5.12.0"
 ruff = "^0.0.287"
 mypy = "^1.5.1"
@@ -80,6 +80,7 @@ omit = ["*/tests/*", "*__init__.py"]
 [tool.mypy]
 plugins = "pydantic.mypy"
 ignore_missing_imports = true
+exclude = ["examples"]
 
 [tool.pydantic-mypy]
 init_forbid_extra = true

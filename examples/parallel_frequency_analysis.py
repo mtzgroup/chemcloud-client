@@ -1,4 +1,4 @@
-from qcio import DualProgramInput, Molecule, SinglePointOutput
+from qcio import DualProgramInput, Molecule, ProgramOutput
 
 from chemcloud import CCClient
 
@@ -23,10 +23,10 @@ prog_inp = DualProgramInput(
 
 # Submit calculation
 future_result = client.compute("bigchem", prog_inp)
-output: SinglePointOutput = future_result.get()
+prog_output: ProgramOutput = future_result.get()
 
-# SinglePointOutput object containing all returned data
-print(output)
-print(f"Wavenumbers: {output.results.freqs_wavenumber}")
-print(output.results.normal_modes_cartesian)
-print(output.results.gibbs_free_energy)
+# ProgramOutput object containing all returned data
+print(prog_output)
+print(f"Wavenumbers: {prog_output.results.freqs_wavenumber}")
+print(prog_output.results.normal_modes_cartesian)
+print(prog_output.results.gibbs_free_energy)

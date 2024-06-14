@@ -1,4 +1,4 @@
-from qcio import Molecule, ProgramInput, SinglePointOutput
+from qcio import Molecule, ProgramInput, ProgramOutput
 
 from chemcloud import CCClient
 
@@ -19,11 +19,15 @@ prog_inp = ProgramInput(
     calctype="energy",  # Or "gradient" or "hessian"
     keywords={},
 )
-future_result = client.compute("psi4", prog_inp, collect_files=True)
-output: SinglePointOutput = future_result.get()
-# SinglePointOutput object containing all returned data
-print(output.stdout)
-print(output)
+future_result = client.compute("terachem", prog_inp, collect_files=True)
+prog_output: ProgramOutput = future_result.get()
+# ProgramOutput object containing all returned data
+print(prog_output.stdout)
+print(prog_output)
 # The energy value requested
-print(output.return_result)
-print(output.files.keys())
+
+if prog_output.success:
+    print(prog_output.results.energy)
+    print(prog_output.files.keys())
+else:
+    print(prog_output.traceback)
