@@ -396,7 +396,7 @@ def test_result_pending(settings, jwt, httpx_mock: HTTPXMock):
     client = _RequestsClient(settings=settings)
     client._access_token = jwt
 
-    httpx_mock.add_response(json={"state": "PENDING", "result": None})
+    httpx_mock.add_response(json={"status": "PENDING", "program_output": None})
 
     status, result = client.output("fake_id")
 
@@ -413,7 +413,10 @@ def test_result_success(settings, jwt, httpx_mock: HTTPXMock):
     url = re.compile(".*/compute/output")
     httpx_mock.add_response(
         url=url,
-        json={"state": "SUCCESS", "result": json.loads(prog_output.model_dump_json())},
+        json={
+            "status": "SUCCESS",
+            "program_output": json.loads(prog_output.model_dump_json()),
+        },
     )
 
     status, result = client.output("fake_id")

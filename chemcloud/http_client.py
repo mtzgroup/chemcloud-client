@@ -309,7 +309,7 @@ class _RequestsClient:
         """
         response = self._authenticated_request("get", f"/compute/output/{task_id}")
 
-        return response["state"], response["result"]
+        return response["status"], response["program_output"]
 
     def hello_world(self, name: Optional[str] = None):
         """Ping hello-world endpoint on ChemCloud"""

@@ -1,6 +1,6 @@
 name: Basic Code Quality
 
-on: [push, pull_request]
+on: [push]
 
 env:
   POETRY_VIRTUALENVS_CREATE: false
