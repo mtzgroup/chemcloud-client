@@ -21,22 +21,22 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://mtzgroup.github.io/chemcloud-client/code-reference/FutureOutputs/</loc>
+         <lastmod>2024-06-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://mtzgroup.github.io/chemcloud-client/code-reference/ProgramInputs/</loc>
+         <lastmod>2024-06-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://mtzgroup.github.io/chemcloud-client/code-reference/ProgramOutputs/</loc>
+         <lastmod>2024-06-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/code-reference/exceptions/</loc>
-         <lastmod>2024-06-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://mtzgroup.github.io/chemcloud-client/code-reference/future-outputs/</loc>
-         <lastmod>2024-06-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://mtzgroup.github.io/chemcloud-client/code-reference/inputs/</loc>
-         <lastmod>2024-06-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://mtzgroup.github.io/chemcloud-client/code-reference/outputs/</loc>
          <lastmod>2024-06-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
