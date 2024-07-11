@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
+## [0.10.0] - 2024-07-10
+
 ### Changed
 
 - Updated to `qcio 0.10.1` which uses `Structure` instead of `Molecule`.
@@ -180,7 +182,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - `_RequestsClient` class that handles all network requests to TeraChem Cloud server
 - `FutureResults` object that is created from a `task_id` and can be used to retrieve a result once finished.
 
-[unreleased]: https://github.com/mtzgroup/chemcloud-client/compare/0.9.0...HEAD
+[unreleased]: https://github.com/mtzgroup/chemcloud-client/compare/0.10.0...HEAD
+[0.10.0]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.10.0
 [0.9.0]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.9.0
 [0.8.3]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.8.3
 [0.8.2]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.8.2
