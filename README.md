@@ -49,17 +49,17 @@ client.hello_world("Colton")
 - Run calculations just like you would with `qcop` except calling `client.compute` instead of `qcop.compute`. Rather than getting back an `Output` object directly, `client.compute` returns a `FutureOutput` object which can be used to get the output of the computation once it is complete.
 
 ```python
-from qcio import Molecule, ProgramInput
+from qcio import Structure, ProgramInput
 from chemcloud import CCClient
 
 client = CCClient()
 
-# Create the molecule
-h2o = Molecule.open("h2o.xyz")
+# Create the structure
+h2o = Structure.open("h2o.xyz")
 
 # Define the program input
 prog_input = ProgramInput(
-    molecule=h2o,
+    structure=h2o,
     calctype="energy",
     model={"method": "hf", "basis": "sto-3g"},
     keywords={"purify": "no", "restricted": False},

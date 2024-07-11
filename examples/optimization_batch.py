@@ -1,8 +1,8 @@
-from qcio import DualProgramInput, Molecule
+from qcio import DualProgramInput, Structure
 
 from chemcloud import CCClient
 
-water = Molecule(
+water = Structure(
     symbols=["O", "H", "H"],
     geometry=[
         [0.0000, 0.00000, 0.0000],
@@ -14,7 +14,7 @@ water = Molecule(
 client = CCClient()
 
 prog_inp = DualProgramInput(
-    molecule=water,
+    structure=water,
     calctype="optimization",
     keywords={"maxiter": 25},
     subprogram="psi4",

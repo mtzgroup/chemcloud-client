@@ -8,7 +8,7 @@ from typing import Dict
 import pytest
 import tomli_w
 from pytest_httpx import HTTPXMock
-from qcio import Molecule
+from qcio import Structure
 
 from chemcloud.config import Settings
 
@@ -83,7 +83,7 @@ def patch_compute_endpoints(httpx_mock: HTTPXMock):
 
 @pytest.fixture
 def water():
-    return Molecule.open(Path(__file__).parent / "water.json")
+    return Structure.open(Path(__file__).parent / "water.json")
 
 
 @pytest.fixture

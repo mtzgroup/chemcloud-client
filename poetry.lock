@@ -1329,13 +1329,13 @@ pyyaml = "*"
 
 [[package]]
 name = "qcio"
-version = "0.9.3"
+version = "0.10.1"
 description = "Beautiful and user friendly data structures for quantum chemistry."
 optional = false
 python-versions = "<4.0,>=3.8"
 files = [
-    {file = "qcio-0.9.3-py3-none-any.whl", hash = "sha256:8199f78cef3f63b573610e62733a61d3c7db408481e5a8f47a30896bb5c1e800"},
-    {file = "qcio-0.9.3.tar.gz", hash = "sha256:e38027e68aa05f6b9c6e735dd2262ca14d368bf80432f091ee33bbea74245c75"},
+    {file = "qcio-0.10.1-py3-none-any.whl", hash = "sha256:70abf1c323d88f2807d6d82d6f1b88ceca39e0f4197e09ed6fca43c29d248297"},
+    {file = "qcio-0.10.1.tar.gz", hash = "sha256:831d5971ee3df9e5abc268f8e78c7b89979d29c3d91da7723b31bc41bf60250d"},
 ]
 
 [package.dependencies]
@@ -1344,6 +1344,9 @@ pydantic = ">=2.0.0,<2.0.1 || >2.0.1,<2.1.0 || >2.1.0,<3.0.0"
 pyyaml = ">=6.0,<7.0"
 toml = ">=0.10.2,<0.11.0"
 typing-extensions = ">=4.7.1,<5.0.0"
+
+[package.extras]
+rdkit = ["rdkit (>=2022.3.3)"]
 
 [[package]]
 name = "regex"
@@ -1676,4 +1679,4 @@ test = ["big-O", "importlib-resources", "jaraco.functools", "jaraco.itertools", 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "cbd14c9bb89ba6e2ef81da2d92ec4d11c81907bc70821eb29955c5063b25e525"
+content-hash = "1dc06d7c394449b2102a99d302073984af32c350915a7c398d1a04cb798d971d"

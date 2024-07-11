@@ -369,7 +369,7 @@ def test_compute(settings, patch_compute_endpoints, water, jwt):
 
     Model(method="B3LYP", basis="6-31g")
     atomic_input = ProgramInput(
-        molecule=water, model={"method": "b3lyp", "basis": "6-31g"}, calctype="energy"
+        structure=water, model={"method": "b3lyp", "basis": "6-31g"}, calctype="energy"
     )
 
     future_result = client.compute(atomic_input, {"program": "psi4"})
@@ -383,7 +383,7 @@ def test_compute_batch(settings, patch_compute_endpoints, water, jwt):
     client._access_token = jwt
 
     model = Model(method="B3LYP", basis="6-31g")
-    atomic_input = ProgramInput(molecule=water, model=model, calctype="energy")
+    atomic_input = ProgramInput(structure=water, model=model, calctype="energy")
 
     future_result = client.compute([atomic_input, atomic_input], {"program": "psi4"})
 

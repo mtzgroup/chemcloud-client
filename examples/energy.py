@@ -1,8 +1,8 @@
-from qcio import Molecule, ProgramInput, ProgramOutput
+from qcio import ProgramInput, ProgramOutput, Structure
 
 from chemcloud import CCClient
 
-water = Molecule(
+water = Structure(
     symbols=["O", "H", "H"],
     geometry=[
         [0.0000, 0.00000, 0.0000],
@@ -14,7 +14,7 @@ water = Molecule(
 client = CCClient()
 
 prog_inp = ProgramInput(
-    molecule=water,
+    structure=water,
     model={"method": "b3lyp", "basis": "6-31g"},
     calctype="energy",  # Or "gradient" or "hessian"
     keywords={},
