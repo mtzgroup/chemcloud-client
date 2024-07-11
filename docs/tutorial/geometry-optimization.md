@@ -9,7 +9,7 @@
 `rdkit` can be specified as a compute backend to perform optimizations using force field methods instead of quantum chemistry backends. To use `rdkit` force field methods simply modify the model specification and `subprogram` specification as shown below. Also note that `rdkit` requires the molecular connectivity to be defined.
 
 ```python
-water = Molecule(
+water = Structure(
     symbols=["O", "H", "H"],
     geometry=[
         [0.0000, 0.00000, 0.0000],

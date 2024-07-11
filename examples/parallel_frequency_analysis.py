@@ -1,8 +1,8 @@
-from qcio import DualProgramInput, Molecule, ProgramOutput
+from qcio import DualProgramInput, ProgramOutput, Structure
 
 from chemcloud import CCClient
 
-water = Molecule(
+water = Structure(
     symbols=["O", "H", "H"],
     geometry=[
         [0.0000, 0.00000, 0.0000],
@@ -14,7 +14,7 @@ water = Molecule(
 client = CCClient()
 
 prog_inp = DualProgramInput(
-    molecule=water,
+    structure=water,
     calctype="hessian",
     subprogram="psi4",
     subprogram_args={"model": {"method": "b3lyp", "basis": "6-31g"}},

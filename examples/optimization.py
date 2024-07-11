@@ -1,8 +1,8 @@
-from qcio import DualProgramInput, Molecule, OptimizationOutput
+from qcio import DualProgramInput, OptimizationOutput, Structure
 
 from chemcloud import CCClient
 
-water = Molecule(
+water = Structure(
     symbols=["O", "H", "H"],
     geometry=[
         [-0.11904094, -0.36695321, -0.21996706],
@@ -14,7 +14,7 @@ water = Molecule(
 client = CCClient()
 
 prog_inp = DualProgramInput(
-    molecule=water,
+    structure=water,
     calctype="optimization",
     keywords={"maxiter": 25},
     subprogram="psi4",
@@ -30,10 +30,10 @@ if output.success:
     print("Optimization succeeded!")
     # Will be OptimizationResult object
     print(output)
-    # The final molecule of the geometry optimization
-    print(output.results.final_molecule)
-    # Initial molecule
-    print(output.input_data.molecule)
+    # The final structure of the geometry optimization
+    print(output.results.final_structure)
+    # Initial structure
+    print(output.input_data.structure)
     # A list of ordered AtomicResult objects for each step in the optimization
     print(output.results.trajectory)
     # A list of ordered energies for each step in the optimization
