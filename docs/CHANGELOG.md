@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
+### Changed
+
+Updated qcio (0.10.1 -> 0.10.2). `Structure.ids` -> `Structure.identifiers`
+
 ## [0.10.1] - 2024-07-11
 
 ### Added
