@@ -25,7 +25,8 @@ def update_version_with_poetry(version):
 def update_changelog(version, repo_url):
     """Update the CHANGELOG.md file with the new version and today's date."""
     print("Updating CHANGELOG.md...")
-    with open("CHANGELOG.md", "r") as file:
+    CHANGELOG_PATH = "docs/CHANGELOG.md"
+    with open(CHANGELOG_PATH, "r") as file:
         lines = file.readlines()
 
     today = datetime.today().strftime("%Y-%m-%d")
@@ -48,7 +49,7 @@ def update_changelog(version, repo_url):
             lines.insert(i + 1, new_version_link)
             break
 
-    with open("CHANGELOG.md", "w") as file:
+    with open(CHANGELOG_PATH, "w") as file:
         file.writelines(lines)
 
 
