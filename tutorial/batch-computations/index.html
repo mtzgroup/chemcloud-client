@@ -647,11 +647,11 @@
 
 <h1 id="batch-computations">Batch Computations<a class="headerlink" href="#batch-computations" title="Permanent link">🔗</a></h1>
 <p>Calculations can be submitted in bulk by passing a list of <code>Input</code> objects to <code>client.compute()</code> rather than a single object.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">qcio</span> <span class="kn">import</span> <span class="n">Molecule</span><span class="p">,</span> <span class="n">ProgramInput</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">qcio</span> <span class="kn">import</span> <span class="n">ProgramInput</span><span class="p">,</span> <span class="n">Structure</span>
 
 <span class="kn">from</span> <span class="nn">chemcloud</span> <span class="kn">import</span> <span class="n">CCClient</span>
 
-<span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span>
+<span class="n">water</span> <span class="o">=</span> <span class="n">Structure</span><span class="p">(</span>
     <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">],</span>
     <span class="n">geometry</span><span class="o">=</span><span class="p">[</span>
         <span class="p">[</span><span class="mf">0.0000</span><span class="p">,</span> <span class="mf">0.00000</span><span class="p">,</span> <span class="mf">0.0000</span><span class="p">],</span>
@@ -663,7 +663,7 @@
 <span class="n">client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">()</span>
 
 <span class="n">prog_inp</span> <span class="o">=</span> <span class="n">ProgramInput</span><span class="p">(</span>
-    <span class="n">molecule</span><span class="o">=</span><span class="n">water</span><span class="p">,</span>
+    <span class="n">structure</span><span class="o">=</span><span class="n">water</span><span class="p">,</span>
     <span class="n">model</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;b3lyp&quot;</span><span class="p">,</span> <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="s2">&quot;6-31g&quot;</span><span class="p">},</span>
     <span class="n">calctype</span><span class="o">=</span><span class="s2">&quot;energy&quot;</span><span class="p">,</span>
     <span class="n">keywords</span><span class="o">=</span><span class="p">{},</span>

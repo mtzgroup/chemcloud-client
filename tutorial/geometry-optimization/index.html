@@ -752,11 +752,11 @@
   <h1>Geometry optimization</h1>
 
 <h2 id="basic-working-example">Basic Working Example<a class="headerlink" href="#basic-working-example" title="Permanent link">🔗</a></h2>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">qcio</span> <span class="kn">import</span> <span class="n">DualProgramInput</span><span class="p">,</span> <span class="n">Molecule</span><span class="p">,</span> <span class="n">OptimizationOutput</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">qcio</span> <span class="kn">import</span> <span class="n">DualProgramInput</span><span class="p">,</span> <span class="n">OptimizationOutput</span><span class="p">,</span> <span class="n">Structure</span>
 
 <span class="kn">from</span> <span class="nn">chemcloud</span> <span class="kn">import</span> <span class="n">CCClient</span>
 
-<span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span>
+<span class="n">water</span> <span class="o">=</span> <span class="n">Structure</span><span class="p">(</span>
     <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">],</span>
     <span class="n">geometry</span><span class="o">=</span><span class="p">[</span>
         <span class="p">[</span><span class="o">-</span><span class="mf">0.11904094</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.36695321</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.21996706</span><span class="p">],</span>
@@ -768,7 +768,7 @@
 <span class="n">client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">()</span>
 
 <span class="n">prog_inp</span> <span class="o">=</span> <span class="n">DualProgramInput</span><span class="p">(</span>
-    <span class="n">molecule</span><span class="o">=</span><span class="n">water</span><span class="p">,</span>
+    <span class="n">structure</span><span class="o">=</span><span class="n">water</span><span class="p">,</span>
     <span class="n">calctype</span><span class="o">=</span><span class="s2">&quot;optimization&quot;</span><span class="p">,</span>
     <span class="n">keywords</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;maxiter&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">},</span>
     <span class="n">subprogram</span><span class="o">=</span><span class="s2">&quot;psi4&quot;</span><span class="p">,</span>
@@ -784,10 +784,10 @@
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Optimization succeeded!&quot;</span><span class="p">)</span>
     <span class="c1"># Will be OptimizationResult object</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-    <span class="c1"># The final molecule of the geometry optimization</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">final_molecule</span><span class="p">)</span>
-    <span class="c1"># Initial molecule</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">input_data</span><span class="o">.</span><span class="n">molecule</span><span class="p">)</span>
+    <span class="c1"># The final structure of the geometry optimization</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">final_structure</span><span class="p">)</span>
+    <span class="c1"># Initial structure</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">input_data</span><span class="o">.</span><span class="n">structure</span><span class="p">)</span>
     <span class="c1"># A list of ordered AtomicResult objects for each step in the optimization</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">trajectory</span><span class="p">)</span>
     <span class="c1"># A list of ordered energies for each step in the optimization</span>
@@ -801,7 +801,7 @@
 </code></pre></div>
 <h2 id="using-force-fields">Using Force Fields<a class="headerlink" href="#using-force-fields" title="Permanent link">🔗</a></h2>
 <p><code>rdkit</code> can be specified as a compute backend to perform optimizations using force field methods instead of quantum chemistry backends. To use <code>rdkit</code> force field methods simply modify the model specification and <code>subprogram</code> specification as shown below. Also note that <code>rdkit</code> requires the molecular connectivity to be defined.</p>
-<div class="highlight"><pre><span></span><code><span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="n">water</span> <span class="o">=</span> <span class="n">Structure</span><span class="p">(</span>
     <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">],</span>
     <span class="n">geometry</span><span class="o">=</span><span class="p">[</span>
         <span class="p">[</span><span class="mf">0.0000</span><span class="p">,</span> <span class="mf">0.00000</span><span class="p">,</span> <span class="mf">0.0000</span><span class="p">],</span>

@@ -723,11 +723,11 @@
 <p>Computations are physically executed by a BigChem instance fronted by a ChemCloud server. The chemcloud python client submits jobs to and retrieves work from the ChemCloud server. Computations are submitted using the <a class="autorefs autorefs-internal" href="../../code-reference/CCClient/#chemcloud.client.CCClient">CCClient</a> object.</p>
 <p>Computations require a QC proram and <code>ProgramInput</code> or <code>DualProgramInput</code> object. The <code>ProgramInput</code> object contains all the information necessary to run a single calculation. The <code>DualProgramInput</code> object is used when two QC programs are used in tandem, such as when performing a geometry optimization with one program that uses a subprogram for the energy and gradient calculations.</p>
 <h2 id="basic-single-point-calculation">Basic Single Point Calculation<a class="headerlink" href="#basic-single-point-calculation" title="Permanent link">🔗</a></h2>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">qcio</span> <span class="kn">import</span> <span class="n">Molecule</span><span class="p">,</span> <span class="n">ProgramInput</span><span class="p">,</span> <span class="n">ProgramOutput</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">qcio</span> <span class="kn">import</span> <span class="n">ProgramInput</span><span class="p">,</span> <span class="n">ProgramOutput</span><span class="p">,</span> <span class="n">Structure</span>
 
 <span class="kn">from</span> <span class="nn">chemcloud</span> <span class="kn">import</span> <span class="n">CCClient</span>
 
-<span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span>
+<span class="n">water</span> <span class="o">=</span> <span class="n">Structure</span><span class="p">(</span>
     <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">],</span>
     <span class="n">geometry</span><span class="o">=</span><span class="p">[</span>
         <span class="p">[</span><span class="mf">0.0000</span><span class="p">,</span> <span class="mf">0.00000</span><span class="p">,</span> <span class="mf">0.0000</span><span class="p">],</span>
@@ -739,7 +739,7 @@
 <span class="n">client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">()</span>
 
 <span class="n">prog_inp</span> <span class="o">=</span> <span class="n">ProgramInput</span><span class="p">(</span>
-    <span class="n">molecule</span><span class="o">=</span><span class="n">water</span><span class="p">,</span>
+    <span class="n">structure</span><span class="o">=</span><span class="n">water</span><span class="p">,</span>
     <span class="n">model</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;b3lyp&quot;</span><span class="p">,</span> <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="s2">&quot;6-31g&quot;</span><span class="p">},</span>
     <span class="n">calctype</span><span class="o">=</span><span class="s2">&quot;energy&quot;</span><span class="p">,</span>  <span class="c1"># Or &quot;gradient&quot; or &quot;hessian&quot;</span>
     <span class="n">keywords</span><span class="o">=</span><span class="p">{},</span>
@@ -758,11 +758,11 @@
     <span class="nb">print</span><span class="p">(</span><span class="n">prog_output</span><span class="o">.</span><span class="n">traceback</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="including-files-in-the-input">Including Files in the Input<a class="headerlink" href="#including-files-in-the-input" title="Permanent link">🔗</a></h2>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">qcio</span> <span class="kn">import</span> <span class="n">Molecule</span><span class="p">,</span> <span class="n">ProgramInput</span><span class="p">,</span> <span class="n">ProgramOutput</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">qcio</span> <span class="kn">import</span> <span class="n">ProgramInput</span><span class="p">,</span> <span class="n">ProgramOutput</span><span class="p">,</span> <span class="n">Structure</span>
 
 <span class="kn">from</span> <span class="nn">chemcloud</span> <span class="kn">import</span> <span class="n">CCClient</span>
 
-<span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span>
+<span class="n">water</span> <span class="o">=</span> <span class="n">Structure</span><span class="p">(</span>
     <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">],</span>
     <span class="n">geometry</span><span class="o">=</span><span class="p">[</span>
         <span class="p">[</span><span class="mf">0.0000</span><span class="p">,</span> <span class="mf">0.00000</span><span class="p">,</span> <span class="mf">0.0000</span><span class="p">],</span>
@@ -774,7 +774,7 @@
 <span class="n">client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">()</span>
 
 <span class="n">prog_inp</span> <span class="o">=</span> <span class="n">ProgramInput</span><span class="p">(</span>
-    <span class="n">molecule</span><span class="o">=</span><span class="n">water</span><span class="p">,</span>
+    <span class="n">structure</span><span class="o">=</span><span class="n">water</span><span class="p">,</span>
     <span class="n">model</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;b3lyp&quot;</span><span class="p">,</span> <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="s2">&quot;6-31g&quot;</span><span class="p">},</span>
     <span class="n">calctype</span><span class="o">=</span><span class="s2">&quot;energy&quot;</span><span class="p">,</span>
     <span class="n">keywords</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;guess&quot;</span><span class="p">:</span> <span class="s2">&quot;c0&quot;</span><span class="p">},</span>

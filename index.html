@@ -812,17 +812,17 @@
 <ul>
 <li>Run calculations just like you would with <code>qcop</code> except calling <code>client.compute</code> instead of <code>qcop.compute</code>. Rather than getting back an <code>Output</code> object directly, <code>client.compute</code> returns a <code>FutureOutput</code> object which can be used to get the output of the computation once it is complete.</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">qcio</span> <span class="kn">import</span> <span class="n">Molecule</span><span class="p">,</span> <span class="n">ProgramInput</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">qcio</span> <span class="kn">import</span> <span class="n">Structure</span><span class="p">,</span> <span class="n">ProgramInput</span>
 <span class="kn">from</span> <span class="nn">chemcloud</span> <span class="kn">import</span> <span class="n">CCClient</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">()</span>
 
-<span class="c1"># Create the molecule</span>
-<span class="n">h2o</span> <span class="o">=</span> <span class="n">Molecule</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;h2o.xyz&quot;</span><span class="p">)</span>
+<span class="c1"># Create the structure</span>
+<span class="n">h2o</span> <span class="o">=</span> <span class="n">Structure</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;h2o.xyz&quot;</span><span class="p">)</span>
 
 <span class="c1"># Define the program input</span>
 <span class="n">prog_input</span> <span class="o">=</span> <span class="n">ProgramInput</span><span class="p">(</span>
-    <span class="n">molecule</span><span class="o">=</span><span class="n">h2o</span><span class="p">,</span>
+    <span class="n">structure</span><span class="o">=</span><span class="n">h2o</span><span class="p">,</span>
     <span class="n">calctype</span><span class="o">=</span><span class="s2">&quot;energy&quot;</span><span class="p">,</span>
     <span class="n">model</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;hf&quot;</span><span class="p">,</span> <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="s2">&quot;sto-3g&quot;</span><span class="p">},</span>
     <span class="n">keywords</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;purify&quot;</span><span class="p">:</span> <span class="s2">&quot;no&quot;</span><span class="p">,</span> <span class="s2">&quot;restricted&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
