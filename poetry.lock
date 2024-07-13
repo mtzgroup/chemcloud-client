@@ -1329,13 +1329,13 @@ pyyaml = "*"
 
 [[package]]
 name = "qcio"
-version = "0.10.1"
+version = "0.10.2"
 description = "Beautiful and user friendly data structures for quantum chemistry."
 optional = false
 python-versions = "<4.0,>=3.8"
 files = [
-    {file = "qcio-0.10.1-py3-none-any.whl", hash = "sha256:70abf1c323d88f2807d6d82d6f1b88ceca39e0f4197e09ed6fca43c29d248297"},
-    {file = "qcio-0.10.1.tar.gz", hash = "sha256:831d5971ee3df9e5abc268f8e78c7b89979d29c3d91da7723b31bc41bf60250d"},
+    {file = "qcio-0.10.2-py3-none-any.whl", hash = "sha256:26b170447dce209a3a1ea344c2b3e9f234de3c2a1010479ad470b31a6e5eda7d"},
+    {file = "qcio-0.10.2.tar.gz", hash = "sha256:27649fa3022fe575a5d5460768b2e0bfeedd7adb86d8945d084f757d7c098132"},
 ]
 
 [package.dependencies]
@@ -1556,6 +1556,17 @@ files = [
 ]
 
 [[package]]
+name = "types-toml"
+version = "0.10.8.20240310"
+description = "Typing stubs for toml"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "types-toml-0.10.8.20240310.tar.gz", hash = "sha256:3d41501302972436a6b8b239c850b26689657e25281b48ff0ec06345b8830331"},
+    {file = "types_toml-0.10.8.20240310-py3-none-any.whl", hash = "sha256:627b47775d25fa29977d9c70dc0cbab3f314f32c8d8d0c012f2ef5de7aaec05d"},
+]
+
+[[package]]
 name = "typing-extensions"
 version = "4.12.2"
 description = "Backported and Experimental Type Hints for Python 3.8+"
@@ -1679,4 +1690,4 @@ test = ["big-O", "importlib-resources", "jaraco.functools", "jaraco.itertools", 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "1dc06d7c394449b2102a99d302073984af32c350915a7c398d1a04cb798d971d"
+content-hash = "70bd1bf41f6e62c7fbdc2c05806018aa6cfcb6041bd53146ac88858ccbc7f000"
