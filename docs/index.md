@@ -76,9 +76,9 @@ output = future_output.get()
 output.input_data # Input data used by the QC program
 output.success # Whether the calculation succeeded
 output.results # All structured results from the calculation
+output.results.files # Any files returned by the calculation
 output.stdout # Stdout log from the calculation
 output.pstdout # Shortcut to print out the stdout in human readable format
-output.files # Any files returned by the calculation
 output.provenance # Provenance information about the calculation
 output.extras # Any extra information not in the schema
 output.traceback # Stack trace if calculation failed

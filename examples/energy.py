@@ -28,6 +28,6 @@ print(prog_output)
 
 if prog_output.success:
     print(prog_output.results.energy)
-    print(prog_output.files.keys())
+    print(prog_output.results.files.keys())
 else:
     print(prog_output.traceback)
