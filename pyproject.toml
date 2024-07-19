@@ -31,7 +31,7 @@ python = "^3.8"
 tomli = { version = ">=1.1.0", python = "<3.11" }
 tomli-w = "^1.0.0"
 httpx = "^0.23.1"
-qcio = "^0.10.2"
+qcio = "^0.11.0"
 pydantic = ">=2.0.0, !=2.4.0"
 pydantic-settings = "^2.0.3"
 
