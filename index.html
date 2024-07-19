@@ -327,6 +327,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#visualization" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✨ Visualization ✨
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#support" class="md-nav__link">
     <span class="md-ellipsis">
       Support
@@ -745,6 +754,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#visualization" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✨ Visualization ✨
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#support" class="md-nav__link">
     <span class="md-ellipsis">
       Support
@@ -783,11 +801,11 @@
 <p><code>chemcloud</code> works in harmony with a suite of other quantum chemistry tools for fast, structured, and interoperable quantum chemistry.</p>
 <h2 id="the-qc-suite-of-programs">The QC Suite of Programs<a class="headerlink" href="#the-qc-suite-of-programs" title="Permanent link">🔗</a></h2>
 <ul>
-<li><a href="https://github.com/coltonbh/qcio">qcio</a> - Beautiful and user friendly data structures for quantum chemistry.</li>
+<li><a href="https://github.com/coltonbh/qcio">qcio</a> - Elegant and intuitive data structures for quantum chemistry, featuring seamless Jupyter Notebook visualizations.</li>
 <li><a href="https://github.com/coltonbh/qcparse">qcparse</a> - A library for efficient parsing of quantum chemistry data into structured <code>qcio</code> objects.</li>
-<li><a href="https://github.com/coltonbh/qcop">qcop</a> - A package for operating quantum chemistry programs using <code>qcio</code> standardized data structures. Compatible with <code>TeraChem</code>, <code>psi4</code>, <code>QChem</code>, <code>NWChem</code>, <code>ORCA</code>, <code>Molpro</code>, <code>geomeTRIC</code> and many more.</li>
-<li><a href="https://github.com/mtzgroup/bigchem">BigChem</a> - A distributed application for running quantum chemistry calculations at scale across clusters of computers or the cloud. Bring multi-node scaling to your favorite quantum chemistry program.</li>
-<li><code>ChemCloud</code> - A <a href="https://github.com/mtzgroup/chemcloud-server">web application</a> and associated <a href="https://github.com/mtzgroup/chemcloud-client">Python client</a> for exposing a BigChem cluster securely over the internet.</li>
+<li><a href="https://github.com/coltonbh/qcop">qcop</a> - A package for operating quantum chemistry programs using <code>qcio</code> standardized data structures. Compatible with <code>TeraChem</code>, <code>psi4</code>, <code>QChem</code>, <code>NWChem</code>, <code>ORCA</code>, <code>Molpro</code>, <code>geomeTRIC</code>, and many more, featuring seamless Jupyter Notebook visualizations.</li>
+<li><a href="https://github.com/mtzgroup/bigchem">BigChem</a> - A distributed application for running quantum chemistry calculations at scale across clusters of computers or the cloud. Bring multi-node scaling to your favorite quantum chemistry program, featuring seamless Jupyter Notebook visualizations.</li>
+<li><code>ChemCloud</code> - A <a href="https://github.com/mtzgroup/chemcloud-server">web application</a> and associated <a href="https://github.com/mtzgroup/chemcloud-client">Python client</a> for exposing a BigChem cluster securely over the internet, featuring seamless Jupyter Notebook visualizations.</li>
 </ul>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">🔗</a></h2>
 <div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>chemcloud
@@ -849,6 +867,21 @@
 </code></pre></div>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">🔗</a></h2>
 <p>Examples of various computations can be found in the <a href="https://github.com/mtzgroup/chemcloud-client/tree/main/examples">examples directory</a>.</p>
+<h2 id="visualization">✨ Visualization ✨<a class="headerlink" href="#visualization" title="Permanent link">🔗</a></h2>
+<p>Visualize all your results with a single line of code!</p>
+<p>First install the visualization module:</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>qcio<span class="o">[</span>view<span class="o">]</span>
+</code></pre></div>
+<p>or if your shell requires <code>''</code> around arguments with brackets:</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span><span class="s1">&#39;qcio[view]&#39;</span>
+</code></pre></div>
+<p>Then in a Jupyter notebook import the <code>qcio</code> view module and call <code>view.view(...)</code> passing it one or any number of <code>qcio</code> objects you want to visualizing including <code>Structure</code> objects or any <code>ProgramOutput</code> object. You may also pass an array of <code>titles</code> and/or <code>subtitles</code> to add additional information to the molecular structure display. If no titles are passed <code>qcio</code> with look for <code>Structure</code> identifiers such as a name or SMILES to label the <code>Structure</code>.</p>
+<p><img alt="Structure Viewer" src="https://public.coltonhicks.com/assets/qcio/structure_viewer.png" /></p>
+<p>Seamless visualizations for <code>ProgramOutput</code> objects make results analysis easy!</p>
+<p><img alt="Optimization Viewer" src="https://public.coltonhicks.com/assets/qcio/optimization_viewer.png" /></p>
+<p>Single point calculations display their results in a table.</p>
+<p><img alt="Single Point Viewer" src="https://public.coltonhicks.com/assets/qcio/single_point_viewer.png" /></p>
+<p>If you want to use the HTML generated by the viewer to build your own dashboards use the functions inside of <code>qcio.view.py</code> that begin with the word <code>generate_</code> to create HTML you can insert into any dashboard.</p>
 <h2 id="support">Support<a class="headerlink" href="#support" title="Permanent link">🔗</a></h2>
 <p>If you have any issues with <code>chemcloud</code> or would like to request a feature, please open an <a href="https://github.com/mtzgroup/chemcloud-client/issues">issue</a>.</p>
 
