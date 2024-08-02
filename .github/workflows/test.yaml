@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.8", "3.11"]
+        python-version: ["3.9", "3.12"]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v4
@@ -21,7 +21,7 @@ jobs:
       - name: Run tests
         run: bash scripts/tests.sh
       - name: Upload coverage HTML
-        if: ${{ matrix.python-version == '3.8' }}
+        if: ${{ matrix.python-version == '3.9' }}
         uses: actions/upload-artifact@v3
         with:
           name: htmlcov
