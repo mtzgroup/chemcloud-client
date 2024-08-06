@@ -100,7 +100,7 @@ def main():
     else:
         print("Reverting changes...")
         Path("pyproject.toml").write_text(original_pyproject)
-        Path("CHANGELOG.md").write_text(original_changelog)
+        Path("docs/CHANGELOG.md").write_text(original_changelog)
         sys.exit(1)
     run_git_commands(version)
 
