@@ -3,14 +3,36 @@ site_url: https://mtzgroup.github.io/chemcloud-client/
 theme:
   name: material
   palette:
-    - scheme: default
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
       primary: teal
       accent: amber
+      toggle:
+        icon: material/lightbulb
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: amber
+      toggle:
+        icon: material/lightbulb-outline
+        name: Switch to light mode
   features:
-    - search.suggest
-    - search.highlight
+    - content.tabs.link
+    - content.code.annotate
+    - content.code.copy
+    - announce.dismiss
+    - navigation.tabs
     - navigation.instant
-    - navigation.expand
+    - navigation.instant.prefetch
+    - navigation.instant.preview
+    - navigation.instant.progress
+    - navigation.path
+    - navigation.sections
+    - navigation.top
+    - navigation.tracking
+    - search.suggest
+    - toc.follow
   icon:
     repo: fontawesome/brands/github-alt
 
@@ -24,27 +46,46 @@ plugins:
   - mkdocstrings:
       handlers:
         python:
-          rendering:
-            show_root_heading: False
-            show_root_full_path: True
-            show_category_heading: True
-            show_signature_annotations: True
-            show_if_no_docstring: True
-            group_by_category: True
-            heading_level: 2
-          selection:
-            new_path_syntax: True
-            inherited_members: True
+          options:
+            members_order: source
+            separate_signature: true
+            show_bases: false
+            show_root_heading: true
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+            merge_init_into_class: true
+            show_signature_annotations: true
+            signature_crossrefs: true
+            inherited_members: false
+            # Pretty sure I want this false.
+            show_if_no_docstring: false
+
+            docstring_options:
+              ignore_init_summary: true
+
             filters:
               - "!^_"
-              - "^__init__$"
+              - "!^model"
+              - "^__init__"
+
+          selection:
+            new_path_syntax: true
+
 markdown_extensions:
-  - pymdownx.highlight
-  - pymdownx.superfences
-  - pymdownx.details
-  - admonition
   - toc:
-      permalink: 🔗
+      permalink: true
+      title: Page contents
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      pygments_lang_class: true
+  - pymdownx.extra
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.tabbed:
+      alternate_style: true
   - markdown_include.include:
       base_path: docs
 
