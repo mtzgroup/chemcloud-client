@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
+- Removed `black` and `isort` in favor for `ruff`
+- Updated:
+    - `python` (`>3.8` -> `>3.9`)
+    - `tomli` (`^1.0` -> `^2.0`)
+    - `httpx` (`^0.23.1` -> `^0.27`)
+    - `ruff` (`^0.0287` -> `^0.5`)
+    - `pytest-httpx` (`<0.23.0` -> `>=0.23.0`)
+
 ## [0.11.1] - 2024-07-19
 
 ### Changed
