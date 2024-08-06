@@ -1,4 +1,4 @@
-from __future__ import annotations
+from __future__ import annotations  # Can remove once we drop Python 3.9 support
 
 from pathlib import Path
 from typing import Optional
