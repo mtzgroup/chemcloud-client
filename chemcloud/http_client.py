@@ -4,7 +4,7 @@ from base64 import urlsafe_b64decode
 from getpass import getpass
 from pathlib import Path
 from time import time
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Optional, Union
 
 import httpx
 
@@ -172,9 +172,9 @@ class _RequestsClient:
         method: str,
         route: str,
         *,
-        headers: Optional[Dict[str, str]] = None,
-        data: Optional[Dict[str, Any]] = None,
-        params: Optional[Dict[str, Any]] = None,
+        headers: Optional[dict[str, str]] = None,
+        data: Optional[dict[str, Any]] = None,
+        params: Optional[dict[str, Any]] = None,
         api_call: bool = True,
     ):
         """Make HTTP request"""
@@ -208,7 +208,7 @@ class _RequestsClient:
 
     def _tokens_from_username_password(
         self, username: str, password: str
-    ) -> Tuple[str, str]:
+    ) -> tuple[str, str]:
         """Exchanges username/password for access_token and refresh_token"""
         data = {
             "grant_type": "password",
@@ -227,7 +227,7 @@ class _RequestsClient:
 
         return response["access_token"], response["refresh_token"]
 
-    def _refresh_tokens(self, refresh_token: str) -> Tuple[str, str]:
+    def _refresh_tokens(self, refresh_token: str) -> tuple[str, str]:
         """Get new access and refresh tokens."""
         data = {"grant_type": "refresh_token", "refresh_token": refresh_token}
         headers = {"content-type": "application/x-www-form-urlencoded"}
@@ -260,7 +260,7 @@ class _RequestsClient:
         )
 
     @staticmethod
-    def _decode_access_token(jwt: str) -> Dict[str, Any]:
+    def _decode_access_token(jwt: str) -> dict[str, Any]:
         """Decode jwt string and return dictionary of payload claims."""
         payload = jwt.split(".")[1]
         encoded_payload = payload.encode("ascii")
@@ -275,14 +275,14 @@ class _RequestsClient:
         return json.loads(json_string)
 
     def _result_id_to_future_result(self, input_data, result_id):
-        if isinstance(input_data, list):
+        if isinstance(input_data, list) and len(input_data) > 1:
             return FutureOutputGroup(task_id=result_id, client=self)
         return FutureOutput(task_id=result_id, client=self)
 
     def compute(
         self,
         inp_obj: QCIOInputsOrList,
-        params: Optional[Dict[str, Any]] = None,
+        params: Optional[dict[str, Any]] = None,
     ) -> Union[FutureOutput, FutureOutputGroup]:
         """Submit a computation to ChemCloud"""
         result_id = self._authenticated_request(
@@ -296,7 +296,7 @@ class _RequestsClient:
     def output(
         self,
         task_id: str,
-    ) -> Tuple[str, Union[Optional[Any], Optional[List[Any]]]]:
+    ) -> tuple[str, Union[Optional[Any], Optional[list[Any]]]]:
         """Check the output of a compute job, returns status and output (if available).
 
         Parameters:

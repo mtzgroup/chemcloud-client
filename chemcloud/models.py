@@ -2,7 +2,7 @@ from abc import ABC
 from enum import Enum
 from pathlib import Path
 from time import sleep, time
-from typing import Any, List, Optional, Type, Union
+from typing import Any, Optional, Union
 
 from pydantic import field_validator
 from pydantic.main import BaseModel
@@ -15,9 +15,9 @@ GROUP_ID_PREFIX = "group-"
 
 # Convenience types
 QCIOInputs: TypeAlias = Union[ProgramInput, FileInput, DualProgramInput]
-QCIOInputsOrList: TypeAlias = Union[QCIOInputs, List[QCIOInputs]]
+QCIOInputsOrList: TypeAlias = Union[QCIOInputs, list[QCIOInputs]]
 QCIOOutputs: TypeAlias = ProgramOutput
-QCIOOutputsOrList: TypeAlias = Union[QCIOOutputs, List[QCIOOutputs]]
+QCIOOutputsOrList: TypeAlias = Union[QCIOOutputs, list[QCIOOutputs]]
 
 
 class TaskStatus(str, Enum):
@@ -121,7 +121,7 @@ class FutureOutput(FutureOutputBase):
 class FutureOutputGroup(FutureOutputBase):
     """Group computation result"""
 
-    result: Optional[List[QCIOOutputs]] = None
+    result: Optional[list[QCIOOutputs]] = None
 
     def _output(self):
         """Return result from server. Remove GROUP_ID_PREFIX from id."""
@@ -142,7 +142,7 @@ class FutureOutputGroup(FutureOutputBase):
 
 
 def to_file(
-    future_results: Union[FutureOutputBase, List[FutureOutputBase]],
+    future_results: Union[FutureOutputBase, list[FutureOutputBase]],
     path: Union[str, Path],
     *,
     append: bool = False,
@@ -164,18 +164,18 @@ def to_file(
 def from_file(
     path: Union[str, Path],
     client: Any,
-) -> List[Union[FutureOutput, FutureOutputGroup]]:
+) -> list[Union[FutureOutput, FutureOutputGroup]]:
     """Instantiate FutureOutputs or FutureOutputGroups from file of result ids
 
     Params:
         path: Path to file containing the ids
         client: Instantiated CCClient object
     """
-    frs: List[Union[FutureOutput, FutureOutputGroup]] = []
+    frs: list[Union[FutureOutput, FutureOutputGroup]] = []
     with open(path) as f:
         for id in f.readlines():
             id = id.strip()
-            model: Union[Type[FutureOutput], Type[FutureOutputGroup]]
+            model: Union[type[FutureOutput], type[FutureOutputGroup]]
             if id.startswith(GROUP_ID_PREFIX):
                 model = FutureOutputGroup
             else:
