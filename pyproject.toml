@@ -63,7 +63,7 @@ target-version = "py39"
 
 [tool.ruff.lint]
 isort = { known-first-party = ["tests"] }
-select = ["I"]
+select = ["I", "F401"]
 
 [tool.coverage.run]
 branch = true

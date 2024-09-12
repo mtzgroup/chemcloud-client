@@ -3,7 +3,6 @@ import re
 from base64 import b64encode
 from pathlib import Path
 from time import time
-from typing import Dict
 
 import pytest
 import tomli_w
@@ -13,7 +12,7 @@ from qcio import Structure
 from chemcloud.config import Settings
 
 
-def _jwt_from_payload(payload: Dict[str, str]) -> str:
+def _jwt_from_payload(payload: dict[str, str]) -> str:
     """Convert payload to fake JWT"""
     b64_encoded_access_token = b64encode(json.dumps(payload).encode("utf-8")).decode(
         "utf-8"

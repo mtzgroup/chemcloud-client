@@ -1,4 +1,4 @@
-from typing import Dict, List, Optional, Union
+from typing import Optional, Union
 
 from . import __version__
 from .config import settings
@@ -38,7 +38,7 @@ class CCClient:
             profile=profile,
             chemcloud_domain=chemcloud_domain,
         )
-        self._openapi_spec: Optional[Dict] = None
+        self._openapi_spec: Optional[dict] = None
 
     def __repr__(self) -> str:
         return (
@@ -67,7 +67,7 @@ class CCClient:
         return self._client._profile
 
     @property
-    def supported_programs(self) -> List[str]:
+    def supported_programs(self) -> list[str]:
         """Compute programs currently supported by ChemCloud.
 
         Returns:

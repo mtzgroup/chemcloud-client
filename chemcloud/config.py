@@ -1,4 +1,4 @@
-from __future__ import annotations  # Can remove once we drop Python 3.9 support
+from __future__ import annotations
 
 from pathlib import Path
 from typing import Optional
@@ -19,7 +19,6 @@ class Settings(BaseSettings):
     chemcloud_domain: str = "https://chemcloud.mtzlab.com"
     chemcloud_api_version_prefix: str = "/api/v2"
     chemcloud_credentials_profile: str = "default"
-    tcfe_keywords: str = "tcfe:keywords"
 
 
 settings = Settings()

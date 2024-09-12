@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
+### Changed
+
+- Using `FutureOutput` for arrays of inputs of length 1.
+- Updated to Python 3.9 typing syntax.
+
 ## [0.12.0] - 2024-08-06
 
 ### Changed
