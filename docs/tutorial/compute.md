@@ -2,7 +2,7 @@
 
 Computations are physically executed by a BigChem instance fronted by a ChemCloud server. The chemcloud python client submits jobs to and retrieves work from the ChemCloud server. Computations are submitted using the [CCClient][chemcloud.client.CCClient] object.
 
-Computations require a QC proram and `ProgramInput` or `DualProgramInput` object. The `ProgramInput` object contains all the information necessary to run a single calculation. The `DualProgramInput` object is used when two QC programs are used in tandem, such as when performing a geometry optimization with one program that uses a subprogram for the energy and gradient calculations.
+Computations require a QC program and `ProgramInput` or `DualProgramInput` object. The `ProgramInput` object contains all the information necessary to run a single calculation. The `DualProgramInput` object is used when two QC programs are used in tandem, such as when performing a geometry optimization with one program that uses a subprogram for the energy and gradient calculations.
 
 ## Basic Single Point Calculation
 

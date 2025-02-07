@@ -64,6 +64,7 @@ def patch_token_endpoint(httpx_mock: HTTPXMock):
             "access_token": PATCH_VALUES["access_token"],
             "refresh_token": PATCH_VALUES["refresh_token"],
         },
+        is_reusable=True,
     )
 
     yield PATCH_VALUES
