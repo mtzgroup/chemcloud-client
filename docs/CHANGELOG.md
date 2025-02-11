@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
+### Added
+
+- Retry loop for HTTP requests to handle ssl handshake errors or other non-HTTP status code errors.
+
 ## [0.12.2] - 2025-02-07
 
 ### Changed
