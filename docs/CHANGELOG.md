@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
+## [0.12.3] - 2025-02-10
+
 ### Added
 
 - Retry loop for HTTP requests to handle ssl handshake errors or other non-HTTP status code errors.
@@ -232,7 +234,8 @@ Updated qcio (0.10.1 -> 0.10.2). `Structure.ids` -> `Structure.identifiers`
 - `_RequestsClient` class that handles all network requests to TeraChem Cloud server
 - `FutureResults` object that is created from a `task_id` and can be used to retrieve a result once finished.
 
-[unreleased]: https://github.com/mtzgroup/chemcloud-client/compare/0.12.2...HEAD
+[unreleased]: https://github.com/mtzgroup/chemcloud-client/compare/0.12.3...HEAD
+[0.12.3]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.12.3
 [0.12.2]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.12.2
 [0.12.1]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.12.1
 [0.12.0]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.12.0
