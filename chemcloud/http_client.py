@@ -3,7 +3,7 @@ import sys
 from base64 import urlsafe_b64decode
 from getpass import getpass
 from pathlib import Path
-from time import time
+from time import sleep, time
 from typing import Any, Optional, Union
 
 import httpx
@@ -176,8 +176,10 @@ class _RequestsClient:
         data: Optional[dict[str, Any]] = None,
         params: Optional[dict[str, Any]] = None,
         api_call: bool = True,
+        max_retries: int = 3,
+        backoff_factor: float = 1.0,
     ):
-        """Make HTTP request"""
+        """Make HTTP request with retry logic"""
         url = (
             f"{self._chemcloud_domain}"
             f"{self._settings.chemcloud_api_version_prefix if api_call else ''}{route}"
@@ -189,11 +191,21 @@ class _RequestsClient:
             data=data,
             params=params,
         )
-        # Longer read timeouts for large batches of files
-        with httpx.Client(timeout=httpx.Timeout(5.0, read=20.0)) as client:
-            response = client.send(request)
-        response.raise_for_status()
-        return response.json()
+
+        for attempt in range(max_retries):
+            try:
+                # Longer read timeouts for large batches of files
+                with httpx.Client(timeout=httpx.Timeout(5.0, read=20.0)) as client:
+                    response = client.send(request)
+                response.raise_for_status()
+                return response.json()
+            except httpx.RequestError as exc:
+                if attempt == max_retries:
+                    # Re-raise the exception if it's the last attempt.
+                    raise
+                # Exponential backoff the retry time
+                sleep_time = backoff_factor * attempt
+                sleep(sleep_time)
 
     def _authenticated_request(self, method: str, route: str, **kwargs):
         """Make authenticated HTTP request"""
