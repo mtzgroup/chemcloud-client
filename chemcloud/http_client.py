@@ -176,7 +176,7 @@ class _RequestsClient:
         data: Optional[dict[str, Any]] = None,
         params: Optional[dict[str, Any]] = None,
         api_call: bool = True,
-        max_retries: int = 3,
+        max_attempts: int = 3,
         backoff_factor: float = 1.0,
     ):
         """Make HTTP request with retry logic"""
@@ -192,18 +192,15 @@ class _RequestsClient:
             params=params,
         )
 
-        for attempt in range(max_retries):
+        for attempt in range(1, max_attempts + 1):
             try:
                 # Longer read timeouts for large batches of files
                 with httpx.Client(timeout=httpx.Timeout(5.0, read=20.0)) as client:
                     response = client.send(request)
                 response.raise_for_status()
                 return response.json()
-            except (
-                httpx.RequestError,
-                httpx.HTTPStatusError,
-            ) as exc:  # Retry for 4xx and 5xx errors
-                if attempt == max_retries:
+            except httpx.RequestError as exc:  # Retry for
+                if attempt == max_attempts:
                     # Re-raise the exception if it's the last attempt.
                     raise
                 # Exponential backoff the retry time

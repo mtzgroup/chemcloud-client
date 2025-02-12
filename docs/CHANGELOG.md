@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
+### Fixed
+
+- Retry logic for `httpx.RequestError` now correctly raises an exception after `max_attempts`. Requests that fail due to sporadic connection/network issues will now be retried up to `max_attempts` times.
+
+### Changed
+
+- Removed retry logic for 4xx and 5xx errors.
+
 ## [0.12.4] - 2025-02-11
 
 ### Added
