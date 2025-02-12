@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
+## [0.12.5] - 2025-02-12
+
 ### Fixed
 
 - Retry logic for `httpx.RequestError` now correctly raises an exception after `max_attempts`. Requests that fail due to sporadic connection/network issues will now be retried up to `max_attempts` times.
@@ -248,7 +250,8 @@ Updated qcio (0.10.1 -> 0.10.2). `Structure.ids` -> `Structure.identifiers`
 - `_RequestsClient` class that handles all network requests to TeraChem Cloud server
 - `FutureResults` object that is created from a `task_id` and can be used to retrieve a result once finished.
 
-[unreleased]: https://github.com/mtzgroup/chemcloud-client/compare/0.12.4...HEAD
+[unreleased]: https://github.com/mtzgroup/chemcloud-client/compare/0.12.5...HEAD
+[0.12.5]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.12.5
 [0.12.4]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.12.4
 [0.12.3]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.12.3
 [0.12.2]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.12.2
