@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
+### Added
+
+- Retry requests for 4xx and 5xx status codes. This is a short term fix for the sporadic 500 errors related to `LookupError: unknown encoding: idna` on the server.
+
 ## [0.12.3] - 2025-02-10
 
 ### Added
