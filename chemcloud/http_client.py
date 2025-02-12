@@ -199,7 +199,10 @@ class _RequestsClient:
                     response = client.send(request)
                 response.raise_for_status()
                 return response.json()
-            except httpx.RequestError as exc:
+            except (
+                httpx.RequestError,
+                httpx.HTTPStatusError,
+            ) as exc:  # Retry for 4xx and 5xx errors
                 if attempt == max_retries:
                     # Re-raise the exception if it's the last attempt.
                     raise
