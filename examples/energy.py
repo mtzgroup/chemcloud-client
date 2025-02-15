@@ -1,6 +1,6 @@
-from qcio import ProgramInput, ProgramOutput, Structure
+from qcio import ProgramInput, Structure
 
-from chemcloud import CCClient
+from chemcloud import compute
 
 water = Structure(
     symbols=["O", "H", "H"],
@@ -11,7 +11,6 @@ water = Structure(
     ],
 )
 
-client = CCClient()
 
 prog_inp = ProgramInput(
     structure=water,
@@ -19,15 +18,14 @@ prog_inp = ProgramInput(
     calctype="energy",  # Or "gradient" or "hessian"
     keywords={},
 )
-future_result = client.compute("terachem", prog_inp, collect_files=True)
-prog_output: ProgramOutput = future_result.get()
+output = compute("terachem", prog_inp)
 # ProgramOutput object containing all returned data
-print(prog_output.stdout)
-print(prog_output)
-# The energy value requested
+print(output.stdout)
+print(output)
 
-if prog_output.success:
-    print(prog_output.results.energy)
-    print(prog_output.results.files.keys())
+if output.success:
+    print(output.results.energy)
+    # Not empty if collect_files=True passed to compute
+    print(output.results.files.keys())
 else:
-    print(prog_output.traceback)
+    print(output.traceback)

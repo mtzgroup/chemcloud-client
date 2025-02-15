@@ -26,7 +26,7 @@ opt_input = DualProgramInput(
     subprogram_args={"model": {"method": "UFF"}} # or any other force field
 )
 
-future_output = client.compute("geometric", opt_input)
+output = client.compute("geometric", opt_input)
 
 ```
 

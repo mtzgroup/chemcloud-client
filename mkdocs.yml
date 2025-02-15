@@ -88,7 +88,9 @@ markdown_extensions:
       alternate_style: true
   - markdown_include.include:
       base_path: docs
-
+watch:
+  - chemcloud
+  - examples
 nav:
   - chemcloud: index.md
   - Tutorial - Users Guide:
@@ -99,9 +101,10 @@ nav:
       - tutorial/batch-computations.md
       - tutorial/bigchem-algorithms.md
   - Code Reference:
+      - code-reference/Main Methods.md
       - code-reference/CCClient.md
-      - code-reference/FutureOutputs.md
+      - code-reference/FutureOutput.md
       - code-reference/ProgramInputs.md
-      - code-reference/ProgramOutputs.md
+      - code-reference/ProgramOutput.md
       - code-reference/exceptions.md
   - Changelog: CHANGELOG.md

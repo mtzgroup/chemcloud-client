@@ -7,7 +7,7 @@ from time import time
 import pytest
 import tomli_w
 from pytest_httpx import HTTPXMock
-from qcio import Structure
+from qcio import ProgramInput, Structure
 
 from chemcloud.config import Settings
 
@@ -75,10 +75,24 @@ def patch_compute_endpoints(httpx_mock: HTTPXMock):
     """Patch httpx methods against /compute endpoint"""
     PATCH_VALUES = "fake_task_id"
 
-    compute_endpoint = re.compile(r".*/compute")
-    httpx_mock.add_response(url=compute_endpoint, json=PATCH_VALUES)
+    compute_endpoint = re.compile(r".*/compute*")
+    httpx_mock.add_response(url=compute_endpoint, json=PATCH_VALUES, is_reusable=True)
 
     yield PATCH_VALUES
+
+
+@pytest.fixture
+def patch_openapi_endpoint(httpx_mock: HTTPXMock):
+    """Patch httpx methods against /openapi endpoint"""
+    httpx_mock.add_response(
+        url=re.compile(r".*/openapi\.json$"),
+        json={
+            "components": {
+                "schemas": {"SupportedPrograms": {"enum": ["psi4", "terachem"]}}
+            }
+        },
+        is_reusable=True,
+    )
 
 
 @pytest.fixture
@@ -98,3 +112,21 @@ def jwt(settings):
 def expired_jwt(settings):
     payload = {"exp": int(time()) - 1}
     return _jwt_from_payload(payload)
+
+
+@pytest.fixture
+def prog_input(water):
+    """Function that returns ProgramInput of calctype."""
+
+    return ProgramInput(
+        structure=water,
+        calctype="energy",
+        model={"method": "hf", "basis": "sto-3g"},
+        keywords={
+            "maxiter": 100,
+            "purify": "no",
+            "some-bool": False,
+            "displacement": 1e-3,
+            "thermo_temp": 298.15,
+        },
+    )

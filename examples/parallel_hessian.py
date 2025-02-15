@@ -1,6 +1,6 @@
-from qcio import DualProgramInput, ProgramOutput, Structure
+from qcio import DualProgramInput, Structure
 
-from chemcloud import CCClient
+from chemcloud import compute
 
 water = Structure(
     symbols=["O", "H", "H"],
@@ -11,7 +11,6 @@ water = Structure(
     ],
 )
 
-client = CCClient()
 
 prog_inp = DualProgramInput(
     structure=water,
@@ -22,13 +21,12 @@ prog_inp = DualProgramInput(
 
 
 # Submit calculation
-future_result = client.compute("bigchem", prog_inp)
-prog_output: ProgramOutput = future_result.get()
+output = compute("bigchem", prog_inp)
 
 # ProgramOutput object containing all returned data
-print(prog_output)
-print(prog_output.results.hessian)
+print(output)
+print(output.results.hessian)
 # Frequency data always included too
-print(f"Wavenumbers: {prog_output.results.freqs_wavenumber}")
-print(prog_output.results.normal_modes_cartesian)
-print(prog_output.results.gibbs_free_energy)
+print(f"Wavenumbers: {output.results.freqs_wavenumber}")
+print(output.results.normal_modes_cartesian)
+print(output.results.gibbs_free_energy)

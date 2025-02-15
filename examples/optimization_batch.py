@@ -1,6 +1,6 @@
 from qcio import DualProgramInput, Structure
 
-from chemcloud import CCClient
+from chemcloud import compute
 
 water = Structure(
     symbols=["O", "H", "H"],
@@ -11,7 +11,6 @@ water = Structure(
     ],
 )
 
-client = CCClient()
 
 prog_inp = DualProgramInput(
     structure=water,
@@ -23,8 +22,5 @@ prog_inp = DualProgramInput(
 
 
 # Submit calculation
-future_result = client.compute("geometric", prog_inp)
-prog_output = future_result.get()
-
-# Array of OptimizationOutput objects
-print(prog_output)
+output = compute("geometric", [prog_inp] * 2)
+print(output)

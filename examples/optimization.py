@@ -1,6 +1,6 @@
-from qcio import DualProgramInput, OptimizationOutput, Structure
+from qcio import DualProgramInput, Structure
 
-from chemcloud import CCClient
+from chemcloud import compute
 
 water = Structure(
     symbols=["O", "H", "H"],
@@ -11,7 +11,6 @@ water = Structure(
     ],
 )
 
-client = CCClient()
 
 prog_inp = DualProgramInput(
     structure=water,
@@ -23,8 +22,7 @@ prog_inp = DualProgramInput(
 
 
 # Submit calculation
-future_result = client.compute("geometric", prog_inp)
-output: OptimizationOutput = future_result.get()
+output = compute("geometric", prog_inp)
 
 if output.success:
     print("Optimization succeeded!")
@@ -33,7 +31,7 @@ if output.success:
     # The final structure of the geometry optimization
     print(output.results.final_structure)
     # Initial structure
-    print(output.input_data.structure)
+    print(output.inputs.structure)
     # A list of ordered AtomicResult objects for each step in the optimization
     print(output.results.trajectory)
     # A list of ordered energies for each step in the optimization

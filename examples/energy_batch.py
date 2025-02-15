@@ -1,6 +1,6 @@
 from qcio import ProgramInput, Structure
 
-from chemcloud import CCClient
+from chemcloud import compute
 
 water = Structure(
     symbols=["O", "H", "H"],
@@ -11,15 +11,15 @@ water = Structure(
     ],
 )
 
-client = CCClient()
-
 prog_inp = ProgramInput(
     structure=water,
     model={"method": "b3lyp", "basis": "6-31g"},
     calctype="energy",
     keywords={},
 )
-future_result = client.compute("psi4", [prog_inp] * 2)
-prog_output = future_result.get()
-# Array of ProgramOutput objects containing all returned data
-print(prog_output)
+# output = compute("terachem", [prog_inp] * 2)
+# print(output)  # list of ProgramOutput objects
+
+future = compute("terachem", [prog_inp] * 20, return_future=True)
+for i, output in enumerate(future.as_completed()):
+    print(f"Task {i} completed with energy: {output.results.energy}")

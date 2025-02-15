@@ -1,186 +1,301 @@
-from abc import ABC
+import json
+import logging
+import traceback
+from base64 import urlsafe_b64encode
+from collections.abc import Generator
 from enum import Enum
 from pathlib import Path
 from time import sleep, time
-from typing import Any, Optional, Union
+from typing import TYPE_CHECKING, Any, Optional, Union, cast
+from uuid import uuid4
 
-from pydantic import field_validator
-from pydantic.main import BaseModel
-from qcio import DualProgramInput, FileInput, ProgramInput, ProgramOutput
-from typing_extensions import TypeAlias
+from pydantic import BaseModel, field_validator, model_validator
+from qcio import Files, Inputs, ProgramOutput
+from typing_extensions import Self
 
+from .config import settings
 from .exceptions import TimeoutError
 
-GROUP_ID_PREFIX = "group-"
+# Option 1: Use TYPE_CHECKING for static type hints.
+if TYPE_CHECKING:
+    from .client import CCClient
 
-# Convenience types
-QCIOInputs: TypeAlias = Union[ProgramInput, FileInput, DualProgramInput]
-QCIOInputsOrList: TypeAlias = Union[QCIOInputs, list[QCIOInputs]]
-QCIOOutputs: TypeAlias = ProgramOutput
-QCIOOutputsOrList: TypeAlias = Union[QCIOOutputs, list[QCIOOutputs]]
+logger = logging.getLogger(__name__)
 
 
 class TaskStatus(str, Enum):
-    """Tasks status for a submitted compute job."""
+    """Tasks status for a submitted compute job"""
+
+    # States from https://github.com/celery/celery/blob/master/celery/states.py
 
     #: Task state is unknown (assumed pending since you know the id).
     PENDING = "PENDING"
-    COMPLETE = "COMPLETE"
+    #: Task was received by a worker (only used in events).
+    RECEIVED = "RECEIVED"
+    #: Task was started by a worker (:setting:`task_track_started`).
+    STARTED = "STARTED"
+    #: Task succeeded
+    SUCCESS = "SUCCESS"
+    #: Task failed
     FAILURE = "FAILURE"
+    #: Task was revoked.
+    REVOKED = "REVOKED"
+    #: Task was rejected (only used in events).
+    REJECTED = "REJECTED"
+    #: Task is waiting for retry.
+    RETRY = "RETRY"
+    IGNORED = "IGNORED"
 
 
-class FutureOutputBase(BaseModel, ABC):
-    """Base class for FutureOutputs
+READY_STATES = {TaskStatus.SUCCESS, TaskStatus.FAILURE, TaskStatus.REVOKED}
+
+
+class FutureOutput(BaseModel):
+    """
+    Represents one or more asynchronous compute tasks.
 
     Attributes:
-        task_id: The task_id for primary task submitted to ChemCloud. May correspond to
-            a single task or group of tasks.
-        client: The _RequestsClient to use for http requests to ChemCloud.
-        result: Primary return value resulting from computation.
-
-    Caution:
-        A FutureOutput should never be instantiated directly.
-        `CCClient.compute(...)` will return one when you submit a computation.
+        task_ids: A list of task IDs from a compute submission.
+        input_data: A list of input data objects for each task.
+        program: The program used for the computation.
+        client: A client instance that can perform HTTP requests to check task status.
+        program_outputs: A list of ProgramOutputs once tasks are completed (order corresponds to task_ids).
     """
 
-    task_id: str
-    result: Optional[QCIOOutputsOrList] = None
+    task_ids: list[str]
+    inputs: list[Inputs]
+    program: str
     client: Any
-    _state: TaskStatus = TaskStatus.PENDING
+    outputs: list[Optional[ProgramOutput]] = []
+    _statuses: list[TaskStatus] = []
 
-    model_config = {"validate_assignment": True}
+    class ConfigDict:
+        arbitrary_types_allowed = True
+        validate_assignment = True
 
-    def get(
-        self,
-        timeout: Optional[float] = None,  # in seconds
-        interval: float = 1.0,
-    ) -> Optional[QCIOOutputsOrList]:
-        """Block until a calculation is complete and return the result.
-
-        Parameters:
-            timeout: The number of seconds to wait for a computation before raising a
-                TimeOutError.
-            interval: The amount of time to wait between calls to ChemCloud to
-                check a computation's status.
-
-        Returns:
-            Resultant values from a computation.
-
-        Exceptions:
-            TimeoutError: Raised if timeout interval exceeded.
+    @field_validator("client", mode="before")
+    def ensure_client(cls, v: Union["CCClient", dict[str, Any]]) -> "CCClient":
         """
-        if self.result:
-            return self.result
+        If 'client' is provided as a dict, assume it is the serialized configuration
+        and instantiate a CCClient from it.
+        """
+        if isinstance(v, dict):
+            from chemcloud import CCClient
 
-        start_time = time()
+            try:
+                return CCClient(**v)
+            except Exception as exc:
+                raise ValueError(
+                    f"Error instantiating client from serialized data: {v}."
+                ) from exc
+        return v
 
-        # self._state check prevents 401 errors from ChemCloud when the job completed
-        # but the server failed to return a result (e.g., due to .program_output not)
-        # being set correctly by qcio/BigChem.
-        # TODO: Make a clearer contract between Server and Client re: states. This got
-        # a bit messy as I switched mimicking celery states to the more simplified setup
-        # I have now. This can be simplified further.
-        while not self.result and self._state not in {"COMPLETE", "FAILURE"}:
-            # Calling self.status returns status and sets self.result if task complete
-            self.status
-            if timeout:
-                if (time() - start_time) > timeout:
-                    raise TimeoutError(
-                        f"Your timeout limit of {timeout} seconds was exceeded"
-                    )
-            sleep(interval)
-
-        return self.result
-
-    def _output(self):
-        """Return output from server"""
-        return self.client.output(self.task_id)
+    @model_validator(mode="after")
+    def initialize_outputs_and_statuses(self) -> Self:
+        """Initialize program_outputs and statuses based on task_ids length."""
+        if not self.outputs:
+            self.outputs = [None] * len(self.task_ids)
+        if not self._statuses:
+            self._statuses = [TaskStatus.PENDING] * len(self.task_ids)
+        return self
 
     @property
-    def status(self) -> str:
-        """Check status of compute task.
+    def task_id(self) -> str:
+        """Return the task id if only a single computation was submitted."""
+        if len(self.task_ids) > 1:
+            raise AttributeError("Multiple task IDs found. Use `task_ids` instead.")
+        return self.task_ids[0]
+
+    def refresh(self) -> None:
+        """Refresh the statuses and program_outputs of uncollected tasks."""
+        logger.debug("Refreshing task statuses and outputs.")
+
+        # Identify unfinished tasks
+        assert self._statuses is not None  # For mypy
+        unfinished_indices = [
+            i for i, status in enumerate(self._statuses) if status not in READY_STATES
+        ]
+        if not unfinished_indices:
+            logger.debug("No unfinished tasks to refresh.")
+            return  # Nothing to refresh
+
+        # Build coroutines to refresh unfinished tasks
+        coroutines = [
+            self.client.fetch_output_async(self.task_ids[i]) for i in unfinished_indices
+        ]
+
+        # Run the coroutines in parallel; collect statues and results.
+        results = self.client._http_client.run_parallel_requests(
+            coroutines, settings.chemcloud_concurrency, return_exceptions=True
+        )
+
+        # Update the statuses and outputs based on the results.
+        logger.info(f"Refreshing {len(unfinished_indices)} unfinished task(s).")
+        for i, result in zip(unfinished_indices, results):
+            # Insulate users against all exceptions for now
+            if isinstance(result, Exception):
+                logger.error(
+                    f"Error collecting task {self.task_ids[i]}: {result}", exc_info=True
+                )
+                self._statuses[i] = TaskStatus.FAILURE
+                self.outputs[i] = self._output_from_exception(result, self.inputs[i])
+            else:
+                logger.debug(f"Task {self.task_ids[i]} collected: status {result[0]}")
+                self._statuses[i], self.outputs[i] = result
+
+    @property
+    def is_ready(self) -> bool:
+        """
+        Contacts the ChemCloud server to collect task status and program outputs.
 
         Returns:
-            Status of computation.
-
-        Note:
-            Sets self.result if task is complete.
+            True if all tasks are complete, i.e., in a READY_STATE (SUCCESS, FAILURE, or REVOKED).
         """
-        if self.result:
-            return self._state
-        self._state, self.result = self._output()
-        return self._state
+        self.refresh()  # Ensures self._statuses and self.program_outputs are not None
+        return all(
+            (res is not None or status in READY_STATES)
+            for status, res in zip(self._statuses, self.outputs)
+        )
 
-
-class FutureOutput(FutureOutputBase):
-    """Single computation result"""
-
-    result: Optional[QCIOOutputs] = None
-
-
-class FutureOutputGroup(FutureOutputBase):
-    """Group computation result"""
-
-    result: Optional[list[QCIOOutputs]] = None
-
-    def _output(self):
-        """Return result from server. Remove GROUP_ID_PREFIX from id."""
-        return self.client.output(self.task_id.replace(GROUP_ID_PREFIX, ""))
-
-    @field_validator("task_id")
-    @classmethod
-    def validate_id(cls, val):
-        """Prepend id with GROUP_ID_PREFIX.
-
-        NOTE:
-            This makes instantiating FutureOutputGroups from saved ids easier because
-            they are differentiated from FutureOutput ids.
+    def get(
+        self, timeout: Optional[float] = None, initial_interval: float = 1.0
+    ) -> Union[ProgramOutput, list[ProgramOutput]]:
         """
-        if not val.startswith(GROUP_ID_PREFIX):
-            val = GROUP_ID_PREFIX + val
-        return val
+        Block until all tasks complete and return their program_outputs.
 
+        If only one task was submitted, returns the single result;
+        otherwise, returns a list of program_outputs.
 
-def to_file(
-    future_results: Union[FutureOutputBase, list[FutureOutputBase]],
-    path: Union[str, Path],
-    *,
-    append: bool = False,
-) -> None:
-    """Write FutureOutputs to disk for later retrieval
+        Parameters:
+            timeout: The maximum time to wait for all tasks to complete.
+            initial_interval: The initial interval between status checks.
 
-    Params:
-        future_results: List of or single FutureOutput or FutureOutputGroup
-        path: File path to results file
-        append: Append results to an existing file if True, else create new file
-    """
-    if not isinstance(future_results, list):
-        future_results = [future_results]
+        Returns:
+            The program_outputs for all tasks once they are complete.
+        Raises:
+            TimeoutError: If the timeout is exceeded before all tasks complete.
+        """
+        start_time = time()
+        interval = initial_interval
+        while not self.is_ready:
+            elapsed = time() - start_time
+            logger.debug(
+                f"Waiting for tasks to complete... elapsed time: {elapsed:.2f}s"
+            )
+            if timeout is not None and elapsed > timeout:
+                raise TimeoutError(
+                    f"Timeout of {timeout} seconds exceeded while waiting for tasks."
+                )
+            # Increase interval gradually (up to a max value)
+            interval = min(interval * 1.5, 30.0)
+            self.refresh()
+            logger.debug(f"Sleeping for {interval:.2f} seconds before next poll.")
+            sleep(interval)
 
-    with open(path, f"{'a' if append else 'w'}") as f:
-        f.writelines([f"{fr.task_id}\n" for fr in future_results])
+        logger.info("All tasks are ready. Returning results.")
+        # Return a single result if only one task_id was provided.
+        assert all(
+            output is not None for output in self.outputs
+        ), "All outputs should be collected at this point."
 
+        if len(self.outputs) == 1:
+            return cast(ProgramOutput, self.outputs[0])
+        else:
+            return cast(list[ProgramOutput], self.outputs)
 
-def from_file(
-    path: Union[str, Path],
-    client: Any,
-) -> list[Union[FutureOutput, FutureOutputGroup]]:
-    """Instantiate FutureOutputs or FutureOutputGroups from file of result ids
+    def as_completed(
+        self, initial_interval: float = 1.0
+    ) -> Generator[ProgramOutput, None, None]:
+        """
+        Yields ProgramOutput objects as tasks become ready (SUCCESS, FAILURE, or REVOKED).
+        Blocks until all tasks have finished or the generator is exhausted.
 
-    Params:
-        path: Path to file containing the ids
-        client: Instantiated CCClient object
-    """
-    frs: list[Union[FutureOutput, FutureOutputGroup]] = []
-    with open(path) as f:
-        for id in f.readlines():
-            id = id.strip()
-            model: Union[type[FutureOutput], type[FutureOutputGroup]]
-            if id.startswith(GROUP_ID_PREFIX):
-                model = FutureOutputGroup
+        This uses the same refresh logic as `.get()`, so it will automatically
+        handle errors and generate ProgramOutput objects (including error placeholders)
+        in the same way. The order in which results are yielded is not guaranteed
+        to match the exact order tasks finish on the server.
+
+        Parameters:
+            initial_interval: The initial interval (in seconds) between refresh calls.
+            This interval is increased by a factor of 1.5 on every poll cycle that
+            finds no newly completed tasks, up to a maximum of 30 seconds.
+
+        Yields:
+            ProgramOutput objects for each task as they become ready.
+            If a task fails, the yielded ProgramOutput will contain
+            error/traceback information (just like `.get()`).
+        """
+        done_indices: set[int] = set()
+        interval = initial_interval
+
+        # Keep polling until all tasks are completed
+        while len(done_indices) < len(self.task_ids):
+            logger.debug("Polling for task completions...")
+            self.refresh()
+            any_new = False
+            for i, status in enumerate(self._statuses):
+                if i not in done_indices and status in READY_STATES:
+                    logger.info(
+                        f"Task {self.task_ids[i]} is complete with status {status}."
+                    )
+                    done_indices.add(i)
+                    any_new = True
+                    assert self.outputs[i] is not None
+                    yield cast(ProgramOutput, self.outputs[i])
+            if any_new:
+                # Reset interval if new completions were found.
+                interval = initial_interval
             else:
-                model = FutureOutput
-            frs.append(model(task_id=id, client=client._client))
+                # Increase interval if nothing new was found.
+                interval = min(interval * 1.5, 30.0)
+                logger.debug(f"No new completions; sleeping {interval:.2f} seconds.")
+                sleep(interval)
 
-    assert len(frs) > 0, "No ids found in file!"
-    return frs
+    def _output_from_exception(
+        self, exc: Exception, input_data: Inputs
+    ) -> ProgramOutput:
+        """Create a ProgramOutput object from an exception."""
+        tb_str = "".join(traceback.format_exception(type(exc), exc, exc.__traceback__))
+        stdout_str = (
+            "The ChemCloud server was unable to return this result. "
+            "Please open an issue at https://github.com/mtzgroup/chemcloud-server/issues "
+            "and include this entire ProgramOutput object in the issue description. "
+            "You can dump this object to a JSON file using `output.save('output.json')`."
+        )
+        return ProgramOutput(
+            input_data=input_data,
+            success=False,
+            results=Files(),  # Empty results
+            stdout=stdout_str,
+            traceback=tb_str,
+            provenance={"program": self.program},
+        )
+
+    def model_dump(self, **kwargs) -> dict[str, Any]:
+        """
+        Custom dump method that replaces the `client` field with a minimal configuration
+        dictionary.
+        """
+        data = super().model_dump(**kwargs)
+        data["client"] = {
+            "chemcloud_domain": self.client._http_client._chemcloud_domain,
+            "profile": self.client._http_client._profile,
+        }
+        return data
+
+    def save(self, path: Optional[Union[str, Path]] = None) -> None:
+        """Save the FutureOutput to a JSON file."""
+        path = (
+            Path(path)
+            if path is not None
+            else Path.cwd()
+            / f"future-{urlsafe_b64encode(uuid4().bytes).rstrip(b'=').decode('ascii')}.json"
+        )
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(self.model_dump()))
+
+    @classmethod
+    def open(self, path: Union[str, Path]) -> "FutureOutput":
+        """Load a FutureOutput from a JSON file."""
+        data = json.loads(Path(path).read_text())
+        return FutureOutput(**data)
