@@ -19,6 +19,10 @@ class Settings(BaseSettings):
     chemcloud_domain: str = "https://chemcloud.mtzlab.com"
     chemcloud_api_version_prefix: str = "/api/v2"
     chemcloud_credentials_profile: str = "default"
+    chemcloud_queue: Optional[str] = None
+    chemcloud_concurrency: int = 3
+    chemcloud_timeout: int = 20
+    chemcloud_read_timeout: int = 20
 
 
 settings = Settings()

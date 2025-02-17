@@ -1,43 +1,42 @@
+import asyncio
 import json
+import logging
 import sys
 from base64 import urlsafe_b64decode
 from getpass import getpass
 from pathlib import Path
-from time import sleep, time
+from time import time
 from typing import Any, Optional, Union
+from urllib.parse import urlencode
 
 import httpx
+import tomli_w
+from pydantic import BaseModel
+from qcio.utils import json_dumps
 
 if sys.version_info >= (3, 11):
     import tomllib
 else:
     import tomli as tomllib
 
-import tomli_w
-from qcio.utils import json_dumps
-
-from chemcloud.models import FutureOutput, FutureOutputGroup
-
 from .config import Settings, settings
-from .models import QCIOInputsOrList
+
+logger = logging.getLogger(__name__)
+logger.addHandler(logging.NullHandler())
 
 
-class _RequestsClient:
-    """Interface for making http requests to ChemCloud.
+class _HttpClient:
+    """
+    Internal, asynchronous HTTP client for interacting with the ChemCloud API.
 
-    This class should never be instantiated by end users. End users should use the
-    CCClient class to interact with ChemCloud.
+    Provides run_parallel_requests method as a synchronous API for external consumers.
 
-    Main Features:
-        - Manages credentials for making authenticated requests.
-        - All public methods in should enforce a contract of returning python data
-            objects to the caller rather than dicts or request/response objects.
-        - public methods:
-            - hello_world()
-            - compute()
-            - output()
-            - write_tokens_to_credentials_file()
+    Responsibilities:
+      - Handle authentication (token management, refresh, etc.)
+      - Make HTTP requests (with retries, timeouts, etc.)
+      - Return raw JSON/dict data for the domain layer to process.
 
+    This class should not contain any domain-specific logic.
     """
 
     def __init__(
@@ -52,21 +51,209 @@ class _RequestsClient:
         self._chemcloud_username = chemcloud_username
         self._chemcloud_password = chemcloud_password
         self._settings = settings
-        self._profile = profile or settings.chemcloud_credentials_profile
+        self._profile = profile or self._settings.chemcloud_credentials_profile
         self._access_token: str = ""
         self._refresh_token: str = ""
-        self._chemcloud_domain = chemcloud_domain or settings.chemcloud_domain
-        # If set to True future refresh_tokens calls will also write new tokens to
-        # Credentials file
+        self._chemcloud_domain = chemcloud_domain or self._settings.chemcloud_domain
         self._tokens_set_from_file: bool = False
+        self._httpx_timeout = httpx.Timeout(
+            self._settings.chemcloud_timeout, read=self._settings.chemcloud_read_timeout
+        )
+        self._async_client = httpx.AsyncClient(timeout=self._httpx_timeout)
+        # Use an asyncio lock to ensure only one token refresh happens at a time.
+        # Must create lock when even loop is active to setting to None here.
+        self._token_refresh_lock: Optional[asyncio.Lock] = None
 
     def __repr__(self) -> str:
         return (
             f"{type(self).__name__}({self._chemcloud_domain}, profile={self._profile})"
         )
 
-    def _set_tokens(self) -> None:
-        """Set self._access_token and self._refresh_token"""
+    async def _request_async(
+        self,
+        method: str,
+        route: str,
+        *,
+        headers: Optional[dict[str, str]] = None,
+        data: Optional[Union[dict[str, Any], str]] = None,
+        params: Optional[dict[str, Any]] = None,
+        api_call: bool = True,
+        max_attempts: int = 3,
+        backoff_factor: float = 1.0,
+    ) -> Any:
+        """Asynchronous HTTP request with retry logic."""
+        url, content = self._build_url_and_content(route, data, api_call, headers)
+
+        # Retry for RequestErrors (non HTTPStatusErrors)
+        for attempt in range(1, max_attempts + 1):
+            try:
+                response = await self._async_client.request(
+                    method, url, headers=headers, content=content, params=params
+                )
+                logger.debug(
+                    f"Received response (attempt {attempt}): {response.status_code}"
+                )
+
+                response.raise_for_status()
+                return response.json()
+            except httpx.RequestError as exc:
+                logger.error(f"Request error on attempt {attempt} for {url}: {exc}")
+                if attempt == max_attempts:
+                    raise
+                # Exponential backoff
+                sleep_time = backoff_factor * 2**attempt
+                logger.debug(f"Retrying in {sleep_time} seconds...")
+                await asyncio.sleep(sleep_time)
+
+    async def _authenticated_request_async(
+        self, method: str, route: str, **kwargs
+    ) -> Any:
+        """Asynchronous version of _authenticated_request."""
+        auth_kwargs = await self._add_auth_headers(**kwargs)
+        return await self._request_async(method, route, **auth_kwargs)
+
+    async def _run_parallel_requests_async(
+        self,
+        coroutines: list[Any],
+        concurrency: Optional[int] = None,
+        return_exceptions: bool = False,
+    ) -> list[Any]:
+        """Async API to run multiple coroutines concurrently."""
+        semaphore = asyncio.Semaphore(
+            concurrency or self._settings.chemcloud_concurrency
+        )
+
+        async def sem_task(coro):
+            async with semaphore:
+                return await coro
+
+        tasks = [sem_task(coro) for coro in coroutines]
+        return await asyncio.gather(*tasks, return_exceptions=return_exceptions)
+
+    def run_parallel_requests(
+        self,
+        coroutines: list[Any],
+        concurrency: Optional[int] = None,
+        return_exceptions: bool = False,
+    ) -> list[Any]:
+        """Synchronous API to run multiple coroutines concurrently."""
+        # Create a fresh AsyncClient so that it's bound to the new event loop.
+        client = httpx.AsyncClient(timeout=self._httpx_timeout)
+
+        # Temporarily swap out the persistent client
+        original_async_client = self._async_client
+        self._async_client = client
+
+        try:
+            return asyncio.run(
+                self._run_parallel_requests_async(
+                    coroutines, concurrency, return_exceptions
+                )
+            )
+        finally:
+            self._async_client = original_async_client
+
+    def _build_url_and_content(
+        self,
+        route: str,
+        data: Optional[Any],
+        api_call: bool,
+        headers: Optional[dict[str, str]] = None,
+    ) -> tuple[str, Union[str, bytes]]:
+        """Builds URL and serializes request content appropriately."""
+        url = (
+            f"{self._chemcloud_domain}"
+            f"{self._settings.chemcloud_api_version_prefix if api_call else ''}{route}"
+        )
+
+        # Auth requests do not use JSON content type.
+        if (
+            headers
+            and headers.get("content-type", "").lower()
+            == "application/x-www-form-urlencoded"
+        ):
+            content = urlencode(data) if data else ""
+        # All other requests serialize data as JSON
+        else:
+            content = (
+                json_dumps(data)
+                if isinstance(data, (BaseModel, list))
+                else json.dumps(data or {})
+            )
+
+        return url, content
+
+    async def _add_auth_headers(self, **kwargs) -> Any:
+        """Add authorization header to request headers."""
+        kwargs["headers"] = kwargs.get("headers", {})
+        token = await self.get_access_token()
+        kwargs["headers"]["Authorization"] = f"Bearer {token}"
+        return kwargs
+
+    async def get_access_token(self) -> str:
+        """
+        Returns a valid access token asynchronously.
+        Uses a lock to ensure only one refresh occurs at a time.
+        """
+        if self._access_token and not self._is_token_expired(self._access_token):
+            logger.debug("Access token is valid, returning cached token.")
+            return self._access_token
+
+        # Lazily create the lock in an async context where an event loop is active.
+        if self._token_refresh_lock is None:
+            self._token_refresh_lock = asyncio.Lock()
+
+        async with self._token_refresh_lock:
+            # Double-check after acquiring the lock in case another task refreshed it.
+            if self._access_token and not self._is_token_expired(self._access_token):
+                logger.debug(
+                    "Access token refreshed by another coroutine, returning updated token."
+                )
+                return self._access_token
+
+            if self._refresh_token:
+                logger.info(
+                    "Access token expired. Refreshing tokens using refresh token."
+                )
+                await self._refresh_tokens(self._refresh_token)
+            else:
+                logger.info(f"No refresh token set.")
+                await self._set_tokens()
+
+            return self._access_token
+
+    async def _refresh_tokens(self, refresh_token: str) -> None:
+        """Get new access and refresh tokens asynchronously."""
+        logger.info("Refreshing tokens...")
+        data = {"grant_type": "refresh_token", "refresh_token": refresh_token}
+        headers = {"content-type": "application/x-www-form-urlencoded"}
+        response = await self._request_async(
+            "post", "/oauth/token", headers=headers, data=data
+        )
+        # Return new refresh_token if issued, keep current token if no new token
+        # issued. New refresh_token issued if refresh token rotation activated on
+        # Auth0 backend.
+        self._access_token = response["access_token"]
+        self._refresh_token = response.get("refresh_token", refresh_token)
+        if self._tokens_set_from_file:  # tokens originally set from file
+            self.write_tokens_to_credentials_file(
+                self._access_token, self._refresh_token, profile=self._profile
+            )
+
+    async def _set_tokens(self) -> None:
+        """
+        Sets self._access_token and self._refresh_token.
+
+        Initializes tokens by one of the following (in order of precedence):
+            1. If username and password are passed in, use those to get tokens.
+            2. If username and password are found in the environment, use those.
+            3. If tokens are found in the credentials file, use those (refresh if
+                expired).
+            4. If none of the above, ask the user to input username and password (tokens
+                will not be saved to credentials file for future sessions).
+        """
+        logger.info("Attempting to set tokens.")
+
         un = self._chemcloud_username or self._settings.chemcloud_username
         pw = self._chemcloud_password or self._settings.chemcloud_password
         credentials_file = (
@@ -74,79 +261,120 @@ class _RequestsClient:
             / self._settings.chemcloud_credentials_file
         )
 
-        unauth_msg = "You must authenticate with ChemCloud to make this request."
+        unauth_msg = (
+            "You must authenticate with ChemCloud to make this request.\n"
+            f"If you don't have an account, please signup at: {self._chemcloud_domain}/signup"
+        )
 
-        if un and pw:  # username/password passed in or found in environment
-            access_token, refresh_token = self._tokens_from_username_password(un, pw)
+        if un and pw:  # Passed to __init__ or environment credentials.
+            logger.info(
+                "Using username and password passed to __init__ or found in environment to create tokens."
+            )
+            (
+                self._access_token,
+                self._refresh_token,
+            ) = await self._tokens_from_username_password(un, pw)
+            # Remove sensitive information if passed to __init__.
+            self._chemcloud_username, self._chemcloud_password = None, None
 
-        elif credentials_file.is_file():  # Look for tokens in credentials file
+        elif credentials_file.is_file():
             with open(credentials_file, "rb") as f:
                 credentials = tomllib.load(f)
             try:
-                access_token = credentials[self._profile]["access_token"]
-                refresh_token = credentials[self._profile]["refresh_token"]
+                self._access_token = credentials[self._profile]["access_token"]
+                self._refresh_token = credentials[self._profile]["refresh_token"]
             except KeyError:
+                logger.info("Profile not found in credentials file.")
                 print(unauth_msg)
-                access_token, refresh_token = self._set_tokens_from_user_input()
+                (
+                    self._access_token,
+                    self._refresh_token,
+                ) = await self._set_tokens_from_user_input()
             else:
+                logger.info("Setting tokens from credentials file.")
                 self._tokens_set_from_file = True
-                if self._expired_access_token(access_token):
-                    access_token, refresh_token = self._refresh_tokens(refresh_token)
+                if self._is_token_expired(self._access_token):
+                    await self._refresh_tokens(self._refresh_token)
         else:
             print(unauth_msg)
-            access_token, refresh_token = self._set_tokens_from_user_input()
+            (
+                self._access_token,
+                self._refresh_token,
+            ) = await self._set_tokens_from_user_input()
 
-        # Remove sensitive credentials from object
-        self._chemcloud_username, self._chemcloud_password = None, None
-
-        self._access_token, self._refresh_token = access_token, refresh_token
-
-    def _set_tokens_from_user_input(self):
-        """Request user to input username/password to get access tokens"""
+    async def _set_tokens_from_user_input(self) -> tuple[str, str]:
+        """Request user to input credentials until authentication succeeds."""
         while True:
             msg = "Please enter your ChemCloud"
-            username = input(msg + " username: ")
-            password = getpass(msg + " password: ")
+            email_address = input(f"{msg} email address: ")
+            password = getpass(f"{msg} password: ")
 
             try:
                 print("Authenticating...")
-                return self._tokens_from_username_password(username, password)
+                access_token, refresh_token = await self._tokens_from_username_password(
+                    email_address, password
+                )
             except httpx.HTTPStatusError as e:
                 print(e)
                 print(
-                    "Login Failed! Did you enter your credentials correctly? If you "
-                    "do not have a ChemCloud account please visit "
-                    f"{self._chemcloud_domain}/signup to create an account."
+                    "Login Failed! Did you enter your credentials correctly? "
+                    f"Visit {self._chemcloud_domain}/signup to create an account."
                 )
-
-    def _get_access_token(self) -> str:
-        """Top-level method to get an access token for authenticated requests"""
-        if self._access_token:
-            # Check Expiration
-            if self._expired_access_token(self._access_token):
-                print("Refreshing Access Token...")
-                if self._refresh_token:
-                    self._refresh_tokens(self._refresh_token)
-                else:
-                    self._set_tokens()
             else:
-                return self._access_token
-        else:
-            self._set_tokens()
+                print("Success!")
+                # Ask user if they want to write tokens to credentials file.
+                write_to_file = input(
+                    "Would you like to save these credentials for future sessions? (y/n): "
+                )
+                if write_to_file.lower() == "y":
+                    self.write_tokens_to_credentials_file(
+                        access_token, refresh_token, profile=self._profile
+                    )
+                return access_token, refresh_token
 
-        return self._access_token
+    async def _tokens_from_username_password(
+        self, username: str, password: str
+    ) -> tuple[str, str]:
+        """Exchanges username/password for access_token and refresh_token asynchronously."""
+        data = {
+            "grant_type": "password",
+            "username": username,
+            "password": password,
+            "scope": "offline_access compute:public compute:private",
+        }
+        headers = {"content-type": "application/x-www-form-urlencoded"}
+        response = await self._request_async(
+            "post", "/oauth/token", headers=headers, data=data
+        )
+        return response["access_token"], response["refresh_token"]
+
+    def _is_token_expired(self, jwt: str) -> bool:
+        payload = self._decode_access_token(jwt)
+        return payload["exp"] <= (
+            int(time()) + self._settings.chemcloud_access_token_expiration_buffer
+        )
+
+    @staticmethod
+    def _decode_access_token(jwt: str) -> dict[str, Any]:
+        """Decode jwt string and return dictionary of payload claims."""
+        payload = jwt.split(".")[1]
+        encoded_payload = payload.encode("ascii")
+        rem = len(encoded_payload) % 4
+        if rem > 0:
+            encoded_payload += b"=" * (4 - rem)
+        json_string = urlsafe_b64decode(encoded_payload).decode("utf-8")
+        return json.loads(json_string)
 
     def write_tokens_to_credentials_file(
         self,
         access_token: str,
         refresh_token: str,
         *,
-        profile: str = settings.chemcloud_credentials_profile,
+        profile: Optional[str] = None,
     ) -> None:
         """Writes access_token and refresh_token to configuration file"""
-        assert (
-            access_token and refresh_token
-        ), "You must pass an access_token and refresh_token"
+        assert access_token and refresh_token, "Both tokens must be provided"
+        profile = profile or self._settings.chemcloud_credentials_profile
 
         credentials_file = (
             Path(self._settings.chemcloud_base_directory)
@@ -166,165 +394,3 @@ class _RequestsClient:
         }
         with open(credentials_file, "wb") as f:
             tomli_w.dump(credentials, f)
-
-    def _request(
-        self,
-        method: str,
-        route: str,
-        *,
-        headers: Optional[dict[str, str]] = None,
-        data: Optional[dict[str, Any]] = None,
-        params: Optional[dict[str, Any]] = None,
-        api_call: bool = True,
-        max_attempts: int = 3,
-        backoff_factor: float = 1.0,
-    ):
-        """Make HTTP request with retry logic"""
-        url = (
-            f"{self._chemcloud_domain}"
-            f"{self._settings.chemcloud_api_version_prefix if api_call else ''}{route}"
-        )
-        request = httpx.Request(
-            method,
-            url,
-            headers=headers,
-            data=data,
-            params=params,
-        )
-
-        for attempt in range(1, max_attempts + 1):
-            try:
-                # Longer read timeouts for large batches of files
-                with httpx.Client(timeout=httpx.Timeout(5.0, read=20.0)) as client:
-                    response = client.send(request)
-                response.raise_for_status()
-                return response.json()
-            except httpx.RequestError as exc:  # Retry for
-                if attempt == max_attempts:
-                    # Re-raise the exception if it's the last attempt.
-                    raise
-                # Exponential backoff the retry time
-                sleep_time = backoff_factor * attempt
-                sleep(sleep_time)
-
-    def _authenticated_request(self, method: str, route: str, **kwargs):
-        """Make authenticated HTTP request"""
-        kwargs["headers"] = kwargs.get("headers", {})
-        access_token = self._get_access_token()
-        kwargs["headers"]["Authorization"] = f"Bearer {access_token}"
-        return self._request(
-            method,
-            route,
-            **kwargs,
-        )
-
-    def _tokens_from_username_password(
-        self, username: str, password: str
-    ) -> tuple[str, str]:
-        """Exchanges username/password for access_token and refresh_token"""
-        data = {
-            "grant_type": "password",
-            "username": username,
-            "password": password,
-            # get refresh_token
-            "scope": "offline_access compute:public compute:private",
-        }
-        headers = {"content-type": "application/x-www-form-urlencoded"}
-        response = self._request(
-            "post",
-            "/oauth/token",
-            headers=headers,
-            data=data,
-        )
-
-        return response["access_token"], response["refresh_token"]
-
-    def _refresh_tokens(self, refresh_token: str) -> tuple[str, str]:
-        """Get new access and refresh tokens."""
-        data = {"grant_type": "refresh_token", "refresh_token": refresh_token}
-        headers = {"content-type": "application/x-www-form-urlencoded"}
-        response = self._request(
-            "post",
-            "/oauth/token",
-            headers=headers,
-            data=data,
-        )
-        # Return new refresh_token if issued, keep current token if no new token
-        # issued. New refresh_token issued if refresh token rotation activated on
-        # Auth0 backend.
-        self._access_token, self._refresh_token = (
-            response["access_token"],
-            response.get("refresh_token", refresh_token),
-        )
-        if self._tokens_set_from_file:
-            # If tokens were originally set from a credentials file then update that
-            # file with the new values
-            self.write_tokens_to_credentials_file(
-                self._access_token, self._refresh_token, profile=self._profile
-            )
-        return self._access_token, self._refresh_token
-
-    def _expired_access_token(self, jwt: str) -> bool:
-        """Checks expiration of JWT (access token)"""
-        payload = self._decode_access_token(jwt)
-        return payload["exp"] <= (
-            int(time()) + self._settings.chemcloud_access_token_expiration_buffer
-        )
-
-    @staticmethod
-    def _decode_access_token(jwt: str) -> dict[str, Any]:
-        """Decode jwt string and return dictionary of payload claims."""
-        payload = jwt.split(".")[1]
-        encoded_payload = payload.encode("ascii")
-
-        # Helper section taken from python-jose.utils.base64url_decode
-        rem = len(encoded_payload) % 4
-
-        if rem > 0:
-            encoded_payload += b"=" * (4 - rem)
-
-        json_string = urlsafe_b64decode(encoded_payload).decode("utf-8")
-        return json.loads(json_string)
-
-    def _result_id_to_future_result(self, input_data, result_id):
-        if isinstance(input_data, list) and len(input_data) > 1:
-            return FutureOutputGroup(task_id=result_id, client=self)
-        return FutureOutput(task_id=result_id, client=self)
-
-    def compute(
-        self,
-        inp_obj: QCIOInputsOrList,
-        params: Optional[dict[str, Any]] = None,
-    ) -> Union[FutureOutput, FutureOutputGroup]:
-        """Submit a computation to ChemCloud"""
-        result_id = self._authenticated_request(
-            "post",
-            "/compute",
-            data=json_dumps(inp_obj),  # type: ignore
-            params=params or {},
-        )
-        return self._result_id_to_future_result(inp_obj, result_id)
-
-    def output(
-        self,
-        task_id: str,
-    ) -> tuple[str, Union[Optional[Any], Optional[list[Any]]]]:
-        """Check the output of a compute job, returns status and output (if available).
-
-        Parameters:
-            result_id: The ID of the result.
-
-        Endpoint returns:
-            class TaskResult(BaseModel):
-                compute_status: TaskStatus (str)
-                result: Optional[Union[PossibleResults, List[PossibleResults]]] = None
-        """
-        response = self._authenticated_request("get", f"/compute/output/{task_id}")
-
-        return response["status"], response["program_output"]
-
-    def hello_world(self, name: Optional[str] = None):
-        """Ping hello-world endpoint on ChemCloud"""
-        return self._request(
-            "get", "/hello-world", params={"name": name}, api_call=False
-        )

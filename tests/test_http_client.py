@@ -1,26 +1,19 @@
-import json
-import re
 import sys
 from pathlib import Path
+
+import pytest
 
 if sys.version_info >= (3, 11):
     import tomllib
 else:
     import tomli as tomllib
-from pytest_httpx import HTTPXMock
-from qcio import Model, ProgramInput, ProgramOutput
 
 from chemcloud.config import Settings
-from chemcloud.http_client import _RequestsClient
-from chemcloud.models import (
-    GROUP_ID_PREFIX,
-    FutureOutput,
-    FutureOutputGroup,
-    TaskStatus,
-)
+from chemcloud.http_client import _HttpClient
 
 
-def test_passing_username_password_are_prioritized_for_auth(
+@pytest.mark.asyncio
+async def test_passing_username_password_are_prioritized_for_auth(
     mocker, monkeypatch, settings, credentials_file, patch_token_endpoint, jwt
 ):
     # Set environment variables
@@ -31,24 +24,25 @@ def test_passing_username_password_are_prioritized_for_auth(
     refresh_token = "credentials_file_refresh_token"
     credentials_file(jwt, refresh_token)
 
-    spy = mocker.spy(_RequestsClient, "_tokens_from_username_password")
+    spy = mocker.spy(_HttpClient, "_tokens_from_username_password")
 
     # Instantiate client
     passed_username = "passed_username"
     passed_password = "passed_password"  # pragma: allowlist secret
-    client = _RequestsClient(
+    client = _HttpClient(
         chemcloud_username=passed_username,
         chemcloud_password=passed_password,
         settings=settings,
     )
-    client._set_tokens()
+    await client._set_tokens()
 
     spy.assert_called_once_with(client, passed_username, passed_password)
     assert client._access_token == patch_token_endpoint["access_token"]
     assert client._refresh_token == patch_token_endpoint["refresh_token"]
 
 
-def test_environment_variables_used_for_auth_if_no_passed_values(
+@pytest.mark.asyncio
+async def test_environment_variables_used_for_auth_if_no_passed_values(
     monkeypatch, credentials_file, settings, mocker, patch_token_endpoint, jwt
 ):
     # Set environment variables
@@ -61,25 +55,26 @@ def test_environment_variables_used_for_auth_if_no_passed_values(
     refresh_token = "credentials_file_refresh_token"
     credentials_file(jwt, refresh_token)
 
-    spy = mocker.spy(_RequestsClient, "_tokens_from_username_password")
+    spy = mocker.spy(_HttpClient, "_tokens_from_username_password")
 
     settings_with_patched_envars = Settings(
         chemcloud_base_directory=settings.chemcloud_base_directory
     )
 
     # Instantiate client
-    client = _RequestsClient(
+    client = _HttpClient(
         settings=settings_with_patched_envars,
     )
 
-    client._set_tokens()
+    await client._set_tokens()
 
     spy.assert_called_once_with(client, env_username, env_password)
     assert client._access_token == patch_token_endpoint["access_token"]
     assert client._refresh_token == patch_token_endpoint["refresh_token"]
 
 
-def test_credentials_file_used_for_auth_if_no_passed_values_or_envvars(
+@pytest.mark.asyncio
+async def test_credentials_file_used_for_auth_if_no_passed_values_or_envvars(
     settings, credentials_file, jwt
 ):
     # Create Credentials file
@@ -88,14 +83,15 @@ def test_credentials_file_used_for_auth_if_no_passed_values_or_envvars(
     credentials_file(jwt, refresh_token)
 
     # Instantiate client
-    client = _RequestsClient(settings=settings)
-    client._set_tokens()
+    client = _HttpClient(settings=settings)
+    await client._set_tokens()
 
     assert client._access_token == jwt
     assert client._refresh_token == refresh_token
 
 
-def test_username_pwd_requested_if_no_credentials_available_to_create_credentials_file(
+@pytest.mark.asyncio
+async def test_username_pwd_requested_if_no_credentials_available_to_create_credentials_file(
     settings, monkeypatch, patch_token_endpoint, mocker
 ):
     # Hack using "no" for username since this will also return "no" for configuring
@@ -106,10 +102,10 @@ def test_username_pwd_requested_if_no_credentials_available_to_create_credential
     monkeypatch.setattr("builtins.input", lambda _: username)
     monkeypatch.setattr("chemcloud.http_client.getpass", lambda x: password)
 
-    spy = mocker.spy(_RequestsClient, "_tokens_from_username_password")
+    spy = mocker.spy(_HttpClient, "_tokens_from_username_password")
 
-    client = _RequestsClient(settings=settings)
-    client._set_tokens()
+    client = _HttpClient(settings=settings)
+    await client._set_tokens()
 
     spy.assert_called_once_with(client, username, password)
     assert client._access_token == patch_token_endpoint["access_token"]
@@ -124,7 +120,7 @@ def test_username_pwd_requested_if_no_credentials_available_to_create_credential
 
 
 def test_write_tokens_to_credentials_file(settings):
-    client = _RequestsClient(settings=settings)
+    client = _HttpClient(settings=settings)
     credentials_file = (
         Path(settings.chemcloud_base_directory) / settings.chemcloud_credentials_file
     )
@@ -155,7 +151,7 @@ def test_write_tokens_to_credentials_file(settings):
 def test_write_tokens_to_credentials_file_adds_new_profiles_to_credentials_file(
     settings,
 ):
-    client = _RequestsClient(settings=settings)
+    client = _HttpClient(settings=settings)
     credentials_file = (
         Path(settings.chemcloud_base_directory) / settings.chemcloud_credentials_file
     )
@@ -211,7 +207,7 @@ def test_write_tokens_to_credentials_file_adds_new_profiles_to_credentials_file(
 def test_write_tokens_to_credentials_file_overwrites_tokens_of_existing_profiles(
     settings,
 ):
-    client = _RequestsClient(settings=settings)
+    client = _HttpClient(settings=settings)
     credentials_file = (
         Path(settings.chemcloud_base_directory) / settings.chemcloud_credentials_file
     )
@@ -258,19 +254,20 @@ def test_write_tokens_to_credentials_file_overwrites_tokens_of_existing_profiles
     )
 
 
-def test__set_tokens_removes_username_password_from_attributes(
+@pytest.mark.asyncio
+async def test__set_tokens_removes_username_password_from_attributes(
     settings, patch_token_endpoint
 ):
     username = "username"
     password = "super_secret"  # pragma: allowlist secret
 
-    client = _RequestsClient(
+    client = _HttpClient(
         settings=settings, chemcloud_username=username, chemcloud_password=password
     )
     assert client._chemcloud_username == username
     assert client._chemcloud_password == password
 
-    client._set_tokens()
+    await client._set_tokens()
 
     assert client._chemcloud_username is None
     assert client._chemcloud_password is None
@@ -279,24 +276,26 @@ def test__set_tokens_removes_username_password_from_attributes(
     assert client._refresh_token == patch_token_endpoint["refresh_token"]
 
 
-def test__refresh_tokens_called_if_access_token_expired(
+@pytest.mark.asyncio
+async def test__refresh_tokens_called_if_access_token_expired(
     settings, patch_token_endpoint, mocker, expired_jwt
 ):
     original_refresh_token = "og_refresh_token"
-    client = _RequestsClient(settings=settings)
+    client = _HttpClient(settings=settings)
     client._access_token = expired_jwt
     client._refresh_token = original_refresh_token
 
-    spy = mocker.spy(_RequestsClient, "_refresh_tokens")
+    spy = mocker.spy(_HttpClient, "_refresh_tokens")
 
-    client._get_access_token()
+    await client.get_access_token()
 
     spy.assert_called_once_with(client, original_refresh_token)
     assert client._access_token == patch_token_endpoint["access_token"]
     assert client._refresh_token == patch_token_endpoint["refresh_token"]
 
 
-def test__refresh_tokens_writes_to_credentials_file_only_if_flag_set(
+@pytest.mark.asyncio
+async def test__refresh_tokens_writes_to_credentials_file_only_if_flag_set(
     settings, patch_token_endpoint, expired_jwt
 ):
     original_refresh_token = "my_refresh_token"
@@ -306,18 +305,18 @@ def test__refresh_tokens_writes_to_credentials_file_only_if_flag_set(
     )
     assert not credentials_file.is_file()
 
-    client = _RequestsClient(settings=settings)
+    client = _HttpClient(settings=settings)
     client._access_token = expired_jwt
     client._refresh_token = original_refresh_token
 
-    client._refresh_tokens(original_refresh_token)
+    await client._refresh_tokens(original_refresh_token)
 
     assert client._access_token == patch_token_endpoint["access_token"]
     assert client._refresh_token == patch_token_endpoint["refresh_token"]
     assert not credentials_file.is_file()
 
     client._tokens_set_from_file = True
-    client._refresh_tokens(original_refresh_token)
+    await client._refresh_tokens(original_refresh_token)
     assert credentials_file.is_file()
 
     with open(credentials_file, "rb") as f:
@@ -333,16 +332,19 @@ def test__refresh_tokens_writes_to_credentials_file_only_if_flag_set(
     )
 
 
-def test__refresh_tokens_not_called_if_access_token_not_expired(settings, mocker, jwt):
+@pytest.mark.asyncio
+async def test__refresh_tokens_not_called_if_access_token_not_expired(
+    settings, mocker, jwt
+):
     original_refresh_token = "og_refresh_token"
 
-    client = _RequestsClient(settings=settings)
+    client = _HttpClient(settings=settings)
     client._access_token = jwt
     client._refresh_token = original_refresh_token
 
-    spy = mocker.spy(_RequestsClient, "_refresh_tokens")
+    spy = mocker.spy(_HttpClient, "_refresh_tokens")
 
-    access_token = client._get_access_token()
+    access_token = await client.get_access_token()
 
     spy.assert_not_called()
     assert access_token == jwt
@@ -350,84 +352,22 @@ def test__refresh_tokens_not_called_if_access_token_not_expired(settings, mocker
     assert client._refresh_token == original_refresh_token
 
 
-def test__set_tokens_called_if_access_token_expired_and_no_refresh_token_set(
+@pytest.mark.asyncio
+async def test__set_tokens_called_if_access_token_expired_and_no_refresh_token_set(
     settings, mocker, expired_jwt
 ):
-    client = _RequestsClient(settings=settings)
+    client = _HttpClient(settings=settings)
     client._access_token = expired_jwt
 
-    mocked = mocker.patch.object(_RequestsClient, "_set_tokens", autospec=True)
+    mocked = mocker.patch.object(_HttpClient, "_set_tokens", autospec=True)
 
-    client._get_access_token()
+    await client.get_access_token()
 
     mocked.assert_called_once()
 
 
-def test_compute(settings, patch_compute_endpoints, water, jwt):
-    client = _RequestsClient(settings=settings)
-    client._access_token = jwt
-
-    Model(method="B3LYP", basis="6-31g")
-    atomic_input = ProgramInput(
-        structure=water, model={"method": "b3lyp", "basis": "6-31g"}, calctype="energy"
-    )
-
-    future_result = client.compute(atomic_input, {"program": "psi4"})
-    assert isinstance(future_result, FutureOutput)
-    assert future_result.task_id == patch_compute_endpoints
-    assert future_result.client is client
-
-
-def test_compute_batch(settings, patch_compute_endpoints, water, jwt):
-    client = _RequestsClient(settings=settings)
-    client._access_token = jwt
-
-    model = Model(method="B3LYP", basis="6-31g")
-    atomic_input = ProgramInput(structure=water, model=model, calctype="energy")
-
-    future_result = client.compute([atomic_input, atomic_input], {"program": "psi4"})
-
-    assert isinstance(future_result, FutureOutputGroup)
-    assert future_result.task_id == f"{GROUP_ID_PREFIX}{patch_compute_endpoints}"
-    assert future_result.client is client
-
-
-def test_result_pending(settings, jwt, httpx_mock: HTTPXMock):
-    client = _RequestsClient(settings=settings)
-    client._access_token = jwt
-
-    httpx_mock.add_response(json={"status": "PENDING", "program_output": None})
-
-    status, result = client.output("fake_id")
-
-    assert status == TaskStatus.PENDING
-    assert result is None
-
-
-def test_result_success(settings, jwt, httpx_mock: HTTPXMock):
-    client = _RequestsClient(settings=settings)
-    client._access_token = jwt
-    prog_output: ProgramOutput = ProgramOutput.model_validate_json(
-        (Path(__file__).parent / "water.b3lyp.6-31g.energy.json").read_text()
-    )
-    url = re.compile(".*/compute/output")
-    httpx_mock.add_response(
-        url=url,
-        json={
-            "status": "SUCCESS",
-            "program_output": json.loads(prog_output.model_dump_json()),
-        },
-    )
-
-    status, result = client.output("fake_id")
-
-    assert status == "SUCCESS"
-    # Being laze on this type: ignore. Investigate more later...
-    assert isinstance(ProgramOutput(**result), ProgramOutput)  # type: ignore
-
-
 def test__decode_access_token():
-    client = _RequestsClient()
+    client = _HttpClient()
 
     jwt = (Path(__file__).resolve().parent / "jwt.txt").read_text()
 
@@ -447,16 +387,17 @@ def test__decode_access_token():
     assert decoded_payload == known_payload
 
 
-def test__set_tokens_gets_new_access_token_if_credentials_file_expired(
+@pytest.mark.asyncio
+async def test__set_tokens_gets_new_access_token_if_credentials_file_expired(
     credentials_file, expired_jwt, settings, mocker, patch_token_endpoint
 ):
     refresh_token = "credentials_file_refresh_token"
     credentials_file(expired_jwt, refresh_token)
-    client = _RequestsClient(settings=settings)
+    client = _HttpClient(settings=settings)
 
-    spy = mocker.spy(_RequestsClient, "_refresh_tokens")
+    spy = mocker.spy(_HttpClient, "_refresh_tokens")
 
-    client._set_tokens()
+    await client._set_tokens()
     spy.assert_called_once_with(client, refresh_token)
     assert client._access_token == patch_token_endpoint["access_token"]
     assert client._refresh_token == patch_token_endpoint["refresh_token"]

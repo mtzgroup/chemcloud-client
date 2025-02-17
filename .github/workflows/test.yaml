@@ -2,12 +2,15 @@ name: Tests
 
 on: [push]
 
+env:
+  POETRY_VIRTUALENVS_CREATE: false
+
 jobs:
   tests:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.9", "3.12"]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v4
@@ -16,10 +19,14 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install poetry
         run: pip install poetry
-      - name: Install repo
+      - name: Install repo and dependencies via Poetry
         run: poetry install --no-interaction --no-ansi
+      - name: Build distribution
+        run: poetry build --format wheel --no-interaction --no-ansi
+      - name: Install built wheel via pip over poetry install
+        run: pip install dist/*.whl
       - name: Run tests
-        run: bash scripts/tests.sh
+        run: pytest --cov-report=term-missing --cov-report html:htmlcov --cov-config=pyproject.toml --cov=chemcloud --cov=tests .
       - name: Upload coverage HTML
         if: ${{ matrix.python-version == '3.9' }}
         uses: actions/upload-artifact@v4

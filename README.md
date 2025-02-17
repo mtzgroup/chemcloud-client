@@ -7,7 +7,7 @@
 
 # chemcloud - A Python Client for ChemCloud
 
-`chemcloud` is a python client for the [ChemCloud Server](https://github.com/mtzgroup/chemcloud-server). The client provides a simple yet powerful interface to perform computational chemistry calculations using nothing but modern Python and an internet connection.
+`chemcloud` is a python client for the [ChemCloud Server](https://github.com/mtzgroup/chemcloud-server). The client provides a simple yet powerful interface to perform computational chemistry calculations at scale using nothing but modern Python and an internet connection.
 
 **Documentation**: <https://mtzgroup.github.io/chemcloud-client>
 
@@ -29,30 +29,11 @@ pip install chemcloud
 
 ## Quickstart
 
-- Create a ChemCloud account at [https://chemcloud.mtzlab.com/signup](https://chemcloud.mtzlab.com/signup) (or the address of the ChemCloud Server you want to communicate with).
-- Instantiate a client
-- Configure client (only required the very first time you use `CCClient`)
-
-```python
-from chemcloud import CCClient
-
-client = CCClient()
-client.configure() # only run this the very first time you use CCClient
-# See supported compute engines on the ChemCloud Server
-client.supported_engines
-['psi4', 'terachem', ...]
-# Test connection to ChemCloud
-client.hello_world("Colton")
-'Welcome to ChemCloud, Colton'
-```
-
-- Run calculations just like you would with `qcop` except calling `client.compute` instead of `qcop.compute`. Rather than getting back an `Output` object directly, `client.compute` returns a `FutureOutput` object which can be used to get the output of the computation once it is complete.
+Run calculations just like you would with `qcop` except calling `chemcloud.compute` instead of `qcop.compute`. You may also pass list of inputs to `chemcloud.compute` to run calculations in parallel. By default `chemcloud.compute` will return `ProgramOutput` objects for all calculations, even those that failed, rather than raising exceptions. Check if calculations were successful by accessing `output.success`.
 
 ```python
 from qcio import Structure, ProgramInput
-from chemcloud import CCClient
-
-client = CCClient()
+from chemcloud import compute
 
 # Create the structure
 h2o = Structure.open("h2o.xyz")
@@ -66,11 +47,7 @@ prog_input = ProgramInput(
 )
 
 # Submit the calculation to the server
-future_output = client.compute("terachem", prog_input, collect_files=True)
-# Status can be checked at any time
-future_result.status
-# Get the output (blocking)
-output = future_output.get()
+output = compute("terachem", prog_input)
 
 # Inspect the output
 output.input_data # Input data used by the QC program
@@ -85,9 +62,40 @@ output.traceback # Stack trace if calculation failed
 output.ptraceback # Shortcut to print out the traceback in human readable format
 ```
 
+Pass thousands of inputs simultaneously:
+
+```python
+prog_inputs = [prog_input] * 1000
+outputs = compute("terachem", prog_inputs)
+
+for output in outputs:
+    # Handle each output
+```
+
+If you want to use a non-blocking API, pass `return_future=True` to `compute`. Calling `.get()` on the future will return a `ProgramOutput` or list of `ProgramOutput` once the calculations are complete.
+
+```python
+# Submit the calculation to the server
+future = compute("terachem", prog_input, return_future=True)
+# Check the status of calculations
+future.is_ready
+# Block and retrieve results
+output = future.get()
+```
+
+Or stream results from the server as they complete:
+
+```python
+prog_inputs = [prog_input] * 1000
+# Submit the calculation to the server
+future = compute("terachem", prog_inputs, return_future=True)
+for output in future.as_completed():
+    # Process outputs
+```
+
 ## Examples
 
-Examples of various computations can be found in the [examples directory](https://github.com/mtzgroup/chemcloud-client/tree/main/examples).
+More examples can be found in the [examples directory](https://github.com/mtzgroup/chemcloud-client/tree/main/examples).
 
 ## ✨ Visualization ✨
 

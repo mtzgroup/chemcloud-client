@@ -6,6 +6,31 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
+### Added
+
+- High level `compute()` interface for doing calculations without needing to first instantiate a client.
+- More complete `TaskStatus` enum.
+- Parallel task submission and retrieval with ChemCloud server via asynchronous coroutines.
+- `asyncio.Lock()` to auth requests so that token refreshes are not duplicated by multiple coroutines.
+- `.save()` and `.open()` methods to FutureOutput to serialize to/from disk.
+
+### Changed
+
+- Refactored `CCClient`, `_RequestsClient` and `FutureOutput` to have cleaner interface and more clearly defined roles.
+- `CCClient.configure()` renamed to `.setup_profile()` to improve clarity and reserve the term `configure` for the new `configure_client` function.
+- `compute()` and `client.compute()` are now synchronous by default. If end users want to run calculations asynchronously and have a future object returned pass `return_future=True`.
+- `_RequestsClient` is entirely `async` now with a `.run_parallel_requests()` method that can be used for synchronous tasks.
+- Lists of `ProgramInput` objects submitted to `CCClient.compute()` are now submitted individually (and concurrently) rather than as a batched, single request. This will prevent the server from having to retrieve large batch calculations which occasionally fills server memory and crashes it.
+- `_HTTPClient` and updated requests methods to reuse these clients across requests rather than creating a new connection for each request. This enables connection pooling and reuse of `TCP/SSL` connections, greatly speeding up requests and lowering server load.
+- Refactored and renamed methods on `_HTTPClient` for clarity and maintainability.
+- Updated documentation to use new `compute()` API instead of instantiating a `client`.
+
+### Removed
+
+- `TaskStatus.complete`. `TaskStatus` has been expanded to mirror celery's states.
+- `FutureOutputGroup` in favor of a single `FutureResult` object that can handle both single tasks and arrays of tasks.
+- Convenience types defined in `models`.
+
 ## [0.12.5] - 2025-02-12
 
 ### Fixed
