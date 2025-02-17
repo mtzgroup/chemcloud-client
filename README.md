@@ -1,9 +1,9 @@
-[![image](https://img.shields.io/pypi/v/chemcloud.svg)](https://pypi.python.org/pypi/chemcloud)
-[![image](https://img.shields.io/pypi/l/chemcloud.svg)](https://pypi.python.org/pypi/chemcloud)
+[![Actions status](https://github.com/mtzgroup/chemcloud-client/workflows/Tests/badge.svg)](https://github.com/mtzgroup/chemcloud-client/actions/workflows/test.yaml)
+[![image](https://img.shields.io/pypi/v/chemcloud.svg?color=%2334D058&label=pypi%20package)](https://pypi.python.org/pypi/chemcloud)
 [![image](https://img.shields.io/pypi/pyversions/chemcloud.svg)](https://pypi.python.org/pypi/chemcloud)
-[![Actions status](https://github.com/mtzgroup/chemcloud-client/workflows/Tests/badge.svg)](https://github.com/mtzgroup/chemcloud-client/actions)
-[![Actions status](https://github.com/mtzgroup/chemcloud-client/workflows/Basic%20Code%20Quality/badge.svg)](https://github.com/mtzgroup/chemcloud-client/actions)
-[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v1.json)](https://github.com/charliermarsh/ruff)
+[![downloads](https://static.pepy.tech/badge/chemcloud/month)](https://pepy.tech/project/chemcloud)
+[![Actions status](https://github.com/mtzgroup/chemcloud-client/workflows/Basic%20Code%20Quality/badge.svg)](https://github.com/mtzgroup/chemcloud-client/actions/workflows/basic-code-quality.yaml)
+[![image](https://img.shields.io/pypi/l/chemcloud.svg?color=%2334D058)](https://pypi.python.org/pypi/chemcloud)
 
 # chemcloud - A Python Client for ChemCloud
 
