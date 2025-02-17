@@ -16,7 +16,7 @@
         <link rel="prev" href="../batch-computations/">
       
       
-        <link rel="next" href="../../code-reference/CCClient/">
+        <link rel="next" href="../../code-reference/Main%20Methods/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -262,7 +262,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../code-reference/CCClient/" class="md-tabs__link">
+        <a href="../../code-reference/Main%20Methods/" class="md-tabs__link">
           
   
   Code Reference
@@ -569,18 +569,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#hessian" class="md-nav__link">
+  <a href="#parallel-hessian-frequency-analysis" class="md-nav__link">
     <span class="md-ellipsis">
-      Hessian
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#frequency-analysis" class="md-nav__link">
-    <span class="md-ellipsis">
-      Frequency Analysis
+      Parallel Hessian &amp; Frequency Analysis
     </span>
   </a>
   
@@ -650,6 +641,28 @@
   
   
     <li class="md-nav__item">
+      <a href="../../code-reference/Main%20Methods/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Main Methods
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../code-reference/CCClient/" class="md-nav__link">
         
   
@@ -672,11 +685,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-reference/FutureOutputs/" class="md-nav__link">
+      <a href="../../code-reference/FutureOutput/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    FutureOutputs
+    FutureOutput
     
   </span>
   
@@ -716,11 +729,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-reference/ProgramOutputs/" class="md-nav__link">
+      <a href="../../code-reference/ProgramOutput/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    ProgramOutputs
+    ProgramOutput
     
   </span>
   
@@ -810,18 +823,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#hessian" class="md-nav__link">
+  <a href="#parallel-hessian-frequency-analysis" class="md-nav__link">
     <span class="md-ellipsis">
-      Hessian
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#frequency-analysis" class="md-nav__link">
-    <span class="md-ellipsis">
-      Frequency Analysis
+      Parallel Hessian &amp; Frequency Analysis
     </span>
   </a>
   
@@ -848,10 +852,10 @@
 
 <h1 id="bigchem-algorithms">BigChem Algorithms<a class="headerlink" href="#bigchem-algorithms" title="Permanent link">&para;</a></h1>
 <p>BigChem implements some of its own concurrent algorithms that leverage its horizontally scalable backend infrastructure. These include a parallel hessian algorithm and parallel frequency analysis algorithm. To use them submit a <code>hessian</code> calculation to ChemCloud using <code>bigchem</code> as the engine. See examples the <code>parallel_hessian.py</code> and <code>parallel_frequency_analysis.py</code> scripts in the <a href="https://github.com/mtzgroup/chemcloud-client/tree/main/examples">examples directory</a>.</p>
-<h2 id="hessian">Hessian<a class="headerlink" href="#hessian" title="Permanent link">&para;</a></h2>
-<div class="language-python highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">qcio</span><span class="w"> </span><span class="kn">import</span> <span class="n">DualProgramInput</span><span class="p">,</span> <span class="n">ProgramOutput</span><span class="p">,</span> <span class="n">Structure</span>
+<h2 id="parallel-hessian-frequency-analysis">Parallel Hessian &amp; Frequency Analysis<a class="headerlink" href="#parallel-hessian-frequency-analysis" title="Permanent link">&para;</a></h2>
+<div class="language-python highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">qcio</span><span class="w"> </span><span class="kn">import</span> <span class="n">DualProgramInput</span><span class="p">,</span> <span class="n">Structure</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">chemcloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">CCClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemcloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute</span>
 
 <span class="n">water</span> <span class="o">=</span> <span class="n">Structure</span><span class="p">(</span>
     <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">],</span>
@@ -862,7 +866,6 @@
     <span class="p">],</span>
 <span class="p">)</span>
 
-<span class="n">client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">()</span>
 
 <span class="n">prog_inp</span> <span class="o">=</span> <span class="n">DualProgramInput</span><span class="p">(</span>
     <span class="n">structure</span><span class="o">=</span><span class="n">water</span><span class="p">,</span>
@@ -873,50 +876,15 @@
 
 
 <span class="c1"># Submit calculation</span>
-<span class="n">future_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="s2">&quot;bigchem&quot;</span><span class="p">,</span> <span class="n">prog_inp</span><span class="p">)</span>
-<span class="n">prog_output</span><span class="p">:</span> <span class="n">ProgramOutput</span> <span class="o">=</span> <span class="n">future_result</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">compute</span><span class="p">(</span><span class="s2">&quot;bigchem&quot;</span><span class="p">,</span> <span class="n">prog_inp</span><span class="p">)</span>
 
 <span class="c1"># ProgramOutput object containing all returned data</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">prog_output</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">prog_output</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">hessian</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">hessian</span><span class="p">)</span>
 <span class="c1"># Frequency data always included too</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Wavenumbers: </span><span class="si">{</span><span class="n">prog_output</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">freqs_wavenumber</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">prog_output</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">normal_modes_cartesian</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">prog_output</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">gibbs_free_energy</span><span class="p">)</span>
-</code></pre></div>
-<h2 id="frequency-analysis">Frequency Analysis<a class="headerlink" href="#frequency-analysis" title="Permanent link">&para;</a></h2>
-<div class="language-python highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">qcio</span><span class="w"> </span><span class="kn">import</span> <span class="n">DualProgramInput</span><span class="p">,</span> <span class="n">ProgramOutput</span><span class="p">,</span> <span class="n">Structure</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">chemcloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">CCClient</span>
-
-<span class="n">water</span> <span class="o">=</span> <span class="n">Structure</span><span class="p">(</span>
-    <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">],</span>
-    <span class="n">geometry</span><span class="o">=</span><span class="p">[</span>
-        <span class="p">[</span><span class="mf">0.0000</span><span class="p">,</span> <span class="mf">0.00000</span><span class="p">,</span> <span class="mf">0.0000</span><span class="p">],</span>
-        <span class="p">[</span><span class="mf">0.2774</span><span class="p">,</span> <span class="mf">0.89290</span><span class="p">,</span> <span class="mf">0.2544</span><span class="p">],</span>
-        <span class="p">[</span><span class="mf">0.6067</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.23830</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.7169</span><span class="p">],</span>
-    <span class="p">],</span>
-<span class="p">)</span>
-
-<span class="n">client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">()</span>
-
-<span class="n">prog_inp</span> <span class="o">=</span> <span class="n">DualProgramInput</span><span class="p">(</span>
-    <span class="n">structure</span><span class="o">=</span><span class="n">water</span><span class="p">,</span>
-    <span class="n">calctype</span><span class="o">=</span><span class="s2">&quot;hessian&quot;</span><span class="p">,</span>
-    <span class="n">subprogram</span><span class="o">=</span><span class="s2">&quot;psi4&quot;</span><span class="p">,</span>
-    <span class="n">subprogram_args</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;b3lyp&quot;</span><span class="p">,</span> <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="s2">&quot;6-31g&quot;</span><span class="p">}},</span>
-<span class="p">)</span>
-
-
-<span class="c1"># Submit calculation</span>
-<span class="n">future_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="s2">&quot;bigchem&quot;</span><span class="p">,</span> <span class="n">prog_inp</span><span class="p">)</span>
-<span class="n">prog_output</span><span class="p">:</span> <span class="n">ProgramOutput</span> <span class="o">=</span> <span class="n">future_result</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-
-<span class="c1"># ProgramOutput object containing all returned data</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">prog_output</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Wavenumbers: </span><span class="si">{</span><span class="n">prog_output</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">freqs_wavenumber</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">prog_output</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">normal_modes_cartesian</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">prog_output</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">gibbs_free_energy</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Wavenumbers: </span><span class="si">{</span><span class="n">output</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">freqs_wavenumber</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">normal_modes_cartesian</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">gibbs_free_energy</span><span class="p">)</span>
 </code></pre></div>
 <p>Keywords for the BigChem algorithms:</p>
 <table>

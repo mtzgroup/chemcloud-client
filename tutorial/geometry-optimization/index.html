@@ -262,7 +262,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../code-reference/CCClient/" class="md-tabs__link">
+        <a href="../../code-reference/Main%20Methods/" class="md-tabs__link">
           
   
   Code Reference
@@ -664,6 +664,28 @@
   
   
     <li class="md-nav__item">
+      <a href="../../code-reference/Main%20Methods/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Main Methods
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../code-reference/CCClient/" class="md-nav__link">
         
   
@@ -686,11 +708,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-reference/FutureOutputs/" class="md-nav__link">
+      <a href="../../code-reference/FutureOutput/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    FutureOutputs
+    FutureOutput
     
   </span>
   
@@ -730,11 +752,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-reference/ProgramOutputs/" class="md-nav__link">
+      <a href="../../code-reference/ProgramOutput/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    ProgramOutputs
+    ProgramOutput
     
   </span>
   
@@ -879,9 +901,9 @@
   <h1>Geometry optimization</h1>
 
 <h2 id="basic-working-example">Basic Working Example<a class="headerlink" href="#basic-working-example" title="Permanent link">&para;</a></h2>
-<div class="language-python highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">qcio</span><span class="w"> </span><span class="kn">import</span> <span class="n">DualProgramInput</span><span class="p">,</span> <span class="n">OptimizationOutput</span><span class="p">,</span> <span class="n">Structure</span>
+<div class="language-python highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">qcio</span><span class="w"> </span><span class="kn">import</span> <span class="n">DualProgramInput</span><span class="p">,</span> <span class="n">Structure</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">chemcloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">CCClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemcloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute</span>
 
 <span class="n">water</span> <span class="o">=</span> <span class="n">Structure</span><span class="p">(</span>
     <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">],</span>
@@ -892,7 +914,6 @@
     <span class="p">],</span>
 <span class="p">)</span>
 
-<span class="n">client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">()</span>
 
 <span class="n">prog_inp</span> <span class="o">=</span> <span class="n">DualProgramInput</span><span class="p">(</span>
     <span class="n">structure</span><span class="o">=</span><span class="n">water</span><span class="p">,</span>
@@ -904,8 +925,7 @@
 
 
 <span class="c1"># Submit calculation</span>
-<span class="n">future_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="s2">&quot;geometric&quot;</span><span class="p">,</span> <span class="n">prog_inp</span><span class="p">)</span>
-<span class="n">output</span><span class="p">:</span> <span class="n">OptimizationOutput</span> <span class="o">=</span> <span class="n">future_result</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">compute</span><span class="p">(</span><span class="s2">&quot;geometric&quot;</span><span class="p">,</span> <span class="n">prog_inp</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="n">output</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Optimization succeeded!&quot;</span><span class="p">)</span>
@@ -914,7 +934,7 @@
     <span class="c1"># The final structure of the geometry optimization</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">final_structure</span><span class="p">)</span>
     <span class="c1"># Initial structure</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">input_data</span><span class="o">.</span><span class="n">structure</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">structure</span><span class="p">)</span>
     <span class="c1"># A list of ordered AtomicResult objects for each step in the optimization</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">trajectory</span><span class="p">)</span>
     <span class="c1"># A list of ordered energies for each step in the optimization</span>
@@ -945,7 +965,7 @@
     <span class="n">subprogram_args</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;UFF&quot;</span><span class="p">}}</span> <span class="c1"># or any other force field</span>
 <span class="p">)</span>
 
-<span class="n">future_output</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="s2">&quot;geometric&quot;</span><span class="p">,</span> <span class="n">opt_input</span><span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="s2">&quot;geometric&quot;</span><span class="p">,</span> <span class="n">opt_input</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="berny-specifics">Berny Specifics<a class="headerlink" href="#berny-specifics" title="Permanent link">&para;</a></h2>
 <p>The <code>berny</code> procedure uses the <a href="https://github.com/jhrmnn/pyberny">pyberny</a> package to perform a geometry optimization. <code>berny</code> specific keywords are subject to change as the <code>berny</code> package evolves, but for simplicity a short list is included here with default values noted:</p>

@@ -262,7 +262,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../code-reference/CCClient/" class="md-tabs__link">
+        <a href="../../code-reference/Main%20Methods/" class="md-tabs__link">
           
   
   Code Reference
@@ -599,6 +599,28 @@
   
   
     <li class="md-nav__item">
+      <a href="../../code-reference/Main%20Methods/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Main Methods
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../code-reference/CCClient/" class="md-nav__link">
         
   
@@ -621,11 +643,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-reference/FutureOutputs/" class="md-nav__link">
+      <a href="../../code-reference/FutureOutput/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    FutureOutputs
+    FutureOutput
     
   </span>
   
@@ -665,11 +687,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-reference/ProgramOutputs/" class="md-nav__link">
+      <a href="../../code-reference/ProgramOutput/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    ProgramOutputs
+    ProgramOutput
     
   </span>
   
@@ -770,10 +792,10 @@
 
 
 <h1 id="batch-computations">Batch Computations<a class="headerlink" href="#batch-computations" title="Permanent link">&para;</a></h1>
-<p>Calculations can be submitted in bulk by passing a list of <code>Input</code> objects to <code>client.compute()</code> rather than a single object.</p>
+<p>Calculations can be submitted in bulk by passing a list of <code>Input</code> objects to <code>compute()</code> rather than a single object.</p>
 <div class="language-python highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">qcio</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProgramInput</span><span class="p">,</span> <span class="n">Structure</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">chemcloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">CCClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemcloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute</span>
 
 <span class="n">water</span> <span class="o">=</span> <span class="n">Structure</span><span class="p">(</span>
     <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">],</span>
@@ -784,18 +806,18 @@
     <span class="p">],</span>
 <span class="p">)</span>
 
-<span class="n">client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">()</span>
-
 <span class="n">prog_inp</span> <span class="o">=</span> <span class="n">ProgramInput</span><span class="p">(</span>
     <span class="n">structure</span><span class="o">=</span><span class="n">water</span><span class="p">,</span>
     <span class="n">model</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;b3lyp&quot;</span><span class="p">,</span> <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="s2">&quot;6-31g&quot;</span><span class="p">},</span>
     <span class="n">calctype</span><span class="o">=</span><span class="s2">&quot;energy&quot;</span><span class="p">,</span>
     <span class="n">keywords</span><span class="o">=</span><span class="p">{},</span>
 <span class="p">)</span>
-<span class="n">future_result</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="s2">&quot;psi4&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">prog_inp</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">prog_output</span> <span class="o">=</span> <span class="n">future_result</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-<span class="c1"># Array of ProgramOutput objects containing all returned data</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">prog_output</span><span class="p">)</span>
+<span class="c1"># output = compute(&quot;terachem&quot;, [prog_inp] * 2)</span>
+<span class="c1"># print(output)  # list of ProgramOutput objects</span>
+
+<span class="n">future</span> <span class="o">=</span> <span class="n">compute</span><span class="p">(</span><span class="s2">&quot;terachem&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">prog_inp</span><span class="p">]</span> <span class="o">*</span> <span class="mi">20</span><span class="p">,</span> <span class="n">return_future</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">output</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">future</span><span class="o">.</span><span class="n">as_completed</span><span class="p">()):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Task </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> completed with energy: </span><span class="si">{</span><span class="n">output</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">energy</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
 
 

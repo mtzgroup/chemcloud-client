@@ -262,7 +262,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../code-reference/CCClient/" class="md-tabs__link">
+        <a href="../../code-reference/Main%20Methods/" class="md-tabs__link">
           
   
   Code Reference
@@ -503,9 +503,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#clientconfigure-recommended-for-most-cases" class="md-nav__link">
+  <a href="#setup_profile-recommended-for-most-cases" class="md-nav__link">
     <span class="md-ellipsis">
-      client.configure() (recommended for most cases)
+      setup_profile() (recommended for most cases)
     </span>
   </a>
   
@@ -668,6 +668,28 @@
   
   
     <li class="md-nav__item">
+      <a href="../../code-reference/Main%20Methods/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Main Methods
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../code-reference/CCClient/" class="md-nav__link">
         
   
@@ -690,11 +712,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-reference/FutureOutputs/" class="md-nav__link">
+      <a href="../../code-reference/FutureOutput/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    FutureOutputs
+    FutureOutput
     
   </span>
   
@@ -734,11 +756,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-reference/ProgramOutputs/" class="md-nav__link">
+      <a href="../../code-reference/ProgramOutput/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    ProgramOutputs
+    ProgramOutput
     
   </span>
   
@@ -828,9 +850,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#clientconfigure-recommended-for-most-cases" class="md-nav__link">
+  <a href="#setup_profile-recommended-for-most-cases" class="md-nav__link">
     <span class="md-ellipsis">
-      client.configure() (recommended for most cases)
+      setup_profile() (recommended for most cases)
     </span>
   </a>
   
@@ -884,41 +906,60 @@
 
 <h1 id="authentication">Authentication<a class="headerlink" href="#authentication" title="Permanent link">&para;</a></h1>
 <p>Authentication is the process of supplying your credentials (usually a username and password) to <code>chemcloud</code> so that you can perform computations. <code>chemcloud</code> provides a few easy ways for you to authenticate. If you do not have a ChemCloud account you can get one for free here or at the address of the ChemCloud server you want to interact with: <a href="https://chemcloud.mtzlab.com/signup">https://chemcloud.mtzlab.com/signup</a></p>
-<h2 id="clientconfigure-recommended-for-most-cases"><code>client.configure()</code> (recommended for most cases)<a class="headerlink" href="#clientconfigure-recommended-for-most-cases" title="Permanent link">&para;</a></h2>
-<div class="language-python highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">chemcloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">CCClient</span>
-<span class="n">client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">()</span>
-<span class="n">client</span><span class="o">.</span><span class="n">configure</span><span class="p">()</span>
+<h2 id="setup_profile-recommended-for-most-cases"><code>setup_profile()</code> (recommended for most cases)<a class="headerlink" href="#setup_profile-recommended-for-most-cases" title="Permanent link">&para;</a></h2>
+<div class="language-python highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">chemcloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">setup_profile</span>
+<span class="n">setup_profile</span><span class="p">()</span> <span class="c1"># This will setup the default profile</span>
 <span class="err">✅</span> <span class="n">If</span> <span class="n">you</span> <span class="n">dont</span> <span class="n">get</span> <span class="n">have</span> <span class="n">an</span> <span class="n">account</span> <span class="n">please</span> <span class="n">signup</span> <span class="n">at</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">chemcloud</span><span class="o">.</span><span class="n">mtzlab</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">signup</span>
 <span class="n">Please</span> <span class="n">enter</span> <span class="n">your</span> <span class="n">ChemCloud</span> <span class="n">username</span><span class="p">:</span> <span class="n">your_username</span><span class="nd">@email</span><span class="o">.</span><span class="n">com</span>
 <span class="n">Please</span> <span class="n">enter</span> <span class="n">your</span> <span class="n">ChemCloud</span> <span class="n">password</span><span class="p">:</span>
 <span class="n">Authenticating</span><span class="o">...</span>
-<span class="s1">&#39;default&#39;</span> <span class="n">profile</span> <span class="n">configured</span><span class="err">!</span> <span class="n">Username</span><span class="o">/</span><span class="n">password</span> <span class="ow">not</span> <span class="n">required</span> <span class="k">for</span> <span class="n">future</span> <span class="n">use</span> <span class="n">of</span> <span class="n">CCClient</span>
+<span class="s1">&#39;default&#39;</span> <span class="n">profile</span> <span class="n">configured</span><span class="err">!</span> <span class="n">Username</span><span class="o">/</span><span class="n">password</span> <span class="ow">not</span> <span class="n">required</span> <span class="k">for</span> <span class="n">future</span> <span class="n">use</span><span class="o">.</span>
 </code></pre></div>
-<p>Performing this action will configure your local client by writing authentication tokens to <code>~/.chemcloud/credentials</code>. You will not need to execute <code>configure()</code> ever again. Under the hood <code>CCClient</code> will access your tokens, refresh them when necessary, and keep you logged in to ChemCloud. Note that this will write a file to your home directory with sensitive access tokens, so if you are on a shared computer or using a device where you would not want to write this information to disk do not use this option. If you would like to write the <code>credentials</code> file to a different directory than <code>~/.chemcloud</code>, set the <code>CHEMCLOUD_BASE_DIRECTORY</code> environment variable to the path of interest.</p>
-<p>You can configure multiple profiles in case you have multiple logins to ChemCloud by passing a profile name to <code>configure()</code>:</p>
-<div class="language-python highlight"><pre><span></span><code><span class="n">client</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="s1">&#39;mtz_lab&#39;</span><span class="p">)</span>
+<p>Performing this action will configure your local client by writing authentication tokens to <code>~/.chemcloud/credentials</code>. You will not need to run <code>setup_profile()</code> ever again. Under the hood <code>chemcloud</code> will access your tokens, refresh them when necessary, and keep you logged in to ChemCloud. Note that this will write a file to your home directory with sensitive access tokens, so if you are on a shared computer or using a device where you would not want to write this information to disk do not use this option. If you would like to write the <code>credentials</code> file to a different directory than <code>~/.chemcloud</code>, set the <code>CHEMCLOUD_BASE_DIRECTORY</code> environment variable to the path of interest.</p>
+<p>You can configure multiple profiles in case you have multiple logins to ChemCloud by passing a profile name to <code>setup_profile()</code>:</p>
+<div class="language-python highlight"><pre><span></span><code><span class="n">setup_profile</span><span class="p">(</span><span class="s1">&#39;mtz_lab&#39;</span><span class="p">)</span>
 <span class="err">✅</span> <span class="n">If</span> <span class="n">you</span> <span class="n">dont</span> <span class="n">get</span> <span class="n">have</span> <span class="n">an</span> <span class="n">account</span> <span class="n">please</span> <span class="n">signup</span> <span class="n">at</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">chemcloud</span><span class="o">.</span><span class="n">mtzlab</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">signup</span>
 <span class="n">Please</span> <span class="n">enter</span> <span class="n">your</span> <span class="n">ChemCloud</span> <span class="n">username</span><span class="p">:</span> <span class="n">your_username</span><span class="nd">@email</span><span class="o">.</span><span class="n">om</span>
 <span class="n">Please</span> <span class="n">enter</span> <span class="n">your</span> <span class="n">ChemCloud</span> <span class="n">password</span><span class="p">:</span>
 <span class="n">Authenticating</span><span class="o">...</span>
-<span class="s1">&#39;mtz_lab&#39;</span> <span class="n">profile</span> <span class="n">configured</span><span class="err">!</span> <span class="n">Username</span><span class="o">/</span><span class="n">password</span> <span class="ow">not</span> <span class="n">required</span> <span class="k">for</span> <span class="n">future</span> <span class="n">use</span> <span class="n">of</span> <span class="n">CCClient</span>
+<span class="s1">&#39;mtz_lab&#39;</span> <span class="n">profile</span> <span class="n">configured</span><span class="err">!</span> <span class="n">Username</span><span class="o">/</span><span class="n">password</span> <span class="ow">not</span> <span class="n">required</span> <span class="k">for</span> <span class="n">future</span> <span class="n">use</span><span class="o">.</span>
 </code></pre></div>
-<p>To use one of these profiles pass the profile option to your client instance. The "default" profile is used when no profile name is passed:</p>
+<p>To use a profile other than the default profile, do one of the following:</p>
+<ol>
+<li>Set the <code>chemcloud_credentials_profile</code> environment variable in your shell or in python.
+   <div class="language-sh highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">chemcloud_credentials_profile</span><span class="o">=</span><span class="s2">&quot;mtz_lab&quot;</span>
+</code></pre></div></li>
+<li>Run <code>configure_client</code> before running `compute() and pass the profile.
+   <div class="language-python highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">chemcloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">configure_client</span>
+<span class="n">configure_client</span><span class="p">(</span><span class="n">profile</span><span class="o">=</span><span class="s2">&quot;mtz_lab&quot;</span><span class="p">)</span>
+</code></pre></div></li>
+<li>Pass the profile option to a client instance and use the <code>client.compute()</code> method on it.</li>
+</ol>
 <div class="language-python highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">chemcloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">CCClient</span>
 <span class="c1"># Use default profile</span>
 <span class="n">client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">()</span>
 
 <span class="c1"># Use named profile</span>
 <span class="n">client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">(</span><span class="n">profile</span><span class="o">=</span><span class="s2">&quot;mtz_lab&quot;</span><span class="p">)</span>
+<span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="environment-variables">Environment Variables<a class="headerlink" href="#environment-variables" title="Permanent link">&para;</a></h2>
-<p>You can set your ChemCloud username and password in your environment and the <code>client</code> will find them automatically. Set <code>CHEMCLOUD_USERNAME</code> and <code>CHEMCLOUD_PASSWORD</code>. When you create a client it will find these values and maintain all access tokens in memory only.</p>
+<p>All variables on the <code>config.Settings</code> object can be set via environment variables and chemcloud will pick them up and use them automatically.</p>
+<p>Most commonly, users may want to modify one or many of the following:</p>
+<div class="language-sh highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">CHEMCLOUD_DOMAIN</span><span class="o">=</span>https://mycustomchemcloud.com
+<span class="nb">export</span><span class="w"> </span><span class="nv">CHEMCLOUD_QUEUE</span><span class="o">=</span>myqueue
+<span class="nb">export</span><span class="w"> </span><span class="nv">CHEMCLOUD_CREDENTIALS_PROFILE</span><span class="o">=</span>non-default-profile-name
+</code></pre></div>
+<p>If you are operating in an environment where tokens should not be persistently saved to disk you may want to set the following. <code>chemcloud</code> will find these values and maintain all access tokens in memory only.</p>
+<div class="language-sh highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">CHEMCLOUD_USERNAME</span><span class="o">=</span>myusername@chemcloud.com
+<span class="nb">export</span><span class="w"> </span><span class="nv">CHEMCLOUD_PASSWORD</span><span class="o">=</span>mysupersecretpassword<span class="w">  </span><span class="c1"># pragma: allowlist secret</span>
+</code></pre></div>
 <h2 id="usernamepassword-when-prompted-after-calling-clientcompute">Username/Password when prompted after calling <code>client.compute(...)</code><a class="headerlink" href="#usernamepassword-when-prompted-after-calling-clientcompute" title="Permanent link">&para;</a></h2>
-<p>If you have not run <code>client.configure()</code> or set environment variables you will be requested for your username and password when you submit a computation to ChemCloud using <code>client.compute(...)</code>. The client will use your username and password to get access tokens and will maintain access tokens for you in memory only. Your login session will be valid for the duration of your Python session.</p>
+<p>If you have not run <code>setup_profile()</code> or set environment variables you will be requested for your username and password when you submit a computation to ChemCloud using <code>compute(...)</code>. The client will use your username and password to get access tokens and ask if you'd like to save the tokens to disk for future sessions.</p>
 <h2 id="pass-usernamepassword-to-client-not-recommended">Pass Username/Password to Client (not recommended)<a class="headerlink" href="#pass-usernamepassword-to-client-not-recommended" title="Permanent link">&para;</a></h2>
 <p>You can directly pass a username and password to the <code>client</code> object. This is <strong>not</strong> recommended as it opens up the possibility of your credentials accidentally being committed to your code repo. However, it can be used in rare circumstances when necessary.</p>
-<div class="language-python highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">chemcloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">CCClient</span>
-<span class="n">client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">(</span>
+<div class="language-python highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">chemcloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">configure_client</span>
+<span class="n">configure_client</span> <span class="o">=</span> <span class="p">(</span>
     <span class="n">chemcloud_username</span><span class="o">=</span><span class="s2">&quot;your_username@email.com&quot;</span><span class="p">,</span> <span class="n">chemcloud_password</span><span class="o">=</span><span class="s2">&quot;super_secret_password&quot;</span>  <span class="c1"># pragma: allowlist secret</span>
     <span class="p">)</span>
 </code></pre></div>
