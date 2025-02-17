@@ -30,6 +30,8 @@ class CCClient:
             https://chemcloud.mtzlab.com.
         settings: An instance of the Settings class. Defaults to the global settings
             object.
+        queue: The name of a desired compute queue. If None, default queue is used from
+            settings.
 
     Responsibilities:
       - Expose domain-specific methods (e.g., compute, output) that operate with Python objects.
@@ -45,6 +47,7 @@ class CCClient:
         profile: Optional[str] = None,
         chemcloud_domain: Optional[str] = None,
         settings: Settings = settings,
+        queue: Optional[str] = None,
     ):
         self._http_client = _HttpClient(
             chemcloud_username=chemcloud_username,
@@ -53,6 +56,8 @@ class CCClient:
             chemcloud_domain=chemcloud_domain,
             settings=settings,  # Assume settings is injected here
         )
+        self.queue = queue
+        self._settings = settings
         self._openapi_spec: Optional[dict[str, Any]] = None
 
     @property
@@ -151,7 +156,7 @@ class CCClient:
             collect_wfn=collect_wfn,
             rm_scratch_dir=rm_scratch_dir,
             propagate_wfn=propagate_wfn,
-            queue=queue or settings.chemcloud_queue,
+            queue=queue or self.queue or self._settings.chemcloud_queue,
         )
 
         if not isinstance(inp_objs, list):
@@ -241,7 +246,7 @@ class CCClient:
             future. You only need to run this method once per profile. Credentials will
             be loaded automatically from the credentials file in the future.
         """
-        profile = profile or settings.chemcloud_credentials_profile
+        profile = profile or self._settings.chemcloud_credentials_profile
         print(
             f"✅ If you don't have an account, please signup at: {self._http_client._chemcloud_domain}/signup"
         )

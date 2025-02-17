@@ -13,9 +13,9 @@ water = Structure(
 
 
 prog_inp = ProgramInput(
+    calctype="energy",  # Or "gradient" or "hessian"
     structure=water,
     model={"method": "b3lyp", "basis": "6-31g"},
-    calctype="energy",  # Or "gradient" or "hessian"
     keywords={},
 )
 output = compute("terachem", prog_inp)

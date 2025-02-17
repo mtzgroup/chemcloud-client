@@ -13,8 +13,8 @@ water = Structure(
 
 
 prog_inp = DualProgramInput(
-    structure=water,
     calctype="hessian",
+    structure=water,
     subprogram="psi4",
     subprogram_args={"model": {"method": "b3lyp", "basis": "6-31g"}},
 )

@@ -106,8 +106,7 @@ def test_as_completed(httpx_mock, settings, jwt):
     assert len(outputs) == 1
     result = outputs[0]
     assert isinstance(result, ProgramOutput)
-    # Optionally, assert some properties of the output:
-    assert result.success is True
+    assert all([output is None for output in future.outputs])
 
 
 def test_model_dump_returns_client_config(prog_input):

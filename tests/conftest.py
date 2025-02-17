@@ -20,10 +20,26 @@ def _jwt_from_payload(payload: dict[str, str]) -> str:
     return f"header.{b64_encoded_access_token}.signature"
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture
 def settings(tmp_path):
-    test_settings = {"chemcloud_base_directory": tmp_path}
+    test_settings = {
+        "chemcloud_base_directory": tmp_path,
+        "chemcloud_domain": "http://test.com",
+    }
     return Settings(**test_settings)
+
+
+@pytest.fixture(autouse=True)
+def patch_global_settings(settings):
+    """Patch global settings"""
+    import chemcloud
+
+    # Patch global settings
+    original_settings = chemcloud.config.settings
+    chemcloud.config.settings = settings
+    yield
+    # Reset global settings
+    chemcloud.config.settings = original_settings
 
 
 @pytest.fixture

@@ -100,11 +100,11 @@ nav:
       - tutorial/geometry-optimization.md
       - tutorial/batch-computations.md
       - tutorial/bigchem-algorithms.md
-  - Code Reference:
-      - code-reference/Main Methods.md
-      - code-reference/CCClient.md
-      - code-reference/FutureOutput.md
-      - code-reference/ProgramInputs.md
-      - code-reference/ProgramOutput.md
-      - code-reference/exceptions.md
+  - API Documentation:
+      - api-documentation/Main Methods.md
+      - api-documentation/CCClient.md
+      - api-documentation/FutureOutput.md
+      - api-documentation/ProgramInputs.md
+      - api-documentation/ProgramOutput.md
+      - api-documentation/exceptions.md
   - Changelog: CHANGELOG.md

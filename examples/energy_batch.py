@@ -17,9 +17,5 @@ prog_inp = ProgramInput(
     calctype="energy",
     keywords={},
 )
-# output = compute("terachem", [prog_inp] * 2)
-# print(output)  # list of ProgramOutput objects
-
-future = compute("terachem", [prog_inp] * 20, return_future=True)
-for i, output in enumerate(future.as_completed()):
-    print(f"Task {i} completed with energy: {output.results.energy}")
+output = compute("terachem", [prog_inp] * 2)
+print(output)  # list of ProgramOutput objects

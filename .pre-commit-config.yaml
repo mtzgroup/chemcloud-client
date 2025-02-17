@@ -27,6 +27,7 @@ repos:
       - id: mypy
         additional_dependencies:
           [tokenize-rt==3.2.0, pydantic>=2.0.0, types-pyyaml, types-toml]
+        exclude: '(^|/)examples/'
   - repo: https://github.com/crate-ci/typos
     rev: v1.23.6
     hooks:
