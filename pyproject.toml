@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "chemcloud"
-version = "0.12.5"
+version = "0.13.0"
 description = "Fast, secure, scalable quantum chemistry. A Python client for the the ChemCloud server."
 authors = ["Colton Hicks <github@coltonhicks.com>"]
 license = "MIT"
