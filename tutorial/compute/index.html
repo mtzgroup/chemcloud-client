@@ -262,10 +262,10 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../code-reference/Main%20Methods/" class="md-tabs__link">
+        <a href="../../api-documentation/Main%20Methods/" class="md-tabs__link">
           
   
-  Code Reference
+  API Documentation
 
         </a>
       </li>
@@ -628,7 +628,7 @@
             
   
   <span class="md-ellipsis">
-    Code Reference
+    API Documentation
     
   </span>
   
@@ -639,7 +639,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            Code Reference
+            API Documentation
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -650,7 +650,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-reference/Main%20Methods/" class="md-nav__link">
+      <a href="../../api-documentation/Main%20Methods/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -672,7 +672,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-reference/CCClient/" class="md-nav__link">
+      <a href="../../api-documentation/CCClient/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -694,7 +694,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-reference/FutureOutput/" class="md-nav__link">
+      <a href="../../api-documentation/FutureOutput/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -716,7 +716,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-reference/ProgramInputs/" class="md-nav__link">
+      <a href="../../api-documentation/ProgramInputs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -738,7 +738,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-reference/ProgramOutput/" class="md-nav__link">
+      <a href="../../api-documentation/ProgramOutput/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -760,7 +760,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-reference/exceptions/" class="md-nav__link">
+      <a href="../../api-documentation/exceptions/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -869,7 +869,7 @@
 
 
 <h1 id="compute">Compute<a class="headerlink" href="#compute" title="Permanent link">&para;</a></h1>
-<p>Computations are physically executed by a BigChem instance fronted by a ChemCloud server. The chemcloud python client submits jobs to and retrieves work from the ChemCloud server. Computations are submitted using the <a class="autorefs autorefs-internal" href="../../code-reference/CCClient/#chemcloud.client.CCClient">CCClient</a> object.</p>
+<p>Computations are physically executed by a BigChem instance fronted by a ChemCloud server. The chemcloud python client submits jobs to and retrieves work from the ChemCloud server. Computations are submitted using the <a class="autorefs autorefs-internal" href="../../api-documentation/CCClient/#chemcloud.client.CCClient">CCClient</a> object.</p>
 <p>Computations require a QC program and <code>ProgramInput</code> or <code>DualProgramInput</code> object. The <code>ProgramInput</code> object contains all the information necessary to run a single calculation. The <code>DualProgramInput</code> object is used when two QC programs are used in tandem, such as when performing a geometry optimization with one program that uses a subprogram for the energy and gradient calculations.</p>
 <h2 id="basic-single-point-calculation">Basic Single Point Calculation<a class="headerlink" href="#basic-single-point-calculation" title="Permanent link">&para;</a></h2>
 <div class="language-python highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">qcio</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProgramInput</span><span class="p">,</span> <span class="n">Structure</span>
@@ -887,9 +887,9 @@
 
 
 <span class="n">prog_inp</span> <span class="o">=</span> <span class="n">ProgramInput</span><span class="p">(</span>
+    <span class="n">calctype</span><span class="o">=</span><span class="s2">&quot;energy&quot;</span><span class="p">,</span>  <span class="c1"># Or &quot;gradient&quot; or &quot;hessian&quot;</span>
     <span class="n">structure</span><span class="o">=</span><span class="n">water</span><span class="p">,</span>
     <span class="n">model</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;b3lyp&quot;</span><span class="p">,</span> <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="s2">&quot;6-31g&quot;</span><span class="p">},</span>
-    <span class="n">calctype</span><span class="o">=</span><span class="s2">&quot;energy&quot;</span><span class="p">,</span>  <span class="c1"># Or &quot;gradient&quot; or &quot;hessian&quot;</span>
     <span class="n">keywords</span><span class="o">=</span><span class="p">{},</span>
 <span class="p">)</span>
 <span class="n">output</span> <span class="o">=</span> <span class="n">compute</span><span class="p">(</span><span class="s2">&quot;terachem&quot;</span><span class="p">,</span> <span class="n">prog_inp</span><span class="p">)</span>

@@ -10,7 +10,7 @@
         <meta name="author" content="Colton Hicks">
       
       
-        <link rel="canonical" href="https://mtzgroup.github.io/chemcloud-client/code-reference/Main%20Methods/">
+        <link rel="canonical" href="https://mtzgroup.github.io/chemcloud-client/api-documentation/Main%20Methods/">
       
       
         <link rel="prev" href="../../tutorial/bigchem-algorithms/">
@@ -265,7 +265,7 @@
         <a href="./" class="md-tabs__link">
           
   
-  Code Reference
+  API Documentation
 
         </a>
       </li>
@@ -567,7 +567,7 @@
             
   
   <span class="md-ellipsis">
-    Code Reference
+    API Documentation
     
   </span>
   
@@ -578,7 +578,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            Code Reference
+            API Documentation
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -654,9 +654,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#chemcloud.hello_world" class="md-nav__link">
+  <a href="#chemcloud.configure_client" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;hello_world
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;configure_client
     </span>
   </a>
   
@@ -672,18 +672,18 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#chemcloud.configure_client" class="md-nav__link">
+  <a href="#chemcloud.fetch_output" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;configure_client
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;fetch_output
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#chemcloud.fetch_output" class="md-nav__link">
+  <a href="#chemcloud.hello_world" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;fetch_output
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;hello_world
     </span>
   </a>
   
@@ -887,9 +887,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#chemcloud.hello_world" class="md-nav__link">
+  <a href="#chemcloud.configure_client" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;hello_world
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;configure_client
     </span>
   </a>
   
@@ -905,18 +905,18 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#chemcloud.configure_client" class="md-nav__link">
+  <a href="#chemcloud.fetch_output" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;configure_client
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;fetch_output
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#chemcloud.fetch_output" class="md-nav__link">
+  <a href="#chemcloud.hello_world" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;fetch_output
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;hello_world
     </span>
   </a>
   
@@ -948,7 +948,7 @@
 
   <h1>Main Methods</h1>
 
-<p>Top-level methods for running calculations with <code>chemcloud</code>. Most users should never need to use anything except these methods for running using chemcloud.</p>
+<p>Top-level methods for running calculations with <code>chemcloud</code>. Most users should never need to use anything except these methods for running calculations on chemcloud.</p>
 
 
 <div class="doc doc-object doc-module">
@@ -990,7 +990,11 @@
 
 
 <a href="#chemcloud.compute" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">compute</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">compute</span><span class="p">(</span>
+    <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="typing.Union">Union</span></span><span class="p">[</span>
+    <span class="n"><a class="autorefs autorefs-internal" title="qcio.ProgramOutput" href="../ProgramOutput/#qcio.models.outputs.ProgramOutput">ProgramOutput</a></span><span class="p">,</span> <span class="n">list</span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="qcio.ProgramOutput" href="../ProgramOutput/#qcio.models.outputs.ProgramOutput">ProgramOutput</a></span><span class="p">],</span> <span class="n"><a class="autorefs autorefs-internal" title="chemcloud.models.FutureOutput" href="../FutureOutput/#chemcloud.models.FutureOutput">FutureOutput</a></span>
+<span class="p">]</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
@@ -998,20 +1002,126 @@
         <p>Submit a compute job using the default client.</p>
 <p>See <a class="autorefs autorefs-internal" href="../CCClient/#chemcloud.client.CCClient.compute">CCClient.compute</a> for more information.</p>
 
+
+<details class="usage" open>
+  <summary>Usage</summary>
+  <div class="language-python highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">qcio</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProgramInput</span><span class="p">,</span> <span class="n">Structure</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">chemcloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute</span>
+
+<span class="n">struct</span> <span class="o">=</span> <span class="n">Structure</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;structure.xyz&quot;</span><span class="p">)</span>
+<span class="n">prog_input</span> <span class="o">=</span> <span class="n">ProgramInput</span><span class="p">(</span>
+    <span class="n">calctype</span><span class="o">=</span><span class="s2">&quot;energy&quot;</span><span class="p">,</span>
+    <span class="n">structure</span><span class="o">=</span><span class="n">struct</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;b3lyp&quot;</span><span class="p">,</span> <span class="s2">&quot;basis&quot;</span><span class="p">:</span> <span class="s2">&quot;6-31g&quot;</span><span class="p">},</span>
+    <span class="n">keywords</span><span class="o">=</span><span class="p">{},</span>  <span class="c1"># Optional keywords for the program</span>
+    <span class="p">)</span>
+
+<span class="c1"># Submit a single job</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">compute</span><span class="p">(</span><span class="s2">&quot;psi4&quot;</span><span class="p">,</span> <span class="n">prog_input</span><span class="p">)</span>
+
+<span class="c1"># Submit multiple jobs</span>
+<span class="n">prog_inputs</span> <span class="o">=</span> <span class="p">[</span><span class="n">prog_input</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>  <span class="c1"># List of ProgramInput objects</span>
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">compute</span><span class="p">(</span><span class="s2">&quot;psi4&quot;</span><span class="p">,</span> <span class="n">prog_inputs</span><span class="p">)</span>
+</code></pre></div>
+<p>Results may be collected asynchronously if desired:</p>
+<div class="language-python highlight"><pre><span></span><code><span class="n">future</span> <span class="o">=</span> <span class="n">compute</span><span class="p">(</span><span class="s2">&quot;psi4&quot;</span><span class="p">,</span> <span class="n">prog_inputs</span><span class="p">,</span> <span class="n">return_future</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">future</span><span class="o">.</span><span class="n">is_ready</span>  <span class="c1"># Checks if all tasks are complete (not required)</span>
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">future</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>  <span class="c1"># Collects results</span>
+</code></pre></div>
+<p>Or stream results from the server as they complete:</p>
+<div class="language-python highlight"><pre><span></span><code><span class="n">future</span> <span class="o">=</span> <span class="n">compute</span><span class="p">(</span><span class="s2">&quot;psi4&quot;</span><span class="p">,</span> <span class="n">prog_inputs</span><span class="p">,</span> <span class="n">return_future</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">output</span> <span class="ow">in</span> <span class="n">future</span><span class="o">.</span><span class="n">as_completed</span><span class="p">():</span>  <span class="c1"># Will return results as the complete</span>
+    <span class="c1"># Process outputs</span>
+</code></pre></div>
+</details>
             <details class="quote">
               <summary>Source code in <code>chemcloud/__init__.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">17</span>
 <span class="normal">18</span>
 <span class="normal">19</span>
 <span class="normal">20</span>
 <span class="normal">21</span>
 <span class="normal">22</span>
-<span class="normal">23</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compute</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compute</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">ProgramOutput</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="n">ProgramOutput</span><span class="p">],</span> <span class="n">FutureOutput</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Submit a compute job using the default client.</span>
 
 <span class="sd">    See [CCClient.compute][chemcloud.client.CCClient.compute] for more information.</span>
+
+<span class="sd">    Usage:</span>
+<span class="sd">        ```python</span>
+<span class="sd">        from qcio import ProgramInput, Structure</span>
+<span class="sd">        from chemcloud import compute</span>
+
+<span class="sd">        struct = Structure.open(&quot;structure.xyz&quot;)</span>
+<span class="sd">        prog_input = ProgramInput(</span>
+<span class="sd">            calctype=&quot;energy&quot;,</span>
+<span class="sd">            structure=struct,</span>
+<span class="sd">            model={&quot;method&quot;: &quot;b3lyp&quot;, &quot;basis&quot;: &quot;6-31g&quot;},</span>
+<span class="sd">            keywords={},  # Optional keywords for the program</span>
+<span class="sd">            )</span>
+
+<span class="sd">        # Submit a single job</span>
+<span class="sd">        output = compute(&quot;psi4&quot;, prog_input)</span>
+
+<span class="sd">        # Submit multiple jobs</span>
+<span class="sd">        prog_inputs = [prog_input] * 100  # List of ProgramInput objects</span>
+<span class="sd">        outputs = compute(&quot;psi4&quot;, prog_inputs)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">        Results may be collected asynchronously if desired:</span>
+
+<span class="sd">        ```python</span>
+<span class="sd">        future = compute(&quot;psi4&quot;, prog_inputs, return_future=True)</span>
+<span class="sd">        future.is_ready  # Checks if all tasks are complete (not required)</span>
+<span class="sd">        outputs = future.get()  # Collects results</span>
+<span class="sd">        ```</span>
+
+<span class="sd">        Or stream results from the server as they complete:</span>
+
+<span class="sd">        ```python</span>
+<span class="sd">        future = compute(&quot;psi4&quot;, prog_inputs, return_future=True)</span>
+<span class="sd">        for output in future.as_completed():  # Will return results as the complete</span>
+<span class="sd">            # Process outputs</span>
+<span class="sd">        ```</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">global</span> <span class="n">_default_client</span>
     <span class="k">if</span> <span class="n">_default_client</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -1026,38 +1136,85 @@
 <div class="doc doc-object doc-function">
 
 
-<h3 id="chemcloud.hello_world" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>            <span class="doc doc-object-name doc-function-name">hello_world</span>
+<h3 id="chemcloud.configure_client" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>            <span class="doc doc-object-name doc-function-name">configure_client</span>
 
 
-<a href="#chemcloud.hello_world" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">hello_world</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n"><span title="typing.Optional">Optional</span></span><span class="p">[</span><span class="n">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">str</span>
+<a href="#chemcloud.configure_client" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">configure_client</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
 
-        <p>Return a greeting message from the ChemCloud server.</p>
-<p>See <a class="autorefs autorefs-internal" href="../CCClient/#chemcloud.client.CCClient.hello_world">CCClient.hello_world</a> for more information.</p>
+        <p>Configure the default ChemCloud client.</p>
+<p>Passes keyword arguments to CCClient constructor.
+See <a class="autorefs autorefs-internal" href="../CCClient/#chemcloud.client.CCClient">CCClient</a> for more information.</p>
 
+
+<details class="usage" open>
+  <summary>Usage</summary>
+  <p>Pass any of the following keyword arguments before calling
+<a class="autorefs autorefs-internal" href="#chemcloud.compute">compute</a> to configure the client.</p>
+<div class="language-python highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">chemcloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">configure_client</span>
+
+<span class="n">configure_client</span><span class="p">(</span>
+    <span class="n">chemcloud_username</span><span class="o">=</span><span class="s2">&quot;testuser&quot;</span><span class="p">,</span>  <span class="c1"># Not recommended</span>
+    <span class="n">chemcloud_password</span><span class="o">=</span><span class="s2">&quot;testpassword&quot;</span><span class="p">,</span>  <span class="c1"># Not recommended  # pragma: allowlist secret</span>
+    <span class="n">chemcloud_domain</span><span class="o">=</span><span class="s2">&quot;https://example.com&quot;</span><span class="p">,</span>
+    <span class="n">profile</span><span class="o">=</span><span class="s2">&quot;testprofile&quot;</span><span class="p">,</span>
+    <span class="n">queue</span><span class="o">=</span><span class="s2">&quot;myqueue&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+</code></pre></div>
+</details>
             <details class="quote">
               <summary>Source code in <code>chemcloud/__init__.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">hello_world</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a greeting message from the ChemCloud server.</span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">configure_client</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configure the default ChemCloud client.</span>
 
-<span class="sd">    See [CCClient.hello_world][chemcloud.client.CCClient.hello_world] for more information.</span>
+<span class="sd">    Passes keyword arguments to CCClient constructor.</span>
+<span class="sd">    See [CCClient][chemcloud.client.CCClient] for more information.</span>
+
+<span class="sd">    Usage:</span>
+<span class="sd">        Pass any of the following keyword arguments before calling</span>
+<span class="sd">        [compute][chemcloud.compute] to configure the client.</span>
+
+<span class="sd">        ```python</span>
+<span class="sd">        from chemcloud import configure_client</span>
+
+<span class="sd">        configure_client(</span>
+<span class="sd">            chemcloud_username=&quot;testuser&quot;,  # Not recommended</span>
+<span class="sd">            chemcloud_password=&quot;testpassword&quot;,  # Not recommended  # pragma: allowlist secret</span>
+<span class="sd">            chemcloud_domain=&quot;https://example.com&quot;,</span>
+<span class="sd">            profile=&quot;testprofile&quot;,</span>
+<span class="sd">            queue=&quot;myqueue&quot;,</span>
+<span class="sd">            )</span>
+<span class="sd">        ```</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">global</span> <span class="n">_default_client</span>
-    <span class="k">if</span> <span class="n">_default_client</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">_default_client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">_default_client</span><span class="o">.</span><span class="n">hello_world</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">_default_client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -1082,59 +1239,19 @@
 
             <details class="quote">
               <summary>Source code in <code>chemcloud/__init__.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">setup_profile</span><span class="p">(</span><span class="n">profile</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">91</span>
+<span class="normal">92</span>
+<span class="normal">93</span>
+<span class="normal">94</span>
+<span class="normal">95</span>
+<span class="normal">96</span>
+<span class="normal">97</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">setup_profile</span><span class="p">(</span><span class="n">profile</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Setup a profile for the ChemCloud client.</span>
 
 <span class="sd">    See [CCClient.setup_profile][chemcloud.client.CCClient.setup_profile] for more information.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">()</span>
     <span class="n">client</span><span class="o">.</span><span class="n">setup_profile</span><span class="p">(</span><span class="n">profile</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-            </details>
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h3 id="chemcloud.configure_client" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>            <span class="doc doc-object-name doc-function-name">configure_client</span>
-
-
-<a href="#chemcloud.configure_client" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">configure_client</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
-</code></pre></div>
-
-    <div class="doc doc-contents ">
-
-        <p>Configure the default ChemCloud client.</p>
-<p>Passes keyword arguments to CCClient constructor.
-See <a class="autorefs autorefs-internal" href="../CCClient/#chemcloud.client.CCClient">CCClient</a> for more information.</p>
-
-            <details class="quote">
-              <summary>Source code in <code>chemcloud/__init__.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">configure_client</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configure the default ChemCloud client.</span>
-
-<span class="sd">    Passes keyword arguments to CCClient constructor.</span>
-<span class="sd">    See [CCClient][chemcloud.client.CCClient] for more information.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">global</span> <span class="n">_default_client</span>
-    <span class="n">_default_client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -1155,25 +1272,28 @@ See <a class="autorefs autorefs-internal" href="../CCClient/#chemcloud.client.CC
     <div class="doc doc-contents ">
 
         <p>Fetch the status and output of a compute job using the default client.</p>
-<p>Only needed if you want on manually check the status of a compute job.</p>
+<p>Only needed if you want on manually check the status of a compute job. This function
+is usually not used by end users.</p>
 <p>See <a class="autorefs autorefs-internal" href="../CCClient/#chemcloud.client.CCClient.fetch_output">CCClient.fetch_output</a> for more information.</p>
 
             <details class="quote">
               <summary>Source code in <code>chemcloud/__init__.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">fetch_output</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">fetch_output</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Fetch the status and output of a compute job using the default client.</span>
 
-<span class="sd">    Only needed if you want on manually check the status of a compute job.</span>
+<span class="sd">    Only needed if you want on manually check the status of a compute job. This function</span>
+<span class="sd">    is usually not used by end users.</span>
 
 <span class="sd">    See [CCClient.fetch_output][chemcloud.client.CCClient.fetch_output] for more information.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1181,6 +1301,47 @@ See <a class="autorefs autorefs-internal" href="../CCClient/#chemcloud.client.CC
     <span class="k">if</span> <span class="n">_default_client</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">_default_client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">_default_client</span><span class="o">.</span><span class="n">fetch_output</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="chemcloud.hello_world" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>            <span class="doc doc-object-name doc-function-name">hello_world</span>
+
+
+<a href="#chemcloud.hello_world" class="headerlink" title="Permanent link">&para;</a></h3>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">hello_world</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n"><span title="typing.Optional">Optional</span></span><span class="p">[</span><span class="n">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">str</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Return a greeting message from the ChemCloud server.</p>
+<p>See <a class="autorefs autorefs-internal" href="../CCClient/#chemcloud.client.CCClient.hello_world">CCClient.hello_world</a> for more information.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>chemcloud/__init__.py</code></summary>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">hello_world</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a greeting message from the ChemCloud server.</span>
+
+<span class="sd">    See [CCClient.hello_world][chemcloud.client.CCClient.hello_world] for more information.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">_default_client</span>
+    <span class="k">if</span> <span class="n">_default_client</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_default_client</span> <span class="o">=</span> <span class="n">CCClient</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">_default_client</span><span class="o">.</span><span class="n">hello_world</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>

@@ -262,10 +262,10 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../code-reference/Main%20Methods/" class="md-tabs__link">
+        <a href="../../api-documentation/Main%20Methods/" class="md-tabs__link">
           
   
-  Code Reference
+  API Documentation
 
         </a>
       </li>
@@ -577,7 +577,7 @@
             
   
   <span class="md-ellipsis">
-    Code Reference
+    API Documentation
     
   </span>
   
@@ -588,7 +588,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            Code Reference
+            API Documentation
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -599,7 +599,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-reference/Main%20Methods/" class="md-nav__link">
+      <a href="../../api-documentation/Main%20Methods/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -621,7 +621,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-reference/CCClient/" class="md-nav__link">
+      <a href="../../api-documentation/CCClient/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -643,7 +643,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-reference/FutureOutput/" class="md-nav__link">
+      <a href="../../api-documentation/FutureOutput/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -665,7 +665,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-reference/ProgramInputs/" class="md-nav__link">
+      <a href="../../api-documentation/ProgramInputs/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -687,7 +687,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-reference/ProgramOutput/" class="md-nav__link">
+      <a href="../../api-documentation/ProgramOutput/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -709,7 +709,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-reference/exceptions/" class="md-nav__link">
+      <a href="../../api-documentation/exceptions/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -812,12 +812,8 @@
     <span class="n">calctype</span><span class="o">=</span><span class="s2">&quot;energy&quot;</span><span class="p">,</span>
     <span class="n">keywords</span><span class="o">=</span><span class="p">{},</span>
 <span class="p">)</span>
-<span class="c1"># output = compute(&quot;terachem&quot;, [prog_inp] * 2)</span>
-<span class="c1"># print(output)  # list of ProgramOutput objects</span>
-
-<span class="n">future</span> <span class="o">=</span> <span class="n">compute</span><span class="p">(</span><span class="s2">&quot;terachem&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">prog_inp</span><span class="p">]</span> <span class="o">*</span> <span class="mi">20</span><span class="p">,</span> <span class="n">return_future</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">output</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">future</span><span class="o">.</span><span class="n">as_completed</span><span class="p">()):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Task </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> completed with energy: </span><span class="si">{</span><span class="n">output</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">energy</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">compute</span><span class="p">(</span><span class="s2">&quot;terachem&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">prog_inp</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>  <span class="c1"># list of ProgramOutput objects</span>
 </code></pre></div>
 
 
