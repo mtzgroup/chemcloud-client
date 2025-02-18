@@ -242,6 +242,8 @@ class FutureOutput(BaseModel):
                     any_new = True
                     assert self.outputs[i] is not None
                     yield cast(ProgramOutput, self.outputs[i])
+                    self.outputs[i] = None  # Clear the output to save memory
+
             if any_new:
                 # Reset interval if new completions were found.
                 interval = initial_interval

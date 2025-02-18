@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
+### Added
+
+- Usage examples for main `chemcloud` functions.
+- Tests for main `chemcloud` functions.
+- `queue` can be passed to `configure_client()` or `CCClient()` to specify that all calculations should be submitted to a particular queue.
+
+### Changed
+
+- `ProgramOutput` objects are removed from the `FutureOutput.output` list as they are returned by `.as_completed()` to reduce memory footprint for collecting large batches of results.
+
 ## [0.13.0] - 2025-02-16
 
 ### Added
