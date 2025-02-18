@@ -64,6 +64,7 @@ class FutureOutput(BaseModel):
 
     task_ids: list[str]
     inputs: list[Inputs]
+    single_input: bool = False
     program: str
     client: Any
     outputs: list[Optional[ProgramOutput]] = []
@@ -198,7 +199,7 @@ class FutureOutput(BaseModel):
             output is not None for output in self.outputs
         ), "All outputs should be collected at this point."
 
-        if len(self.outputs) == 1:
+        if len(self.outputs) == 1 and self.single_input:
             return cast(ProgramOutput, self.outputs[0])
         else:
             return cast(list[ProgramOutput], self.outputs)

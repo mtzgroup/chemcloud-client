@@ -100,7 +100,7 @@ class CCClient:
     def compute(
         self,
         program: str,
-        inp_objs: QCIOInputsOrList,
+        inp_obj: QCIOInputsOrList,
         *,
         collect_stdout: bool = True,
         collect_files: bool = False,
@@ -140,8 +140,11 @@ class CCClient:
             computation's status by running .status on the FutureOutput object or
             .get() to block and retrieve the computation's final result.
         """
+        if not inp_obj:
+            raise ValueError("Please provide input objects for the computation.")
+
         logger.info(
-            f"Submitting compute job for program {program} with inputs {inp_objs}."
+            f"Submitting compute job for program {program} with inputs {inp_obj}."
         )
 
         if program not in self.supported_programs:
@@ -159,8 +162,10 @@ class CCClient:
             queue=queue or self.queue or self._settings.chemcloud_queue,
         )
 
-        if not isinstance(inp_objs, list):
-            inp_objs = [inp_objs]
+        if not isinstance(inp_obj, list):
+            inp_objs = [inp_obj]
+        else:
+            inp_objs = inp_obj
 
         # Create a list of coroutines to submit each compute request.
         coroutines = [
@@ -173,7 +178,11 @@ class CCClient:
         # Use the HTTP client's parallel runner with the desired concurrency.
         task_ids = self._http_client.run_parallel_requests(coroutines)
         future = FutureOutput(
-            task_ids=task_ids, inputs=inp_objs, program=program, client=self
+            task_ids=task_ids,
+            inputs=inp_objs,
+            single_input=not isinstance(inp_obj, list),
+            program=program,
+            client=self,
         )
         if return_future:
             return future
