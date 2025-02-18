@@ -1,3 +1,4 @@
+import pytest
 from qcio import ProgramOutput
 
 from chemcloud import CCClient, FutureOutput
@@ -140,3 +141,17 @@ def test_compute_queue_from_settings(
 
     # Restore the original queue value.
     settings.chemcloud_queue = original_queue
+
+
+def test_compute_raise_value_error_empty_inp_objs(prog_input):
+    """
+    If an empty list of input objects or None is passed to compute(), a ValueError should be raised.
+    """
+    client = CCClient()
+    # None
+    with pytest.raises(ValueError):
+        client.compute("psi", None)
+
+    # Empty list
+    with pytest.raises(ValueError):
+        client.compute("psi4", [])
