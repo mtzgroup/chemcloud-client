@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
+## [0.13.2] - 2025-02-18
+
 ### Added
 
 - `FutureOutput.single_input` so that list of len 1 submitted to `compute()` still get returned as list. May want to refactor into `FutureOutput` and `FutureOutputs`, but this solution works for a quick fix for today's presentation.
@@ -293,7 +295,8 @@ Updated qcio (0.10.1 -> 0.10.2). `Structure.ids` -> `Structure.identifiers`
 - `_RequestsClient` class that handles all network requests to TeraChem Cloud server
 - `FutureResults` object that is created from a `task_id` and can be used to retrieve a result once finished.
 
-[unreleased]: https://github.com/mtzgroup/chemcloud-client/compare/0.13.1...HEAD
+[unreleased]: https://github.com/mtzgroup/chemcloud-client/compare/0.13.2...HEAD
+[0.13.2]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.13.2
 [0.13.1]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.13.1
 [0.13.0]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.13.0
 [0.12.5]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.12.5
