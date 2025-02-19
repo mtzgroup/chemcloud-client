@@ -1650,7 +1650,7 @@ return the ProgramOutput object(s) directly.</p>
     <span class="n">propagate_wfn</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">queue</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">return_future</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">ProgramOutput</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="n">ProgramOutput</span><span class="p">],</span> <span class="s2">&quot;FutureOutput&quot;</span><span class="p">]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">ProgramOutput</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="n">ProgramOutput</span><span class="p">],</span> <span class="n">FutureOutput</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Submit a computation to ChemCloud.</span>
 
 <span class="sd">    Parameters:</span>
@@ -1704,26 +1704,26 @@ return the ProgramOutput object(s) directly.</p>
     <span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">inp_obj</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-        <span class="n">inp_objs</span> <span class="o">=</span> <span class="p">[</span><span class="n">inp_obj</span><span class="p">]</span>
+        <span class="n">inp_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">inp_obj</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">inp_objs</span> <span class="o">=</span> <span class="n">inp_obj</span>
+        <span class="n">inp_list</span> <span class="o">=</span> <span class="n">inp_obj</span>
 
     <span class="c1"># Create a list of coroutines to submit each compute request.</span>
     <span class="n">coroutines</span> <span class="o">=</span> <span class="p">[</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_http_client</span><span class="o">.</span><span class="n">_authenticated_request_async</span><span class="p">(</span>
             <span class="s2">&quot;post&quot;</span><span class="p">,</span> <span class="s2">&quot;/compute&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">inp</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">url_params</span>
         <span class="p">)</span>
-        <span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">inp_objs</span>
+        <span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="n">inp_list</span>
     <span class="p">]</span>
 
     <span class="c1"># Use the HTTP client&#39;s parallel runner with the desired concurrency.</span>
     <span class="n">task_ids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_http_client</span><span class="o">.</span><span class="n">run_parallel_requests</span><span class="p">(</span><span class="n">coroutines</span><span class="p">)</span>
     <span class="n">future</span> <span class="o">=</span> <span class="n">FutureOutput</span><span class="p">(</span>
         <span class="n">task_ids</span><span class="o">=</span><span class="n">task_ids</span><span class="p">,</span>
-        <span class="n">inputs</span><span class="o">=</span><span class="n">inp_objs</span><span class="p">,</span>
-        <span class="n">single_input</span><span class="o">=</span><span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">inp_obj</span><span class="p">,</span> <span class="nb">list</span><span class="p">),</span>
+        <span class="n">inputs</span><span class="o">=</span><span class="n">inp_list</span><span class="p">,</span>
         <span class="n">program</span><span class="o">=</span><span class="n">program</span><span class="p">,</span>
         <span class="n">client</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
+        <span class="n">return_single_output</span><span class="o">=</span><span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">inp_obj</span><span class="p">,</span> <span class="nb">list</span><span class="p">),</span>
     <span class="p">)</span>
     <span class="k">if</span> <span class="n">return_future</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">future</span>
