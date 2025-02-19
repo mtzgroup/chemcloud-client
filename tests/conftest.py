@@ -7,12 +7,12 @@ from time import time
 import pytest
 import tomli_w
 from pytest_httpx import HTTPXMock
-from qcio import ProgramInput, Structure
+from qcio import CalcType, Model, ProgramInput, Structure
 
 from chemcloud.config import Settings
 
 
-def _jwt_from_payload(payload: dict[str, str]) -> str:
+def _jwt_from_payload(payload: dict[str, int]) -> str:
     """Convert payload to fake JWT"""
     b64_encoded_access_token = b64encode(json.dumps(payload).encode("utf-8")).decode(
         "utf-8"
@@ -117,16 +117,16 @@ def water():
 
 
 @pytest.fixture
-def jwt(settings):
+def jwt(settings: Settings) -> str:
     payload = {
-        "exp": int(time() + settings.chemcloud_access_token_expiration_buffer) + 10,
+        "exp": int(time() + settings.chemcloud_access_token_expiration_buffer + 10),
     }
     return _jwt_from_payload(payload)
 
 
 @pytest.fixture
-def expired_jwt(settings):
-    payload = {"exp": int(time()) - 1}
+def expired_jwt(settings: Settings):
+    payload = {"exp": int(time() - 1)}
     return _jwt_from_payload(payload)
 
 
@@ -136,8 +136,8 @@ def prog_input(water):
 
     return ProgramInput(
         structure=water,
-        calctype="energy",
-        model={"method": "hf", "basis": "sto-3g"},
+        calctype=CalcType.energy,
+        model=Model(method="hf", basis="sto-3g"),
         keywords={
             "maxiter": 100,
             "purify": "no",

@@ -62,35 +62,53 @@ output.traceback # Stack trace if calculation failed
 output.ptraceback # Shortcut to print out the traceback in human readable format
 ```
 
-Pass thousands of inputs simultaneously:
+Submit thousands of calculations simultaneously and collect results parallel:
 
 ```python
-prog_inputs = [prog_input] * 1000
+prog_inputs = [prog_input] * 10
 outputs = compute("terachem", prog_inputs)
 
 for output in outputs:
-    # Handle each output
-```
-
-If you want to use a non-blocking API, pass `return_future=True` to `compute`. Calling `.get()` on the future will return a `ProgramOutput` or list of `ProgramOutput` once the calculations are complete.
-
-```python
-# Submit the calculation to the server
-future = compute("terachem", prog_input, return_future=True)
-# Check the status of calculations
-future.is_ready
-# Block and retrieve results
-output = future.get()
+    # Process outputs
+    output.save(...)
 ```
 
 Or stream results from the server as they complete:
 
 ```python
-prog_inputs = [prog_input] * 1000
+prog_inputs = [prog_input] * 10
 # Submit the calculation to the server
 future = compute("terachem", prog_inputs, return_future=True)
 for output in future.as_completed():
+    # Outputs returned as they complete
+    output.save(...)
+```
+
+If you want to use a non-blocking API, pass `return_future=True` to `compute`. Calling `.get()` on the future will return a `ProgramOutput` or list of `ProgramOutput` once the calculations are complete.
+
+```python
+prog_inputs = [prog_input] * 10
+# Submit the calculation to the server
+future = compute("terachem", prog_inputs, return_future=True)
+# Check the status of calculations (optional)
+future.is_ready
+# Block and retrieve results
+outputs = future.get()
+for output in outputs:
     # Process outputs
+    output.save(...)
+```
+
+Save a `future` to disk and then collect results later:
+
+```python
+# Submit the calculation to the server
+future = compute("terachem", prog_inputs, return_future=True)
+future.save("myfuture.json")
+
+# Later in a different script
+future.open("myfuture.json")
+outputs = future.get()
 ```
 
 ## Examples

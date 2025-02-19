@@ -109,7 +109,7 @@ class CCClient:
         propagate_wfn: bool = False,
         queue: Optional[str] = None,
         return_future: bool = False,
-    ) -> Union[ProgramOutput, list[ProgramOutput], "FutureOutput"]:
+    ) -> Union[ProgramOutput, list[ProgramOutput], FutureOutput]:
         """Submit a computation to ChemCloud.
 
         Parameters:
@@ -163,26 +163,26 @@ class CCClient:
         )
 
         if not isinstance(inp_obj, list):
-            inp_objs = [inp_obj]
+            inp_list = [inp_obj]
         else:
-            inp_objs = inp_obj
+            inp_list = inp_obj
 
         # Create a list of coroutines to submit each compute request.
         coroutines = [
             self._http_client._authenticated_request_async(
                 "post", "/compute", data=inp, params=url_params
             )
-            for inp in inp_objs
+            for inp in inp_list
         ]
 
         # Use the HTTP client's parallel runner with the desired concurrency.
         task_ids = self._http_client.run_parallel_requests(coroutines)
         future = FutureOutput(
             task_ids=task_ids,
-            inputs=inp_objs,
-            single_input=not isinstance(inp_obj, list),
+            inputs=inp_list,
             program=program,
             client=self,
+            return_single_output=not isinstance(inp_obj, list),
         )
         if return_future:
             return future
