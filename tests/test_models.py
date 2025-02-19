@@ -19,11 +19,12 @@ def test_result_pending(
 
     httpx_mock.add_response(json={"status": "PENDING", "program_output": None})
 
-    future = FutureOutput(
+    future = FutureOutput(  # type: ignore
         task_ids=["fake_task_id"],
         client=client,
         inputs=[FileInput()],
         program="fake_program",
+        return_single_output=True,
     )
     status, output = future.client.fetch_output(future.task_id)
 
@@ -57,13 +58,13 @@ def test_result_success(
         program="fake_program",
         client=client,
     )
-    status, output = future.client.fetch_output("fake_task_id")
+    status, output = future.client.fetch_output("fake_task_id")  # type: ignore
 
     assert status == "SUCCESS"
     assert isinstance(output, ProgramOutput)  # type: ignore
 
 
-def test_as_completed(httpx_mock, settings, jwt):
+def test_as_completed(httpx_mock, settings, jwt, prog_input):
     # Instantiate the client and set a valid token.
     client = CCClient(settings=settings)
     client._http_client._access_token = jwt
@@ -94,7 +95,7 @@ def test_as_completed(httpx_mock, settings, jwt):
     # Create a FutureOutput instance with a single task.
     future = FutureOutput(
         task_ids=["fake_task_id"],
-        inputs=[{}],  # Using an empty dict as a stand-in for an Inputs instance.
+        inputs=[prog_input],
         program="fake_program",
         client=client,
     )
@@ -147,7 +148,7 @@ def test_ensure_client_validator(prog_input):
         task_ids=["task1"],
         inputs=[prog_input],
         program="dummy",
-        client=client_config,
+        client=client_config,  # type: ignore
     )
     # The validator should have converted the dict into a CCClient.
     assert isinstance(
@@ -215,3 +216,25 @@ def test_open(tmp_path, prog_input):
     ), "Client was not re-instantiated as CCClient"
     assert loaded_future.client._http_client._chemcloud_domain == "https://example.com"
     assert loaded_future.client._http_client._profile == "testprofile"
+
+
+def test_serialization(tmp_path, prog_input):
+    # Create a FutureOutput with known dummy data.
+    future = FutureOutput(
+        task_ids=["task_ids"],
+        inputs=[prog_input],
+        program="program",
+        client=CCClient(),
+    )
+    # Save to a specific file path.
+    file_path = tmp_path / "future_test.json"
+    future.save(file_path)
+
+    # Load the FutureOutput from the saved file.
+    loaded_future = FutureOutput.open(file_path)
+
+    # Verify that the loaded data matches the original data.
+    # Must use serialized representation since no __eq__ method for CCClient.
+    assert (
+        loaded_future.model_dump() == future.model_dump()
+    ), "Loaded data does not match original data."

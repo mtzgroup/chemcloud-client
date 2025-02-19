@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
+### Added
+
+= `FutureOutput.save()` and `FutureOutput.open()` methods to serialize futures to disks and then open the later for retrieval.
+
+### Changed
+
+- `FutureOutput.single_input` to `.return_single_output`.
+
 ## [0.13.2] - 2025-02-18
 
 ### Added

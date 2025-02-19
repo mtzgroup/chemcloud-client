@@ -45,6 +45,7 @@ def test_compute(
     # Set JWT so that the client can make requests
     from chemcloud import _default_client
 
+    assert _default_client is not None, "Default client is not set."
     _default_client._http_client._access_token = jwt
 
     # Single input
@@ -72,6 +73,7 @@ def test_compute_future(
     # Set JWT so that the client can make requests
     from chemcloud import _default_client
 
+    assert _default_client is not None, "Default client is not set."
     _default_client._http_client._access_token = jwt
 
     # Single input

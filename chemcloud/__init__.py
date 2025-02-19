@@ -9,7 +9,7 @@ __version__ = metadata.version(__name__)
 from qcio import ProgramOutput
 
 from .client import CCClient
-from .models import FutureOutput  # noqa
+from .models import FutureOutput
 
 _default_client: Optional[CCClient] = None
 

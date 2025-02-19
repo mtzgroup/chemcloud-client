@@ -32,7 +32,7 @@ jobs:
       - name: Install repo
         run: poetry install --no-interaction --no-ansi
       - name: mypy
-        run: mypy .
+        run: mypy --check-untyped-defs .
 
   detect-secrets:
     runs-on: ubuntu-latest

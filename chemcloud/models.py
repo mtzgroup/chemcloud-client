@@ -54,31 +54,53 @@ class FutureOutput(BaseModel):
     """
     Represents one or more asynchronous compute tasks.
 
+    Developer Note:
+        Rather than refactoring into a `BaseFutureOutput` with `FutureOutput` and
+        `FutureOutputs` subclass, we use the `return_single_output` flag to determine
+        when the `.get()` method should return a `ProgramOutput` or
+        `list[ProgramOutput]` and when to enable the `.task_id` attribute. This
+        simplifies the API, reduces code complexity, removes the need for `isinstance`
+        checks, and still gives the same end user experience. We can rethink this design
+        if it becomes an issue.
+
+
     Attributes:
         task_ids: A list of task IDs from a compute submission.
         input_data: A list of input data objects for each task.
         program: The program used for the computation.
-        client: A client instance that can perform HTTP requests to check task status.
-        program_outputs: A list of ProgramOutputs once tasks are completed (order corresponds to task_ids).
+        client: A `CCClient` instance that can perform HTTP requests to check task status.
+        return_single_output (bool): If True, indicates that the `.get()` method will
+            return a single ProgramOutput rather than a list. Also enables the
+            `.task_id` property.
+        outputs: A list of ProgramOutputs once tasks are completed (order
+            corresponds to task_ids). Generally not passed by the user, but used
+            internally to track task outputs.
+
+        statuses: A list of TaskStatus enums corresponding to the status of each task.
+            Generally not passed by the user, but used internally to track task status.
     """
 
     task_ids: list[str]
     inputs: list[Inputs]
-    single_input: bool = False
     program: str
     client: Any
     outputs: list[Optional[ProgramOutput]] = []
-    _statuses: list[TaskStatus] = []
+    return_single_output: bool = False
+    statuses: list[TaskStatus] = []
 
-    class ConfigDict:
-        arbitrary_types_allowed = True
-        validate_assignment = True
+    model_config = {
+        # Raises an error if extra fields are passed to model.
+        "extra": "forbid",
+        # For client
+        # https://docs.pydantic.dev/latest/usage/types/#arbitrary-types-allowed
+        "arbitrary_types_allowed": True,
+    }
 
     @field_validator("client", mode="before")
-    def ensure_client(cls, v: Union["CCClient", dict[str, Any]]) -> "CCClient":
+    def _instantiate_client(cls, v: Union["CCClient", dict[str, Any]]) -> "CCClient":
         """
         If 'client' is provided as a dict, assume it is the serialized configuration
-        and instantiate a CCClient from it.
+        and instantiate a CCClient from it. This enables .open() to work correctly.
         """
         if isinstance(v, dict):
             from chemcloud import CCClient
@@ -92,19 +114,28 @@ class FutureOutput(BaseModel):
         return v
 
     @model_validator(mode="after")
-    def initialize_outputs_and_statuses(self) -> Self:
+    def _initialize_outputs_and_statuses(self) -> Self:
         """Initialize program_outputs and statuses based on task_ids length."""
         if not self.outputs:
             self.outputs = [None] * len(self.task_ids)
-        if not self._statuses:
-            self._statuses = [TaskStatus.PENDING] * len(self.task_ids)
+        if not self.statuses:
+            self.statuses = [TaskStatus.PENDING] * len(self.task_ids)
+        return self
+
+    @model_validator(mode="after")
+    def _ensure_single_input(self) -> Self:
+        """Ensure that return_single_output is only set for a single task submission."""
+        if self.return_single_output and len(self.task_ids) != 1:
+            raise ValueError(
+                "return_single_output=True is only valid for a single task submission."
+            )
         return self
 
     @property
     def task_id(self) -> str:
         """Return the task id if only a single computation was submitted."""
-        if len(self.task_ids) > 1:
-            raise AttributeError("Multiple task IDs found. Use `task_ids` instead.")
+        if not self.return_single_output:
+            raise AttributeError("Tasks submitted as a list. Use `task_ids` instead.")
         return self.task_ids[0]
 
     def refresh(self) -> None:
@@ -112,9 +143,9 @@ class FutureOutput(BaseModel):
         logger.debug("Refreshing task statuses and outputs.")
 
         # Identify unfinished tasks
-        assert self._statuses is not None  # For mypy
+        assert self.statuses is not None  # For mypy
         unfinished_indices = [
-            i for i, status in enumerate(self._statuses) if status not in READY_STATES
+            i for i, status in enumerate(self.statuses) if status not in READY_STATES
         ]
         if not unfinished_indices:
             logger.debug("No unfinished tasks to refresh.")
@@ -138,11 +169,11 @@ class FutureOutput(BaseModel):
                 logger.error(
                     f"Error collecting task {self.task_ids[i]}: {result}", exc_info=True
                 )
-                self._statuses[i] = TaskStatus.FAILURE
+                self.statuses[i] = TaskStatus.FAILURE
                 self.outputs[i] = self._output_from_exception(result, self.inputs[i])
             else:
                 logger.debug(f"Task {self.task_ids[i]} collected: status {result[0]}")
-                self._statuses[i], self.outputs[i] = result
+                self.statuses[i], self.outputs[i] = result
 
     @property
     def is_ready(self) -> bool:
@@ -152,10 +183,10 @@ class FutureOutput(BaseModel):
         Returns:
             True if all tasks are complete, i.e., in a READY_STATE (SUCCESS, FAILURE, or REVOKED).
         """
-        self.refresh()  # Ensures self._statuses and self.program_outputs are not None
+        self.refresh()
         return all(
             (res is not None or status in READY_STATES)
-            for status, res in zip(self._statuses, self.outputs)
+            for status, res in zip(self.statuses, self.outputs)
         )
 
     def get(
@@ -172,7 +203,8 @@ class FutureOutput(BaseModel):
             initial_interval: The initial interval between status checks.
 
         Returns:
-            The program_outputs for all tasks once they are complete.
+            The ProgramOutput objects for all tasks once they are complete.
+
         Raises:
             TimeoutError: If the timeout is exceeded before all tasks complete.
         """
@@ -199,7 +231,7 @@ class FutureOutput(BaseModel):
             output is not None for output in self.outputs
         ), "All outputs should be collected at this point."
 
-        if len(self.outputs) == 1 and self.single_input:
+        if self.return_single_output:
             return cast(ProgramOutput, self.outputs[0])
         else:
             return cast(list[ProgramOutput], self.outputs)
@@ -234,7 +266,7 @@ class FutureOutput(BaseModel):
             logger.debug("Polling for task completions...")
             self.refresh()
             any_new = False
-            for i, status in enumerate(self._statuses):
+            for i, status in enumerate(self.statuses):
                 if i not in done_indices and status in READY_STATES:
                     logger.info(
                         f"Task {self.task_ids[i]} is complete with status {status}."
