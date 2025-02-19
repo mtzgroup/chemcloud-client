@@ -10,7 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
-= `FutureOutput.save()` and `FutureOutput.open()` methods to serialize futures to disks and then open the later for retrieval.
+- `FutureOutput.save()` and `FutureOutput.open()` methods to serialize futures to disks and then open the later for retrieval.
 
 ### Changed
 
