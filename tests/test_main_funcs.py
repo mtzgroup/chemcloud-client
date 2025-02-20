@@ -35,6 +35,7 @@ def test_configure_client():
 def test_compute(
     patch_openapi_endpoint,
     patch_compute_endpoints,
+    patch_compute_output_endpoint,
     prog_input,
     jwt,
 ):
@@ -63,6 +64,7 @@ def test_compute(
 def test_compute_future(
     patch_openapi_endpoint,
     patch_compute_endpoints,
+    patch_compute_output_endpoint,
     prog_input,
     jwt,
 ):

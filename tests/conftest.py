@@ -66,7 +66,7 @@ def credentials_file(settings):
 @pytest.fixture
 def patch_token_endpoint(httpx_mock: HTTPXMock):
     """Patch httpx methods against /oauth/token endpoint"""
-    PATCH_VALUES = {
+    response_data = {
         "access_token": "fake_access_token",
         "refresh_token": "fake_refresh_token",
         "task_id": "fake_task_id",
@@ -77,24 +77,47 @@ def patch_token_endpoint(httpx_mock: HTTPXMock):
     httpx_mock.add_response(
         url=token_endpoint,
         json={
-            "access_token": PATCH_VALUES["access_token"],
-            "refresh_token": PATCH_VALUES["refresh_token"],
+            "access_token": response_data["access_token"],
+            "refresh_token": response_data["refresh_token"],
         },
         is_reusable=True,
     )
 
-    yield PATCH_VALUES
+    yield response_data
 
 
 @pytest.fixture
 def patch_compute_endpoints(httpx_mock: HTTPXMock):
     """Patch httpx methods against /compute endpoint"""
-    PATCH_VALUES = "fake_task_id"
+    response_data = "fake_task_id"
 
-    compute_endpoint = re.compile(r".*/compute*")
-    httpx_mock.add_response(url=compute_endpoint, json=PATCH_VALUES, is_reusable=True)
+    compute_endpoint = re.compile(r".*/compute")
+    httpx_mock.add_response(
+        url=compute_endpoint,
+        json=response_data,
+        is_reusable=True,
+    )
 
-    yield PATCH_VALUES
+    yield response_data
+
+
+@pytest.fixture
+def patch_compute_output_endpoint(httpx_mock: HTTPXMock, prog_input):
+    """Patch httpx methods against /compute/output endpoint."""
+    response_data = {
+        "status": "SUCCESS",
+        "program_output": {
+            "input_data": prog_input.model_dump(),  # fill with dummy data if needed
+            "success": True,
+            "results": {"energy": -76.026632},
+            "stdout": "output text",
+            "traceback": "",
+            "provenance": {"program": "psi4"},
+        },
+    }
+    output_endpoint = re.compile(r".*/compute/output/.*")
+    httpx_mock.add_response(url=output_endpoint, json=response_data, is_reusable=True)
+    yield response_data
 
 
 @pytest.fixture

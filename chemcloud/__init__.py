@@ -14,6 +14,15 @@ from .models import FutureOutput
 _default_client: Optional[CCClient] = None
 
 
+async def compute_async(
+    *args, **kwargs
+) -> Union[ProgramOutput, list[ProgramOutput], FutureOutput]:
+    global _default_client
+    if _default_client is None:
+        _default_client = CCClient()
+    return await _default_client.compute_async(*args, **kwargs)
+
+
 def compute(*args, **kwargs) -> Union[ProgramOutput, list[ProgramOutput], FutureOutput]:
     """Submit a compute job using the default client.
 

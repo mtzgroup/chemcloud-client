@@ -59,15 +59,29 @@ class _HttpClient:
         self._httpx_timeout = httpx.Timeout(
             self._settings.chemcloud_timeout, read=self._settings.chemcloud_read_timeout
         )
-        self._async_client = httpx.AsyncClient(timeout=self._httpx_timeout)
+        # Create async clients and semaphores lazily when a loop is running.
+        self._async_client: Optional[httpx.AsyncClient] = None
         # Use an asyncio lock to ensure only one token refresh happens at a time.
-        # Must create lock when even loop is active to setting to None here.
         self._token_refresh_lock: Optional[asyncio.Lock] = None
+        self._semaphore: Optional[asyncio.Semaphore] = None
 
     def __repr__(self) -> str:
         return (
             f"{type(self).__name__}({self._chemcloud_domain}, profile={self._profile})"
         )
+
+    @property
+    def async_client(self) -> httpx.AsyncClient:
+        if self._async_client is None:
+            self._async_client = httpx.AsyncClient(timeout=self._httpx_timeout)
+        return self._async_client
+
+    @property
+    def semaphore(self) -> asyncio.Semaphore:
+        if self._semaphore is None:
+            # Create the semaphore using the currently running event loop.
+            self._semaphore = asyncio.Semaphore(self._settings.chemcloud_concurrency)
+        return self._semaphore
 
     async def _request_async(
         self,
@@ -81,18 +95,19 @@ class _HttpClient:
         max_attempts: int = 3,
         backoff_factor: float = 1.0,
     ) -> Any:
-        """Asynchronous HTTP request with retry logic."""
+        """HTTP request with retry logic."""
         url, content = self._build_url_and_content(route, data, api_call, headers)
 
         # Retry for RequestErrors (non HTTPStatusErrors)
         for attempt in range(1, max_attempts + 1):
             try:
-                response = await self._async_client.request(
-                    method, url, headers=headers, content=content, params=params
-                )
-                logger.debug(
-                    f"Received response (attempt {attempt}): {response.status_code}"
-                )
+                async with self.semaphore:
+                    response = await self.async_client.request(
+                        method, url, headers=headers, content=content, params=params
+                    )
+                    logger.debug(
+                        f"Received response (attempt {attempt}): {response.status_code}"
+                    )
 
                 response.raise_for_status()
                 return response.json()
@@ -108,50 +123,16 @@ class _HttpClient:
     async def _authenticated_request_async(
         self, method: str, route: str, **kwargs
     ) -> Any:
-        """Asynchronous version of _authenticated_request."""
+        """Perform an authenticated request."""
         auth_kwargs = await self._add_auth_headers(**kwargs)
         return await self._request_async(method, route, **auth_kwargs)
 
-    async def _run_parallel_requests_async(
-        self,
-        coroutines: list[Any],
-        concurrency: Optional[int] = None,
-        return_exceptions: bool = False,
-    ) -> list[Any]:
-        """Async API to run multiple coroutines concurrently."""
-        semaphore = asyncio.Semaphore(
-            concurrency or self._settings.chemcloud_concurrency
-        )
-
-        async def sem_task(coro):
-            async with semaphore:
-                return await coro
-
-        tasks = [sem_task(coro) for coro in coroutines]
-        return await asyncio.gather(*tasks, return_exceptions=return_exceptions)
-
-    def run_parallel_requests(
-        self,
-        coroutines: list[Any],
-        concurrency: Optional[int] = None,
-        return_exceptions: bool = False,
-    ) -> list[Any]:
-        """Synchronous API to run multiple coroutines concurrently."""
-        # Create a fresh AsyncClient so that it's bound to the new event loop.
-        client = httpx.AsyncClient(timeout=self._httpx_timeout)
-
-        # Temporarily swap out the persistent client
-        original_async_client = self._async_client
-        self._async_client = client
-
-        try:
-            return asyncio.run(
-                self._run_parallel_requests_async(
-                    coroutines, concurrency, return_exceptions
-                )
-            )
-        finally:
-            self._async_client = original_async_client
+    async def _add_auth_headers(self, **kwargs) -> Any:
+        """Add authorization header to request headers."""
+        kwargs["headers"] = kwargs.get("headers", {})
+        token = await self.get_access_token()
+        kwargs["headers"]["Authorization"] = f"Bearer {token}"
+        return kwargs
 
     def _build_url_and_content(
         self,
@@ -182,13 +163,6 @@ class _HttpClient:
             )
 
         return url, content
-
-    async def _add_auth_headers(self, **kwargs) -> Any:
-        """Add authorization header to request headers."""
-        kwargs["headers"] = kwargs.get("headers", {})
-        token = await self.get_access_token()
-        kwargs["headers"]["Authorization"] = f"Bearer {token}"
-        return kwargs
 
     async def get_access_token(self) -> str:
         """

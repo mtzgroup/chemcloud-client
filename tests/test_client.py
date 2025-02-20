@@ -10,19 +10,29 @@ def test_version():
 
 
 def test_compute(
-    settings, patch_openapi_endpoint, patch_compute_endpoints, prog_input, jwt
+    settings,
+    patch_openapi_endpoint,
+    patch_compute_endpoints,
+    patch_compute_output_endpoint,
+    prog_input,
+    jwt,
 ):
-    client = CCClient(settings=settings)
+    client = CCClient()
     client._http_client._access_token = jwt
 
     result = client.compute("psi4", prog_input)
     assert isinstance(result, ProgramOutput)
+    assert result.success is True
 
 
 def test_compute_future(
-    settings, patch_openapi_endpoint, patch_compute_endpoints, prog_input, jwt
+    settings,
+    patch_openapi_endpoint,
+    patch_compute_endpoints,
+    prog_input,
+    jwt,
 ):
-    client = CCClient(settings=settings)
+    client = CCClient()
     client._http_client._access_token = jwt
 
     future = client.compute("psi4", prog_input, return_future=True)
@@ -34,7 +44,7 @@ def test_compute_future(
 def test_compute_batch_future(
     settings, patch_openapi_endpoint, patch_compute_endpoints, prog_input, jwt
 ):
-    client = CCClient(settings=settings)
+    client = CCClient()
     client._http_client._access_token = jwt
 
     future = client.compute("psi4", [prog_input] * 2, return_future=True)
@@ -45,9 +55,9 @@ def test_compute_batch_future(
 
 
 def test_compute_queue_explicit(
-    settings,
     patch_openapi_endpoint,
     patch_compute_endpoints,
+    patch_compute_output_endpoint,
     water,
     jwt,
     mocker,
@@ -56,7 +66,7 @@ def test_compute_queue_explicit(
     """
     If a queue is explicitly passed to compute(), then that value should be used.
     """
-    client = CCClient(settings=settings)
+    client = CCClient()
     client._http_client._access_token = jwt
 
     # Spy on the method that sends the HTTP request
@@ -82,6 +92,7 @@ def test_compute_queue_from_client(
     settings,
     patch_openapi_endpoint,
     patch_compute_endpoints,
+    patch_compute_output_endpoint,
     water,
     jwt,
     mocker,
@@ -114,7 +125,13 @@ def test_compute_queue_from_client(
 
 
 def test_compute_queue_from_settings(
-    settings, patch_openapi_endpoint, patch_compute_endpoints, jwt, mocker, prog_input
+    settings,
+    patch_openapi_endpoint,
+    patch_compute_endpoints,
+    patch_compute_output_endpoint,
+    jwt,
+    mocker,
+    prog_input,
 ):
     """
     If neither compute() nor CCClient specify a queue, then the queue from settings should be used.
