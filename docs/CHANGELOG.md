@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
+### Added
+
+- Full async API for `chemcloud`. This enables Jupyter support. All `chemcloud` methods have an `_async` version that can be awaited as follows:
+
+  ```python
+  from chemcloud import compute_async
+
+  ...
+  output = await compute_async("terachem", prog_inputs)
+  ```
+
 ## [0.13.3] - 2025-02-19
 
 ### Added

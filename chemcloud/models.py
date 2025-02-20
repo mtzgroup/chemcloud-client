@@ -1,19 +1,19 @@
+import asyncio
 import json
 import logging
 import traceback
-from base64 import urlsafe_b64encode
-from collections.abc import Generator
+from collections.abc import AsyncGenerator, Generator
 from enum import Enum
 from pathlib import Path
 from time import sleep, time
 from typing import TYPE_CHECKING, Any, Optional, Union, cast
 from uuid import uuid4
 
+from httpx import HTTPError
 from pydantic import BaseModel, field_validator, model_validator
 from qcio import Files, Inputs, ProgramOutput
 from typing_extensions import Self
 
-from .config import settings
 from .exceptions import TimeoutError
 
 # Option 1: Use TYPE_CHECKING for static type hints.
@@ -138,8 +138,8 @@ class FutureOutput(BaseModel):
             raise AttributeError("Tasks submitted as a list. Use `task_ids` instead.")
         return self.task_ids[0]
 
-    def refresh(self) -> None:
-        """Refresh the statuses and program_outputs of uncollected tasks."""
+    async def refresh_async(self) -> None:
+        """Refresh the status and output for uncollected tasks."""
         logger.debug("Refreshing task statuses and outputs.")
 
         # Identify unfinished tasks
@@ -155,45 +155,35 @@ class FutureOutput(BaseModel):
         coroutines = [
             self.client.fetch_output_async(self.task_ids[i]) for i in unfinished_indices
         ]
-
         # Run the coroutines in parallel; collect statues and results.
-        results = self.client._http_client.run_parallel_requests(
-            coroutines, settings.chemcloud_concurrency, return_exceptions=True
-        )
-
-        # Update the statuses and outputs based on the results.
         logger.info(f"Refreshing {len(unfinished_indices)} unfinished task(s).")
+        results = await asyncio.gather(*coroutines, return_exceptions=True)
+
+        # Update statuses and outputs based on results
         for i, result in zip(unfinished_indices, results):
-            # Insulate users against all exceptions for now
-            if isinstance(result, Exception):
+            # Insulate users against all HTTP errors
+            if isinstance(result, HTTPError):
                 logger.error(
                     f"Error collecting task {self.task_ids[i]}: {result}", exc_info=True
                 )
                 self.statuses[i] = TaskStatus.FAILURE
                 self.outputs[i] = self._output_from_exception(result, self.inputs[i])
             else:
+                assert (
+                    isinstance(result, tuple) and len(result) == 2
+                ), "Invalid result returned."
                 logger.debug(f"Task {self.task_ids[i]} collected: status {result[0]}")
                 self.statuses[i], self.outputs[i] = result
 
-    @property
-    def is_ready(self) -> bool:
-        """
-        Contacts the ChemCloud server to collect task status and program outputs.
+    def refresh(self):
+        """Sync wrapper around `refresh_async`."""
+        return self.client.run(self.refresh_async())
 
-        Returns:
-            True if all tasks are complete, i.e., in a READY_STATE (SUCCESS, FAILURE, or REVOKED).
-        """
-        self.refresh()
-        return all(
-            (res is not None or status in READY_STATES)
-            for status, res in zip(self.statuses, self.outputs)
-        )
-
-    def get(
+    async def get_async(
         self, timeout: Optional[float] = None, initial_interval: float = 1.0
     ) -> Union[ProgramOutput, list[ProgramOutput]]:
         """
-        Block until all tasks complete and return their program_outputs.
+        Block until all tasks complete and return their ProgramOutputs.
 
         If only one task was submitted, returns the single result;
         otherwise, returns a list of program_outputs.
@@ -208,10 +198,10 @@ class FutureOutput(BaseModel):
         Raises:
             TimeoutError: If the timeout is exceeded before all tasks complete.
         """
-        start_time = time()
+        start = time()
         interval = initial_interval
-        while not self.is_ready:
-            elapsed = time() - start_time
+        while not await self.is_ready_async():
+            elapsed = time() - start
             logger.debug(
                 f"Waiting for tasks to complete... elapsed time: {elapsed:.2f}s"
             )
@@ -221,29 +211,42 @@ class FutureOutput(BaseModel):
                 )
             # Increase interval gradually (up to a max value)
             interval = min(interval * 1.5, 30.0)
-            self.refresh()
+            await self.refresh_async()
             logger.debug(f"Sleeping for {interval:.2f} seconds before next poll.")
-            sleep(interval)
+            await asyncio.sleep(interval)
 
         logger.info("All tasks are ready. Returning results.")
-        # Return a single result if only one task_id was provided.
         assert all(
             output is not None for output in self.outputs
         ), "All outputs should be collected at this point."
-
         if self.return_single_output:
             return cast(ProgramOutput, self.outputs[0])
-        else:
-            return cast(list[ProgramOutput], self.outputs)
+        return cast(list[ProgramOutput], self.outputs)
 
-    def as_completed(
+    def get(self, *args, **kwargs) -> Union[ProgramOutput, list[ProgramOutput]]:
+        """Sync wrapper around `get_async`."""
+        return self.client.run(self.get_async(*args, **kwargs))
+
+    async def is_ready_async(self) -> bool:
+        """
+        Asynchronously refreshes the statuses and checks if all tasks are complete.
+        """
+        await self.refresh_async()
+        return all(status in READY_STATES for status in self.statuses)
+
+    @property
+    def is_ready(self) -> bool:
+        """Synch wrapper around `is_ready_async`."""
+        return self.client.run(self.is_ready_async())
+
+    async def as_completed_async(
         self, initial_interval: float = 1.0
-    ) -> Generator[ProgramOutput, None, None]:
+    ) -> AsyncGenerator[ProgramOutput, None]:
         """
         Yields ProgramOutput objects as tasks become ready (SUCCESS, FAILURE, or REVOKED).
         Blocks until all tasks have finished or the generator is exhausted.
 
-        This uses the same refresh logic as `.get()`, so it will automatically
+        This uses the same refresh logic as `.get_async()`, so it will automatically
         handle errors and generate ProgramOutput objects (including error placeholders)
         in the same way. The order in which results are yielded is not guaranteed
         to match the exact order tasks finish on the server.
@@ -256,7 +259,42 @@ class FutureOutput(BaseModel):
         Yields:
             ProgramOutput objects for each task as they become ready.
             If a task fails, the yielded ProgramOutput will contain
-            error/traceback information (just like `.get()`).
+            error/traceback information (just like `.get_async()`).
+        """
+        done_indices: set[int] = set()
+        interval = initial_interval
+        while len(done_indices) < len(self.task_ids):
+            logger.debug("Polling for task completions...")
+            await self.refresh_async()
+            any_new = False
+            for i, status in enumerate(self.statuses):
+                if i not in done_indices and status in READY_STATES:
+                    logger.info(
+                        f"Task {self.task_ids[i]} is complete with status {status}."
+                    )
+                    done_indices.add(i)
+                    any_new = True
+                    if self.outputs[i] is not None:
+                        yield cast(ProgramOutput, self.outputs[i])
+                        self.outputs[i] = None  # Optional: clear to free memory
+
+            if any_new:
+                # Reset interval if new completions were found.
+                interval = initial_interval
+
+            else:
+                interval = min(interval * 1.5, 30.0)
+                logger.debug(f"No new completions; sleeping {interval:.2f} seconds.")
+                await asyncio.sleep(interval)
+
+    def as_completed(
+        self, initial_interval: float = 1.0
+    ) -> Generator[ProgramOutput, None, None]:
+        """
+        Synchronous implementation of `as_completed_async`.
+
+        Cannot directly wrap async version due to it containing an AsyncGenerator, and
+        asyncio.sleep() so we must reimplement the logic here.
         """
         done_indices: set[int] = set()
         interval = initial_interval
@@ -293,7 +331,7 @@ class FutureOutput(BaseModel):
         tb_str = "".join(traceback.format_exception(type(exc), exc, exc.__traceback__))
         stdout_str = (
             "The ChemCloud server was unable to return this result. "
-            "Please open an issue at https://github.com/mtzgroup/chemcloud-server/issues "
+            "Please open an issue at https://github.com/mtzgroup/chemcloud-client/issues "
             "and include this entire ProgramOutput object in the issue description. "
             "You can dump this object to a JSON file using `output.save('output.json')`."
         )
@@ -323,8 +361,7 @@ class FutureOutput(BaseModel):
         path = (
             Path(path)
             if path is not None
-            else Path.cwd()
-            / f"future-{urlsafe_b64encode(uuid4().bytes).rstrip(b'=').decode('ascii')}.json"
+            else Path.cwd() / f"future-{uuid4().hex}.json"
         )
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(json.dumps(self.model_dump()))

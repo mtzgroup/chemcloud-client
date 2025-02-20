@@ -1,6 +1,9 @@
+import asyncio
 import logging
-from typing import Any, Optional, Union
+from asyncio import Semaphore
+from typing import Any, Coroutine, Optional, Union
 
+from httpx import AsyncClient
 from qcio import InputType, ProgramOutput
 from typing_extensions import TypeAlias
 
@@ -54,7 +57,7 @@ class CCClient:
             chemcloud_password=chemcloud_password,
             profile=profile,
             chemcloud_domain=chemcloud_domain,
-            settings=settings,  # Assume settings is injected here
+            settings=settings,
         )
         self.queue = queue
         self._settings = settings
@@ -69,38 +72,10 @@ class CCClient:
         """Returns chemcloud client version"""
         return __version__
 
-    @property
-    def supported_programs(self) -> list[str]:
-        """Compute programs currently supported by ChemCloud.
-
-        Returns:
-            List of programs currently supported by ChemCloud."""
-        try:
-            programs = self.openapi_spec["components"]["schemas"]["SupportedPrograms"][
-                "enum"
-            ]
-        except (KeyError, IndexError):
-            logger.warning("Cannot locate currently supported programs.")
-            programs = [""]
-        return programs
-
-    @property
-    def openapi_spec(self) -> dict[str, Any]:
-        """Gets OpenAPI specification from ChemCloud Server"""
-        if self._openapi_spec is None:
-            self._openapi_spec = self._http_client.run_parallel_requests(
-                [
-                    self._http_client._request_async(
-                        "get", "/openapi.json", api_call=False
-                    )
-                ]
-            )[0]
-        return self._openapi_spec
-
-    def compute(
+    async def compute_async(
         self,
         program: str,
-        inp_obj: QCIOInputsOrList,
+        inp_obj: Union[Any, list[Any]],
         *,
         collect_stdout: bool = True,
         collect_files: bool = False,
@@ -110,7 +85,7 @@ class CCClient:
         queue: Optional[str] = None,
         return_future: bool = False,
     ) -> Union[ProgramOutput, list[ProgramOutput], FutureOutput]:
-        """Submit a computation to ChemCloud.
+        """Asynchronously submit a computation to ChemCloud.
 
         Parameters:
             program: A program name matching one of the self.supported_programs
@@ -134,7 +109,6 @@ class CCClient:
             return_future: If True, return a FutureOutput object. If False, block and
                 return the ProgramOutput object(s) directly.
 
-
         Returns:
             Object providing access to a computation's eventual result. You can check a
             computation's status by running .status on the FutureOutput object or
@@ -146,37 +120,34 @@ class CCClient:
         logger.info(
             f"Submitting compute job for program {program} with inputs {inp_obj}."
         )
-
-        if program not in self.supported_programs:
+        supported_programs = await self.supported_programs_async()
+        if program not in supported_programs:
             raise UnsupportedProgramError(
-                f"Please use one of the following programs: {self.supported_programs}"
+                f"Please use one of the following programs: {supported_programs}"
             )
+        url_params = {
+            "program": program,
+            "collect_stdout": collect_stdout,
+            "collect_files": collect_files,
+            "collect_wfn": collect_wfn,
+            "rm_scratch_dir": rm_scratch_dir,
+            "propagate_wfn": propagate_wfn,
+            "queue": queue or self.queue or self._settings.chemcloud_queue,
+        }
 
-        url_params = dict(
-            program=program,
-            collect_stdout=collect_stdout,
-            collect_files=collect_files,
-            collect_wfn=collect_wfn,
-            rm_scratch_dir=rm_scratch_dir,
-            propagate_wfn=propagate_wfn,
-            queue=queue or self.queue or self._settings.chemcloud_queue,
-        )
+        # Normalize inputs to a list.
+        inp_list = [inp_obj] if not isinstance(inp_obj, list) else inp_obj
 
-        if not isinstance(inp_obj, list):
-            inp_list = [inp_obj]
-        else:
-            inp_list = inp_obj
-
-        # Create a list of coroutines to submit each compute request.
+        # Create a list of coroutines to submit compute requests.
         coroutines = [
             self._http_client._authenticated_request_async(
                 "post", "/compute", data=inp, params=url_params
             )
             for inp in inp_list
         ]
+        # Use asyncio.gather to run them concurrently.
+        task_ids = await asyncio.gather(*coroutines)
 
-        # Use the HTTP client's parallel runner with the desired concurrency.
-        task_ids = self._http_client.run_parallel_requests(coroutines)
         future = FutureOutput(
             task_ids=task_ids,
             inputs=inp_list,
@@ -186,24 +157,19 @@ class CCClient:
         )
         if return_future:
             return future
-        return future.get()
+        return await future.get_async()
 
-    def fetch_output(
-        self, task_id: str
-    ) -> tuple[TaskStatus, Optional[Union[ProgramOutput, list[ProgramOutput]]]]:
-        """
-        Synchronously fetch the output for a single task.
-        """
-        # Run the asynchronous authenticated request synchronously.
-        return self._http_client.run_parallel_requests(
-            [self.fetch_output_async(task_id)]
-        )[0]
+    def compute(
+        self, *args, **kwargs
+    ) -> Union[ProgramOutput, list[ProgramOutput], FutureOutput]:
+        """Synchronous wrapper for compute_async."""
+        return self.run(self.compute_async(*args, **kwargs))
 
     async def fetch_output_async(
         self, task_id: str
     ) -> tuple[TaskStatus, Optional[ProgramOutput]]:
         """
-        Perform an authenticated request to check the status and output for a single task.
+        Get the status and output (if it is complete) of a task.
 
         Parameters:
             task_id: The ID of the task to check.
@@ -220,6 +186,47 @@ class CCClient:
             output = ProgramOutput(**output)
         return status, output
 
+    def fetch_output(
+        self, task_id: str
+    ) -> tuple[TaskStatus, Optional[Union[ProgramOutput, list[ProgramOutput]]]]:
+        """Sync wrapper for `fetch_output_async`."""
+        return self.run(self.fetch_output_async(task_id))
+
+    async def _run_helper(self, coro: Coroutine[Any, Any, Any]) -> Any:
+        """
+        Internal helper that enables running async methods synchronously.
+
+        We need this method in addition .run() because the semaphore must be created
+        within an async context in order to be bound to the current event loop. We add
+        the AsyncClient swap here for convenience (it could be in .run() be valid).
+        """
+        # Create a fresh AsyncClient and Semaphore bound to the current event loop.
+        temp_client = AsyncClient(timeout=self._http_client.async_client.timeout)
+        temp_semaphore = Semaphore(self._settings.chemcloud_concurrency)
+
+        # Save the original client and semaphore.
+        original_client = self._http_client.async_client
+        original_semaphore = self._http_client.semaphore
+
+        self._http_client._async_client = temp_client
+        self._http_client._semaphore = temp_semaphore
+
+        try:
+            return await coro
+        finally:
+            # Restore original client and semaphore.
+            self._http_client._async_client = original_client
+            self._http_client._semaphore = original_semaphore
+            await temp_client.aclose()
+
+    def run(self, coro: Coroutine[Any, Any, Any]) -> Any:
+        """
+        Synchronous runner for async methods. Akin to asyncio.run() but centralized
+        on CCClient since we have to modify the ._http_client._async_client and
+        semaphore.
+        """
+        return asyncio.run(self._run_helper(coro))
+
     def hello_world(self, name: Optional[str] = None) -> str:
         """A simple endpoint to check connectivity to ChemCloud.
 
@@ -233,13 +240,39 @@ class CCClient:
         logger.info(f"Sending hello_world request with name: {name}")
 
         # Run a single asynchronous request synchronously via run_parallel_requests.
-        return self._http_client.run_parallel_requests(
-            [
-                self._http_client._request_async(
-                    "get", "/hello-world", params={"name": name}, api_call=False
-                )
-            ]
-        )[0]
+        return self.run(
+            self._http_client._request_async(
+                "get", "/hello-world", params={"name": name}, api_call=False
+            )
+        )
+
+    async def openapi_spec_async(self) -> dict[str, Any]:
+        """
+        Asynchronously retrieves and caches the OpenAPI specification from the ChemCloud server.
+        """
+        if self._openapi_spec is None:
+            result = await self._http_client._request_async(
+                "get", "/openapi.json", api_call=False
+            )
+            self._openapi_spec = result
+        return self._openapi_spec
+
+    async def supported_programs_async(self) -> list[str]:
+        """
+        Asynchronously returns the list of supported programs from the OpenAPI specification.
+        """
+        spec = await self.openapi_spec_async()
+        try:
+            programs = spec["components"]["schemas"]["SupportedPrograms"]["enum"]
+        except (KeyError, IndexError):
+            logger.warning("Cannot locate currently supported programs.")
+            programs = [""]
+        return programs
+
+    @property
+    def supported_programs(self) -> list[str]:
+        """Sync wrapper for supported_programs_async."""
+        return self.run(self.supported_programs_async())
 
     def setup_profile(self, profile: Optional[str] = None) -> None:
         """Setup profiles for authentication with ChemCloud.
@@ -260,9 +293,9 @@ class CCClient:
             f"✅ If you don't have an account, please signup at: {self._http_client._chemcloud_domain}/signup"
         )
         # Use the async _set_tokens_from_user_input wrapped via run_parallel_requests
-        access_token, refresh_token = self._http_client.run_parallel_requests(
-            [self._http_client._set_tokens_from_user_input()]
-        )[0]
+        access_token, refresh_token = self.run(
+            self._http_client._set_tokens_from_user_input()
+        )
         self._http_client.write_tokens_to_credentials_file(
             access_token, refresh_token, profile=profile
         )
