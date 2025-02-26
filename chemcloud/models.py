@@ -200,7 +200,9 @@ class FutureOutput(BaseModel):
         """
         start = time()
         interval = initial_interval
+        completed = 0
         while not await self.is_ready_async():
+            # Check for timeout
             elapsed = time() - start
             logger.debug(
                 f"Waiting for tasks to complete... elapsed time: {elapsed:.2f}s"
@@ -209,9 +211,16 @@ class FutureOutput(BaseModel):
                 raise TimeoutError(
                     f"Timeout of {timeout} seconds exceeded while waiting for tasks."
                 )
-            # Increase interval gradually (up to a max value)
-            interval = min(interval * 1.5, 30.0)
+            # Refresh statuses and outputs
             await self.refresh_async()
+            # Check for new completions
+            new_completed = sum(status in READY_STATES for status in self.statuses)
+            if new_completed > completed:
+                completed = new_completed
+                interval = initial_interval  # Reset interval if new completions found
+            else:
+                # Increase interval gradually (up to a max value)
+                interval = min(interval * 1.5, 30.0)
             logger.debug(f"Sleeping for {interval:.2f} seconds before next poll.")
             await asyncio.sleep(interval)
 

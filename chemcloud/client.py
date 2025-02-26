@@ -11,7 +11,7 @@ from . import __version__
 from .config import Settings, settings
 from .exceptions import UnsupportedProgramError
 from .http_client import _HttpClient
-from .models import FutureOutput, TaskStatus
+from .models import READY_STATES, FutureOutput, TaskStatus
 
 logger = logging.getLogger(__name__)
 
@@ -166,13 +166,14 @@ class CCClient:
         return self.run(self.compute_async(*args, **kwargs))
 
     async def fetch_output_async(
-        self, task_id: str
+        self, task_id: str, delete: bool = True
     ) -> tuple[TaskStatus, Optional[ProgramOutput]]:
         """
         Get the status and output (if it is complete) of a task.
 
         Parameters:
             task_id: The ID of the task to check.
+            delete: Whether to delete the output from the server after fetching.
 
         Returns:
             A tuple of the task status and the output object if available.
@@ -184,6 +185,9 @@ class CCClient:
         output = response.get("program_output")
         if output is not None:
             output = ProgramOutput(**output)
+        if status in READY_STATES and delete:
+            # Fire-and-forget the deletion task
+            asyncio.create_task(self.delete_output_async(task_id))
         return status, output
 
     def fetch_output(
@@ -191,6 +195,23 @@ class CCClient:
     ) -> tuple[TaskStatus, Optional[Union[ProgramOutput, list[ProgramOutput]]]]:
         """Sync wrapper for `fetch_output_async`."""
         return self.run(self.fetch_output_async(task_id))
+
+    async def delete_output_async(self, task_id: str) -> None:
+        """
+        Delete a task's output from the ChemCloud server.
+
+        Parameters:
+            task_id: The ID of the task to delete.
+        """
+        logger.debug(f"Deleting output for task {task_id}")
+        await self._http_client._authenticated_request_async(
+            "delete", f"/compute/output/{task_id}"
+        )
+        logger.debug(f"Output deleted for task {task_id}")
+
+    def delete_output(self, task_id: str) -> None:
+        """Sync wrapper for `delete_output_async`."""
+        return self.run(self.delete_output_async(task_id))
 
     async def _run_helper(self, coro: Coroutine[Any, Any, Any]) -> Any:
         """
@@ -200,24 +221,36 @@ class CCClient:
         within an async context in order to be bound to the current event loop. We add
         the AsyncClient swap here for convenience (it could be in .run() be valid).
         """
-        # Create a fresh AsyncClient and Semaphore bound to the current event loop.
-        temp_client = AsyncClient(timeout=self._http_client.async_client.timeout)
-        temp_semaphore = Semaphore(self._settings.chemcloud_concurrency)
-
-        # Save the original client and semaphore.
+        # Save the original client, semaphore, and lock.
         original_client = self._http_client.async_client
         original_semaphore = self._http_client.semaphore
+        original_lock = self._http_client._token_refresh_lock
 
-        self._http_client._async_client = temp_client
-        self._http_client._semaphore = temp_semaphore
+        # Create and set the new client, semaphore and lock
+        self._http_client._async_client = AsyncClient(
+            timeout=self._http_client.async_client.timeout,
+        )
+        self._http_client._semaphore = Semaphore(self._settings.chemcloud_concurrency)
+        self._http_client._token_refresh_lock = asyncio.Lock()
 
         try:
             return await coro
         finally:
+            # Wait for any pending background tasks (excluding the current one)
+            # Ensures delete tasks are completed before closing the client.
+            pending = [
+                task
+                for task in asyncio.all_tasks()
+                if task is not asyncio.current_task()
+            ]
+            if pending:
+                await asyncio.gather(*pending, return_exceptions=True)
+
             # Restore original client and semaphore.
+            await self._http_client._async_client.aclose()
             self._http_client._async_client = original_client
             self._http_client._semaphore = original_semaphore
-            await temp_client.aclose()
+            self._http_client._token_refresh_lock = original_lock
 
     def run(self, coro: Coroutine[Any, Any, Any]) -> Any:
         """

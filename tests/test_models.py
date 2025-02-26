@@ -1,5 +1,4 @@
 import json
-import re
 from pathlib import Path
 
 from pytest_httpx import HTTPXMock
@@ -35,21 +34,13 @@ def test_result_pending(
 def test_result_success(
     settings,
     jwt,
-    httpx_mock: HTTPXMock,
+    patch_compute_output_endpoint,
 ):
     client = CCClient(settings=settings)
     client._http_client._access_token = jwt
 
     output: ProgramOutput = ProgramOutput.model_validate_json(
         (Path(__file__).parent / "water.b3lyp.6-31g.energy.json").read_text()
-    )
-    url = re.compile(".*/compute/output")
-    httpx_mock.add_response(
-        url=url,
-        json={
-            "status": "SUCCESS",
-            "program_output": json.loads(output.model_dump_json()),
-        },
     )
 
     future = FutureOutput(
@@ -64,7 +55,9 @@ def test_result_success(
     assert isinstance(output, ProgramOutput)  # type: ignore
 
 
-def test_as_completed(httpx_mock, settings, jwt, prog_input):
+def test_as_completed(
+    httpx_mock, settings, jwt, prog_input, patch_compute_output_endpoint
+):
     # Instantiate the client and set a valid token.
     client = CCClient(settings=settings)
     client._http_client._access_token = jwt
@@ -72,24 +65,6 @@ def test_as_completed(httpx_mock, settings, jwt, prog_input):
     # Load a valid ProgramOutput from a JSON file.
     output: ProgramOutput = ProgramOutput.model_validate_json(
         (Path(__file__).parent / "water.b3lyp.6-31g.energy.json").read_text()
-    )
-
-    # Create a regex for matching compute output endpoints.
-    url = re.compile(".*/compute/output")
-
-    # First response: task is still pending (no program_output).
-    httpx_mock.add_response(
-        url=url,
-        json={"status": "PENDING", "program_output": None},
-    )
-
-    # Second response: task is complete with a successful output.
-    httpx_mock.add_response(
-        url=url,
-        json={
-            "status": "SUCCESS",
-            "program_output": json.loads(output.model_dump_json()),
-        },
     )
 
     # Create a FutureOutput instance with a single task.

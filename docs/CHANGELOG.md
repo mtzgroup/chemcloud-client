@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
+### Added
+
+- Temporary `._token_refresh_lock` `asyncio.Lock` bound to the new event loop for synchronous request invocations.
+- `DELETE` request to the ChemCloud server after successfully receiving `ProgramOutput`.
+- Adaptive polling interval to `FutureOutput.get_async()` so that the interval is reset if results are collected.
+
+### Removed
+
+- `_HTTPClient._httpx_timeout`.
+
 ## [0.14.0] - 2025-02-20
 
 ### Added
