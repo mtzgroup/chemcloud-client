@@ -726,6 +726,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#chemcloud.models.FutureOutput.refresh_async" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;refresh_async
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#chemcloud.models.FutureOutput.refresh" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;refresh
@@ -735,9 +744,36 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#chemcloud.models.FutureOutput.get_async" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;get_async
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#chemcloud.models.FutureOutput.get" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;get
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chemcloud.models.FutureOutput.is_ready_async" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;is_ready_async
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chemcloud.models.FutureOutput.as_completed_async" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;as_completed_async
     </span>
   </a>
   
@@ -957,6 +993,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#chemcloud.models.FutureOutput.refresh_async" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;refresh_async
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#chemcloud.models.FutureOutput.refresh" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;refresh
@@ -966,9 +1011,36 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#chemcloud.models.FutureOutput.get_async" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;get_async
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#chemcloud.models.FutureOutput.get" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;get
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chemcloud.models.FutureOutput.is_ready_async" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;is_ready_async
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chemcloud.models.FutureOutput.as_completed_async" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;as_completed_async
     </span>
   </a>
   
@@ -1282,30 +1354,7 @@ Generally not passed by the user, but used internally to track task status.</p>
 
     <div class="doc doc-contents ">
 
-        <p>Contacts the ChemCloud server to collect task status and program outputs.</p>
-
-
-    <p><span class="doc-section-title">Returns:</span></p>
-    <table>
-      <thead>
-        <tr>
-          <th>Type</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr class="doc-section-item">
-            <td>
-                  <code>bool</code>
-            </td>
-            <td>
-              <div class="doc-md-description">
-                <p>True if all tasks are complete, i.e., in a READY_STATE (SUCCESS, FAILURE, or REVOKED).</p>
-              </div>
-            </td>
-          </tr>
-      </tbody>
-    </table>
+        <p>Synch wrapper around <code>is_ready_async</code>.</p>
     </div>
 
 </div>
@@ -1315,17 +1364,21 @@ Generally not passed by the user, but used internally to track task status.</p>
 <div class="doc doc-object doc-function">
 
 
-<h4 id="chemcloud.models.FutureOutput.refresh" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">refresh</span>
+<h4 id="chemcloud.models.FutureOutput.refresh_async" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">refresh_async</span>
 
 
-<a href="#chemcloud.models.FutureOutput.refresh" class="headerlink" title="Permanent link">&para;</a></h4>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">refresh</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+<a href="#chemcloud.models.FutureOutput.refresh_async" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">refresh_async</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
 
-        <p>Refresh the statuses and program_outputs of uncollected tasks.</p>
+        <p>Refresh the status and output for uncollected tasks.</p>
 
             <details class="quote">
               <summary>Source code in <code>chemcloud/models.py</code></summary>
@@ -1364,8 +1417,8 @@ Generally not passed by the user, but used internally to track task status.</p>
 <span class="normal">173</span>
 <span class="normal">174</span>
 <span class="normal">175</span>
-<span class="normal">176</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">refresh</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Refresh the statuses and program_outputs of uncollected tasks.&quot;&quot;&quot;</span>
+<span class="normal">176</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">refresh_async</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Refresh the status and output for uncollected tasks.&quot;&quot;&quot;</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Refreshing task statuses and outputs.&quot;</span><span class="p">)</span>
 
     <span class="c1"># Identify unfinished tasks</span>
@@ -1381,23 +1434,23 @@ Generally not passed by the user, but used internally to track task status.</p>
     <span class="n">coroutines</span> <span class="o">=</span> <span class="p">[</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">fetch_output_async</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">task_ids</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">unfinished_indices</span>
     <span class="p">]</span>
-
     <span class="c1"># Run the coroutines in parallel; collect statues and results.</span>
-    <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">_http_client</span><span class="o">.</span><span class="n">run_parallel_requests</span><span class="p">(</span>
-        <span class="n">coroutines</span><span class="p">,</span> <span class="n">settings</span><span class="o">.</span><span class="n">chemcloud_concurrency</span><span class="p">,</span> <span class="n">return_exceptions</span><span class="o">=</span><span class="kc">True</span>
-    <span class="p">)</span>
-
-    <span class="c1"># Update the statuses and outputs based on the results.</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Refreshing </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">unfinished_indices</span><span class="p">)</span><span class="si">}</span><span class="s2"> unfinished task(s).&quot;</span><span class="p">)</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="o">*</span><span class="n">coroutines</span><span class="p">,</span> <span class="n">return_exceptions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Update statuses and outputs based on results</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">unfinished_indices</span><span class="p">,</span> <span class="n">results</span><span class="p">):</span>
-        <span class="c1"># Insulate users against all exceptions for now</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="ne">Exception</span><span class="p">):</span>
+        <span class="c1"># Insulate users against all HTTP errors</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">HTTPError</span><span class="p">):</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;Error collecting task </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">task_ids</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="kc">True</span>
             <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">statuses</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">TaskStatus</span><span class="o">.</span><span class="n">FAILURE</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_from_exception</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="p">(</span>
+                <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+            <span class="p">),</span> <span class="s2">&quot;Invalid result returned.&quot;</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Task </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">task_ids</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2"> collected: status </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">statuses</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
 </code></pre></div></td></tr></table></div>
@@ -1409,12 +1462,44 @@ Generally not passed by the user, but used internally to track task status.</p>
 <div class="doc doc-object doc-function">
 
 
-<h4 id="chemcloud.models.FutureOutput.get" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">get</span>
+<h4 id="chemcloud.models.FutureOutput.refresh" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">refresh</span>
 
 
-<a href="#chemcloud.models.FutureOutput.get" class="headerlink" title="Permanent link">&para;</a></h4>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">get</span><span class="p">(</span>
+<a href="#chemcloud.models.FutureOutput.refresh" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">refresh</span><span class="p">()</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Sync wrapper around <code>refresh_async</code>.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>chemcloud/models.py</code></summary>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">refresh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sync wrapper around `refresh_async`.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">refresh_async</span><span class="p">())</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="chemcloud.models.FutureOutput.get_async" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">get_async</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+<a href="#chemcloud.models.FutureOutput.get_async" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">get_async</span><span class="p">(</span>
     <span class="n">timeout</span><span class="p">:</span> <span class="n"><span title="typing.Optional">Optional</span></span><span class="p">[</span><span class="n">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">initial_interval</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="typing.Union">Union</span></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="qcio.ProgramOutput" href="../ProgramOutput/#qcio.models.outputs.ProgramOutput">ProgramOutput</a></span><span class="p">,</span> <span class="n">list</span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="qcio.ProgramOutput" href="../ProgramOutput/#qcio.models.outputs.ProgramOutput">ProgramOutput</a></span><span class="p">]]</span>
@@ -1422,7 +1507,7 @@ Generally not passed by the user, but used internally to track task status.</p>
 
     <div class="doc doc-contents ">
 
-        <p>Block until all tasks complete and return their program_outputs.</p>
+        <p>Block until all tasks complete and return their ProgramOutputs.</p>
 <p>If only one task was submitted, returns the single result;
 otherwise, returns a list of program_outputs.</p>
 
@@ -1521,7 +1606,17 @@ otherwise, returns a list of program_outputs.</p>
 
             <details class="quote">
               <summary>Source code in <code>chemcloud/models.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">192</span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
 <span class="normal">193</span>
 <span class="normal">194</span>
 <span class="normal">195</span>
@@ -1562,15 +1657,11 @@ otherwise, returns a list of program_outputs.</p>
 <span class="normal">230</span>
 <span class="normal">231</span>
 <span class="normal">232</span>
-<span class="normal">233</span>
-<span class="normal">234</span>
-<span class="normal">235</span>
-<span class="normal">236</span>
-<span class="normal">237</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span>
+<span class="normal">233</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_async</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">initial_interval</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">ProgramOutput</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="n">ProgramOutput</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Block until all tasks complete and return their program_outputs.</span>
+<span class="sd">    Block until all tasks complete and return their ProgramOutputs.</span>
 
 <span class="sd">    If only one task was submitted, returns the single result;</span>
 <span class="sd">    otherwise, returns a list of program_outputs.</span>
@@ -1585,10 +1676,12 @@ otherwise, returns a list of program_outputs.</p>
 <span class="sd">    Raises:</span>
 <span class="sd">        TimeoutError: If the timeout is exceeded before all tasks complete.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
     <span class="n">interval</span> <span class="o">=</span> <span class="n">initial_interval</span>
-    <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_ready</span><span class="p">:</span>
-        <span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+    <span class="n">completed</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_ready_async</span><span class="p">():</span>
+        <span class="c1"># Check for timeout</span>
+        <span class="n">elapsed</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;Waiting for tasks to complete... elapsed time: </span><span class="si">{</span><span class="n">elapsed</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s&quot;</span>
         <span class="p">)</span>
@@ -1596,22 +1689,26 @@ otherwise, returns a list of program_outputs.</p>
             <span class="k">raise</span> <span class="ne">TimeoutError</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;Timeout of </span><span class="si">{</span><span class="n">timeout</span><span class="si">}</span><span class="s2"> seconds exceeded while waiting for tasks.&quot;</span>
             <span class="p">)</span>
-        <span class="c1"># Increase interval gradually (up to a max value)</span>
-        <span class="n">interval</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">interval</span> <span class="o">*</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">30.0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
+        <span class="c1"># Refresh statuses and outputs</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">refresh_async</span><span class="p">()</span>
+        <span class="c1"># Check for new completions</span>
+        <span class="n">new_completed</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">status</span> <span class="ow">in</span> <span class="n">READY_STATES</span> <span class="k">for</span> <span class="n">status</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">statuses</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">new_completed</span> <span class="o">&gt;</span> <span class="n">completed</span><span class="p">:</span>
+            <span class="n">completed</span> <span class="o">=</span> <span class="n">new_completed</span>
+            <span class="n">interval</span> <span class="o">=</span> <span class="n">initial_interval</span>  <span class="c1"># Reset interval if new completions found</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Increase interval gradually (up to a max value)</span>
+            <span class="n">interval</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">interval</span> <span class="o">*</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">30.0</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sleeping for </span><span class="si">{</span><span class="n">interval</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> seconds before next poll.&quot;</span><span class="p">)</span>
-        <span class="n">sleep</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
 
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;All tasks are ready. Returning results.&quot;</span><span class="p">)</span>
-    <span class="c1"># Return a single result if only one task_id was provided.</span>
     <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span>
         <span class="n">output</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">output</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span>
     <span class="p">),</span> <span class="s2">&quot;All outputs should be collected at this point.&quot;</span>
-
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_single_output</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="n">ProgramOutput</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="nb">list</span><span class="p">[</span><span class="n">ProgramOutput</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="nb">list</span><span class="p">[</span><span class="n">ProgramOutput</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -1621,21 +1718,93 @@ otherwise, returns a list of program_outputs.</p>
 <div class="doc doc-object doc-function">
 
 
-<h4 id="chemcloud.models.FutureOutput.as_completed" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">as_completed</span>
+<h4 id="chemcloud.models.FutureOutput.get" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">get</span>
 
 
-<a href="#chemcloud.models.FutureOutput.as_completed" class="headerlink" title="Permanent link">&para;</a></h4>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">as_completed</span><span class="p">(</span>
+<a href="#chemcloud.models.FutureOutput.get" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">get</span><span class="p">(</span>
+    <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="typing.Union">Union</span></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="qcio.ProgramOutput" href="../ProgramOutput/#qcio.models.outputs.ProgramOutput">ProgramOutput</a></span><span class="p">,</span> <span class="n">list</span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="qcio.ProgramOutput" href="../ProgramOutput/#qcio.models.outputs.ProgramOutput">ProgramOutput</a></span><span class="p">]]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Sync wrapper around <code>get_async</code>.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>chemcloud/models.py</code></summary>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">ProgramOutput</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="n">ProgramOutput</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sync wrapper around `get_async`.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_async</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="chemcloud.models.FutureOutput.is_ready_async" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">is_ready_async</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+<a href="#chemcloud.models.FutureOutput.is_ready_async" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">is_ready_async</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">bool</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Asynchronously refreshes the statuses and checks if all tasks are complete.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>chemcloud/models.py</code></summary>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">is_ready_async</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Asynchronously refreshes the statuses and checks if all tasks are complete.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">refresh_async</span><span class="p">()</span>
+    <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">status</span> <span class="ow">in</span> <span class="n">READY_STATES</span> <span class="k">for</span> <span class="n">status</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">statuses</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="chemcloud.models.FutureOutput.as_completed_async" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">as_completed_async</span>
+
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+<a href="#chemcloud.models.FutureOutput.as_completed_async" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">as_completed_async</span><span class="p">(</span>
     <span class="n">initial_interval</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="collections.abc.Generator">Generator</span></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="qcio.ProgramOutput" href="../ProgramOutput/#qcio.models.outputs.ProgramOutput">ProgramOutput</a></span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="collections.abc.AsyncGenerator">AsyncGenerator</span></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="qcio.ProgramOutput" href="../ProgramOutput/#qcio.models.outputs.ProgramOutput">ProgramOutput</a></span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
 
         <p>Yields ProgramOutput objects as tasks become ready (SUCCESS, FAILURE, or REVOKED).
 Blocks until all tasks have finished or the generator is exhausted.</p>
-<p>This uses the same refresh logic as <code>.get()</code>, so it will automatically
+<p>This uses the same refresh logic as <code>.get_async()</code>, so it will automatically
 handle errors and generate ProgramOutput objects (including error placeholders)
 in the same way. The order in which results are yielded is not guaranteed
 to match the exact order tasks finish on the server.</p>
@@ -1683,7 +1852,7 @@ to match the exact order tasks finish on the server.</p>
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-internal" title="qcio.ProgramOutput" href="../ProgramOutput/#qcio.models.outputs.ProgramOutput">ProgramOutput</a></code>
+                  <code><span title="collections.abc.AsyncGenerator">AsyncGenerator</span>[<a class="autorefs autorefs-internal" title="qcio.ProgramOutput" href="../ProgramOutput/#qcio.models.outputs.ProgramOutput">ProgramOutput</a>, None]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1693,7 +1862,7 @@ to match the exact order tasks finish on the server.</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-internal" title="qcio.ProgramOutput" href="../ProgramOutput/#qcio.models.outputs.ProgramOutput">ProgramOutput</a></code>
+                  <code><span title="collections.abc.AsyncGenerator">AsyncGenerator</span>[<a class="autorefs autorefs-internal" title="qcio.ProgramOutput" href="../ProgramOutput/#qcio.models.outputs.ProgramOutput">ProgramOutput</a>, None]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1703,11 +1872,11 @@ to match the exact order tasks finish on the server.</p>
           </tr>
           <tr class="doc-section-item">
             <td>
-                  <code><a class="autorefs autorefs-internal" title="qcio.ProgramOutput" href="../ProgramOutput/#qcio.models.outputs.ProgramOutput">ProgramOutput</a></code>
+                  <code><span title="collections.abc.AsyncGenerator">AsyncGenerator</span>[<a class="autorefs autorefs-internal" title="qcio.ProgramOutput" href="../ProgramOutput/#qcio.models.outputs.ProgramOutput">ProgramOutput</a>, None]</code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>error/traceback information (just like <code>.get()</code>).</p>
+                <p>error/traceback information (just like <code>.get_async()</code>).</p>
               </div>
             </td>
           </tr>
@@ -1716,19 +1885,7 @@ to match the exact order tasks finish on the server.</p>
 
             <details class="quote">
               <summary>Source code in <code>chemcloud/models.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">239</span>
-<span class="normal">240</span>
-<span class="normal">241</span>
-<span class="normal">242</span>
-<span class="normal">243</span>
-<span class="normal">244</span>
-<span class="normal">245</span>
-<span class="normal">246</span>
-<span class="normal">247</span>
-<span class="normal">248</span>
-<span class="normal">249</span>
-<span class="normal">250</span>
-<span class="normal">251</span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">251</span>
 <span class="normal">252</span>
 <span class="normal">253</span>
 <span class="normal">254</span>
@@ -1764,14 +1921,24 @@ to match the exact order tasks finish on the server.</p>
 <span class="normal">284</span>
 <span class="normal">285</span>
 <span class="normal">286</span>
-<span class="normal">287</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">as_completed</span><span class="p">(</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">as_completed_async</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">initial_interval</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">ProgramOutput</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">ProgramOutput</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Yields ProgramOutput objects as tasks become ready (SUCCESS, FAILURE, or REVOKED).</span>
 <span class="sd">    Blocks until all tasks have finished or the generator is exhausted.</span>
 
-<span class="sd">    This uses the same refresh logic as `.get()`, so it will automatically</span>
+<span class="sd">    This uses the same refresh logic as `.get_async()`, so it will automatically</span>
 <span class="sd">    handle errors and generate ProgramOutput objects (including error placeholders)</span>
 <span class="sd">    in the same way. The order in which results are yielded is not guaranteed</span>
 <span class="sd">    to match the exact order tasks finish on the server.</span>
@@ -1784,7 +1951,103 @@ to match the exact order tasks finish on the server.</p>
 <span class="sd">    Yields:</span>
 <span class="sd">        ProgramOutput objects for each task as they become ready.</span>
 <span class="sd">        If a task fails, the yielded ProgramOutput will contain</span>
-<span class="sd">        error/traceback information (just like `.get()`).</span>
+<span class="sd">        error/traceback information (just like `.get_async()`).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">done_indices</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">interval</span> <span class="o">=</span> <span class="n">initial_interval</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">done_indices</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">task_ids</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Polling for task completions...&quot;</span><span class="p">)</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">refresh_async</span><span class="p">()</span>
+        <span class="n">any_new</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">status</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">statuses</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">done_indices</span> <span class="ow">and</span> <span class="n">status</span> <span class="ow">in</span> <span class="n">READY_STATES</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Task </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">task_ids</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2"> is complete with status </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="p">)</span>
+                <span class="n">done_indices</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="n">any_new</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">yield</span> <span class="n">cast</span><span class="p">(</span><span class="n">ProgramOutput</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Optional: clear to free memory</span>
+
+        <span class="k">if</span> <span class="n">any_new</span><span class="p">:</span>
+            <span class="c1"># Reset interval if new completions were found.</span>
+            <span class="n">interval</span> <span class="o">=</span> <span class="n">initial_interval</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">interval</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">interval</span> <span class="o">*</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">30.0</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No new completions; sleeping </span><span class="si">{</span><span class="n">interval</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> seconds.&quot;</span><span class="p">)</span>
+            <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="chemcloud.models.FutureOutput.as_completed" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>            <span class="doc doc-object-name doc-function-name">as_completed</span>
+
+
+<a href="#chemcloud.models.FutureOutput.as_completed" class="headerlink" title="Permanent link">&para;</a></h4>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span class="nf">as_completed</span><span class="p">(</span>
+    <span class="n">initial_interval</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="collections.abc.Generator">Generator</span></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="qcio.ProgramOutput" href="../ProgramOutput/#qcio.models.outputs.ProgramOutput">ProgramOutput</a></span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Synchronous implementation of <code>as_completed_async</code>.</p>
+<p>Cannot directly wrap async version due to it containing an AsyncGenerator, and
+asyncio.sleep() so we must reimplement the logic here.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>chemcloud/models.py</code></summary>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">as_completed</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">initial_interval</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">ProgramOutput</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Synchronous implementation of `as_completed_async`.</span>
+
+<span class="sd">    Cannot directly wrap async version due to it containing an AsyncGenerator, and</span>
+<span class="sd">    asyncio.sleep() so we must reimplement the logic here.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">done_indices</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
     <span class="n">interval</span> <span class="o">=</span> <span class="n">initial_interval</span>
@@ -1836,22 +2099,20 @@ to match the exact order tasks finish on the server.</p>
 
             <details class="quote">
               <summary>Source code in <code>chemcloud/models.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">321</span>
-<span class="normal">322</span>
-<span class="normal">323</span>
-<span class="normal">324</span>
-<span class="normal">325</span>
-<span class="normal">326</span>
-<span class="normal">327</span>
-<span class="normal">328</span>
-<span class="normal">329</span>
-<span class="normal">330</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">368</span>
+<span class="normal">369</span>
+<span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span>
+<span class="normal">374</span>
+<span class="normal">375</span>
+<span class="normal">376</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Save the FutureOutput to a JSON file.&quot;&quot;&quot;</span>
     <span class="n">path</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-        <span class="k">else</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
-        <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;future-</span><span class="si">{</span><span class="n">urlsafe_b64encode</span><span class="p">(</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">bytes</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;=&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">.json&quot;</span>
+        <span class="k">else</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;future-</span><span class="si">{</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span><span class="si">}</span><span class="s2">.json&quot;</span>
     <span class="p">)</span>
     <span class="n">path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dump</span><span class="p">()))</span>
@@ -1882,11 +2143,11 @@ to match the exact order tasks finish on the server.</p>
 
             <details class="quote">
               <summary>Source code in <code>chemcloud/models.py</code></summary>
-              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">332</span>
-<span class="normal">333</span>
-<span class="normal">334</span>
-<span class="normal">335</span>
-<span class="normal">336</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@classmethod</span>
+              <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">378</span>
+<span class="normal">379</span>
+<span class="normal">380</span>
+<span class="normal">381</span>
+<span class="normal">382</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;FutureOutput&quot;</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Load a FutureOutput from a JSON file.&quot;&quot;&quot;</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">())</span>

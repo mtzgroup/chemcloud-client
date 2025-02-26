@@ -2,62 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/</loc>
-         <lastmod>2025-02-19</lastmod>
+         <lastmod>2025-02-26</lastmod>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/CHANGELOG/</loc>
-         <lastmod>2025-02-19</lastmod>
+         <lastmod>2025-02-26</lastmod>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/dev-decisions/</loc>
-         <lastmod>2025-02-19</lastmod>
+         <lastmod>2025-02-26</lastmod>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/api-documentation/CCClient/</loc>
-         <lastmod>2025-02-19</lastmod>
+         <lastmod>2025-02-26</lastmod>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/api-documentation/FutureOutput/</loc>
-         <lastmod>2025-02-19</lastmod>
+         <lastmod>2025-02-26</lastmod>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/api-documentation/Main%20Methods/</loc>
-         <lastmod>2025-02-19</lastmod>
+         <lastmod>2025-02-26</lastmod>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/api-documentation/ProgramInputs/</loc>
-         <lastmod>2025-02-19</lastmod>
+         <lastmod>2025-02-26</lastmod>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/api-documentation/ProgramOutput/</loc>
-         <lastmod>2025-02-19</lastmod>
+         <lastmod>2025-02-26</lastmod>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/api-documentation/exceptions/</loc>
-         <lastmod>2025-02-19</lastmod>
+         <lastmod>2025-02-26</lastmod>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/tutorial/authentication/</loc>
-         <lastmod>2025-02-19</lastmod>
+         <lastmod>2025-02-26</lastmod>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/tutorial/batch-computations/</loc>
-         <lastmod>2025-02-19</lastmod>
+         <lastmod>2025-02-26</lastmod>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/tutorial/bigchem-algorithms/</loc>
-         <lastmod>2025-02-19</lastmod>
+         <lastmod>2025-02-26</lastmod>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/tutorial/compute/</loc>
-         <lastmod>2025-02-19</lastmod>
+         <lastmod>2025-02-26</lastmod>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/tutorial/geometry-optimization/</loc>
-         <lastmod>2025-02-19</lastmod>
+         <lastmod>2025-02-26</lastmod>
     </url>
     <url>
          <loc>https://mtzgroup.github.io/chemcloud-client/tutorial/supported-programs/</loc>
-         <lastmod>2025-02-19</lastmod>
+         <lastmod>2025-02-26</lastmod>
     </url>
 </urlset>
