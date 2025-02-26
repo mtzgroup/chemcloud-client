@@ -78,8 +78,8 @@ def test_compute_queue_explicit(
 
     # Verify that _authenticated_request_async was called at least once with the correct queue.
     assert (
-        spy.call_count == 2
-    ), "Should be called once to submit the task, once to get the result."
+        spy.call_count == 3
+    ), "Should be called once to submit the task, once to get the result, once to delete the result."
     # Get the keyword arguments from the first call.
     call_kwargs = spy.call_args_list[0].kwargs
     # Get the URL parameters from the first call.
@@ -114,8 +114,8 @@ def test_compute_queue_from_client(
 
     # Verify that _authenticated_request_async was called twice.
     assert (
-        spy.call_count == 2
-    ), "Should be called once to submit the task, once to get the result."
+        spy.call_count == 3
+    ), "Should be called once to submit the task, once to get the result, once to delete the result."
     # Get the keyword arguments from the first call.
     call_kwargs = spy.call_args_list[0].kwargs
     # Get the URL parameters from the first call.
@@ -149,8 +149,8 @@ def test_compute_queue_from_settings(
 
     # Verify that _authenticated_request_async was called twice.
     assert (
-        spy.call_count == 2
-    ), "Should be called once to submit the task, once to get the result."
+        spy.call_count == 3
+    ), "Should be called once to submit the task, once to get the result, once to delete the result."
     call_kwargs = spy.call_args_list[0].kwargs
     params = call_kwargs.get("params")
     assert params is not None, "No URL parameters were passed."

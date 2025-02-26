@@ -56,12 +56,8 @@ class _HttpClient:
         self._refresh_token: str = ""
         self._chemcloud_domain = chemcloud_domain or self._settings.chemcloud_domain
         self._tokens_set_from_file: bool = False
-        self._httpx_timeout = httpx.Timeout(
-            self._settings.chemcloud_timeout, read=self._settings.chemcloud_read_timeout
-        )
-        # Create async clients and semaphores lazily when a loop is running.
+        # Create async client, semaphore, and refresh lock lazily when a loop is running.
         self._async_client: Optional[httpx.AsyncClient] = None
-        # Use an asyncio lock to ensure only one token refresh happens at a time.
         self._token_refresh_lock: Optional[asyncio.Lock] = None
         self._semaphore: Optional[asyncio.Semaphore] = None
 
@@ -73,7 +69,12 @@ class _HttpClient:
     @property
     def async_client(self) -> httpx.AsyncClient:
         if self._async_client is None:
-            self._async_client = httpx.AsyncClient(timeout=self._httpx_timeout)
+            self._async_client = httpx.AsyncClient(
+                timeout=httpx.Timeout(
+                    self._settings.chemcloud_timeout,
+                    read=self._settings.chemcloud_read_timeout,
+                )
+            )
         return self._async_client
 
     @property

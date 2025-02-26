@@ -103,7 +103,8 @@ def patch_compute_endpoints(httpx_mock: HTTPXMock):
 
 @pytest.fixture
 def patch_compute_output_endpoint(httpx_mock: HTTPXMock, prog_input):
-    """Patch httpx methods against /compute/output endpoint."""
+    """Patch httpx methods against /compute/output endpoint for GET and DELETE requests."""
+
     response_data = {
         "status": "SUCCESS",
         "program_output": {
@@ -116,7 +117,21 @@ def patch_compute_output_endpoint(httpx_mock: HTTPXMock, prog_input):
         },
     }
     output_endpoint = re.compile(r".*/compute/output/.*")
-    httpx_mock.add_response(url=output_endpoint, json=response_data, is_reusable=True)
+
+    # Patch GET requests
+    httpx_mock.add_response(
+        method="GET", url=output_endpoint, json=response_data, is_reusable=True
+    )
+
+    # Patch DELETE requests (assuming a 202 Accepted with no JSON body)
+    httpx_mock.add_response(
+        method="DELETE",
+        url=output_endpoint,
+        status_code=202,
+        json=None,
+        is_reusable=True,
+    )
+
     yield response_data
 
 
