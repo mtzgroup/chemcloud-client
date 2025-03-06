@@ -22,5 +22,5 @@ prog_inp = DualProgramInput(
 
 
 # Submit calculation
-output = compute("geometric", [prog_inp] * 2)
-print(output)
+outputs = compute("geometric", [prog_inp] * 2)
+print(outputs)  # list of ProgramOutput objects
