@@ -17,5 +17,5 @@ prog_inp = ProgramInput(
     calctype="energy",
     keywords={},
 )
-outputs = compute("terachem", [prog_inp] * 0)
+outputs = compute("terachem", [prog_inp] * 2)
 print(outputs)  # list of ProgramOutput objects

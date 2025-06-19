@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
+### Added
+
+- Configuration timeout for `chemcloud_connect_timeout`, `chemcloud_write_timeout`, and `chemcloud_pool_timeout`.
+
+### Removed
+
+- 🚨 Default 20s timeout for for all phases and associated `chemcloud_timeout` environment variable.
+
 ## [0.15.0] - 2025-02-25
 
 ### Added

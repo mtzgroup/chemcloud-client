@@ -71,8 +71,10 @@ class _HttpClient:
         if self._async_client is None:
             self._async_client = httpx.AsyncClient(
                 timeout=httpx.Timeout(
-                    self._settings.chemcloud_timeout,
+                    connect=self._settings.chemcloud_connect_timeout,
                     read=self._settings.chemcloud_read_timeout,
+                    write=self._settings.chemcloud_write_timeout,
+                    pool=self._settings.chemcloud_pool_timeout,
                 )
             )
         return self._async_client
