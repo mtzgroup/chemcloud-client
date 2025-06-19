@@ -21,8 +21,10 @@ class Settings(BaseSettings):
     chemcloud_credentials_profile: str = "default"
     chemcloud_queue: Optional[str] = None
     chemcloud_concurrency: int = 3
-    chemcloud_timeout: int = 20
-    chemcloud_read_timeout: int = 20
+    chemcloud_connect_timeout: int = 5
+    chemcloud_read_timeout: int = 60  # for large payloads
+    chemcloud_write_timeout: int = 15
+    chemcloud_pool_timeout: int = 5
 
 
 settings = Settings()
