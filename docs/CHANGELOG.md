@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
+## [0.16.0] - 2025-06-18
+
 ### Added
 
 - Configuration timeout for `chemcloud_connect_timeout`, `chemcloud_write_timeout`, and `chemcloud_pool_timeout`.
@@ -338,7 +340,8 @@ Updated qcio (0.10.1 -> 0.10.2). `Structure.ids` -> `Structure.identifiers`
 - `_RequestsClient` class that handles all network requests to TeraChem Cloud server
 - `FutureResults` object that is created from a `task_id` and can be used to retrieve a result once finished.
 
-[unreleased]: https://github.com/mtzgroup/chemcloud-client/compare/0.15.0...HEAD
+[unreleased]: https://github.com/mtzgroup/chemcloud-client/compare/0.16.0...HEAD
+[0.16.0]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.16.0
 [0.15.0]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.15.0
 [0.14.0]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.14.0
 [0.13.3]: https://github.com/mtzgroup/chemcloud-client/releases/tag/0.13.3
