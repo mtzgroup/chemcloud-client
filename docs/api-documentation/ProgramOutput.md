@@ -1,7 +1,5 @@
-More extensive documentation is available at <https://qcio.coltonhicks.com>.
+More extensive documentation is available at <https://qcdata.coltonhicks.com>.
 
-::: qcio.models.outputs.ProgramOutput
-::: qcio.models.outputs.SinglePointResults
-::: qcio.models.outputs.OptimizationResults
-::: qcio.models.outputs.ConformerSearchResults
-
+::: qcdata.models.outputs.ProgramOutput
+::: qcdata.models.outputs.SinglePointData
+::: qcdata.models.outputs.OptimizationData

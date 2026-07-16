@@ -1,4 +1,4 @@
-from qcio import DualProgramInput, Structure
+from qcdata import DualProgramInput, Structure
 
 from chemcloud import compute
 

@@ -4,7 +4,7 @@ from asyncio import Semaphore
 from typing import Any, Coroutine, Optional, Union
 
 from httpx import AsyncClient
-from qcio import InputType, ProgramOutput
+from qcdata import InputType, ProgramOutput
 from typing_extensions import TypeAlias
 
 from . import __version__
@@ -15,7 +15,7 @@ from .models import READY_STATES, FutureOutput, TaskStatus
 
 logger = logging.getLogger(__name__)
 
-QCIOInputsOrList: TypeAlias = Union[InputType, list[InputType]]
+QCDataInputsOrList: TypeAlias = Union[InputType, list[InputType]]
 
 
 class CCClient:
@@ -132,8 +132,10 @@ class CCClient:
             "collect_wfn": collect_wfn,
             "rm_scratch_dir": rm_scratch_dir,
             "propagate_wfn": propagate_wfn,
-            "queue": queue or self.queue or self._settings.chemcloud_queue,
         }
+        queue = queue or self.queue or self._settings.chemcloud_queue
+        if queue:
+            url_params["queue"] = queue
 
         # Normalize inputs to a list.
         inp_list = [inp_obj] if not isinstance(inp_obj, list) else inp_obj

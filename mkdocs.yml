@@ -107,4 +107,5 @@ nav:
       - api-documentation/ProgramInputs.md
       - api-documentation/ProgramOutput.md
       - api-documentation/exceptions.md
+  - Dev Decisions: dev-decisions.md
   - Changelog: CHANGELOG.md

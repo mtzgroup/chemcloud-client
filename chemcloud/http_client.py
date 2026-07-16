@@ -12,7 +12,7 @@ from urllib.parse import urlencode
 import httpx
 import tomli_w
 from pydantic import BaseModel
-from qcio.utils import json_dumps
+from qcdata.utils import json_dumps
 
 if sys.version_info >= (3, 11):
     import tomllib
@@ -159,6 +159,8 @@ class _HttpClient:
             content = urlencode(data) if data else ""
         # All other requests serialize data as JSON
         else:
+            if headers is not None:
+                headers.setdefault("content-type", "application/json")
             content = (
                 json_dumps(data)
                 if isinstance(data, (BaseModel, list))

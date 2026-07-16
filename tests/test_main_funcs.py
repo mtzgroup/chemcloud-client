@@ -1,5 +1,5 @@
 # Import the function and global default client from your package's __init__.py.
-from qcio import ProgramOutput
+from qcdata import ProgramOutput
 
 import chemcloud
 from chemcloud import FutureOutput, compute, configure_client

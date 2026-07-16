@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 
 from pytest_httpx import HTTPXMock
-from qcio import FileInput, ProgramOutput
+from qcdata import FileInput, ProgramOutput
 
 from chemcloud import CCClient, FutureOutput
 from chemcloud.models import TaskStatus
