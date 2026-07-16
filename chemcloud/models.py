@@ -11,7 +11,7 @@ from uuid import uuid4
 
 from httpx import HTTPError
 from pydantic import BaseModel, field_validator, model_validator
-from qcio import Files, Inputs, ProgramOutput
+from qcdata import Files, Inputs, ProgramOutput, Provenance
 from typing_extensions import Self
 
 from .exceptions import TimeoutError
@@ -262,8 +262,8 @@ class FutureOutput(BaseModel):
 
         Parameters:
             initial_interval: The initial interval (in seconds) between refresh calls.
-            This interval is increased by a factor of 1.5 on every poll cycle that
-            finds no newly completed tasks, up to a maximum of 30 seconds.
+                This interval is increased by a factor of 1.5 on every poll cycle that
+                finds no newly completed tasks, up to a maximum of 30 seconds.
 
         Yields:
             ProgramOutput objects for each task as they become ready.
@@ -347,10 +347,10 @@ class FutureOutput(BaseModel):
         return ProgramOutput(
             input_data=input_data,
             success=False,
-            results=Files(),  # Empty results
-            stdout=stdout_str,
+            data=Files(),  # Empty output data
+            logs=stdout_str,
             traceback=tb_str,
-            provenance={"program": self.program},
+            provenance=Provenance(program=self.program),
         )
 
     def model_dump(self, **kwargs) -> dict[str, Any]:

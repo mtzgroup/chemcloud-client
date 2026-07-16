@@ -1,4 +1,4 @@
-from qcio import DualProgramInput, Structure
+from qcdata import DualProgramInput, Structure
 
 from chemcloud import compute
 
@@ -25,8 +25,8 @@ output = compute("bigchem", prog_inp)
 
 # ProgramOutput object containing all returned data
 print(output)
-print(output.results.hessian)
+print(output.data.hessian)
 # Frequency data always included too
-print(f"Wavenumbers: {output.results.freqs_wavenumber}")
-print(output.results.normal_modes_cartesian)
-print(output.results.gibbs_free_energy)
+print(f"Wavenumbers: {output.data.freqs_wavenumber}")
+print(output.data.normal_modes_cartesian)
+print(output.data.gibbs_free_energy)

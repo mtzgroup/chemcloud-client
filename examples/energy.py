@@ -1,4 +1,4 @@
-from qcio import ProgramInput, Structure
+from qcdata import ProgramInput, Structure
 
 from chemcloud import compute
 
@@ -20,12 +20,12 @@ prog_inp = ProgramInput(
 )
 output = compute("terachem", prog_inp)
 # ProgramOutput object containing all returned data
-print(output.stdout)
+print(output.logs)
 print(output)
 
 if output.success:
-    print(output.results.energy)
+    print(output.data.energy)
     # Not empty if collect_files=True passed to compute
-    print(output.results.files.keys())
+    print(output.data.files.keys())
 else:
     print(output.traceback)

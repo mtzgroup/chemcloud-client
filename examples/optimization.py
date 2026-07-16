@@ -1,4 +1,4 @@
-from qcio import DualProgramInput, Structure
+from qcdata import DualProgramInput, Structure
 
 from chemcloud import compute
 
@@ -29,13 +29,13 @@ if output.success:
     # Will be OptimizationResult object
     print(output)
     # The final structure of the geometry optimization
-    print(output.results.final_structure)
+    print(output.data.final_structure)
     # Initial structure
     print(output.inputs.structure)
     # A list of ordered AtomicResult objects for each step in the optimization
-    print(output.results.trajectory)
+    print(output.data.trajectory)
     # A list of ordered energies for each step in the optimization
-    print(output.results.energies)
+    print(output.data.energies)
 else:
     print("Optimization failed!")
     # Will be FailedOperation object

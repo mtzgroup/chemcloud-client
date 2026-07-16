@@ -1,5 +1,6 @@
 import pytest
-from qcio import ProgramOutput
+from pytest_httpx import HTTPXMock
+from qcdata import ProgramOutput
 
 from chemcloud import CCClient, FutureOutput
 
@@ -158,6 +159,52 @@ def test_compute_queue_from_settings(
 
     # Restore the original queue value.
     settings.chemcloud_queue = original_queue
+
+
+def test_compute_omits_empty_queue(
+    settings,
+    patch_openapi_endpoint,
+    patch_compute_endpoints,
+    patch_compute_output_endpoint,
+    jwt,
+    mocker,
+    prog_input,
+):
+    """
+    Empty queue values should be omitted instead of sent as queue=.
+    """
+    settings.chemcloud_queue = ""
+    client = CCClient(settings=settings, queue="")
+    client._http_client._access_token = jwt
+
+    spy = mocker.spy(client._http_client, "_authenticated_request_async")
+
+    client.compute("psi4", prog_input)
+
+    params = spy.call_args_list[0].kwargs.get("params")
+    assert params is not None, "No URL parameters were passed."
+    assert "queue" not in params
+
+
+def test_compute_sends_json_content_type(
+    patch_openapi_endpoint,
+    patch_compute_endpoints,
+    httpx_mock: HTTPXMock,
+    jwt,
+    prog_input,
+):
+    client = CCClient()
+    client._http_client._access_token = jwt
+
+    client.compute("psi4", prog_input, return_future=True)
+
+    compute_requests = [
+        request
+        for request in httpx_mock.get_requests()
+        if request.method == "POST" and request.url.path.endswith("/compute")
+    ]
+    assert compute_requests
+    assert compute_requests[0].headers["content-type"] == "application/json"
 
 
 def test_compute_raise_value_error_empty_inp_objs(prog_input):

@@ -1,5 +1,5 @@
-More extensive documentation is available at <https://qcio.coltonhicks.com>
+More extensive documentation is available at <https://qcdata.coltonhicks.com>
 
-::: qcio.models.inputs.ProgramInput
-::: qcio.models.inputs.DualProgramInput
-::: qcio.models.inputs.FileInput
+::: qcdata.models.inputs.ProgramInput
+::: qcdata.models.inputs.DualProgramInput
+::: qcdata.models.inputs.FileInput

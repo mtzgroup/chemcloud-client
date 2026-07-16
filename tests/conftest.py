@@ -7,7 +7,7 @@ from time import time
 import pytest
 import tomli_w
 from pytest_httpx import HTTPXMock
-from qcio import CalcType, Model, ProgramInput, Structure
+from qcdata import CalcType, Model, ProgramInput, Structure
 
 from chemcloud.config import Settings
 
@@ -110,8 +110,8 @@ def patch_compute_output_endpoint(httpx_mock: HTTPXMock, prog_input):
         "program_output": {
             "input_data": prog_input.model_dump(),  # fill with dummy data if needed
             "success": True,
-            "results": {"energy": -76.026632},
-            "stdout": "output text",
+            "data": {"energy": -76.026632},
+            "logs": "output text",
             "traceback": "",
             "provenance": {"program": "psi4"},
         },

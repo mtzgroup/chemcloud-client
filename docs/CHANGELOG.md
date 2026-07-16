@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased]
 
+### Changed
+
+- Migrated project packaging and development workflows from Poetry to `uv`.
+- 🚨 Replaced `qcio` with its successor, `qcdata>=0.17.1`.
+- Updated `ProgramOutput` usage in examples, tests, and generated failure outputs from deprecated `results`/`stdout` fields to `data`/`logs`.
+- Updated documentation API references and examples for `qcdata` naming.
+- 🚨 Raised the minimum supported Python version from 3.9 to 3.10 to match `qcdata>=0.17.1`.
+
+### Removed
+
+- Removed `poetry.lock` in favor of `uv.lock`.
+
 ## [0.16.0] - 2025-06-18
 
 ### Added

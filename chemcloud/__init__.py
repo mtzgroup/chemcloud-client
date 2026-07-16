@@ -1,12 +1,11 @@
 """ChemCloud python client. Scalable compute, easy to learn, fast to code."""
 
-# https://github.com/python-poetry/poetry/pull/2366#issuecomment-652418094
 from importlib import metadata
 from typing import Optional, Union
 
 __version__ = metadata.version(__name__)
 
-from qcio import ProgramOutput
+from qcdata import ProgramOutput
 
 from .client import CCClient
 from .models import FutureOutput
@@ -30,7 +29,7 @@ def compute(*args, **kwargs) -> Union[ProgramOutput, list[ProgramOutput], Future
 
     Usage:
         ```python
-        from qcio import ProgramInput, Structure
+        from qcdata import ProgramInput, Structure
         from chemcloud import compute
 
         struct = Structure.open("structure.xyz")

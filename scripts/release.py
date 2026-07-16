@@ -2,24 +2,33 @@ import subprocess
 import sys
 from datetime import datetime
 
-import toml
+import tomli_w
+
+if sys.version_info >= (3, 11):
+    import tomllib
+else:
+    import tomli as tomllib
 
 
 def get_repo_url():
     """Get the repository URL from pyproject.toml or ask the user for it."""
     try:
-        with open("pyproject.toml") as file:
-            pyproject = toml.load(file)
-        repo_url = pyproject["tool"]["poetry"]["repository"]
+        with open("pyproject.toml", "rb") as file:
+            pyproject = tomllib.load(file)
+        repo_url = pyproject["project"]["urls"]["Repository"]
         return repo_url
     except KeyError:
         return input("Enter the repository URL (e.g., https://github.com/user/repo): ")
 
 
-def update_version_with_poetry(version):
-    """Update the version in pyproject.toml using Poetry."""
+def update_version(version):
+    """Update the version in pyproject.toml."""
     print("Updating version in pyproject.toml...")
-    subprocess.run(["poetry", "version", version], check=True)
+    with open("pyproject.toml", "rb") as file:
+        pyproject = tomllib.load(file)
+    pyproject["project"]["version"] = version
+    with open("pyproject.toml", "wb") as file:
+        tomli_w.dump(pyproject, file)
 
 
 def update_changelog(version, repo_url):
@@ -93,7 +102,7 @@ def main():
     original_changelog = Path("docs/CHANGELOG.md").read_text()
 
     repo_url = get_repo_url()
-    update_version_with_poetry(version)
+    update_version(version)
     update_changelog(version, repo_url)
     if confirm_version(version):
         print("Proceeding with the release...")
